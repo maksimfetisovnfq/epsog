@@ -1,0 +1,66 @@
+import {Button as MUIButton, type ButtonProps, type SxProps} from '@mui/material';
+
+type Props = {} & ButtonProps
+
+const commonSx: SxProps = {
+    fontWeight: 700,
+    fontFamily: 'Arial',
+    fontSize: '16px',
+    lineHeight: '20px',
+    letterSpacing: 0,
+    textTransform: 'none',
+    borderRadius: 0,
+    width: '188px',
+    height: '48px',
+}
+
+export const Button = (props: Props) => {
+
+    const isContained = props.variant === 'contained';
+
+    if (isContained) {
+        return <MUIButton {...props} sx={{
+            ...commonSx,
+
+            color: props.disabled ? '#6F8190' : '#000',
+            backgroundColor: props.disabled ? '#B7C0C8' : '#00EB8C',
+            borderColor: '#00EB8C',
+
+            '&:hover': {
+                backgroundColor: props.disabled ? '#B7C0C8' : '#19FF8C',
+                color: props.disabled ? '#6F8190' : '#000',
+                borderColor: '#19FF8C',
+                ...commonSx,
+            },
+            ...(props.disabled && {
+                pointerEvents: 'none',
+            }),
+
+            '& .MuiTouchRipple-root': {
+                display: 'none',
+            },
+        }}
+        >
+        </MUIButton>
+    } else {
+        return <MUIButton {...props} sx={{
+            color: props.disabled ? '#B7C0C8' : '#000',
+            borderColor: '#B7C0C8',
+            ...commonSx,
+            '&:hover': {
+                color: props.disabled ? '#B7C0C8' : '#000',
+                borderColor: props.disabled ? '#B7C0C8' : '#000',
+                ...commonSx,
+            },
+            ...(props.disabled && {
+                pointerEvents: 'none',
+            }),
+
+            '& .MuiTouchRipple-root': {
+                display: 'none',
+            },
+        }}
+        >
+        </MUIButton>
+    }
+}
