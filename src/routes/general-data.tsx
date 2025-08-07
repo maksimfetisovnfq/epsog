@@ -1,22 +1,6 @@
-import {createFileRoute, Link} from '@tanstack/react-router'
-import {useState} from "react";
+import {createFileRoute} from '@tanstack/react-router'
+import {GeneralDataPage} from "../pages/general-data-page";
 
 export const Route = createFileRoute('/general-data')({
-    component: RouteComponent,
+    component: GeneralDataPage,
 })
-
-function RouteComponent() {
-    const [network, setNetwork] = useState('')
-
-    return <div>
-        <h2>Bendrieji duomenys</h2>
-
-        <input value={network} onChange={(e) => setNetwork(e.target.value)}/>
-
-        <Link disabled={!network} to="/economic-parameters" state={{
-            generalData: {
-                network
-            }
-        }}>next</Link>
-    </div>
-}
