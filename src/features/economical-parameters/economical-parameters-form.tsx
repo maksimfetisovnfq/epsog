@@ -14,7 +14,6 @@ export const EconomicalParametersForm = () => {
             network: "",
         }}>
             <FormInput name="network"/>
-
             <FormInput name="fewfewfewe"/>
 
             <button type="submit">Toliau</button>
