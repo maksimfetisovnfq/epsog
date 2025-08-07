@@ -1,21 +1,17 @@
 import {Navigate, useLocation} from "@tanstack/react-router";
+import {EconomicalParametersForm} from "../features/economical-parameters";
 
 export const EconomicParametersPage = () => {
     const location = useLocation();
 
+    const technicalParameters = location.state.technicalParameters;
     const generalData = location.state.generalData;
-
-    if (!generalData) {
-        return <Navigate to="/general-data"/>
+    
+    if (!technicalParameters || !generalData) {
+        return <Navigate to="/technical-parameters"/>
     }
 
     return (
-        <div>
-            <h1>Ekonominiai parametrai</h1>
-
-            <p>{generalData?.network}</p>
-
-            <p>Šioje skiltyje galite nustatyti ekonominius parametrus, kurie bus naudojami jūsų simuliacijoje.</p>
-        </div>
+        <EconomicalParametersForm/>
     )
 }

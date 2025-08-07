@@ -7,7 +7,7 @@ export const GeneralDataForm = () => {
     
     const handleSubmit = (data: GeneralDataSchema) => {
         navigate({
-            to: "/economic-parameters",
+            to: "/technical-parameters",
             state: {
                 generalData: data,
             },

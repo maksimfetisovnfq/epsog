@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 import { routeTree } from './routeTree.gen'
+import type {GeneralDataSchema} from "./features/general-data/general-data-schema";
 
 const router = createRouter({ routeTree })
 
@@ -12,12 +13,9 @@ declare module '@tanstack/react-router' {
     }
     
     interface HistoryState {
-        generalData?: {
-            network: string
-        }
-        economicParameters?: {
-            price: number
-        }
+        generalData?: GeneralDataSchema
+        technicalParameters?: Tech
+        economicParameters?: {}
     }
 }
 

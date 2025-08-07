@@ -9,12 +9,20 @@ export const Route = createRootRoute({
                     Home
                 </Link>
                 
-                <Link to="/general-data" className="[&.active]:font-bold">
+                <Link to="/General-data" className="[&.active]:font-bold">
                     Bendrieji duomenys
                 </Link>
+
+                <Link to="/Technical-parameters" className="[&.active]:font-bold">
+                    Techniniai parametrai
+                </Link>
                 
-                <Link to="/economic-parameters" className="[&.active]:font-bold">
+                <Link to="/Economic-parameters" className="[&.active]:font-bold">
                     Ekonominiai parametrai
+                </Link>
+
+                <Link to="/Summary-results" className="[&.active]:font-bold">
+                    Rezultatų apibendrinimas
                 </Link>
             </div>
 
