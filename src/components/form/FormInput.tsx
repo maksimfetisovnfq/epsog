@@ -56,13 +56,13 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
     };
 
     return (
-        <div style={{ margin: '24px 0px' }}>
+        <div style={{ margin: '24px 0px'}}>
             {title && (
                 <InputLabel
                     shrink htmlFor="bootstrap-input"
                     sx={{
                         color: 'black',
-                        fontSize: '22px',
+                        fontSize: '14px',
                         fontFamily: 'Arial',
                         fontWeight: 400,
                     }}>
@@ -78,9 +78,7 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
                         mb: 2,
                         color: '#6F8190',
                         borderColor: '#CFD5DA',
-                        width: '450px',
-                        height: '34px',
-                        fontSize: '26px',
+                        fontSize: '16px',
                         fontFamily: 'Arial',
                         fontWeight: 400,
                         lineHeight: '20px',
@@ -89,6 +87,8 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
                     },
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 0,
+                        width: '400px',
+                        height: '48px',
                     },
                 }}
                 {...register(name)}
@@ -105,7 +105,7 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
                     id={`${name}-description`}
                     sx={{
                         marginTop: '8px',
-                        fontSize: '14px',
+                        fontSize: '12px',
                         fontFamily: 'Arial',
                         fontWeight: 400,
                     }}>

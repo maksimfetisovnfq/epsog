@@ -1,9 +1,12 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
+import { AppProvider } from './context/AppContext'
 
 import { routeTree } from './routeTree.gen'
 import type {GeneralDataSchema} from "./features/general-data/general-data-schema";
+import type {TechnicalParametersSchema} from "./features/technical-parameters/technical-parameters-schema.ts";
+import type {EconomicalParametersSchema} from "./features/economical-parameters/economical-parameters-schema.ts";
 
 const router = createRouter({ routeTree })
 
@@ -14,8 +17,8 @@ declare module '@tanstack/react-router' {
     
     interface HistoryState {
         generalData?: GeneralDataSchema
-        technicalParameters?: Tech
-        economicParameters?: {}
+        technicalParameters?: TechnicalParametersSchema
+        economicParameters?: EconomicalParametersSchema
     }
 }
 
@@ -25,7 +28,9 @@ if (!rootElement.innerHTML) {
 
     root.render(
         <StrictMode>
-            <RouterProvider router={router} />
+            <AppProvider>
+                <RouterProvider router={router} />
+            </AppProvider>
         </StrictMode>,
     )
 }

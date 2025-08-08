@@ -1,5 +1,6 @@
 import {Navigate, useLocation} from "@tanstack/react-router";
 import {EconomicalParametersForm} from "../features/economical-parameters";
+import {Layout} from "../components/layout/layout.tsx";
 
 export const EconomicParametersPage = () => {
     const location = useLocation();
@@ -8,10 +9,12 @@ export const EconomicParametersPage = () => {
     const generalData = location.state.generalData;
     
     if (!technicalParameters || !generalData) {
-        return <Navigate to="/technical-parameters"/>
+        return <Navigate to="/technical-parameters" state={location.state} />
     }
 
     return (
-        <EconomicalParametersForm/>
+        <Layout>
+            <EconomicalParametersForm/>    
+        </Layout>
     )
 }

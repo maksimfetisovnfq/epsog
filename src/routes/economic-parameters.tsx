@@ -4,4 +4,3 @@ import {EconomicParametersPage} from "../pages/economic-parameters-page";
 export const Route = createFileRoute('/economic-parameters')({
     component: EconomicParametersPage,
 })
-

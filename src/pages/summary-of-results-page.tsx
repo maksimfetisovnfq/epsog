@@ -1,21 +1,19 @@
 import {Navigate, useLocation} from "@tanstack/react-router";
+import {SummaryOfResultsForm} from "../features/summary-of-results";
+import {Layout} from "../components/layout/layout.tsx";
 
 export const SummaryOfResultsPage = () => {
     const location = useLocation();
 
-    const generalData = location.state.generalData;
+    const economicalParameters = location.state.economicParameters;
 
-    if (!generalData) {
-        return <Navigate to="/general-data"/>
+    if (!economicalParameters) {
+        return <Navigate to="/economic-parameters" state={location.state} />
     }
 
     return (
-        <div>
-            <h1>Summary of results</h1>
-
-            <p>{generalData?.network}</p>
-
-            <p>Atkreipiame dėmesį, kad šios informacijos pateikimui, geriausia pasitelkti įrenginio technines specifikacijas. Jei kažkurių verčių nežinote, nesijaudinkite, parinkome numatytąsias reikšmes, kurios atspindi rinkoje esančių įrenginių galimybes.</p>
-        </div>
+        <Layout>
+            <SummaryOfResultsForm/>
+        </Layout>
     )
 }

@@ -5,5 +5,5 @@ export const economicalParametersSchema = z
         network: z.string().min(20),
     });
 
-export type GeneralDataSchema = z.infer<typeof economicalParametersSchema>;
+export type EconomicalParametersSchema = z.infer<typeof economicalParametersSchema>;
 
