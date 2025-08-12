@@ -1,12 +1,17 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { AppProvider } from './context/AppContext'
-
+import { CalculatorTypeProvider } from './context/CalculatorTypeContext'
 import { routeTree } from './routeTree.gen'
 import type {GeneralDataSchema} from "./features/general-data/general-data-schema";
-import type {TechnicalParametersSchema} from "./features/technical-parameters/technical-parameters-schema.ts";
-import type {EconomicalParametersSchema} from "./features/economical-parameters/economical-parameters-schema.ts";
+import type {TechnicalP2hParametersSchema} from "./features/technical-parameters-p2h/technical-parameters-schema.ts";
+import type {TechnicalP2gParametersSchema} from "./features/technical-parameters-p2g/technical-parameters-schema.ts";
+import type {TechnicalBeksParametersSchema} from "./features/technical-parameters-beks/technical-parameters-schema.ts";
+import type {TechnicalDsrParametersSchema} from "./features/technical-parameters-dsr/technical-parameters-schema.ts";
+import type {EconomicalP2hParametersSchema} from "./features/economical-parameters-p2h/economical-parameters-schema.ts";
+import type {EconomicalP2gParametersSchema} from "./features/economical-parameters-p2g/economical-parameters-schema.ts";
+import type {EconomicalDsrParametersSchema} from "./features/economical-parameters-dsr/economical-parameters-schema.ts";
+import type {EconomicalBeksParametersSchema} from "./features/economical-parameters-beks/economical-parameters-schema.ts";
 
 const router = createRouter({ routeTree })
 
@@ -17,8 +22,18 @@ declare module '@tanstack/react-router' {
     
     interface HistoryState {
         generalData?: GeneralDataSchema
-        technicalParameters?: TechnicalParametersSchema
-        economicParameters?: EconomicalParametersSchema
+        technicalParameters?: {
+            p2h?: TechnicalP2hParametersSchema
+            beks?: TechnicalBeksParametersSchema
+            p2g?: TechnicalP2gParametersSchema
+            dsr?: TechnicalDsrParametersSchema
+        }
+        economicParameters?: {
+            p2h?: EconomicalP2hParametersSchema
+            beks?: EconomicalBeksParametersSchema 
+            p2g?: EconomicalP2gParametersSchema
+            dsr?: EconomicalDsrParametersSchema
+        }
     }
 }
 
@@ -28,9 +43,9 @@ if (!rootElement.innerHTML) {
 
     root.render(
         <StrictMode>
-            <AppProvider>
+            <CalculatorTypeProvider>
                 <RouterProvider router={router} />
-            </AppProvider>
+            </CalculatorTypeProvider>
         </StrictMode>,
     )
 }

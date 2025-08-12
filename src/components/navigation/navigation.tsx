@@ -1,15 +1,16 @@
 import {NavLink} from "./nav-link.tsx";
-import {useLocation} from "@tanstack/react-router";
+import {type HistoryState, useLocation} from "@tanstack/react-router";
+import {useCalculatorType} from "../../context/CalculatorTypeContext.tsx";
 
 const links = [
-     { to: '/', label: 'Home' },
+     // { to: '/', label: 'Home' },
     { to: '/general-data', label: 'Bendrieji duomenys' },
     { to: '/technical-parameters', label: 'Techniniai parametrai' },
     { to: '/economic-parameters', label: 'Ekonominiai parametrai' },
     { to: '/summary-of-results', label: 'Rezultatų apibendrinimas' },
 ];
 
-const isPageAccessible = (pagePath: string, state: any): boolean => {
+const isPageAccessible = (pagePath: string, state: HistoryState): boolean => {
     switch (pagePath) {
         case '/':
         case '/general-data':
@@ -29,6 +30,7 @@ const isPageAccessible = (pagePath: string, state: any): boolean => {
 
 export const Navigation = () => {
     const location = useLocation();
+    const {calculatorType} = useCalculatorType();
     
     return (
         <nav className="p-2 flex gap-2" style={{
@@ -39,7 +41,7 @@ export const Navigation = () => {
                 return (
                     <NavLink
                         key={link.to}
-                        to={link.to}
+                        to={`${link.to}-${calculatorType}`}
                         state={location.state}
                         disabled={!isAccessible}
                     >  {link.label}

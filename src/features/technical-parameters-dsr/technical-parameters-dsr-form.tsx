@@ -1,18 +1,18 @@
 import {Form, FormInput} from "../../components/form";
-import {type TechnicalParametersSchema, technicalParametersSchema} from "./technical-parameters-schema.ts";
+import {type TechnicalDsrParametersSchema, technicalParametersSchema} from "./technical-parameters-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
 
-export const TechnicalParametersForm = () => {
+export const TechnicalParametersDsrForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
     
-    const handleSubmit = (data: TechnicalParametersSchema) => {
-        console.log(data, location.state.generalData, location.state.technicalParameters, location.state.economicParameters);
+    const handleSubmit = (data: TechnicalDsrParametersSchema) => {
+        
         navigate({
-            to: "/economic-parameters",
+            to: "/economic-parameters-dsr",
             state: {
                 generalData: location.state.generalData,
-                technicalParameters: data,
+                technicalParameters: { dsr: data },
             },
         })
     }

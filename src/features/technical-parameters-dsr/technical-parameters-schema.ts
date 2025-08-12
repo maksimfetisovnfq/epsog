@@ -5,5 +5,5 @@ export const technicalParametersSchema = z
         network: z.string().min(20),
     });
 
-export type TechnicalParametersSchema = z.infer<typeof technicalParametersSchema>;
+export type TechnicalDsrParametersSchema = z.infer<typeof technicalParametersSchema>;
 

@@ -1,8 +1,8 @@
 import {Navigate, useLocation} from "@tanstack/react-router";
-import {TechnicalParametersForm} from "../features/technical-parameters";
+import {TechnicalParametersP2hForm} from "../features/technical-parameters-p2h";
 import {Layout} from "../components/layout/layout.tsx";
 
-export const TechnicalParametersPage = () => {
+export const TechnicalParametersP2hPage = () => {
     const location = useLocation();
 
     const generalData = location.state.generalData;
@@ -13,7 +13,7 @@ export const TechnicalParametersPage = () => {
 
     return (
         <Layout>
-            <TechnicalParametersForm />
+            <TechnicalParametersP2hForm />
         </Layout>
         
     )

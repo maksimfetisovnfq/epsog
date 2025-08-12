@@ -5,10 +5,10 @@ import {Layout} from "../components/layout/layout.tsx";
 export const SummaryOfResultsPage = () => {
     const location = useLocation();
 
-    const economicalParameters = location.state.economicParameters;
+    const dsrEconomicalParameters = location?.state.economicParameters?.dsr;
 
-    if (!economicalParameters) {
-        return <Navigate to="/economic-parameters" state={location.state} />
+    if (!dsrEconomicalParameters) {
+        return <Navigate to="/economic-parameters-dsr" state={location.state} />
     }
 
     return (

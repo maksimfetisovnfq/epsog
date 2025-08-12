@@ -45,11 +45,11 @@ export const Button = (props: Props) => {
     } else {
         return <MUIButton {...props} sx={{
             color: props.disabled ? '#B7C0C8' : '#000',
-            borderColor: '#B7C0C8',
+            border: '1px solid #B7C0C8',
             ...commonSx,
             '&:hover': {
                 color: props.disabled ? '#B7C0C8' : '#000',
-                borderColor: props.disabled ? '#B7C0C8' : '#000',
+                border: props.disabled ? '1px solid #B7C0C8' : '1px solid #000',
                 ...commonSx,
             },
             ...(props.disabled && {

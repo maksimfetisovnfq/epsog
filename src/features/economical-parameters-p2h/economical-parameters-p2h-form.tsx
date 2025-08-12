@@ -1,19 +1,18 @@
 import {Form, FormInput} from "../../components/form";
-import {type EconomicalParametersSchema, economicalParametersSchema, } from "./economical-parameters-schema.ts";
+import {type EconomicalP2hParametersSchema, economicalParametersSchema, } from "./economical-parameters-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
 
-export const EconomicalParametersForm = () => {
+export const EconomicalParametersP2hForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
     
-    const handleSubmit = (data: EconomicalParametersSchema) => {
-        console.log(data, location.state.generalData, location.state.technicalParameters, location.state.economicParameters);
+    const handleSubmit = (data: EconomicalP2hParametersSchema) => {
         navigate({
             to: "/summary-of-results",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,
-                economicParameters: data,
+                economicParameters: { p2h: data }, //?
             },
         })
     }
