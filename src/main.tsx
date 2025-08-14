@@ -43,9 +43,9 @@ if (!rootElement.innerHTML) {
 
     root.render(
         <StrictMode>
-            <CalculatorTypeProvider>
-                <RouterProvider router={router} />
-            </CalculatorTypeProvider>
+                <CalculatorTypeProvider>
+                    <RouterProvider router={router} />
+                </CalculatorTypeProvider>
         </StrictMode>,
     )
 }

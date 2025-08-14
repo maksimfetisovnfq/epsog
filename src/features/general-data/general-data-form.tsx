@@ -83,14 +83,13 @@ export const GeneralDataForm = () => {
     };
 
     return (
-        <div style={{fontFamily: 'Arial'}}>
+        <div style={{fontFamily: 'Arial', width: '760px'}}>
             <GlobalStyles
                 styles={{
                     '.MuiContainer-root': {
                         padding: '0px !important',
                     },
                     'body, *': {
-                        fontFamily: 'Arial',
                         fontWeight: 400,
                     },
                 }}

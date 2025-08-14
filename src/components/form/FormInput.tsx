@@ -103,7 +103,14 @@ export const FormInput = ({name, label, title, description, defaultValue, toolti
                         height: '48px',
                     },
                 }}
-                {...register(name)}
+                {...register(name, {
+                    setValueAs: v => {
+                        if (typeof v === 'string' && v.trim() !== '' && !isNaN(Number(v))) {
+                            return Number(v);
+                        }
+                        return v;
+                    }
+                })}
                 error={Boolean(errors[name])}
                 helperText={errors[name] ? String(errors[name]?.message) : null}
                 label={label}

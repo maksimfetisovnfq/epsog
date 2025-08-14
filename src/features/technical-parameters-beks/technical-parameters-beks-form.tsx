@@ -52,7 +52,7 @@ export const TechnicalParametersBeksForm = () => {
     }
 
     return (
-        <>
+        <div style={{fontFamily: 'Arial', width: '760px'}}>
             <GlobalStyles styles={{
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',
@@ -61,30 +61,34 @@ export const TechnicalParametersBeksForm = () => {
                     padding: '0px !important',
                 },
                 'body, *': {
-                    fontFamily: 'Arial',
                     fontWeight: 400,
                 },
             }}/>
 
             <div style={{
                 fontSize: '32px',
-                fontWeight: 400,
                 marginBottom: '48px',
             }}>
                 Techniniai parametrai
             </div>
 
             <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-                network: "",
+                q_max: 1000,
+                q_total: 2,
+                RTE: 88,
+                SOC_min: 10,
+                SOC_max: 95,
+                N_cycles_DA: 4,
+                N_cycles_ID: 16,
             }}>
 
-                <FormInput name="maximumPower" defaultValue="1000 MW"
+                <FormInput name="q_max" defaultValue="1000 MW"
                            description="Tik teigiami skaičiai, max reikšmė 1000 MW"
                            title="Elektros energijos kaupiklio maksimali galia"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="accumulatorCapacity" defaultValue="2 MWh"
+                <FormInput name="q_total" defaultValue="2 MWh"
                            description="Tik teigiami skaičiai, max reikšmė 1 000 000 (1 TWh)"
                            title="Elektros energijos kaupiklio talpa *"/>
 
@@ -97,15 +101,15 @@ export const TechnicalParametersBeksForm = () => {
                     width: '400px',
                 }}>
                     <div style={{display: 'flex'}}>
-                        <div style ={{ verticalAlign: 'baseline', marginRight: '4px' }}>
+                        <div style={{verticalAlign: 'baseline', marginRight: '4px'}}>
                             Kaip greitai įrenginys gali pasiekti maksimalią galią? *
                         </div>
                         <Tooltip title="Jeigu nurodomas didesnis laikas per kurį įrenginys pasiekia maksimalią 
-                        galią negu paslaugos reikalavimas, tuomet vertinama kad tos paslaugos įrenginys neteiks." >
+                        galią negu paslaugos reikalavimas, tuomet vertinama kad tos paslaugos įrenginys neteiks.">
                             <InfoOutlineIcon/>
                         </Tooltip>
                     </div>
-                    
+
                     <Slider
                         aria-label="Temperature"
                         defaultValue={30}
@@ -144,33 +148,33 @@ export const TechnicalParametersBeksForm = () => {
                     //onChange={handleRadioGroupChange}
                     style={{columnGap: '32px'}}
                 >
-                    
-                    <div >
-                        <FormControlLabel 
-                            value="first" 
-                            control={<Radio sx={radioStyles}/>} 
+
+                    <div>
+                        <FormControlLabel
+                            value="first"
+                            control={<Radio sx={radioStyles}/>}
                             label="Aukštyn"
-                            sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
+                            sx={{verticalAlign: 'baseline', marginRight: '4px'}}
                         />
-                        
-                        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas" >
+
+                        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas">
                             <InfoOutlineIcon/>
                         </Tooltip>
                     </div>
-                    
+
                     <div>
-                        <FormControlLabel 
-                            value="second" 
+                        <FormControlLabel
+                            value="second"
                             control={<Radio sx={radioStyles}/>}
                             label="Žemyn"
-                            sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
+                            sx={{verticalAlign: 'baseline', marginRight: '4px'}}
                         />
-                        
-                        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas" >
+
+                        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas">
                             <InfoOutlineIcon/>
                         </Tooltip>
                     </div>
-                    
+
                     <FormControlLabel value="third" control={<Radio sx={radioStyles}/>} label="Į abi psues"/>
                 </RadioGroup>
 
@@ -185,70 +189,77 @@ export const TechnicalParametersBeksForm = () => {
                         }}
                     >
                         <div>
-                            <Typography component="span" style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
+                            <Typography component="span"
+                                        style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
                                 <div style={{marginBottom: '24px'}}>
                                     Išplėstiniai techniniai parametrai
                                 </div>
                                 <div>
-                                    <AddIcon />    
+                                    <AddIcon/>
                                 </div>
                             </Typography>
 
-                            <div style={{backgroundColor: '#F5F7F8', display: 'flex', height: '122px', color: '#3F576B'}}>
+                            <div style={{
+                                backgroundColor: '#F5F7F8',
+                                display: 'flex',
+                                height: '122px',
+                                color: '#3F576B'
+                            }}>
 
-                                <div style={{margin: '16px 16px 0 16px', }}>
+                                <div style={{margin: '16px 16px 0 16px',}}>
                                     <InfoOutlineIcon/>
                                 </div>
 
                                 <div style={{marginTop: '20px', fontSize: '14px'}}>
                                     <div style={{marginBottom: '12px'}}>
-                                        Patikslinkite savo įrenginio technines charakteristikas, kad skaičiavimai būtų kuo tikslesni.
+                                        Patikslinkite savo įrenginio technines charakteristikas, kad skaičiavimai būtų
+                                        kuo tikslesni.
                                     </div>
 
                                     <div style={{width: '736px'}}>
                                         Atkreipiame dėmesį, kad šios informacijos pateikimui, geriausia pasitelkti
-                                        įrenginio technines specifikacijas. Jei kažkurių verčių nežinote, nesijaudinkite,
+                                        įrenginio technines specifikacijas. Jei kažkurių verčių nežinote,
+                                        nesijaudinkite,
                                         parinkome numatytąsias reikšmes, kurios atspindi rinkoje esančių įrenginių
                                         galimybes.
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
 
                     </AccordionSummary>
                     <AccordionDetails>
-                        <FormInput name="coefficient" defaultValue="88 %"
+                        <FormInput name="RTE" defaultValue="88 %"
                                    description="Pilno ciklo naudingumo koeficientas"
                                    title="Pilno ciklo naudingumo koeficientas"
                                    tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos"/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-                        
-                        <FormInput name="minCharge" defaultValue="10 %" description="Skaičius nuo 0 iki 100"
+
+                        <FormInput name="SOC_min" defaultValue="10 %" description="Skaičius nuo 0 iki 100"
                                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis"
                                    tooltip="Mažiausia riba iki kurios galima iškrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-                        
-                        <FormInput name="maxCharge" defaultValue="95 %" description="Skaičius nuo 0 iki 100"
+
+                        <FormInput name="SOC_max" defaultValue="95 %" description="Skaičius nuo 0 iki 100"
                                    title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"
                                    tooltip="Didžiausia riba iki kurios galima įkrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-                        
-                        <FormInput name="maxStorageCyclesDayAhead" defaultValue="4 kartai/d."
+
+                        <FormInput name="N_cycles_DA" defaultValue="4 kartai/d."
                                    description="Sveikas skaičius nuo 0 iki 96 imtinai"
                                    title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"
                                    tooltip="Kiek per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-                        
-                        <FormInput name="maxStorageCyclesIntraday" defaultValue="16 kartai/d."
+
+                        <FormInput name="N_cycles_ID" defaultValue="16 kartai/d."
                                    description="Sveikas skaičius nuo 0 iki 96 imtinai"
                                    title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"
                                    tooltip="Dienos eigos rinka skirta išlaikyti kaupiklio talpą leistinose ribose teikiant balansavimo paslaugas."/>
                         
-                        <FormInput name="network"/>
                     </AccordionDetails>
                 </Accordion>
 
@@ -263,6 +274,6 @@ export const TechnicalParametersBeksForm = () => {
                     </Button>
                 </div>
             </Form>
-        </>
+        </div>
     )
 }
