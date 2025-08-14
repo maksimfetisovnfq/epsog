@@ -1,18 +1,19 @@
 import {TextField, type TextFieldProps} from '@mui/material'
 import {useFormContext} from 'react-hook-form'
-import FormHelperText from '@mui/material/FormHelperText';
-import InputLabel from '@mui/material/InputLabel';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
+import Tooltip from "@mui/material/Tooltip";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 
 export type FormInputProps = TextFieldProps & {
     name: string
     description?: string
     title?: string
     defaultValue?: string
+    tooltip?: string
 }
 
 
-export const FormInput = ({name, label, title, description, defaultValue, ...props }: FormInputProps) => {
+export const FormInput = ({name, label, title, description, defaultValue, tooltip, ...props}: FormInputProps) => {
     const {
         register,
         formState: {errors},
@@ -37,7 +38,7 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
             setHasUserInteracted(true);
             setIsDefaultValueSet(false);
         }
-        
+
         if (props.onFocus) {
             props.onFocus(event);
         }
@@ -49,28 +50,39 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
             setHasUserInteracted(true);
             setIsDefaultValueSet(false);
         }
-        
+
         if (props.onClick) {
             props.onClick(event);
         }
     };
 
     return (
-        <div style={{ margin: '24px 0px'}}>
-            {title && (
-                <InputLabel
-                    shrink htmlFor="bootstrap-input"
-                    sx={{
-                        color: 'black',
-                        fontSize: '14px',
-                        fontFamily: 'Arial',
-                        fontWeight: 400,
-                    }}>
-                    {title}
-                </InputLabel>
-            )}
+        <div style={{margin: '24px 0px'}}>
 
-            <TextField 
+            <div style={{display: 'flex', alignItems: 'center', gap: 4, marginBottom: '12px'}}>
+                {title && (
+                    <div
+                        style={{
+                            color: 'black',
+                            fontSize: '14px',
+                            fontFamily: 'Arial',
+                            fontWeight: 400,
+                        }}>
+                        {title}
+                    </div>
+                )}
+
+                <div>
+                    {tooltip && (
+                        <Tooltip title={tooltip} sx={{marginLeft: 0}}>
+                            <InfoOutlineIcon/>
+                        </Tooltip>
+                    )}
+                </div>
+            </div>
+
+
+            <TextField
                 sx={{
                     display: 'block',
                     '& .MuiFormControl-root-MuiTextField-root': {},
@@ -101,17 +113,18 @@ export const FormInput = ({name, label, title, description, defaultValue, ...pro
             />
 
             {description && (
-                <FormHelperText
+                <div
                     id={`${name}-description`}
-                    sx={{
+                    style={{
                         marginTop: '8px',
                         fontSize: '12px',
                         fontFamily: 'Arial',
                         fontWeight: 400,
+                        color: '#6F8190',
                     }}>
 
                     {description}
-                </FormHelperText>
+                </div>
             )}
         </div>
     )

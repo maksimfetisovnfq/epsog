@@ -6,24 +6,30 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import {GlobalStyles} from '@mui/material';
-import {CalculatorType} from "../../types";
+import {CalculatorType, CalculatorTypeTooltips} from "../../types";
 import {useCalculatorType} from "../../context/CalculatorTypeContext.tsx";
 import Divider from '@mui/material/Divider';
 import {Button} from "../../ui/button";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Select, {} from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import {useState} from "react";
+import Tooltip from '@mui/material/Tooltip';
+import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
 
 export const GeneralDataForm = () => {
     const navigate = useNavigate();
     const {calculatorType, setCalculatorType} = useCalculatorType()
+    const [sector, setSector] = useState<string>("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCalculatorType(event.target.value as CalculatorType);
     };
 
-    const handleSecondRadioGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        
-    };
+    // const handleSecondRadioGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //
+    // };
 
     const handleSubmit = (data: GeneralDataSchema) => {
         if (calculatorType === CalculatorType.P2H) {
@@ -77,11 +83,15 @@ export const GeneralDataForm = () => {
     };
 
     return (
-        <>
+        <div style={{fontFamily: 'Arial'}}>
             <GlobalStyles
                 styles={{
                     '.MuiContainer-root': {
                         padding: '0px !important',
+                    },
+                    'body, *': {
+                        fontFamily: 'Arial',
+                        fontWeight: 400,
                     },
                 }}
             />
@@ -91,20 +101,35 @@ export const GeneralDataForm = () => {
 
                 <div style={{
                     fontSize: '32px',
-                    fontFamily: 'Arial',
+                    fontWeight: 400,
                 }}>
                     Bendrieji duomenys
                 </div>
 
                 <div style={{marginTop: '48px',}}>
-                    <div style={{height: '0'}}>
+                    <div style={{height: '18px', marginBottom: '12px'}}>
                         Pasirinkite savo atstovaujamą sektorių
                     </div>
-                    <FormInput name="network"/>
+
+                    <Select
+                        style={{height: '48px', width: '400px'}}
+                        value={sector}
+                        onChange={e => setSector(e.target.value)}
+                        displayEmpty
+                        inputProps={{'aria-label': 'Without label'}}
+                        defaultValue={sector}
+                    >
+                        <MenuItem value="sector">Sektorius</MenuItem>
+                        <MenuItem value="concentrator">Esu telkėjas</MenuItem>
+                    </Select>
+
+                    {sector === 'concentrator' && (
+                        <FormInput name="network" style={{width: '400px'}} defaultValue="Įrašykite sektorių (neprivaloma)"/>
+                    )}
                 </div>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-                
+
                 <FormLabel id="demo-radio-buttons-group-label" style={{color: "black", padding: 0,}}>
                     Pasirinkite vertinamą technologiją / įrenginį
                 </FormLabel>
@@ -115,49 +140,94 @@ export const GeneralDataForm = () => {
                     aria-labelledby="demo-radio-buttons-group-label"
                     name="radio-buttons-group"
                     onChange={handleChange}
-                    style={{ columnGap: '32px' }}
+                    style={{columnGap: '32px'}}
                 >
 
                     {Object.values(CalculatorType).map((type) => (
-                        <FormControlLabel
-                            key={type}
-                            value={type}
-                            control={<Radio {...controlProps(type)} sx={radioStyles}/>}
-                            label={type.toUpperCase()}
-                        />
+                        <div >
+                            <FormControlLabel
+                                key={type}
+                                value={type}
+                                control={<Radio {...controlProps(type)} sx={radioStyles}/>}
+                                label={type.toUpperCase()}
+                                sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
+                            />
+
+                            <Tooltip title={CalculatorTypeTooltips[type]} >
+                                <InfoOutlineIcon/>
+                            </Tooltip>
+                        </div>
                     ))}
                 </RadioGroup>
-
+                
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormLabel id="demo-radio-buttons-group-label" style={{color: "black", padding: 0,}}>
-                    Prie kokio operatoriaus elektros tinklų esate / planuojate prisijungti?
+                <FormLabel 
+                    id="demo-radio-buttons-group-label"
+                    style={{color: "black", padding: 0, display: 'flex'}}>
+                    
+                    <div style={{marginRight: '4px'}}>
+                        Prie kokio operatoriaus elektros tinklų esate / planuojate prisijungti?
+                    </div>
+                    
+                    <Tooltip title="
+                    Priklausomai nuo įrenginių prijungimo taško, 
+                    skaičiavimuose vertinamas skirtingas energijos persiuntimo tarifas." >
+                        <InfoOutlineIcon/>
+                    </Tooltip>
                 </FormLabel>
-                
+
+
                 <RadioGroup
                     defaultValue={CalculatorType.BEKS}
                     row
                     aria-labelledby="demo-radio-buttons-group-label"
                     name="radio-buttons-group"
-                    onChange={handleSecondRadioGroupChange}
-                    style={{ columnGap: '32px' }}
+                    //onChange={handleSecondRadioGroupChange}
+                    style={{columnGap: '32px'}}
                 >
-                    <FormControlLabel value="first" control={<Radio sx={radioStyles}/>} label="Perdavimo tinklas" />
-                    <FormControlLabel value="second" control={<Radio sx={radioStyles}/>} label="Skirstymo tinklas" />
+                    <FormControlLabel value="first" control={<Radio sx={radioStyles}/>} label="Perdavimo tinklas"/>
+                    <FormControlLabel value="second" control={<Radio sx={radioStyles}/>} label="Skirstymo tinklas"/>
                 </RadioGroup>
 
-                <Divider variant="fullWidth" sx={{marginTop: '379px'}}/>
-                
+
+                {sector === 'concentrator' && (
+                    <div>
+                        <Divider variant="fullWidth" sx={{marginTop: '24px', marginBottom: '24px'}}/>
+
+                        <div style={{height: '18px', marginBottom: '12px'}}>
+                            Pasirinkite savo apskritį *
+                        </div>
+
+                        <Select
+                            style={{height: '48px', width: '400px'}}
+                            // value={}
+                            // onChange={e => setSector(e.target.value)}
+                            displayEmpty
+                            inputProps={{'aria-label': 'Without label'}}
+                        >
+                            <MenuItem value="1">1</MenuItem>
+                            <MenuItem value="2">2</MenuItem>
+                        </Select>
+
+                    </div>)}
+
+                {sector === 'concentrator' ? (
+                    <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
+                ) : (
+                    <Divider variant="fullWidth" sx={{marginTop: '379px'}}/>
+                )}
+
                 <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
                     <Button type="submit" startIcon={<ArrowBackIcon/>}>
                         Atgal
                     </Button>
-                    <Button  variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
+                    <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
                         Toliau
-                    </Button>    
+                    </Button>
                 </div>
-                
+
             </Form>
-        </>
+        </div>
     )
 }

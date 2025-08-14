@@ -41,7 +41,8 @@ export const Navigation = () => {
                 return (
                     <NavLink
                         key={link.to}
-                        to={`${link.to}-${calculatorType}`}
+                        
+                        to={link.to === '/general-data' ? link.to : `${link.to}-${calculatorType}`}
                         state={location.state}
                         disabled={!isAccessible}
                     >  {link.label}
