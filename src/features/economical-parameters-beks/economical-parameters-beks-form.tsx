@@ -10,14 +10,35 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {useMutation} from "@tanstack/react-query";
 
 export const EconomicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const {mutate} = useMutation({
+        mutationKey : ['beks'],
+        mutationFn: async ({ parameters }: { parameters: string }) => {
+            return new Promise(resolve => setTimeout(resolve, 1000));
+
+            // const response = await fetch(
+            //     '/beks',
+            //     {
+            //         method: 'POST',
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify({ parameters: strongParameters }),
+            //     }
+            // );
+            // return response.json();
+        },
+    });
+    
     const handleSubmit = (data: EconomicalBeksParametersSchema) => {
+        mutate("ok")
         navigate({
-            to: "/summary-of-results",
+            to: "/summary-of-results-beks",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,
@@ -25,6 +46,8 @@ export const EconomicalParametersBeksForm = () => {
             },
         })
     }
+
+    
 
     return (
         <div style={{fontFamily: 'Arial', width: '760px'}}>
@@ -52,21 +75,6 @@ export const EconomicalParametersBeksForm = () => {
             </div>
 
             <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{
-                CAPEX_P: 0,
-                CAPEX_C: 0,
-                OPEX_P: 0,
-                OPEX_C: 0,
-                number_of_years: 10,
-                discount_rate: 5,
-                P_FCR_CAP_BSP: 0,
-                P_aFRRu_CAP_BSP: 0,
-                P_aFRRd_CAP_BSP: 0,
-                P_mFRRu_CAP_BSP: 0,
-                P_mFRRd_CAP_BSP: 0,
-                P_aFRRu_BSP: 0,
-                P_aFRRd_BSP: 0,
-                P_mFRRu_BSP: 0,
-                P_mFRRd_BSP: 0
             }}>
 
                 <FormInput name="CAPEX_P" defaultValue="Eur/MW" description="Tik teigiami skaičiai"

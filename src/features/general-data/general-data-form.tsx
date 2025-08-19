@@ -143,18 +143,22 @@ export const GeneralDataForm = () => {
                 >
 
                     {Object.values(CalculatorType).map((type) => (
-                        <div >
-                            <FormControlLabel
-                                key={type}
-                                value={type}
-                                control={<Radio {...controlProps(type)} sx={radioStyles}/>}
-                                label={type.toUpperCase()}
-                                sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
-                            />
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <div>
+                                <FormControlLabel
+                                    key={type}
+                                    value={type}
+                                    control={<Radio {...controlProps(type)} sx={radioStyles}/>}
+                                    label={type.toUpperCase()}
+                                    sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
+                                />    
+                            </div>
 
-                            <Tooltip title={CalculatorTypeTooltips[type]} >
-                                <InfoOutlineIcon/>
-                            </Tooltip>
+                            <div>
+                                <Tooltip title={CalculatorTypeTooltips[type]}>
+                                    <InfoOutlineIcon style={{color: '#6F8190'}} />   
+                                </Tooltip>
+                            </div>
                         </div>
                     ))}
                 </RadioGroup>

@@ -12,4 +12,13 @@ export default defineConfig({
     react(),
     svgr(),
   ],
+  server: {
+    proxy: {
+      '/beks': {
+        target: 'https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

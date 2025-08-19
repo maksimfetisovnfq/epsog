@@ -73,13 +73,6 @@ export const TechnicalParametersBeksForm = () => {
             </div>
 
             <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-                q_max: 1000,
-                q_total: 2,
-                RTE: 88,
-                SOC_min: 10,
-                SOC_max: 95,
-                N_cycles_DA: 4,
-                N_cycles_ID: 16,
             }}>
 
                 <FormInput name="q_max" defaultValue="1000 MW"
@@ -114,7 +107,7 @@ export const TechnicalParametersBeksForm = () => {
                         aria-label="Temperature"
                         defaultValue={30}
                         getAriaValueText={valuetext}
-                        color='#0F2D46'
+                        color="primary"
                     />
 
                     <div style={{
