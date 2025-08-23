@@ -270,6 +270,90 @@ export const useSummaryData = () => {
         },
     ], []);
 
+    const
+        electricityTradeDataSource1 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Nupirkta',
+            value: 657.35,
+        },
+        {
+            key: '2',
+            parameter: 'Parduota',
+            value: 583.65,
+        }
+    ], []);
+
+    const
+        electricityTradeDataSource2 = useMemo(() => [
+            {
+                key: '1',
+                parameter: 'Nupirkta',
+                value: 3.54,
+            },
+            {
+                key: '2',
+                parameter: 'Parduota',
+                value: 4.39,
+            }
+        ], []);
+
+    const
+        electricityTradeDataSource3 = useMemo(() => [
+            {
+                key: '1',
+                parameter: 'Nupirkta',
+                value: 38.23,
+            },
+            {
+                key: '2',
+                parameter: 'Parduota',
+                value: 97.35,
+            }
+        ], []);
+
+    const
+        electricityTradeDataSource4 = useMemo(() => [
+            {
+                key: '1',
+                parameter: 'Nupirkta',
+                value: 226.31,
+            },
+            {
+                key: '2',
+                parameter: 'Parduota',
+                value: -11308.35,
+            }
+        ], []);
+
+    const
+        electricityTradeDataSource5 = useMemo(() => [
+            {
+                key: '1',
+                parameter: 'Nupirkta',
+                value: 1.19,
+            },
+            {
+                key: '2',
+                parameter: 'Parduota',
+                value: 3.82,
+            }
+        ], []);
+
+    const
+        electricityTradeDataSource6 = useMemo(() => [
+            {
+                key: '1',
+                parameter: 'Nupirkta',
+                value: '45.38',
+            },
+            {
+                key: '2',
+                parameter: 'Parduota',
+                value: '-804.45',
+            }
+        ], []);
+
     return {
         dataSource,
         columns,
@@ -287,6 +371,12 @@ export const useSummaryData = () => {
         calcDataTableDataSource6,
         calcDataTableDataSource7,
         calcDataTableDataSource8,
+        electricityTradeDataSource1,
+        electricityTradeDataSource2,
+        electricityTradeDataSource3,
+        electricityTradeDataSource4,
+        electricityTradeDataSource5,
+        electricityTradeDataSource6,
         FCR, 
     };
 };

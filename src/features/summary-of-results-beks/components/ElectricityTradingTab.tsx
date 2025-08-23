@@ -1,5 +1,8 @@
 import React from 'react';
-import { Table } from "../../../ui/tables";
+import {CalcDataTable, Table} from "../../../ui/tables";
+import Divider from "@mui/material/Divider";
+import {NavigationButtons} from "./NavigationButtons.tsx";
+import {useSummaryData} from "../hooks/useSummaryData";
 
 interface TableColumn {
     title: string;
@@ -21,12 +24,67 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
     dataSource,
     columns
 }) => {
+    const {
+        electricityTradeDataSource1,
+        electricityTradeDataSource2,
+        electricityTradeDataSource3,
+        electricityTradeDataSource4,
+        electricityTradeDataSource5,
+        electricityTradeDataSource6,
+    } = useSummaryData();
+
     return (
         <div>
             {/* Electricity trading content */}
             <Table columns={columns} dataSource={dataSource}/>
-            
-            
+
+            <div style={{
+                fontSize: '18px',
+                marginTop: '32px',
+                marginBottom: '16px',
+            }}>
+                Diena prieš (angl. Day-Ahead) rinka
+            </div>
+
+            <CalcDataTable
+                source="Užsakytų balansavimo pajėgumų kiekis"
+                dataSource={electricityTradeDataSource1}
+            />
+            <CalcDataTable
+                source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
+                dataSource={electricityTradeDataSource2}
+            />
+            <CalcDataTable
+                source="Tikėtinos pajamos"
+                dataSource={electricityTradeDataSource3}
+            />
+
+            <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
+
+            <div style={{
+                fontSize: '18px',
+                marginTop: '32px',
+                marginBottom: '16px',
+            }}>
+                Dienos eigos (angl. Intraday) rinka
+            </div>
+
+            <CalcDataTable
+                source="Užsakytų balansavimo pajėgumų kiekis"
+                dataSource={electricityTradeDataSource4}
+            />
+            <CalcDataTable
+                source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
+                dataSource={electricityTradeDataSource5}
+            />
+            <CalcDataTable
+                source="Tikėtinos pajamos"
+                dataSource={electricityTradeDataSource6}
+            />
+
+            <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
+
+            <NavigationButtons/>
         </div>
     );
 };
