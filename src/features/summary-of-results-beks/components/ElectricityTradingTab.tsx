@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from "../../../ui/table/table";
+import { Table } from "../../../ui/tables";
 
 interface TableColumn {
     title: string;

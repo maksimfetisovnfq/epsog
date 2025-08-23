@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, NoHeaderTable } from "../../../ui/table/table";
+import { Table, NoHeaderTable } from "../../../ui/tables";
 import { VerticalBarChart } from "../../../ui/charts/verticalBarChart";
 import Divider from "@mui/material/Divider";
 import { NPVAnalysis } from "./NPVAnalysis";

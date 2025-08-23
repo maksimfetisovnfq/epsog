@@ -1,12 +1,5 @@
 import React from 'react';
-import { Table } from "../../../ui/table/table";
-
-interface TableColumn {
-    title: string;
-    dataIndex: string;
-    key: string;
-    render?: (item: { technology: string }) => string;
-}
+import { Table, type Column } from "../../../ui/tables";
 
 interface BalancingEnergyMarketTabProps {
     dataSource: Array<{
@@ -14,7 +7,7 @@ interface BalancingEnergyMarketTabProps {
         name: string;
         technology: string;
     }>;
-    columns: TableColumn[];
+    columns: Column[];
 }
 
 export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> = ({

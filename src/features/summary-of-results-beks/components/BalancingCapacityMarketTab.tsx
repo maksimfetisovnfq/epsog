@@ -1,12 +1,6 @@
 import React from 'react';
-import { Table } from "../../../ui/table/table";
-
-interface TableColumn {
-    title: string;
-    dataIndex: string;
-    key: string;
-    render?: (item: { technology: string }) => string;
-}
+import { Table, CalcDataTable, type Column } from "../../../ui/tables";
+import { useSummaryData } from "../hooks/useSummaryData";
 
 interface BalancingCapacityMarketTabProps {
     dataSource: Array<{
@@ -14,13 +8,15 @@ interface BalancingCapacityMarketTabProps {
         name: string;
         technology: string;
     }>;
-    columns: TableColumn[];
+    columns: Column[];
 }
 
 export const BalancingCapacityMarketTab: React.FC<BalancingCapacityMarketTabProps> = ({
     dataSource,
     columns
 }) => {
+    const { calcDataTableDataSource } = useSummaryData();
+
     return (
         <div>
             <Table columns={columns} dataSource={dataSource}/>
@@ -38,6 +34,30 @@ export const BalancingCapacityMarketTab: React.FC<BalancingCapacityMarketTabProp
                     Dažnio išlaikymo rezervas (angl. Frequency containment reserve)
                 </div>
             </div>
+
+            <div style={{ marginTop: '32px' }}>
+                <CalcDataTable 
+                    title="Calculation Results"
+                    subtitle="Economic parameters and financial metrics"
+                    dataSource={calcDataTableDataSource}
+                />
+            </div>
+            <div style={{ marginTop: '32px' }}>
+                <CalcDataTable
+                    title="Calculation Results"
+                    subtitle="Economic parameters and financial metrics"
+                    dataSource={calcDataTableDataSource}
+                />
+            </div>
+            <div style={{ marginTop: '32px' }}>
+                <CalcDataTable
+                    title="Calculation Results"
+                    subtitle="Economic parameters and financial metrics"
+                    dataSource={calcDataTableDataSource}
+                />
+            </div>
         </div>
+        
+        
     );
 };

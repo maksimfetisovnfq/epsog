@@ -144,6 +144,39 @@ export const useSummaryData = () => {
         {key: '11', name: 'mFRRd', value: 0.2},
     ], []);
 
+    const calcDataTableDataSource = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Total Investment Cost',
+            value: '€ 2,450,000',
+        },
+        {
+            key: '2',
+            parameter: 'Annual Revenue',
+            value: '€ 485,750',
+        },
+        {
+            key: '3',
+            parameter: 'Payback Period',
+            value: '5.8 years',
+        },
+        {
+            key: '4',
+            parameter: 'Net Present Value (NPV)',
+            value: '€ 1,125,340',
+        },
+        {
+            key: '5',
+            parameter: 'Internal Rate of Return (IRR)',
+            value: '18.4%',
+        },
+        {
+            key: '6',
+            parameter: 'Levelized Cost of Storage',
+            value: '€ 0.089/kWh',
+        }
+    ], []);
+
     return {
         dataSource,
         columns,
@@ -153,5 +186,6 @@ export const useSummaryData = () => {
         stackedBarDataSource,
         incomeDataSource,
         marketProductsDataSource,
+        calcDataTableDataSource,
     };
 };
