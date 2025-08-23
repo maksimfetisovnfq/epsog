@@ -44,6 +44,11 @@ interface OverviewTabProps {
         valueA?: number;
         valueB?: number;
     }>;
+    marketProductsDataSource: Array<{
+        key: string;
+        name: string;
+        value: number;
+    }>;
 }
 
 export const OverviewTab: React.FC<OverviewTabProps> = ({
@@ -53,7 +58,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
     secondBarChartLabels,
     secondBarChartDataset,
     stackedBarDataSource,
-    incomeDataSource
+    incomeDataSource,
+    marketProductsDataSource
 }) => {
     return (
         <>
@@ -94,7 +100,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             
             <IncomeComparison incomeDataSource={incomeDataSource} />
             
-            <MarketProducts stackedBarDataSource={stackedBarDataSource} />
+            <MarketProducts marketProductsDataSource={marketProductsDataSource} />
 
             <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
 

@@ -16,6 +16,7 @@ export const SummaryOfResultsBeksForm = () => {
         secondBarChartDataset,
         stackedBarDataSource,
         incomeDataSource,
+        marketProductsDataSource,
     } = useSummaryData();
 
     const handleChange = (_: SyntheticEvent, newValue: number) => {
@@ -69,6 +70,7 @@ export const SummaryOfResultsBeksForm = () => {
                 secondBarChartDataset={secondBarChartDataset}
                 stackedBarDataSource={stackedBarDataSource}
                 incomeDataSource={incomeDataSource}
+                marketProductsDataSource={marketProductsDataSource}
             />
         </div>
     );

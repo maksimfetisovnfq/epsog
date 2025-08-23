@@ -1,16 +1,35 @@
 import React from 'react';
-import { StackedBarChart } from "../../../ui/charts/stackedBarChart";
+import { MarketProductsChart } from "../../../ui/charts/marketProductsChart";
 
 interface MarketProductsProps {
-    stackedBarDataSource: Array<{
+    marketProductsDataSource: Array<{
         key: string;
         name: string;
-        valueA?: number;
-        valueB?: number;
+        value: number;
     }>;
 }
 
-export const MarketProducts: React.FC<MarketProductsProps> = ({ stackedBarDataSource }) => {
+export const MarketProducts: React.FC<MarketProductsProps> = ({ marketProductsDataSource }) => {
+    // Safety check to prevent undefined errors
+    if (!marketProductsDataSource || marketProductsDataSource.length === 0) {
+        return (
+            <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
+                <div style={{
+                    fontSize: '16px',
+                    marginBottom: '16px',
+                    marginTop: '16px',
+                    fontWeight: 700,
+                    textAlign: 'center',
+                }}>
+                    Rinkų produktai
+                </div>
+                <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
+                    Duomenys kraunami...
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
             <div style={{
@@ -24,16 +43,12 @@ export const MarketProducts: React.FC<MarketProductsProps> = ({ stackedBarDataSo
             </div>
 
             <div style={{width: '768px'}}>
-                <StackedBarChart
-                    labels={stackedBarDataSource.map(item => item.name)}
+                <MarketProductsChart
+                    labels={marketProductsDataSource.map(item => item.name)}
                     datasets={[
                         {
-                            label: 'Bottom',
-                            data: stackedBarDataSource.map(item => item.valueB ?? 0),
-                        },
-                        {
-                            label: 'Top',
-                            data: stackedBarDataSource.map(item => item.valueA ?? 0),
+                            label: 'Rinkos produktai',
+                            data: marketProductsDataSource.map(item => item.value),
                         },
                     ]}
                 />

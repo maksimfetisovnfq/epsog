@@ -129,6 +129,21 @@ export const useSummaryData = () => {
         {key: '11', name: 'mFRRd', valueB: -50},
     ], []);
 
+    const marketProductsDataSource = useMemo(() => [
+        {key: '0', name: 'perkama DA', value: 0.6},
+        {key: '1', name: 'parduodama DA', value: 0.7},
+        {key: '2', name: 'aFRRuCAP', value: 0.4},
+        {key: '3', name: 'aFRRd CAP', value: 3},
+        {key: '4', name: 'mFRRu CAP', value: 1.5},
+        {key: '5', name: 'mFRRd CAP', value: 0.4},
+        {key: '6', name: 'perkama ID', value: 0.2},
+        {key: '7', name: 'parduodama ID', value: 3.5},
+        {key: '8', name: 'aFRRu', value: 0.9},
+        {key: '9', name: 'aFRRd', value: 1.5},
+        {key: '10', name: 'mFRRu', value: 1.3},
+        {key: '11', name: 'mFRRd', value: 0.2},
+    ], []);
+
     return {
         dataSource,
         columns,
@@ -137,5 +152,6 @@ export const useSummaryData = () => {
         secondBarChartDataset,
         stackedBarDataSource,
         incomeDataSource,
+        marketProductsDataSource,
     };
 };

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Tabs } from "@mui/material";
 import Tab from '@mui/material/Tab';
-import { Table } from "../../../ui/table/table";
 import { CustomTabPanel } from "./CustomTabPanel";
 import { a11yProps } from "../utils/tabUtils";
+import { BalancingCapacityMarketTab } from "./BalancingCapacityMarketTab";
+import { BalancingEnergyMarketTab } from "./BalancingEnergyMarketTab";
+import { ElectricityTradingTab } from "./ElectricityTradingTab";
 
 interface TableColumn {
     title: string;
@@ -73,31 +75,24 @@ export const MarketDataTab: React.FC<MarketDataTabProps> = ({
             </Tabs>
 
             <CustomTabPanel value={innerTabValue} index={0}>
-                <div>
-                    <Table columns={columns} dataSource={dataSource}/>
-
-                    <div style={{
-                        fontSize: '18px',
-                        marginTop: '32px',
-                    }}>
-                        FCR
-                    </div>
-                    {/* Additional FCR content would go here */}
-                </div>
+                <BalancingCapacityMarketTab 
+                    dataSource={dataSource}
+                    columns={columns}
+                />
             </CustomTabPanel>
 
             <CustomTabPanel value={innerTabValue} index={1}>
-                <div>
-                    {/* Balancing energy market content */}
-                    <Table columns={columns} dataSource={dataSource}/>
-                </div>
+                <BalancingEnergyMarketTab 
+                    dataSource={dataSource}
+                    columns={columns}
+                />
             </CustomTabPanel>
 
             <CustomTabPanel value={innerTabValue} index={2}>
-                <div>
-                    {/* Electricity trading content */}
-                    <Table columns={columns} dataSource={dataSource}/>
-                </div>
+                <ElectricityTradingTab 
+                    dataSource={dataSource}
+                    columns={columns}
+                />
             </CustomTabPanel>
         </>
     );

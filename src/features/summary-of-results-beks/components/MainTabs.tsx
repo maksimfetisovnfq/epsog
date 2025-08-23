@@ -48,6 +48,11 @@ interface MainTabsProps {
         valueA?: number;
         valueB?: number;
     }>;
+    marketProductsDataSource: Array<{
+        key: string;
+        name: string;
+        value: number;
+    }>;
 }
 
 export const MainTabs: React.FC<MainTabsProps> = ({
@@ -61,7 +66,8 @@ export const MainTabs: React.FC<MainTabsProps> = ({
     secondBarChartLabels,
     secondBarChartDataset,
     stackedBarDataSource,
-    incomeDataSource
+    incomeDataSource,
+    marketProductsDataSource
 }) => {
     return (
         <div style={{
@@ -111,6 +117,7 @@ export const MainTabs: React.FC<MainTabsProps> = ({
                     secondBarChartDataset={secondBarChartDataset}
                     stackedBarDataSource={stackedBarDataSource}
                     incomeDataSource={incomeDataSource}
+                    marketProductsDataSource={marketProductsDataSource}
                 />
             </CustomTabPanel>
 

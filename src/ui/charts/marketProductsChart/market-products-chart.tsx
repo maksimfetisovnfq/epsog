@@ -4,7 +4,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels);
 
-export interface IncomeChart {
+export interface MarketProductsChartProps {
   labels: string[];
   datasets: {
     label: string;
@@ -13,13 +13,19 @@ export interface IncomeChart {
   }[];
 }
 
-export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
-  const getBarColors = (data: number[]) =>
-    data.map(v => (v > 0 ? '#87E6B9' : '#FF7070'));
+export const MarketProductsChart = ({ labels, datasets } : MarketProductsChartProps) => {
+  const getBarColors = (labels: string[]) =>
+    labels.map(label => {
+      const upperLabel = label.toUpperCase();
+      if (upperLabel.includes('DA')) return '#0FCD73';
+      if (upperLabel.includes('CAP')) return '#0B9051';
+      if (upperLabel.includes('ID')) return '#06522E';
+      return '#032917';
+    });
 
   const coloredDatasets = datasets.map(ds => ({
     ...ds,
-    backgroundColor: getBarColors(ds.data),
+    backgroundColor: getBarColors(labels),
     borderSkipped: false,
     borderWidth: 0,
   }));
@@ -28,6 +34,7 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
     labels: labels,
     datasets: coloredDatasets,
   };
+  
   const options = {
     responsive: true,
     plugins: {
@@ -38,12 +45,12 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
     scales: {
       x: {
         stacked: true,
-        ticks: {
-          maxRotation: -70,
-          minRotation: -70,
+        ticks: { 
+              display: true,
+          maxRotation: -75,
+          minRotation: -75,
           padding: 90,
         },
-        
         grid: { display: false },
         barPercentage: 0.9,
         categoryPercentage: 0.9,
@@ -60,7 +67,7 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
         grid: { display: true },
         title: {
           display: true,
-          text: 'Vertė (tūkst. Eur)',
+          text: 'Pasiskirstymas pagal rinkos produktus (%)',
           font: {
             size: 12,
           },
@@ -68,11 +75,14 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
       },
     },
   };
+  
   return (
     <div style={{ width: 768, maxWidth: '100%' }}>
-      <div style={{ marginTop: 24, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', height: 353, overflow: 'visible' }}>
+      <div style={{ marginTop: 24, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', overflow: 'visible' }}>
         <Bar data={data} options={options} style={{ width: '100%', maxWidth: 768 }} />
       </div>
+      
+      <div style={{ height: 48 }} />
     </div>
   );
 };
