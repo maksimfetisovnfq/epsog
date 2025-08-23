@@ -25,6 +25,8 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
         <div>
             {/* Electricity trading content */}
             <Table columns={columns} dataSource={dataSource}/>
+            
+            
         </div>
     );
 };
