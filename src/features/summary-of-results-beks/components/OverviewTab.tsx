@@ -82,7 +82,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
 
             <NoHeaderTable dataSource={secondDataSource}/>
 
-            <div style={{width: '768px', border: '1px solid #CFD5DA'}}>
+            <div style={{width: '768px', border: '1px solid #CFD5DA', marginTop: 16}}>
                 <VerticalBarChart labels={secondBarChartLabels} datasets={secondBarChartDataset}/>
             </div>
 

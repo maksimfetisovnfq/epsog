@@ -144,37 +144,130 @@ export const useSummaryData = () => {
         {key: '11', name: 'mFRRd', value: 0.2},
     ], []);
 
-    const calcDataTableDataSource = useMemo(() => [
+    const calcDataTableDataSource1 = useMemo(() => [
         {
             key: '1',
-            parameter: 'Total Investment Cost',
-            value: '€ 2,450,000',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '0.59',
         },
         {
             key: '2',
-            parameter: 'Annual Revenue',
-            value: '€ 485,750',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '0.79',
+        }
+    ], []);
+
+    const calcDataTableDataSource2 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '1.20',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '4.37',
+        }
+    ], []);
+
+    const calcDataTableDataSource3 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '188.64',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '576.26',
+        }
+    ], []);
+
+    const calcDataTableDataSource4 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '1.16',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '10.49',
+        }
+    ], []);
+    const calcDataTableDataSource5 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '0.61',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '0.81',
+        }
+    ], []);
+
+    const calcDataTableDataSource6 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '4.66',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '0.25',
+        }
+    ], []);
+
+    const calcDataTableDataSource7 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '105.28',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '137.96',
+        }
+    ], []);
+
+    const calcDataTableDataSource8 = useMemo(() => [
+        {
+            key: '1',
+            parameter: 'Aukštyn (angl. Upward)',
+            value: '4.50',
+        },
+        {
+            key: '2',
+            parameter: 'Žemyn (angl. Downward)',
+            value: '0.24',
+        }
+    ], []);
+
+    const FCR = useMemo(() => [
+        {
+            key: '1',
+            name: 'Įsigytų pajėgumų apimtys',
+            value: 0,
+        },
+        {
+            key: '2',
+            name: 'Dalyvavimas paslaugoje',
+            value: 0,
         },
         {
             key: '3',
-            parameter: 'Payback Period',
-            value: '5.8 years',
+            name: 'Potencialios pajamos/sąnaudos',
+            value: 0,
         },
         {
             key: '4',
-            parameter: 'Net Present Value (NPV)',
-            value: '€ 1,125,340',
+            name: 'Priimtų kainos pasiūlymų dalis, proc.',
+            value: 0,
         },
-        {
-            key: '5',
-            parameter: 'Internal Rate of Return (IRR)',
-            value: '18.4%',
-        },
-        {
-            key: '6',
-            parameter: 'Levelized Cost of Storage',
-            value: '€ 0.089/kWh',
-        }
     ], []);
 
     return {
@@ -186,6 +279,14 @@ export const useSummaryData = () => {
         stackedBarDataSource,
         incomeDataSource,
         marketProductsDataSource,
-        calcDataTableDataSource,
+        calcDataTableDataSource1,
+        calcDataTableDataSource2,
+        calcDataTableDataSource3,
+        calcDataTableDataSource4,
+        calcDataTableDataSource5,
+        calcDataTableDataSource6,
+        calcDataTableDataSource7,
+        calcDataTableDataSource8,
+        FCR, 
     };
 };

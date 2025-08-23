@@ -4,6 +4,7 @@ import { Table } from '../Table';
 interface CalcDataTableProps {
     title?: string;
     subtitle?: string;
+    source?: string;
     dataSource?: Array<{
         key: string;
         parameter: string;
@@ -12,13 +13,12 @@ interface CalcDataTableProps {
 }
 
 export const CalcDataTable: React.FC<CalcDataTableProps> = ({
-    title,
-    subtitle,
-    dataSource = []
+    dataSource = [],
+    source = 'Header'
 }) => {
     const calcDataTableColumns = [
         {
-            title: 'Calculation Data - Combined Header',
+            title: source,
             dataIndex: 'parameter',
             key: 'combined-header',
             colSpan: 2,

@@ -44,7 +44,7 @@ export const SummaryOfResultsBeksForm = () => {
                         marginBottom: '56px',
                     },
                     '.MuiTable-root': {
-                        marginBottom: '16px',
+                        marginBottom: 0,
                     },
                 }}
             />
