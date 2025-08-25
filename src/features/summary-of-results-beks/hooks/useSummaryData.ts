@@ -354,6 +354,72 @@ export const useSummaryData = () => {
             }
         ], []);
 
+    const economicEvaluationDataSource = useMemo(() => [
+        {
+            key: '1',
+            name: 'Parduota elektros energija "Diena prieš" rinkoje',
+            value: 97.3491,
+        },
+        {
+            key: '2',
+            name: 'aFRR Aukštyn pajėgumas',
+            value: 188.6449,
+        },
+        {
+            key: '3',
+            name: 'aFRR Žemyn pajėgumas',
+            value: 576.2646,
+        },
+        {
+            key: '4',
+            name: 'aFRR Aukštyn pajėgumas',
+            value: 105.2834,
+        },
+        {
+            key: '5',
+            name: 'mFRR Žemyn pajėgumas',
+            value: 137.9616,
+        },
+        {
+            key: '6',
+            name: 'aFRR Aukštyn energija',
+            value: 11.69,
+        },
+        {
+            key: '7',
+            name: 'aFRR Žemyn energija',
+            value: 27.96,
+        },
+        {
+            key: '8',
+            name: 'mFRR Aukštyn energija',
+            value: 61.5444,
+        },
+    ], []);
+
+    const incomeDataSource2 = useMemo(() => [
+        {
+            key: '1',
+            name: 'parduodama DA',
+            value: 38.2326,
+        },
+        {
+            key: '2',
+            name: 'perkama ID',
+            value: 45.3830,
+        },
+        {
+            key: '3',
+            name: 'parduodama ID',
+            value: 804.4530,
+        },
+        {
+            key: '4',
+            name: 'mFRRd',
+            value: 286.0645,
+        },
+    ], []);
+
     return {
         dataSource,
         columns,
@@ -377,6 +443,8 @@ export const useSummaryData = () => {
         electricityTradeDataSource4,
         electricityTradeDataSource5,
         electricityTradeDataSource6,
-        FCR, 
+        FCR,
+        economicEvaluationDataSource,
+        incomeDataSource2,
     };
 };

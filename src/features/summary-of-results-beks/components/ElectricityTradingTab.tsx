@@ -47,15 +47,15 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
             </div>
 
             <CalcDataTable
-                source="Užsakytų balansavimo pajėgumų kiekis"
+                source="Energijos prekybos apimtys"
                 dataSource={electricityTradeDataSource1}
             />
             <CalcDataTable
-                source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
+                source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
                 dataSource={electricityTradeDataSource2}
             />
             <CalcDataTable
-                source="Tikėtinos pajamos"
+                source="Tikėtinos pajamos / sąnaudos"
                 dataSource={electricityTradeDataSource3}
             />
 
@@ -70,15 +70,15 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
             </div>
 
             <CalcDataTable
-                source="Užsakytų balansavimo pajėgumų kiekis"
+                source="Energijos prekybos apimtys"
                 dataSource={electricityTradeDataSource4}
             />
             <CalcDataTable
-                source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
+                source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
                 dataSource={electricityTradeDataSource5}
             />
             <CalcDataTable
-                source="Tikėtinos pajamos"
+                source="Tikėtinos pajamos / sąnaudos"
                 dataSource={electricityTradeDataSource6}
             />
 

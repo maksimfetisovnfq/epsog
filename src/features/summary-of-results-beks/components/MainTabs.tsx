@@ -69,6 +69,11 @@ export const MainTabs: React.FC<MainTabsProps> = ({
     incomeDataSource,
     marketProductsDataSource
 }) => {
+    const economicEvaluationColumns = [
+        { title: "Rinkos produktas", dataIndex: "name", key: "name" },
+        { title: "Suma (tūkst. Eur)", dataIndex: "value", key: "value" }
+    ];
+
     return (
         <div style={{
             borderRadius: '100px',
@@ -132,8 +137,7 @@ export const MainTabs: React.FC<MainTabsProps> = ({
 
             <CustomTabPanel value={value} index={2}>
                 <EconomicEvaluationTab
-                    columns={columns}
-                    dataSource={dataSource}
+                    columns={economicEvaluationColumns}
                     secondBarChartLabels={secondBarChartLabels}
                     secondBarChartDataset={secondBarChartDataset}
                 />

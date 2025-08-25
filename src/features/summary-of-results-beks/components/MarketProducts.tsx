@@ -10,7 +10,6 @@ interface MarketProductsProps {
 }
 
 export const MarketProducts: React.FC<MarketProductsProps> = ({ marketProductsDataSource }) => {
-    // Safety check to prevent undefined errors
     if (!marketProductsDataSource || marketProductsDataSource.length === 0) {
         return (
             <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>

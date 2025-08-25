@@ -1,2 +1,2 @@
-export { StackedBarChart} from "./stacked-chart";
+export { IncomeChart } from "./income-chart";
 
