@@ -420,6 +420,17 @@ export const useSummaryData = () => {
         },
     ], []);
 
+    const detailedAnualDataSource = useMemo(() =>
+        Array.from({ length: 10 }, (_, i) => ({
+            metai: i + 1,
+            ciklai: Math.floor(Math.random() * 1000) + 1,
+            capex: (Math.random() * 1000).toFixed(2),
+            opex: (Math.random() * 500).toFixed(2),
+            cf: (Math.random() * 2000 - 1000).toFixed(2),
+            npv: (Math.random() * 5000 - 2500).toFixed(2),
+        })),
+    []);
+
     return {
         dataSource,
         columns,
@@ -446,5 +457,6 @@ export const useSummaryData = () => {
         FCR,
         economicEvaluationDataSource,
         incomeDataSource2,
+        detailedAnualDataSource,
     };
 };

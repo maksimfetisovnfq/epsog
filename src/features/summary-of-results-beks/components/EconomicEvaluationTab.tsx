@@ -75,6 +75,8 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
 
             <DetailedAnualResults incomeDataSource={incomeDataSource2} />
             
+            
+            
 
             <NavigationButtons />
         </>
