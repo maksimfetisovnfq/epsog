@@ -1,58 +1,74 @@
 import {Form, FormInput} from "../../components/form";
-import {type EconomicalDsrParametersSchema, economicalParametersSchema, } from "./economical-parameters-schema.ts";
+import {type EconomicalDsrParametersSchema, economicalParametersSchema,} from "./economical-parameters-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
+import Divider from "@mui/material/Divider";
+import {Button} from "../../ui/button";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {GlobalStyles} from "@mui/material";
 
 export const EconomicalParametersDsrForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     const handleSubmit = (data: EconomicalDsrParametersSchema) => {
         navigate({
-            to: "/summary-of-results",
+            to: "/summary-of-results-dsr",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,
-                economicParameters: { dsr: data },
+                economicParameters: {dsr: data},
             },
         })
     }
-    
+
     return (
-        <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{
-            network: "",
-        }}>
-            <FormInput name="network"/>
-            <button type="submit">Forward</button> ECO DATA FORM
-            
-            <FormInput name="investmentsPower" defaultValue="Eur/MW" description="Tik teigiami skaičiai" title="Investicijos (CAPEX) į galią"/>
-            
-            <FormInput name="investmentsCapacity" defaultValue="Eur/MWh" description="Tik teigiami skaičiai" title="Investicijos (CAPEX) į talpą"/>
-           
-            <FormInput name="fixCosts" defaultValue="Eur/MW per metus" description="Tik teigiami skaičiai" title="Fiksuotos veiklos sąnaudos (OPEX)"/>
-           
-            <FormInput name="variableCosts" defaultValue="Eur/MWh" description="Tik teigiami skaičiai" title="Kintamos veiklos sąnaudos (OPEX)"/>
-           
-            <FormInput name="calcPeriod" defaultValue="10" description="Tik sveikas skaičius nuo 1 iki 50" title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"/>
-           
-            <FormInput name="discount" defaultValue="5 %" description="Skaičius nuo 0 iki 100" title="Diskonto norma"/> 
-           
-            <FormInput name="FCR" defaultValue="0 Eur/MW" title="FCR"/>
-           
-            <FormInput name="aFRR-up" defaultValue="0 Eur/MW" title="aFRR aukštyn"/>
-           
-            <FormInput name="aFRR-down" defaultValue="0 Eur/MW" title="aFRR žemyn"/>
-           
-            <FormInput name="mFRR-up" defaultValue="0 Eur/MW" title="mFRR aukštyn"/>
-           
-            <FormInput name="mFRR-down" defaultValue="0 Eur/MW" title="mFRR žemyn"/>
-           
-            <FormInput name="aFRR-up-" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
-           
-            <FormInput name="aFRR-down-" defaultValue="Eur/MWh" title="aFRR žemyn"/>
+        <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{}}>
+            <GlobalStyles styles={{
+                '.MuiPaper-root.MuiAccordion-root::before': {
+                    backgroundColor: 'transparent',
+                },
+                '.MuiContainer-root': {
+                    padding: '0px !important',
+                },
+                'body, *': {
+                    fontWeight: 400,
+                },
+            }}/>
+            <div style={{
+                fontSize: '32px',
+                marginTop: '48px',
+            }}>
+                Minimali siūloma kaina už balansavimo pajėgumus:
+            </div>
 
-            <FormInput name="aFRR-up--" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
+            <FormInput name="aFRRu1" title='aFRRu' defaultValue='0'/>
+            <FormInput name="aFRRd1" title='aFRRd' defaultValue="0"/>
+            <FormInput name="mFRRu1" title='mFRRu' defaultValue="0"/>
+            <FormInput name="mFRRd1" title='mFRRd' defaultValue="0"/>
 
-            <FormInput name="mFRR-down--" defaultValue="Eur/MWh" title="mFRR žemyn"/>
+            <div style={{
+                fontSize: '32px',
+                marginTop: '48px',
+            }}>
+                Minimali siūloma kaina už balansavimo energiją:
+            </div>
+
+            <FormInput name="aFRRu2" title='aFRRu' defaultValue='0'/>
+            <FormInput name="aFRRd2" title='aFRRd' defaultValue="0"/>
+            <FormInput name="mFRRu2" title='mFRRu' defaultValue="0"/>
+            <FormInput name="mFRRd2" title='mFRRd' defaultValue="0"/>
+
+            <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
+
+            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
+                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    Atgal
+                </Button>
+                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
+                    Toliau
+                </Button>
+            </div>
 
         </Form>
     )

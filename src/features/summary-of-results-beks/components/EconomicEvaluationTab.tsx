@@ -74,10 +74,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
             </div>
 
             <DetailedAnualResults incomeDataSource={incomeDataSource2} />
-            
-            
-            
 
+            <Divider style={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
+            
             <NavigationButtons />
         </>
     );

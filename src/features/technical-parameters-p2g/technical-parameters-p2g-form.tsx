@@ -1,6 +1,11 @@
 import {Form, FormInput} from "../../components/form";
 import {type TechnicalP2gParametersSchema, technicalParametersSchema} from "./technical-parameters-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
+import Divider from "@mui/material/Divider";
+import {GlobalStyles} from "@mui/material";
+import {Button} from "../../ui/button";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 export const TechnicalParametersP2gForm = () => {
     const navigate = useNavigate();
@@ -18,17 +23,39 @@ export const TechnicalParametersP2gForm = () => {
 
     return (
         <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-            network: "",
         }}>
-            <button type="submit">forward</button> TECHNICAL DATA FORM
-            <FormInput name="network"/>
-            <FormInput name="maximumPower" defaultValue="1000 MW" description="Tik teigiami skaičiai, max reikšmė 1000 MW" title="Elektros energijos kaupiklio maksimali galia"/>
-            <FormInput name="accumulatorCapacity" defaultValue="2 MWh" description="Tik teigiami skaičiai, max reikšmė 1 000 000 (1 TWh)" title="Elektros energijos kaupiklio talpa *"/>
-            <FormInput name="coefficient" defaultValue="88 %" description="Pilno ciklo naudingumo koeficientas" title="Pilno ciklo naudingumo koeficientas"/>
-            <FormInput name="minCharge" defaultValue="10 %" description="Skaičius nuo 0 iki 100" title="Elektros energijos kaupiklio minimalus įkrovimo lygis"/>
-            <FormInput name="maxCharge" defaultValue="95 %" description="Skaičius nuo 0 iki 100" title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"/>
-            <FormInput name="maxStorageCyclesDayAhead" defaultValue="4 kartai/d." description="Sveikas skaičius nuo 0 iki 96 imtinai" title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"/>
-            <FormInput name="maxStorageCyclesIntraday" defaultValue="16 kartai/d." description="Sveikas skaičius nuo 0 iki 96 imtinai" title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"/>
+            <GlobalStyles styles={{
+                '.MuiPaper-root.MuiAccordion-root::before': {
+                    backgroundColor: 'transparent',
+                },
+                '.MuiContainer-root': {
+                    padding: '0px !important',
+                },
+                'body, *': {
+                    fontWeight: 400,
+                },
+            }}/>
+            <FormInput name="electrolyzer_electrical_power" title="Elektrolizerio elektrinė galia (MW)" defaultValue="1"/>
+            <FormInput name="compressor_efficiency" title="Kompresoriaus naudingumo koeficientas (%)" defaultValue="80"/>
+            <FormInput name="P_H2" title="P_H2 (EUR/kg)" defaultValue="3.50"/>
+            <FormInput name="CAPEX" title="CAPEX (tūkst. EUR/MW)" defaultValue="2000"/>
+            <FormInput name="OPEX" title="OPEX (tūkst. EUR/MW/m)" defaultValue="16"/>
+            <FormInput name="discount_rate" title="discount_rate (%)" defaultValue="5"/>
+            <FormInput name="number_of_years" title="number_of_years" defaultValue="10"/>
+            <FormInput name="electrolyzer_efficiency" title="Elektrolizerio (elektra → vandenilis) naudingumo koeficientas (%)" defaultValue="50"/>
+            <FormInput name="hydrogen_temperature" title="Pagamintų vandenilio dujų temperatūra (°C)" defaultValue="80"/>
+            <FormInput name="hydrogen_pressure" title="Pagamintų vandenilio dujų slėgis (bar)" defaultValue="30"/>
+
+            <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
+
+            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
+                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    Atgal
+                </Button>
+                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
+                    Toliau
+                </Button>
+            </div>
         </Form>
     )
 }

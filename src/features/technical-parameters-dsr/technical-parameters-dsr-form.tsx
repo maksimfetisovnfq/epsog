@@ -1,35 +1,59 @@
 import {Form, FormInput} from "../../components/form";
 import {type TechnicalDsrParametersSchema, technicalParametersSchema} from "./technical-parameters-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
+import Divider from "@mui/material/Divider";
+import {Button} from "../../ui/button";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {GlobalStyles} from "@mui/material";
 
 export const TechnicalParametersDsrForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    
+
     const handleSubmit = (data: TechnicalDsrParametersSchema) => {
-        
+
         navigate({
             to: "/economic-parameters-dsr",
             state: {
                 generalData: location.state.generalData,
-                technicalParameters: { dsr: data },
+                technicalParameters: {dsr: data},
             },
         })
     }
 
     return (
         <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-            network: "",
         }}>
-            <button type="submit">forward</button> TECHNICAL DATA FORM
-            <FormInput name="network"/>
-            <FormInput name="maximumPower" defaultValue="1000 MW" description="Tik teigiami skaičiai, max reikšmė 1000 MW" title="Elektros energijos kaupiklio maksimali galia"/>
-            <FormInput name="accumulatorCapacity" defaultValue="2 MWh" description="Tik teigiami skaičiai, max reikšmė 1 000 000 (1 TWh)" title="Elektros energijos kaupiklio talpa *"/>
-            <FormInput name="coefficient" defaultValue="88 %" description="Pilno ciklo naudingumo koeficientas" title="Pilno ciklo naudingumo koeficientas"/>
-            <FormInput name="minCharge" defaultValue="10 %" description="Skaičius nuo 0 iki 100" title="Elektros energijos kaupiklio minimalus įkrovimo lygis"/>
-            <FormInput name="maxCharge" defaultValue="95 %" description="Skaičius nuo 0 iki 100" title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"/>
-            <FormInput name="maxStorageCyclesDayAhead" defaultValue="4 kartai/d." description="Sveikas skaičius nuo 0 iki 96 imtinai" title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"/>
-            <FormInput name="maxStorageCyclesIntraday" defaultValue="16 kartai/d." description="Sveikas skaičius nuo 0 iki 96 imtinai" title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"/>
+            <GlobalStyles styles={{
+                '.MuiPaper-root.MuiAccordion-root::before': {
+                    backgroundColor: 'transparent',
+                },
+                '.MuiContainer-root': {
+                    padding: '0px !important',
+                },
+                'body, *': {
+                    fontWeight: 400,
+                },
+            }}/>
+            <FormInput name="q_avg" title='Q_avg - Average power (MW)' defaultValue='10.00 MW'/>
+            <FormInput name="q_min" title='Q_min - Minimum power (MW)' defaultValue="5.00 MW"/>
+            <FormInput name="q_max" title='Q_max - Maximum power (MW)' defaultValue="15.00 MWh"/>
+            <FormInput name="CAPEX" title='CAPEX (tūkst. EUR/MW)' defaultValue="150.00 EUR/MW"/>
+            <FormInput name="OPEX" title='OPEX (tūkst. EUR/MW/year)' defaultValue="10.00 EUR/MW/year"/>
+            <FormInput name="discount_rate" title='discount_rate (%)' defaultValue="5.00 %"/>
+            <FormInput name="number_of_years" title='number_of_years' defaultValue="10"/>
+
+            <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
+
+            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
+                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    Atgal
+                </Button>
+                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
+                    Toliau
+                </Button>
+            </div>
         </Form>
     )
 }
