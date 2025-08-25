@@ -14,7 +14,7 @@ const isPageAccessible = (pagePath: string, state: HistoryState): boolean => {
     switch (pagePath) {
         case '/':
         case '/general-data':
-            return true;
+            return !!state;
         case '/technical-parameters':
             return !!state?.generalData;
         case '/economic-parameters':
@@ -31,7 +31,7 @@ const isPageAccessible = (pagePath: string, state: HistoryState): boolean => {
 export const Navigation = () => {
     const location = useLocation();
     const {calculatorType} = useCalculatorType();
-    
+
     return (
         <nav className="p-2 flex gap-2" style={{
             display: "flex",
@@ -41,7 +41,7 @@ export const Navigation = () => {
                 return (
                     <NavLink
                         key={link.to}
-                        
+
                         to={link.to === '/general-data' ? link.to : `${link.to}-${calculatorType}`}
                         state={location.state}
                         disabled={!isAccessible}
