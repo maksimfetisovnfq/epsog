@@ -32,7 +32,7 @@ export const StackedBarChart = ({ labels, datasets } : StackedBarChartProps) => 
     responsive: true,
     plugins: {
       legend: { display: false },
-      tooltip: { enabled: true },
+      tooltip: { enabled: false },
       datalabels: { display: false },
     },
     scales: {

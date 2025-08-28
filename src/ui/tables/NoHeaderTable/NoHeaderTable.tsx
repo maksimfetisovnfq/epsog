@@ -14,14 +14,14 @@ export const NoHeaderTable: React.FC<NoHeaderTableProps> = ({ dataSource }) => {
                     <TableRow key={rowIdx} sx={{height: 'auto'}}>
                         {isArrayOfArrays
                             ? (row as Array<unknown>).map((cell, colIdx) => (
-                                <TableCell key={colIdx} sx={{ width: 384 }}>
+                                <TableCell key={colIdx} sx={{ width: 384, ...(colIdx === 0 && { background: '#F5F7F8' }) }}>
                                     {cell as React.ReactNode}
                                 </TableCell>
                             ))
                             : Object.entries(row as Record<string, unknown>)
                                 .filter(([key]) => key !== 'key')
                                 .map(([, cell], colIdx) => (
-                                    <TableCell key={colIdx} sx={{ width: 384 }}>
+                                    <TableCell key={colIdx} sx={{ width: 384, ...(colIdx === 0 && { background: '#F5F7F8' }) }}>
                                         {cell as React.ReactNode}
                                     </TableCell>
                                 ))}

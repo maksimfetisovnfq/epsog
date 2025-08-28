@@ -34,7 +34,7 @@ export const VerticalBarChart = ({ labels, datasets}: VerticalBarChartProps) => 
   const options = {
     responsive: true,
     plugins: {
-      tooltip: { enabled: true },
+      tooltip: { enabled: false },
       legend: { display: false },
       datalabels: {
         display: true,
@@ -47,10 +47,13 @@ export const VerticalBarChart = ({ labels, datasets}: VerticalBarChartProps) => 
           size: 13,
         },
         formatter: function(value: number | [number, number]) {
+          let num: number;
           if (Array.isArray(value)) {
-            return value[1] - value[0];
+            num = value[1] - value[0];
+          } else {
+            num = value;
           }
-          return value;
+          return num.toFixed(2);
         },
         clip: false,
       },
@@ -68,7 +71,7 @@ export const VerticalBarChart = ({ labels, datasets}: VerticalBarChartProps) => 
         beginAtZero: true,
         grid: { drawOnChartArea: true, drawBorder: false },
         ticks: { display: false },
-        max: maxY + 10, 
+        max: maxY + Math.max(10, 0.15 * maxY),
       },
     },
   };

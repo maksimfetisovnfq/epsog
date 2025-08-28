@@ -15,7 +15,6 @@ export const IncomeComparison: React.FC<IncomeComparisonProps> = ({ incomeDataSo
         <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
             <div style={{
                 fontSize: '16px',
-                marginBottom: '16px',
                 marginTop: '16px',
                 fontWeight: 700,
                 textAlign: 'center',

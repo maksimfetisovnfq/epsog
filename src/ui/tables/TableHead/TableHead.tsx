@@ -4,9 +4,10 @@ import type { Column } from '../types';
 
 interface TableHeadProps {
     columns: Column[];
+    boldHeaders?: boolean;
 }
 
-export const TableHead: React.FC<TableHeadProps> = ({ columns }) => (
+export const TableHead: React.FC<TableHeadProps> = ({ columns, boldHeaders }) => (
     <MuiTableHead>
         <TableRow>
             {columns.map((column, colIdx) => {
@@ -22,7 +23,8 @@ export const TableHead: React.FC<TableHeadProps> = ({ columns }) => (
                                 ? '#E7EAED' 
                                 : (colIdx === 0 ? '#F5F7F8' : 'transparent'),
                             width: column.colSpan ? 384 * (column.colSpan || 1) : 384,
-                            textAlign: 'center'
+                            textAlign: 'center',
+                            fontWeight: boldHeaders ? 700 : undefined
                         }}
                     >
                         {column.title}

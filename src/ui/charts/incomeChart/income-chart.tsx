@@ -39,11 +39,11 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
       x: {
         stacked: true,
         ticks: {
-          maxRotation: -70,
-          minRotation: -70,
-          padding: 90,
+          padding: 10,
+            font: {
+                size: 12,
+            },
         },
-        
         grid: { display: false },
         barPercentage: 0.9,
         categoryPercentage: 0.9,
@@ -70,7 +70,7 @@ export const IncomeChart = ({ labels, datasets } : IncomeChart) => {
   };
   return (
     <div style={{ width: 768, maxWidth: '100%' }}>
-      <div style={{ marginTop: 24, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', height: 353, overflow: 'visible' }}>
+      <div style={{ marginTop: 24, marginBottom: 16, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', height: 353, overflow: 'visible' }}>
         <Bar data={data} options={options} style={{ width: '100%', maxWidth: 768 }} />
       </div>
     </div>

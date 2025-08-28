@@ -19,24 +19,117 @@ export const EconomicalParametersBeksForm = () => {
     const {mutate} = useMutation({
         mutationKey: ['beks'],
         mutationFn: async ({parameters}: { parameters: string }) => {
-            return new Promise(resolve => setTimeout(resolve, 1000));
-
-            // const response = await fetch(
-            //     '/beks',
-            //     {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify({ parameters: strongParameters }),
-            //     }
-            // );
-            // return response.json();
+            const formData = new FormData();
+            formData.append('parameters', parameters);
+            
+            const response = await fetch('https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/beks', {
+                method: 'POST',
+                body: formData,
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response.json();
         },
     });
 
     const handleSubmit = (data: EconomicalBeksParametersSchema) => {
-        mutate("ok")
+        // Combine data from all previous steps
+        const technicalParams = location.state?.technicalParameters?.beks;
+        
+        // Guard against missing technical parameters
+        if (!technicalParams) {
+            console.error('Technical parameters are missing');
+            return;
+        }
+        
+        // Construct the complete parameters object matching the API requirements
+        // const parameters = {
+        //     // Technical parameters
+        //     RTE: technicalParams.RTE,
+        //     Q_max: technicalParams.q_max,
+        //     Q_total: technicalParams.q_total,
+        //     SOC_min: technicalParams.SOC_min,
+        //     SOC_max: technicalParams.SOC_max,
+        //     N_cycles_DA: technicalParams.N_cycles_DA,
+        //     N_cycles_ID: technicalParams.N_cycles_ID,
+        //     reaction_time: 30, // Fixed value from the curl example
+        //
+        //     // Economic parameters from form
+        //     CAPEX_P: data.CAPEX_P,
+        //     CAPEX_C: data.CAPEX_C,
+        //     OPEX_P: data.OPEX_P,
+        //     OPEX_C: data.OPEX_C,
+        //     discount_rate: data.discount_rate,
+        //     number_of_years: data.number_of_years,
+        //
+        //     // Provider from general data (default from curl example)
+        //     provider: "ESO",
+        //
+        //     // BSP parameters
+        //     P_FCR_CAP_BSP: data.P_FCR_CAP_BSP,
+        //     P_aFRRu_CAP_BSP: data.P_aFRRu_CAP_BSP,
+        //     P_aFRRd_CAP_BSP: data.P_aFRRd_CAP_BSP,
+        //     P_mFRRu_CAP_BSP: data.P_mFRRu_CAP_BSP,
+        //     P_mFRRd_CAP_BSP: data.P_mFRRd_CAP_BSP,
+        //     P_aFRRu_BSP: data.P_aFRRu_BSP,
+        //     P_aFRRd_BSP: data.P_aFRRd_BSP,
+        //     P_mFRRu_BSP: data.P_mFRRu_BSP,
+        //     P_mFRRd_BSP: data.P_mFRRd_BSP,
+        //
+        //     // Fixed values from curl example
+        //     Sector: "Pramonė",
+        //     produktai: {
+        //         FCR: true,
+        //         aFRRu: true,
+        //         aFRRd: true,
+        //         mFRRu: false,
+        //         mFRRd: false
+        //     }
+        // };
+        
+        // const parameters = {
+        //     "RTE": 85.0,
+        //     "Q_max": 10.0,
+        //     "Q_total": 40.0,
+        //     "SOC_min": 10.0,
+        //     "SOC_max": 90.0,
+        //     "N_cycles_DA": 2,
+        //     "N_cycles_ID": 4,
+        //     "reaction_time": 30,
+        //     "CAPEX_P": 150.0,
+        //     "CAPEX_C": 250.0,
+        //     "OPEX_P": 2.5,
+        //     "OPEX_C": 1.5,
+        //     "discount_rate": 5.0,
+        //     "number_of_years": 10,
+        //     "provider": "ESO",
+        //     "P_FCR_CAP_BSP": 0,
+        //     "P_aFRRu_CAP_BSP": 0,
+        //     "P_aFRRd_CAP_BSP": 0,
+        //     "P_mFRRu_CAP_BSP": 0,
+        //     "P_mFRRd_CAP_BSP": 0,
+        //     "P_aFRRu_BSP": 0,
+        //     "P_aFRRd_BSP": 0,
+        //     "P_mFRRu_BSP": 0,
+        //     "P_mFRRd_BSP": 0,
+        //     "Sector": "Pramonė",
+        //     "produktai": {
+        //         "FCR": true,
+        //         "aFRRu": true,
+        //         "aFRRd": true,
+        //         "mFRRu": false,
+        //         "mFRRd": false
+        //     }
+        // }
+        
+        // Call mutation with JSON string parameters
+        // mutate({
+        //     parameters: JSON.stringify(parameters)
+        // });
+        
         navigate({
             to: "/summary-of-results-beks",
             state: {
@@ -159,6 +252,7 @@ export const EconomicalParametersBeksForm = () => {
                 </Accordion>
 
                 <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
+                
 
                 <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
                     <Button

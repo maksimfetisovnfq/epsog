@@ -41,7 +41,7 @@ export const CalcDataTable: React.FC<CalcDataTableProps> = ({
 
     return (
         <div>
-            <Table columns={calcDataTableColumns} dataSource={dataSource}/>
+            <Table columns={calcDataTableColumns} dataSource={dataSource} boldHeaders={true}/>
         </div>
     );
 };

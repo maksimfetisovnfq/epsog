@@ -16,10 +16,10 @@ export interface MarketProductsChartProps {
 export const MarketProductsChart = ({ labels, datasets } : MarketProductsChartProps) => {
   const getBarColors = (labels: string[]) =>
     labels.map(label => {
-      const upperLabel = label.toUpperCase();
-      if (upperLabel.includes('DA')) return '#0FCD73';
-      if (upperLabel.includes('CAP')) return '#0B9051';
-      if (upperLabel.includes('ID')) return '#06522E';
+      const words = label.toUpperCase().split(/\s+/);
+      if (words.includes('DA')) return '#0FCD73';
+      if (words.includes('CAP')) return '#0B9051';
+      if (words.includes('ID')) return '#06522E';
       return '#032917';
     });
 
@@ -47,9 +47,7 @@ export const MarketProductsChart = ({ labels, datasets } : MarketProductsChartPr
         stacked: true,
         ticks: { 
               display: true,
-          maxRotation: -75,
-          minRotation: -75,
-          padding: 90,
+          padding: 10,
         },
         grid: { display: false },
         barPercentage: 0.9,
@@ -78,11 +76,9 @@ export const MarketProductsChart = ({ labels, datasets } : MarketProductsChartPr
   
   return (
     <div style={{ width: 768, maxWidth: '100%' }}>
-      <div style={{ marginTop: 24, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', overflow: 'visible' }}>
+      <div style={{ marginTop: 24, marginBottom: 16, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto', overflow: 'visible' }}>
         <Bar data={data} options={options} style={{ width: '100%', maxWidth: 768 }} />
       </div>
-      
-      <div style={{ height: 48 }} />
     </div>
   );
 };
