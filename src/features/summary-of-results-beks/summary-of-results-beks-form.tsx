@@ -28,7 +28,7 @@ export const SummaryOfResultsBeksForm = () => {
     };
 
     return (
-        <div style={{fontFamily: 'Arial', width: '760px'}}>
+        <div style={{fontFamily: 'Arial', width: '768px'}}>
             <GlobalStyles
                 styles={{
                     '.MuiContainer-root': {

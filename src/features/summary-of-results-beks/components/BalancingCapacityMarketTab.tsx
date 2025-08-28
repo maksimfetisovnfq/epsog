@@ -3,6 +3,7 @@ import {Table, CalcDataTable, type Column, NoHeaderTable} from "../../../ui/tabl
 import {useSummaryData} from "../hooks/useSummaryData";
 import Divider from "@mui/material/Divider";
 import {NavigationButtons} from "./NavigationButtons.tsx";
+import {useLocation, useNavigate} from "@tanstack/react-router";
 
 interface BalancingCapacityMarketTabProps {
     dataSource: Array<{
@@ -18,6 +19,31 @@ export const BalancingCapacityMarketTab: React.FC<BalancingCapacityMarketTabProp
          dataSource,
          columns
      }) => {
+        const navigate = useNavigate();
+        const location = useLocation();
+
+        const handleForward = () => {
+            navigate({
+                to: "/finish-page",
+                state: {
+                    generalData: location.state?.generalData,
+                    technicalParameters: location.state?.technicalParameters,
+                    economicParameters: location.state?.economicParameters,
+                },
+            });
+        };
+
+        const handleBackward = () => {
+            navigate({
+                to: "/economic-parameters-beks",
+                state: {
+                    generalData: location.state?.generalData,
+                    technicalParameters: location.state?.technicalParameters,
+                    economicParameters: location.state?.economicParameters,
+                },
+            });
+        };
+
         const {
             calcDataTableDataSource1,
             calcDataTableDataSource2,
@@ -130,7 +156,7 @@ export const BalancingCapacityMarketTab: React.FC<BalancingCapacityMarketTabProp
 
                 <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
 
-                <NavigationButtons/>
+                <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
             </div>
 
 

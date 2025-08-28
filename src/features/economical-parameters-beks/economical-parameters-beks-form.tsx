@@ -17,8 +17,8 @@ export const EconomicalParametersBeksForm = () => {
     const location = useLocation();
 
     const {mutate} = useMutation({
-        mutationKey : ['beks'],
-        mutationFn: async ({ parameters }: { parameters: string }) => {
+        mutationKey: ['beks'],
+        mutationFn: async ({parameters}: { parameters: string }) => {
             return new Promise(resolve => setTimeout(resolve, 1000));
 
             // const response = await fetch(
@@ -34,7 +34,7 @@ export const EconomicalParametersBeksForm = () => {
             // return response.json();
         },
     });
-    
+
     const handleSubmit = (data: EconomicalBeksParametersSchema) => {
         mutate("ok")
         navigate({
@@ -42,12 +42,20 @@ export const EconomicalParametersBeksForm = () => {
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,
-                economicParameters: {beks: data}, 
+                economicParameters: {beks: data},
             },
         })
     }
 
-    
+    const handleBackward = () => {
+        navigate({
+            to: "/technical-parameters-beks",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: location.state.technicalParameters,
+            },
+        });
+    }
 
     return (
         <div style={{fontFamily: 'Arial', width: '760px'}}>
@@ -61,10 +69,10 @@ export const EconomicalParametersBeksForm = () => {
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',
                 },
-                '.MuiAccordionDetails-root' : {
+                '.MuiAccordionDetails-root': {
                     padding: '0 !important',
                 },
-                
+
             }}/>
 
             <div style={{
@@ -74,8 +82,7 @@ export const EconomicalParametersBeksForm = () => {
                 Ekonominiai parametrai
             </div>
 
-            <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{
-            }}>
+            <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={location.state?.economicParameters?.beks || {}}>
 
                 <FormInput name="CAPEX_P" defaultValue="Eur/MW" description="Tik teigiami skaičiai"
                            title="Investicijos (CAPEX) į galią"/>
@@ -110,17 +117,15 @@ export const EconomicalParametersBeksForm = () => {
                             padding: 0,
                         }}
                     >
-                        
-                        <Typography component="span" display='flex'>
-                            <div style={{width: '744px', fontSize:'32px'}}>
-                                Išplėstiniai techniniai parametrai
+
+                        <Typography component="span" style={{display: 'flex', width: '744px', fontSize: '32px', justifyContent: 'space-between'}}>
+                            <div>
+                                Išplėstiniai ekonominiai parametrai
                             </div>
                             <div>
                                 <AddIcon/>
                             </div>
                         </Typography>
-
-
                     </AccordionSummary>
 
                     <AccordionDetails>
@@ -128,19 +133,15 @@ export const EconomicalParametersBeksForm = () => {
                                    title="Diskonto norma"/>
 
                         <Divider style={{marginTop: '32px', marginBottom: '32px'}}/>
-                        
+
                         <div style={{fontSize: '18px'}}>
                             Minimali siūloma kainą už balansavimo pajėgumus:
                         </div>
 
                         <FormInput name="P_FCR_CAP_BSP" defaultValue="0 Eur/MW" title="FCR"/>
-
                         <FormInput name="P_aFRRu_CAP_BSP" defaultValue="0 Eur/MW" title="aFRR aukštyn"/>
-
                         <FormInput name="P_aFRRd_CAP_BSP" defaultValue="0 Eur/MW" title="aFRR žemyn"/>
-
                         <FormInput name="P_mFRRu_CAP_BSP" defaultValue="0 Eur/MW" title="mFRR aukštyn"/>
-
                         <FormInput name="P_mFRRd_CAP_BSP" defaultValue="0 Eur/MW" title="mFRR žemyn"/>
 
                         <Divider style={{marginTop: '32px', marginBottom: '32px'}}/>
@@ -150,11 +151,8 @@ export const EconomicalParametersBeksForm = () => {
                         </div>
 
                         <FormInput name="P_aFRRu_BSP" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
-
                         <FormInput name="P_aFRRd_BSP" defaultValue="Eur/MWh" title="aFRR žemyn"/>
-
                         <FormInput name="P_mFRRu_BSP" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
-
                         <FormInput name="P_mFRRd_BSP" defaultValue="Eur/MWh" title="mFRR žemyn"/>
 
                     </AccordionDetails>
@@ -163,7 +161,11 @@ export const EconomicalParametersBeksForm = () => {
                 <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
                 <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                    <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    <Button
+                        variant="outlined"
+                        startIcon={<ArrowBackIcon/>}
+                        onClick={handleBackward}
+                    >
                         Atgal
                     </Button>
                     <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>

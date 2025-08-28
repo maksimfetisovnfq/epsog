@@ -17,13 +17,14 @@ const commonSx: SxProps = {
 export const Button = (props: Props) => {
 
     const isContained = props.variant === 'contained';
+    const isOutlined = props.variant === 'outlined';
 
     if (isContained) {
         return <MUIButton {...props} sx={{
             ...commonSx,
 
-            color: props.disabled ? '#6F8190' : '#000',
-            backgroundColor: props.disabled ? '#B7C0C8' : '#00EB8C',
+            color: props.disabled ? '#6F8190 !important' : '#000',
+            backgroundColor: props.disabled ? '#B7C0C8 !important' : '#00EB8C',
             borderColor: '#00EB8C',
 
             '&:hover': {
@@ -41,8 +42,9 @@ export const Button = (props: Props) => {
             },
         }}
         >
+            {props.children}
         </MUIButton>
-    } else {
+    } else if (isOutlined) {
         return <MUIButton {...props} sx={{
             color: props.disabled ? '#B7C0C8' : '#000',
             border: '1px solid #B7C0C8',
@@ -61,6 +63,7 @@ export const Button = (props: Props) => {
             },
         }}
         >
+            {props.children}
         </MUIButton>
     }
 }

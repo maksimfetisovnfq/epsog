@@ -1,7 +1,7 @@
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Box, SxProps, Tab, Tabs, Theme } from '@mui/material';
 import { TabsProps } from '../types';
-import { CustomTabPanel } from './TabPanel';
+import { CustomTabPanel } from './tabPanel';
 import { createPortal } from 'react-dom';
 
 const a11yProps = (index: number) => {

@@ -4,13 +4,14 @@ import IndicatorSvg from './indicator.svg?react';
 type Props = {
     to: string,
     state: HistoryState,
-    children?: string[],
-    disabled?: boolean
+    children?: React.ReactNode,
+    disabled?: boolean,
+    isHome?: boolean
 }
 
-export const NavLink = ({to, state, children, disabled = false}: Props) => {
-    const textColor = !disabled ? "#0F2D46" : "#B7C0C8";
-    const svgColor = !disabled ? "#00EB8C" : "#E7EAED";
+export const NavLink = ({to, state, children, disabled = false, isHome = false}: Props) => {
+    const textColor = !disabled ? "#0F2D46" : (isHome ? "#B7C0C8" : "#E7EAED");
+    const svgColor = !disabled ? "#00EB8C" : (isHome ? "#B7C0C8" : "#E7EAED");
     
     return (
         <div style={{

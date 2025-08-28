@@ -41,6 +41,8 @@ export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const defaultValues = location.state?.technicalParameters?.beks || {};
+
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
         navigate({
             to: "/economic-parameters-beks",
@@ -51,29 +53,34 @@ export const TechnicalParametersBeksForm = () => {
         })
     }
 
+    const handleBackward = () => {
+        navigate({
+            to: "/general-data",
+            state: {
+                generalData: location.state.generalData,
+            },
+        });
+    }
+
     return (
         <div style={{fontFamily: 'Arial', width: '760px'}}>
             <GlobalStyles styles={{
-                '.MuiPaper-root.MuiAccordion-root::before': {
-                    backgroundColor: 'transparent',
+                'body, *': {
+                    fontWeight: 400,
                 },
                 '.MuiContainer-root': {
                     padding: '0px !important',
                 },
-                'body, *': {
-                    fontWeight: 400,
+                '.MuiPaper-root.MuiAccordion-root::before': {
+                    backgroundColor: 'transparent',
                 },
+                '.MuiAccordionDetails-root': {
+                    padding: '0 !important',
+                },
+
             }}/>
 
-            <div style={{
-                fontSize: '32px',
-                marginBottom: '48px',
-            }}>
-                Techniniai parametrai
-            </div>
-
-            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-            }}>
+            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={defaultValues}>
 
                 <FormInput name="q_max" defaultValue="1000 MW"
                            description="Tik teigiami skaičiai, max reikšmė 1000 MW"
@@ -182,8 +189,7 @@ export const TechnicalParametersBeksForm = () => {
                         }}
                     >
                         <div>
-                            <Typography component="span"
-                                        style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
+                            <Typography component="span" style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
                                 <div style={{marginBottom: '24px'}}>
                                     Išplėstiniai techniniai parametrai
                                 </div>
@@ -213,7 +219,7 @@ export const TechnicalParametersBeksForm = () => {
                                         Atkreipiame dėmesį, kad šios informacijos pateikimui, geriausia pasitelkti
                                         įrenginio technines specifikacijas. Jei kažkurių verčių nežinote,
                                         nesijaudinkite,
-                                        parinkome numatytąsias reikšmes, kurios atspindi rinkoje esančių įrenginių
+                                        parinkome numatytasias reikšmes, kurios atspindi rinkoje esančių įrenginių
                                         galimybes.
                                     </div>
                                 </div>
@@ -259,7 +265,11 @@ export const TechnicalParametersBeksForm = () => {
                 <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
                 <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                    <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    <Button
+                        variant="outlined"
+                        startIcon={<ArrowBackIcon/>}
+                        onClick={handleBackward}
+                    >
                         Atgal
                     </Button>
                     <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>

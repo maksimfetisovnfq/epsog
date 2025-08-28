@@ -22,6 +22,16 @@ export const EconomicalParametersDsrForm = () => {
         })
     }
 
+    const handleBackward = () => {
+        navigate({
+            to: "/technical-parameters-dsr",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: location.state.technicalParameters,
+            },
+        });
+    }
+
     return (
         <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{}}>
             <GlobalStyles styles={{
@@ -62,7 +72,11 @@ export const EconomicalParametersDsrForm = () => {
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
             <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                <Button
+                    variant="outlined"
+                    startIcon={<ArrowBackIcon/>}
+                    onClick={handleBackward}
+                >
                     Atgal
                 </Button>
                 <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>

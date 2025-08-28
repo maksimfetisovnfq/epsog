@@ -27,10 +27,6 @@ export const GeneralDataForm = () => {
         setCalculatorType(event.target.value as CalculatorType);
     };
 
-    // const handleSecondRadioGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //
-    // };
-
     const handleSubmit = (data: GeneralDataSchema) => {
         if (calculatorType === CalculatorType.P2H) {
             navigate({
@@ -39,7 +35,6 @@ export const GeneralDataForm = () => {
             });
             return
         }
-
         if (calculatorType === CalculatorType.BEKS) {
             navigate({
                 to: "/technical-parameters-beks",
@@ -47,7 +42,6 @@ export const GeneralDataForm = () => {
             });
             return;
         }
-
         if (calculatorType === CalculatorType.P2G) {
             navigate({
                 to: "/technical-parameters-p2g",
@@ -55,7 +49,6 @@ export const GeneralDataForm = () => {
             });
             return;
         }
-
         if (calculatorType === CalculatorType.DSR) {
             navigate({
                 to: "/technical-parameters-dsr",
@@ -63,6 +56,10 @@ export const GeneralDataForm = () => {
             });
             return;
         }
+    }
+
+    const handleBackward = () => {
+        navigate({ to: "/" }); 
     }
 
     const controlProps = (item: string) => ({
@@ -94,9 +91,12 @@ export const GeneralDataForm = () => {
                     },
                 }}
             />
-            <Form onSubmit={handleSubmit} validationSchema={generalDataSchema} defaultValues={{
-                network: "",
-            }}>
+            <Form
+                onSubmit={handleSubmit}
+                validationSchema={generalDataSchema}
+                defaultValues={{
+                    network: "",
+                }}>
 
                 <div style={{
                     fontSize: '32px',
@@ -123,7 +123,8 @@ export const GeneralDataForm = () => {
                     </Select>
 
                     {sector === 'concentrator' && (
-                        <FormInput name="network" style={{width: '400px'}} defaultValue="Įrašykite sektorių (neprivaloma)"/>
+                        <FormInput name="network" style={{width: '400px'}}
+                                   defaultValue="Įrašykite sektorių (neprivaloma)"/>
                     )}
                 </div>
 
@@ -150,32 +151,32 @@ export const GeneralDataForm = () => {
                                     value={type}
                                     control={<Radio {...controlProps(type)} sx={radioStyles}/>}
                                     label={type.toUpperCase()}
-                                    sx={{ verticalAlign: 'baseline', marginRight: '4px' }}
-                                />    
+                                    sx={{verticalAlign: 'baseline', marginRight: '4px'}}
+                                />
                             </div>
 
                             <div>
                                 <Tooltip title={CalculatorTypeTooltips[type]}>
-                                    <InfoOutlineIcon style={{color: '#6F8190'}} />   
+                                    <InfoOutlineIcon style={{color: '#6F8190'}}/>
                                 </Tooltip>
                             </div>
                         </div>
                     ))}
                 </RadioGroup>
-                
+
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormLabel 
+                <FormLabel
                     id="demo-radio-buttons-group-label"
                     style={{color: "black", padding: 0, display: 'flex'}}>
-                    
+
                     <div style={{marginRight: '4px'}}>
                         Prie kokio operatoriaus elektros tinklų esate / planuojate prisijungti?
                     </div>
-                    
+
                     <Tooltip title="
                     Priklausomai nuo įrenginių prijungimo taško, 
-                    skaičiavimuose vertinamas skirtingas energijos persiuntimo tarifas." >
+                    skaičiavimuose vertinamas skirtingas energijos persiuntimo tarifas.">
                         <InfoOutlineIcon/>
                     </Tooltip>
                 </FormLabel>
@@ -222,10 +223,18 @@ export const GeneralDataForm = () => {
                 )}
 
                 <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                    <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                    <Button
+                        variant="outlined"
+                        startIcon={<ArrowBackIcon/>}
+                        onClick={handleBackward}
+                    >
                         Atgal
                     </Button>
-                    <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                        endIcon={<ArrowForwardIcon/>}
+                    >
                         Toliau
                     </Button>
                 </div>

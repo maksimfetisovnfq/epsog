@@ -6,6 +6,7 @@ import { NPVAnalysis } from "./NPVAnalysis";
 import { IncomeComparison } from "./IncomeComparison";
 import { MarketProducts } from "./MarketProducts";
 import { NavigationButtons } from "./NavigationButtons";
+import {useLocation, useNavigate} from "@tanstack/react-router";
 
 interface TableColumn {
     title: string;
@@ -61,6 +62,31 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
     incomeDataSource,
     marketProductsDataSource
 }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleForward = () => {
+        navigate({
+            to: "/result-form",
+            state: {
+                generalData: location.state?.generalData || {},
+                technicalParameters: location.state?.technicalParameters || {},
+                economicParameters: location.state?.economicParameters || {},
+            },
+        });
+    };
+
+    const handleBackward = () => {
+        navigate({
+            to: "/economic-parameters-beks",
+            state: {
+                generalData: location.state?.generalData || {},
+                technicalParameters: location.state?.technicalParameters || {},
+                economicParameters: location.state?.economicParameters || {},
+            },
+        });
+    };
+
     return (
         <>
             <div style={{
@@ -97,14 +123,10 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             </div>
 
             <NPVAnalysis stackedBarDataSource={stackedBarDataSource} />
-            
             <IncomeComparison incomeDataSource={incomeDataSource} />
-            
             <MarketProducts marketProductsDataSource={marketProductsDataSource} />
-
             <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
-
-            <NavigationButtons />
+            <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
         </>
     );
 };

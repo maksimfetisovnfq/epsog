@@ -7,6 +7,7 @@ import { useSummaryData } from "../../summary-of-results-beks/hooks/useSummaryDa
 import {RevenueProducts} from "./RevenueProducts.tsx";
 import {IncomeDataExpenses} from "./IncomeDataExpenses.tsx";
 import {DetailedAnualResults} from "./DetailedAnualResults.tsx";
+import {useLocation, useNavigate} from "@tanstack/react-router";
 
 interface EconomicEvaluationTabProps {
     columns: Column[];
@@ -21,7 +22,32 @@ interface EconomicEvaluationTabProps {
 export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
     columns,
 }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
     const { economicEvaluationDataSource, incomeDataSource2 } = useSummaryData();
+
+    const handleForward = () => {
+        navigate({
+            to: "/finish-page",
+            state: {
+                generalData: location.state?.generalData,
+                technicalParameters: location.state?.technicalParameters,
+                economicParameters: location.state?.economicParameters,
+            },
+        });
+    };
+
+    const handleBackward = () => {
+        navigate({
+            to: "/economic-parameters-beks",
+            state: {
+                generalData: location.state?.generalData,
+                technicalParameters: location.state?.technicalParameters,
+                economicParameters: location.state?.economicParameters,
+            },
+        });
+    };
+
     return (
         <>
             <div style={{
@@ -77,7 +103,7 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
 
             <Divider style={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
             
-            <NavigationButtons />
+            <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
         </>
     );
 };

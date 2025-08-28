@@ -37,14 +37,18 @@ export const Navigation = () => {
             display: "flex",
         }}>
             {links.map(link => {
-                const isAccessible = isPageAccessible(link.to, location.state);
+                const isHome = location.pathname === '/';
+                const isGeneralData = link.to === '/general-data';
+                const isAccessible = isGeneralData && isHome
+                    ? false
+                    : isPageAccessible(link.to, location.state);
                 return (
                     <NavLink
                         key={link.to}
-
                         to={link.to === '/general-data' ? link.to : `${link.to}-${calculatorType}`}
                         state={location.state}
                         disabled={!isAccessible}
+                        isHome={isHome}
                     >  {link.label}
                     </NavLink>
                 );

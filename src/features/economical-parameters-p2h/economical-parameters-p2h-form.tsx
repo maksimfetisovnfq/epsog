@@ -21,10 +21,19 @@ export const EconomicalParametersP2hForm = () => {
             },
         })
     }
+
+    const handleBackward = () => {
+        navigate({
+            to: "/technical-parameters-p2h",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: location.state.technicalParameters,
+            },
+        });
+    }
     
     return (
-        <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{
-        }}>
+        <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={location.state?.economicParameters?.p2h || {}}>
             <GlobalStyles styles={{
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',
@@ -65,7 +74,11 @@ export const EconomicalParametersP2hForm = () => {
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
             <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                <Button
+                    variant="outlined"
+                    startIcon={<ArrowBackIcon/>}
+                    onClick={handleBackward}
+                >
                     Atgal
                 </Button>
                 <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>

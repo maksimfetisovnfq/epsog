@@ -9,14 +9,15 @@ export type BaseFormProps<T extends FormData> = {
     defaultValues: DefaultValues<T>
     validationSchema: ZodType<T>
     onSubmit: SubmitHandler<T>
+    onBackward?: () => void // Added optional onBackward prop
 } & Omit<ComponentProps<'form'>, 'onSubmit' | 'ref'>
 
 export type SetErrorRef<T extends FormData> = {
-    setError: UseFormSetError<T>
+    setError: UseFormSetError<T>;
 }
 
 const InnerForm = <T extends FormData>(
-    { defaultValues, validationSchema, onSubmit, children, ...props }: BaseFormProps<T>,
+    { defaultValues, validationSchema, onSubmit, onBackward, children, ...props }: BaseFormProps<T>,
     ref: ForwardedRef<SetErrorRef<T>>
 ) => {
     const methods = useForm({
@@ -34,13 +35,17 @@ const InnerForm = <T extends FormData>(
 
     const handleChange = () => {
         if (!methods.formState.errors.root) return
-
         methods.clearErrors('root')
     }
 
     return (
         <FormProvider {...methods}>
             <form {...props} noValidate onChange={handleChange} onSubmit={methods.handleSubmit(onSubmit)}>
+                {onBackward && (
+                    <button type="button" onClick={onBackward} style={{ marginRight: 8 }}>
+                        Back
+                    </button>
+                )}
                 {children}
             </form>
         </FormProvider>

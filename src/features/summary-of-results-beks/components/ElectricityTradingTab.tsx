@@ -3,12 +3,15 @@ import {CalcDataTable, Table} from "../../../ui/tables";
 import Divider from "@mui/material/Divider";
 import {NavigationButtons} from "./NavigationButtons.tsx";
 import {useSummaryData} from "../hooks/useSummaryData";
+import {useLocation, useNavigate} from "@tanstack/react-router";
 
 interface TableColumn {
     title: string;
-    dataIndex: string;
-    key: string;
-    render?: (item: { technology: string }) => string;
+    dataIndex?: string;
+    key?: string;
+    colSpan?: number;
+    rowSpan?: number;
+    render?: string | ((row: Record<string, unknown>, rowIndex: number, colIndex: number) => React.ReactNode);
 }
 
 interface ElectricityTradingTabProps {
@@ -24,6 +27,31 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
     dataSource,
     columns
 }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleForward = () => {
+        navigate({
+            to: "/summary-of-results-beks",
+            state: {
+                generalData: location.state?.generalData,
+                technicalParameters: location.state?.technicalParameters,
+                economicParameters: location.state?.economicParameters,
+            },
+        });
+    };
+
+    const handleBackward = () => {
+        navigate({
+            to: "/economic-parameters-beks",
+            state: {
+                generalData: location.state?.generalData,
+                technicalParameters: location.state?.technicalParameters,
+                economicParameters: location.state?.economicParameters,
+            },
+        });
+    };
+
     const {
         electricityTradeDataSource1,
         electricityTradeDataSource2,
@@ -48,15 +76,15 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
 
             <CalcDataTable
                 source="Energijos prekybos apimtys"
-                dataSource={electricityTradeDataSource1}
+                dataSource={electricityTradeDataSource1.map(row => ({...row, value: String(row.value)}))}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                dataSource={electricityTradeDataSource2}
+                dataSource={electricityTradeDataSource2.map(row => ({...row, value: String(row.value)}))}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos / sąnaudos"
-                dataSource={electricityTradeDataSource3}
+                dataSource={electricityTradeDataSource3.map(row => ({...row, value: String(row.value)}))}
             />
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
@@ -71,20 +99,20 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
 
             <CalcDataTable
                 source="Energijos prekybos apimtys"
-                dataSource={electricityTradeDataSource4}
+                dataSource={electricityTradeDataSource4.map(row => ({...row, value: String(row.value)}))}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                dataSource={electricityTradeDataSource5}
+                dataSource={electricityTradeDataSource5.map(row => ({...row, value: String(row.value)}))}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos / sąnaudos"
-                dataSource={electricityTradeDataSource6}
+                dataSource={electricityTradeDataSource6.map(row => ({...row, value: String(row.value)}))}
             />
 
             <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
 
-            <NavigationButtons/>
+            <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
         </div>
     );
 };

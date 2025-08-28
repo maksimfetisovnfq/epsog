@@ -21,6 +21,16 @@ export const EconomicalParametersP2gForm = () => {
             },
         })
     }
+
+    const handleBackward = () => {
+        navigate({
+            to: "/technical-parameters-p2g",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: location.state.technicalParameters,
+            },
+        });
+    }
     
     return (
         <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={{
@@ -43,7 +53,7 @@ export const EconomicalParametersP2gForm = () => {
             }}>
                 Minimali siūloma kaina už balansavimo pajėgumus:
             </div>
-            
+
             <FormInput name="FCR" title='FCR' defaultValue="0"/>
             <FormInput name="aFRRu1" title='aFRRu' defaultValue="0"/>
             <FormInput name="aFRRd1" title='aFRRd' defaultValue="0"/>
@@ -56,16 +66,20 @@ export const EconomicalParametersP2gForm = () => {
             }}>
                 Minimali siūloma kaina už balansavimo energiją:
             </div>
-            
+
             <FormInput name="aFRRu2" title='aFRRu' defaultValue="0"/>
             <FormInput name="aFRRd2" title='aFRRd' defaultValue="0"/>
             <FormInput name="mFRRu2" title='mFRRu' defaultValue="0"/>
             <FormInput name="mFRRd2" title='mFRRd' defaultValue="0"/>
-            
+
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
             <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                <Button
+                    variant="outlined"
+                    startIcon={<ArrowBackIcon/>}
+                    onClick={handleBackward}
+                >
                     Atgal
                 </Button>
                 <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>

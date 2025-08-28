@@ -22,9 +22,12 @@ export const TechnicalParametersDsrForm = () => {
         })
     }
 
+    const handleBackward = () => {
+        navigate({ to: "/general-data" }); 
+    }
+
     return (
-        <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{
-        }}>
+        <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={location.state?.technicalParameters?.dsr || {}}>
             <GlobalStyles styles={{
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',
@@ -47,7 +50,11 @@ export const TechnicalParametersDsrForm = () => {
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
             <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button type="submit" startIcon={<ArrowBackIcon/>}>
+                <Button
+                    variant="outlined"
+                    startIcon={<ArrowBackIcon/>}
+                    onClick={handleBackward}
+                >
                     Atgal
                 </Button>
                 <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
