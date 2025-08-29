@@ -19,9 +19,7 @@ export const TableHead: React.FC<TableHeadProps> = ({ columns, boldHeaders }) =>
                         colSpan={column.colSpan || 1}
                         rowSpan={column.rowSpan || 1}
                         sx={{
-                            backgroundColor: column.colSpan && column.colSpan > 1 
-                                ? '#E7EAED' 
-                                : (colIdx === 0 ? '#F5F7F8' : 'transparent'),
+                            backgroundColor: '#E7EAED',
                             width: column.colSpan ? 384 * (column.colSpan || 1) : 384,
                             textAlign: 'center',
                             fontWeight: boldHeaders ? 700 : undefined

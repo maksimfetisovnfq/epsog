@@ -23,10 +23,7 @@ interface ElectricityTradingTabProps {
     columns: TableColumn[];
 }
 
-export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
-    dataSource,
-    columns
-}) => {
+export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -53,18 +50,24 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
     };
 
     const {
-        electricityTradeDataSource1,
-        electricityTradeDataSource2,
-        electricityTradeDataSource3,
-        electricityTradeDataSource4,
-        electricityTradeDataSource5,
-        electricityTradeDataSource6,
+        DayAheadMarketTable1,
+        DayAheadMarketTable2,
+        DayAheadMarketTable3,
+        IntradayMarketTable1,
+        IntradayMarketTable2,
+        IntradayMarketTable3,
     } = useSummaryData();
+
+    const mapTableRows = (rows: { name: string; value: string | number; unit?: string }[]) =>
+        rows.map((row, idx) => ({
+            key: row.name + idx,
+            parameter: row.name,
+            value: row.value + (row.unit ? ` ${row.unit}` : '')
+        }));
 
     return (
         <div>
-            {/* Electricity trading content */}
-            <Table columns={columns} dataSource={dataSource}/>
+            {/*<Table columns={columns} dataSource={dataSource}/>*/}
 
             <div style={{
                 fontSize: '18px',
@@ -76,15 +79,15 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
 
             <CalcDataTable
                 source="Energijos prekybos apimtys"
-                dataSource={electricityTradeDataSource1.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(DayAheadMarketTable1)}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                dataSource={electricityTradeDataSource2.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(DayAheadMarketTable2)}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos / sąnaudos"
-                dataSource={electricityTradeDataSource3.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(DayAheadMarketTable3)}
             />
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
@@ -99,15 +102,15 @@ export const ElectricityTradingTab: React.FC<ElectricityTradingTabProps> = ({
 
             <CalcDataTable
                 source="Energijos prekybos apimtys"
-                dataSource={electricityTradeDataSource4.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(IntradayMarketTable1)}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                dataSource={electricityTradeDataSource5.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(IntradayMarketTable2)}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos / sąnaudos"
-                dataSource={electricityTradeDataSource6.map(row => ({...row, value: String(row.value)}))}
+                dataSource={mapTableRows(IntradayMarketTable3)}
             />
 
             <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>

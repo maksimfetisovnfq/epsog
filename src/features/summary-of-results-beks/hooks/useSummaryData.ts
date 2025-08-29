@@ -85,7 +85,22 @@ export interface ModernSummaryData {
     balancingCapacityMFRRTable2: TableRow[];
     balancingCapacityMFRRTable3: TableRow[];
     balancingCapacityMFRRTable4: TableRow[];
+    balancingEnergyAFRRTable1: TableRow[];
+    balancingEnergyAFRRTable2: TableRow[];
+    balancingEnergyAFRRTable3: TableRow[];
+    balancingEnergyAFRRTable4: TableRow[];
+    balancingEnergyMFRRTable1: TableRow[];
+    balancingEnergyMFRRTable2: TableRow[];
+    balancingEnergyMFRRTable3: TableRow[];
+    balancingEnergyMFRRTable4: TableRow[];
+    DayAheadMarketTable1: TableRow[];
+    DayAheadMarketTable2: TableRow[];
+    DayAheadMarketTable3: TableRow[];
+    IntradayMarketTable1: TableRow[];
+    IntradayMarketTable2: TableRow[];
+    IntradayMarketTable3: TableRow[];
     markets: any; // TODO: type this more strictly
+    revenueTable: { Product: string; "Value (tūkst. EUR)": number }[];
 }
 
 const yearlyMetricMap: Record<string, { key: YearlySummaryKey; label: string }> = {
@@ -428,48 +443,114 @@ export function useSummaryData(): ModernSummaryData {
     // Extract FCR
     const fcr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR;
     const balancingCapacityFCRTable: TableRow[] = [
-        { name: fcr.volume_of_procured_reserves.header, value: fcr.volume_of_procured_reserves.value, unit: fcr.volume_of_procured_reserves.unit },
-        { name: fcr.utilisation.header, value: fcr.utilisation.value, unit: fcr.utilisation.unit },
-        { name: fcr.potential_revenue.header, value: fcr.potential_revenue.value, unit: fcr.potential_revenue.unit },
-        { name: fcr.bids_selected.header, value: fcr.bids_selected.value, unit: fcr.bids_selected.unit },
+        { name: 'Įsigytų pajėgumų apimtys', value: fcr.volume_of_procured_reserves.value, unit: fcr.volume_of_procured_reserves.unit },
+        { name: 'Dalyvavimas paslaugoje', value: fcr.utilisation.value, unit: fcr.utilisation.unit },
+        { name: 'Potencialios pajamos/sąnaudos', value: fcr.potential_revenue.value, unit: fcr.potential_revenue.unit },
+        { name: 'Priimtų kainos pasiūlymų dalis, proc.', value: fcr.bids_selected.value, unit: fcr.bids_selected.unit },
     ];
-    // Extract aFRR
-    const afrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR;
+    // Extract balancingCapacity aFRR
+    const capacityAfrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR;
     const balancingCapacityAFRRTable1: TableRow[] = [
-        { name: 'Upward', value: afrr.volume_of_procured_reserves.upward.value, unit: afrr.volume_of_procured_reserves.upward.unit },
-        { name: 'Downward', value: afrr.volume_of_procured_reserves.downward.value, unit: afrr.volume_of_procured_reserves.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.volume_of_procured_reserves.upward.value, unit: capacityAfrr.volume_of_procured_reserves.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityAfrr.volume_of_procured_reserves.downward.value, unit: capacityAfrr.volume_of_procured_reserves.downward.unit },
     ];
     const balancingCapacityAFRRTable2: TableRow[] = [
-        { name: 'Upward', value: afrr.utilisation.upward.value, unit: afrr.utilisation.upward.unit },
-        { name: 'Downward', value: afrr.utilisation.downward.value, unit: afrr.utilisation.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.utilisation.upward.value, unit: capacityAfrr.utilisation.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityAfrr.utilisation.downward.value, unit: capacityAfrr.utilisation.downward.unit },
     ];
     const balancingCapacityAFRRTable3: TableRow[] = [
-        { name: 'Upward', value: afrr.potential_revenue.upward.value, unit: afrr.potential_revenue.upward.unit },
-        { name: 'Downward', value: afrr.potential_revenue.downward.value, unit: afrr.potential_revenue.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.potential_revenue.upward.value, unit: capacityAfrr.potential_revenue.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityAfrr.potential_revenue.downward.value, unit: capacityAfrr.potential_revenue.downward.unit },
     ];
     const balancingCapacityAFRRTable4: TableRow[] = [
-        { name: 'Upward', value: afrr.bids_selected.upward.value, unit: afrr.bids_selected.upward.unit },
-        { name: 'Downward', value: afrr.bids_selected.downward.value, unit: afrr.bids_selected.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.bids_selected.upward.value, unit: capacityAfrr.bids_selected.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityAfrr.bids_selected.downward.value, unit: capacityAfrr.bids_selected.downward.unit },
     ];
-    // Extract mFRR
-    const mfrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR;
+    // Extract balancingCapacity mFRR
+    const capacityMfrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR;
     const balancingCapacityMFRRTable1: TableRow[] = [
-        { name: 'Upward', value: mfrr.volume_of_procured_reserves.upward.value, unit: mfrr.volume_of_procured_reserves.upward.unit },
-        { name: 'Downward', value: mfrr.volume_of_procured_reserves.downward.value, unit: mfrr.volume_of_procured_reserves.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.volume_of_procured_reserves.upward.value, unit: capacityMfrr.volume_of_procured_reserves.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityMfrr.volume_of_procured_reserves.downward.value, unit: capacityMfrr.volume_of_procured_reserves.downward.unit },
     ];
     const balancingCapacityMFRRTable2: TableRow[] = [
-        { name: 'Upward', value: mfrr.utilisation.upward.value, unit: mfrr.utilisation.upward.unit },
-        { name: 'Downward', value: mfrr.utilisation.downward.value, unit: mfrr.utilisation.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.utilisation.upward.value, unit: capacityMfrr.utilisation.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityMfrr.utilisation.downward.value, unit: capacityMfrr.utilisation.downward.unit },
     ];
     const balancingCapacityMFRRTable3: TableRow[] = [
-        { name: 'Upward', value: mfrr.potential_revenue.upward.value, unit: mfrr.potential_revenue.upward.unit },
-        { name: 'Downward', value: mfrr.potential_revenue.downward.value, unit: mfrr.potential_revenue.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.potential_revenue.upward.value, unit: capacityMfrr.potential_revenue.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityMfrr.potential_revenue.downward.value, unit: capacityMfrr.potential_revenue.downward.unit },
     ];
     const balancingCapacityMFRRTable4: TableRow[] = [
-        { name: 'Upward', value: mfrr.bids_selected.upward.value, unit: mfrr.bids_selected.upward.unit },
-        { name: 'Downward', value: mfrr.bids_selected.downward.value, unit: mfrr.bids_selected.downward.unit },
+        { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.bids_selected.upward.value, unit: capacityMfrr.bids_selected.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: capacityMfrr.bids_selected.downward.value, unit: capacityMfrr.bids_selected.downward.unit },
+    ];
+    
+    // Extract balancingEnergy aFRR
+    const energyAfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.aFRR;
+    const balancingEnergyAFRRTable1: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyAfrr.volume_of_procured_energy.upward.value, unit: energyAfrr.volume_of_procured_energy.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyAfrr.volume_of_procured_energy.downward.value, unit: energyAfrr.volume_of_procured_energy.downward.unit },
+    ];
+    const balancingEnergyAFRRTable2: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyAfrr.utilisation.upward.value, unit: energyAfrr.utilisation.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyAfrr.utilisation.downward.value, unit: energyAfrr.utilisation.downward.unit },
+    ];
+    const balancingEnergyAFRRTable3: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyAfrr.potential_revenue.upward.value, unit: energyAfrr.potential_revenue.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyAfrr.potential_revenue.downward.value, unit: energyAfrr.potential_revenue.downward.unit },
+    ];
+    const balancingEnergyAFRRTable4: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyAfrr.bids_selected.upward.value, unit: energyAfrr.bids_selected.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyAfrr.bids_selected.downward.value, unit: energyAfrr.bids_selected.downward.unit },
+    ];
+    // Extract balancingEnergy mFRR
+    const energyMfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR;
+    const balancingEnergyMFRRTable1: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyMfrr.volume_of_procured_energy.upward.value, unit: energyMfrr.volume_of_procured_energy.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyMfrr.volume_of_procured_energy.downward.value, unit: energyMfrr.volume_of_procured_energy.downward.unit },
+    ];
+    const balancingEnergyMFRRTable2: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyMfrr.utilisation.upward.value, unit: energyMfrr.utilisation.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyMfrr.utilisation.downward.value, unit: energyMfrr.utilisation.downward.unit },
+    ];
+    const balancingEnergyMFRRTable3: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyMfrr.potential_revenue.upward.value, unit: energyMfrr.potential_revenue.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyMfrr.potential_revenue.downward.value, unit: energyMfrr.potential_revenue.downward.unit },
+    ];
+    const balancingEnergyMFRRTable4: TableRow[] = [
+        { name: 'Aukštyn (angl. Upward)', value: energyMfrr.bids_selected.upward.value, unit: energyMfrr.bids_selected.upward.unit },
+        { name: 'Žemyn (angl. Downward)', value: energyMfrr.bids_selected.downward.value, unit: energyMfrr.bids_selected.downward.unit },
     ];
 
+    // Extract electricityTrading Diena prieš (angl. Day-Ahead) rinka
+    const DayAheadMarket = data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead;
+    const DayAheadMarketTable1: TableRow[] = [
+        { name: 'Nupirkta', value: DayAheadMarket.volume_of_energy_exchange.purchase.value, unit: DayAheadMarket.volume_of_energy_exchange.purchase.unit },
+        { name: 'Parduota', value: DayAheadMarket.volume_of_energy_exchange.sale.value, unit: DayAheadMarket.volume_of_energy_exchange.sale.unit },
+    ];
+    const DayAheadMarketTable2: TableRow[] = [
+        { name: 'Nupirkta', value: DayAheadMarket.percentage_of_time.purchase.value, unit: DayAheadMarket.percentage_of_time.purchase.unit },
+        { name: 'Parduota', value: DayAheadMarket.percentage_of_time.sale.value, unit: DayAheadMarket.percentage_of_time.sale.unit },
+    ];
+    const DayAheadMarketTable3: TableRow[] = [
+        { name: 'Sąnaudos', value: DayAheadMarket.potential_cost_revenue.cost.value, unit: DayAheadMarket.potential_cost_revenue.cost.unit },
+        { name: 'Pajamos', value: DayAheadMarket.potential_cost_revenue.revenue.value, unit: DayAheadMarket.potential_cost_revenue.revenue.unit },
+    ];
+    // Extract electricityTrading Dienos eigos (angl. Intraday) rinka
+    const IntradayMarket = data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Intraday;
+    const IntradayMarketTable1: TableRow[] = [
+        { name: 'Nupirkta', value: IntradayMarket.volume_of_energy_exchange.purchase.value, unit: IntradayMarket.volume_of_energy_exchange.purchase.unit },
+        { name: 'Parduota', value: IntradayMarket.volume_of_energy_exchange.sale.value, unit: IntradayMarket.volume_of_energy_exchange.sale.unit },
+    ];
+    const IntradayMarketTable2: TableRow[] = [
+        { name: 'Nupirkta', value: IntradayMarket.percentage_of_time.purchase.value, unit: IntradayMarket.percentage_of_time.purchase.unit },
+        { name: 'Parduota', value: IntradayMarket.percentage_of_time.sale.value, unit: IntradayMarket.percentage_of_time.sale.unit },
+    ];
+    const IntradayMarketTable3: TableRow[] = [
+        { name: 'Sąnaudos', value: IntradayMarket.potential_cost_revenue.cost.value, unit: IntradayMarket.potential_cost_revenue.cost.unit },
+        { name: 'Pajamos', value: IntradayMarket.potential_cost_revenue.revenue.value, unit: IntradayMarket.potential_cost_revenue.revenue.unit },
+    ];
+    
     return {
         yearlySummaryMetrics,
         npvChartData: data.aggregated.summary.npv_chart_data,
@@ -484,7 +565,20 @@ export function useSummaryData(): ModernSummaryData {
         balancingCapacityMFRRTable2,
         balancingCapacityMFRRTable3,
         balancingCapacityMFRRTable4,
+        balancingEnergyAFRRTable1,
+        balancingEnergyAFRRTable2,
+        balancingEnergyAFRRTable3,
+        balancingEnergyAFRRTable4,
+        balancingEnergyMFRRTable1,
+        balancingEnergyMFRRTable2,
+        balancingEnergyMFRRTable3,
+        balancingEnergyMFRRTable4,
+        DayAheadMarketTable1,
+        DayAheadMarketTable2,
+        DayAheadMarketTable3,
+        IntradayMarketTable1,
+        IntradayMarketTable2,
+        IntradayMarketTable3,
+        revenueTable: data.aggregated.economic_results.revenue_table,
     };
 }
-
-

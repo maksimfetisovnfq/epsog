@@ -19,12 +19,31 @@ interface EconomicEvaluationTabProps {
     }>;
 }
 
-export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
-    columns,
-}) => {
+export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { economicEvaluationDataSource, incomeDataSource2 } = useSummaryData();
+    const { incomeDataSource, revenueTable } = useSummaryData();
+
+    const revenueTableColumns = [
+        { title: 'Rinkos produktas', dataIndex: 'Product', key: 'Product' },
+        { title: 'Suma (tūkst. Eur)', dataIndex: 'Value (tūkst. EUR)', key: 'Value (tūkst. EUR)' },
+    ];
+
+    const newProductNames = [
+        'Parduota elektros energija "Diena prieš" rinkoje',
+        'aFRR Aukštyn pajėgumas',
+        'aFRR Žemyn pajėgumas',
+        'aFRR Aukštyn pajėgumas',
+        'mFRR Žemyn pajėgumas',
+        'aFRR Aukštyn energija',
+        'aFRR Žemyn energija',
+        'mFRR Aukštyn energija',
+    ];
+
+    const mappedRevenueTable = revenueTable.map((row, idx) => ({
+        ...row,
+        Product: newProductNames[idx] || row.Product,
+    }));
 
     const handleForward = () => {
         navigate({
@@ -65,9 +84,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
                 Pajamos už produktus
             </div>
 
-            <Table columns={columns} dataSource={economicEvaluationDataSource}/>
+            <Table columns={revenueTableColumns} dataSource={mappedRevenueTable} />
 
-            <RevenueProducts revenueProductsDataSource={economicEvaluationDataSource} />
+            {/*<RevenueProducts revenueProductsDataSource={economicEvaluationDataSource} />*/}
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
 
@@ -78,9 +97,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
                 Pajamos / sąnaudos
             </div>
 
-            <Table columns={columns} dataSource={incomeDataSource2}/>
+            {/*<Table columns={columns} dataSource={incomeDataSource2}/>*/}
 
-            <IncomeDataExpenses incomeDataSource={incomeDataSource2} />
+            {/*<IncomeDataExpenses incomeDataSource={incomeDataSource2} />*/}
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
 
@@ -99,10 +118,10 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = ({
                 </div>
             </div>
 
-            <DetailedAnualResults incomeDataSource={incomeDataSource2} />
+            {/*<DetailedAnualResults incomeDataSource={incomeDataSource2} />*/}
 
             <Divider style={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
-            
+
             <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
         </>
     );

@@ -14,10 +14,7 @@ interface BalancingEnergyMarketTabProps {
     columns: Column[];
 }
 
-export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> = ({
-    dataSource,
-    columns
-}) => {
+export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -44,20 +41,26 @@ export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> =
     };
 
     const {
-        calcDataTableDataSource1,
-        calcDataTableDataSource2,
-        calcDataTableDataSource3,
-        calcDataTableDataSource4,
-        calcDataTableDataSource5,
-        calcDataTableDataSource6,
-        calcDataTableDataSource7,
-        calcDataTableDataSource8,
+        balancingEnergyAFRRTable1,
+        balancingEnergyAFRRTable2,
+        balancingEnergyAFRRTable3,
+        balancingEnergyAFRRTable4,
+        balancingEnergyMFRRTable1,
+        balancingEnergyMFRRTable2,
+        balancingEnergyMFRRTable3,
+        balancingEnergyMFRRTable4
     } = useSummaryData();
+
+    const mapTableRows = (rows: { name: string; value: string | number; unit?: string }[]) =>
+        rows.map((row, idx) => ({
+            key: row.name + idx,
+            parameter: row.name,
+            value: row.value + (row.unit ? ` ${row.unit}` : '')
+        }));
 
     return (
         <div>
-            {/* Balancing energy market content */}
-            <Table columns={columns} dataSource={dataSource}/>
+            {/*<Table columns={columns} dataSource={dataSource}/>*/}
 
             <div style={{
                 fontSize: '18px',
@@ -79,19 +82,19 @@ export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> =
 
             <CalcDataTable
                 source="Užsakytų balansavimo pajėgumų kiekis"
-                dataSource={calcDataTableDataSource1}
+                dataSource={mapTableRows(balancingEnergyAFRRTable1)}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
-                dataSource={calcDataTableDataSource2}
+                dataSource={mapTableRows(balancingEnergyAFRRTable2)}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos"
-                dataSource={calcDataTableDataSource3}
+                dataSource={mapTableRows(balancingEnergyAFRRTable3)}
             />
             <CalcDataTable
                 source="Užsakytų pasiūlymų kiekis (%)"
-                dataSource={calcDataTableDataSource4}
+                dataSource={mapTableRows(balancingEnergyAFRRTable4)}
             />
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
@@ -116,25 +119,26 @@ export const BalancingEnergyMarketTab: React.FC<BalancingEnergyMarketTabProps> =
 
             <CalcDataTable
                 source="Užsakytų balansavimo pajėgumų kiekis"
-                dataSource={calcDataTableDataSource5}
+                dataSource={mapTableRows(balancingEnergyMFRRTable1)}
             />
             <CalcDataTable
                 source="Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
-                dataSource={calcDataTableDataSource6}
+                dataSource={mapTableRows(balancingEnergyMFRRTable2)}
             />
             <CalcDataTable
                 source="Tikėtinos pajamos"
-                dataSource={calcDataTableDataSource7}
+                dataSource={mapTableRows(balancingEnergyMFRRTable3)}
             />
 
             <CalcDataTable
                 source="Užsakytų pasiūlymų kiekis (%)"
-                dataSource={calcDataTableDataSource8}
+                dataSource={mapTableRows(balancingEnergyMFRRTable4)}
             />
 
             <Divider sx={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
 
             <NavigationButtons onBackward={handleBackward} onForward={handleForward} />
         </div>
+        
     );
 };
