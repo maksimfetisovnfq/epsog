@@ -22,14 +22,29 @@ interface EconomicEvaluationTabProps {
 export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { incomeDataSource, revenueTable } = useSummaryData();
+    const { revenueTable, cost_table } = useSummaryData();
 
     const revenueTableColumns = [
         { title: 'Rinkos produktas', dataIndex: 'Product', key: 'Product' },
         { title: 'Suma (tūkst. Eur)', dataIndex: 'Value (tūkst. EUR)', key: 'Value (tūkst. EUR)' },
     ];
 
-    const newProductNames = [
+    const costTableColumns = [
+        { title: 'Produktas', dataIndex: 'Product', key: 'Product' },
+        { title: 'Sąnaudos (tūkst. Eur)', dataIndex: 'Value (tūkst. EUR)', key: 'Value (tūkst. EUR)' },
+    ];
+
+    const productKeyMap: { [display: string]: string } = {
+        'Parduota elektros energija "Diena prieš" rinkoje': 'parduodama DA',
+        'aFRR Aukštyn pajėgumas': 'aFRRu CAP',
+        'aFRR Žemyn pajėgumas': 'aFRRd CAP',
+        'mFRR Žemyn pajėgumas': 'mFRRd CAP',
+        'aFRR Aukštyn energija': 'aFRRu',
+        'aFRR Žemyn energija': 'aFRRd',
+        'mFRR Aukštyn energija': 'mFRRu',
+    };
+
+    const displayProductNames = [
         'Parduota elektros energija "Diena prieš" rinkoje',
         'aFRR Aukštyn pajėgumas',
         'aFRR Žemyn pajėgumas',
@@ -40,14 +55,25 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
         'mFRR Aukštyn energija',
     ];
 
-    const mappedRevenueTable = revenueTable.map((row, idx) => ({
-        ...row,
-        Product: newProductNames[idx] || row.Product,
+    const filteredRevenueTable = displayProductNames.map((displayName, idx) => {
+        const key = productKeyMap[displayName];
+        const found = revenueTable.find(row => row.Product === key);
+        return {
+            key: String(idx),
+            Product: displayName,
+            'Value (tūkst. EUR)': found ? found['Value (tūkst. EUR)'] : 0,
+        };
+    });
+
+    const mappedRevenueProducts = filteredRevenueTable.map((row, idx) => ({
+        key: String(idx),
+        name: row.Product,
+        value: typeof row["Value (tūkst. EUR)"] === 'number' ? row["Value (tūkst. EUR)"] : 0
     }));
 
     const handleForward = () => {
         navigate({
-            to: "/finish-page",
+            to: "/summary-of-results-beks", // changed to a valid route
             state: {
                 generalData: location.state?.generalData,
                 technicalParameters: location.state?.technicalParameters,
@@ -67,6 +93,17 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
         });
     };
 
+    // Merge cost_table with two specific rows from revenueTable
+    const extraRows = revenueTable.filter(row => row.Product === "mFRRd" || row.Product === "parduodama DA");
+    const mergedCostTable = [...cost_table, ...extraRows];
+
+    // Transform mergedCostTable for IncomeDataExpenses
+    const incomeDataExpensesData = mergedCostTable.map((row, idx) => ({
+        key: String(idx),
+        name: row.Product,
+        value: row["Value (tūkst. EUR)"]
+    }));
+
     return (
         <>
             <div style={{
@@ -84,9 +121,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
                 Pajamos už produktus
             </div>
 
-            <Table columns={revenueTableColumns} dataSource={mappedRevenueTable} />
+            <Table columns={revenueTableColumns} dataSource={filteredRevenueTable} />
 
-            {/*<RevenueProducts revenueProductsDataSource={economicEvaluationDataSource} />*/}
+            <RevenueProducts revenueProductsDataSource={mappedRevenueProducts} />
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
 
@@ -97,9 +134,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
                 Pajamos / sąnaudos
             </div>
 
-            {/*<Table columns={columns} dataSource={incomeDataSource2}/>*/}
+            <Table columns={costTableColumns} dataSource={mergedCostTable}/>
 
-            {/*<IncomeDataExpenses incomeDataSource={incomeDataSource2} />*/}
+            <IncomeDataExpenses incomeDataSource={incomeDataExpensesData} />
 
             <Divider style={{marginTop: '32px', marginBottom: '32px', width: '768px'}}/>
 
@@ -118,7 +155,7 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
                 </div>
             </div>
 
-            {/*<DetailedAnualResults incomeDataSource={incomeDataSource2} />*/}
+            <DetailedAnualResults />
 
             <Divider style={{marginTop: '64px', marginBottom: '24px', width: '768px'}}/>
 

@@ -88,10 +88,8 @@ export const RevenueProductsChart = ({labels, datasets}: RevenueProductsChartPro
                 marginRight: 'auto',
                 overflow: 'visible'
             }}>
-                <Bar data={data} options={options} style={{width: '100%', maxWidth: 768}}/>
+                <Bar data={data} options={options} style={{marginBottom: 16, width: '100%', maxWidth: 768}}/>
             </div>
-
-            <div style={{height: 48}}/>
         </div>
     );
 };

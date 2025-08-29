@@ -101,6 +101,7 @@ export interface ModernSummaryData {
     IntradayMarketTable3: TableRow[];
     markets: any; // TODO: type this more strictly
     revenueTable: { Product: string; "Value (tūkst. EUR)": number }[];
+    cost_table: { Product: string; "Value (tūkst. EUR)": number }[];
 }
 
 const yearlyMetricMap: Record<string, { key: YearlySummaryKey; label: string }> = {
@@ -580,5 +581,14 @@ export function useSummaryData(): ModernSummaryData {
         IntradayMarketTable2,
         IntradayMarketTable3,
         revenueTable: data.aggregated.economic_results.revenue_table,
+        cost_table: data.aggregated.economic_results.cost_table,
+        detailedAnualDataSource: data.aggregated.economic_results.yearly_table.map((row: any) => ({
+            metai: row["YEAR"],
+            ciklai: row["CYCLES"],
+            capex: row["CAPEX (tūkst. EUR)"],
+            opex: row["OPEX (tūkst. EUR)"],
+            cf: row["CF (tūkst. EUR)"],
+            npv: row["NPV (tūkst. EUR)"],
+        })),
     };
 }
