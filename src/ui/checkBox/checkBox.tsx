@@ -15,9 +15,8 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '& .MuiSvgIcon-root': {
                     width: 20,
                     height: 20,
-                    borderRadius: '2px',
-                    fill: 'transparent',
-                    border: '1px solid',
+                    fill: '#999999',
+                    
                 },
                 
                 // Default unchecked state
@@ -28,7 +27,6 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                     color: '#00EB8C',
                     '& .MuiSvgIcon-root': {
                         fill: '#00EB8C',
-                        border: '1px solid #CCFBE8',
                         borderColor: '#CCFBE8',
                     },
                 },
@@ -37,8 +35,7 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '&:hover': {
                     backgroundColor: 'transparent',
                     '& .MuiSvgIcon-root': {
-                        fill: 'transparent',
-                        border: '1px solid #CCFBE8',
+                        fill: 'black',
                         borderColor: '#CCFBE8',
                     },
                 },
@@ -47,7 +44,6 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '&:hover.Mui-checked': {
                     '& .MuiSvgIcon-root': {
                         fill: '#00EB8C',
-                        border: '1px solid #CCFBE8',
                         borderColor: '#CCFBE8',
                     },
                 },
@@ -56,7 +52,6 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '&.Mui-disabled': {
                     '& .MuiSvgIcon-root': {
                         fill: '#FAFAFA',
-                        border: '1px solid #B7C0C8',
                         borderColor: '#B7C0C8',
                     },
                 },
@@ -65,7 +60,6 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '&.Mui-disabled.Mui-checked': {
                     '& .MuiSvgIcon-root': {
                         fill: '#FAFAFA',
-                        border: '1px solid #B7C0C8',
                         borderColor: '#B7C0C8',
                     },
                 },

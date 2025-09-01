@@ -6,12 +6,12 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {useState} from 'react';
 import {useNavigate} from '@tanstack/react-router';
 import {CheckBox} from "../ui/checkBox/checkBox";
+import {Checkbox as MUICheckbox} from '@mui/material';
 
 export const Route = createFileRoute('/')({
     component: RouteComponent,
 })
 
-const label = {inputProps: {'aria-label': 'Checkbox demo'}};
 
 function RouteComponent() {
     const [checked, setChecked] = useState(false);
@@ -45,7 +45,7 @@ function RouteComponent() {
                 '.MuiDivider-root': {
                     borderColor: 'white !important',
                 },
-                
+                             
                 
             }}/>
 
@@ -98,7 +98,7 @@ function RouteComponent() {
 
             <div style={{display: 'flex', alignItems: 'center', marginBottom: '8px'}}>
                 <div>
-                    <CheckBox {...label} checked={checked} onChange={e => setChecked(e.target.checked)}/>
+                    <CheckBox checked={checked} onChange={e => setChecked(e.target.checked)}/>
                 </div>
 
                 <div style={{width: '768px', marginLeft: 6, fontSize: '16px'}}>

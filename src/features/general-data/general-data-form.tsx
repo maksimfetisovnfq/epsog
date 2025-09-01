@@ -22,9 +22,14 @@ export const GeneralDataForm = () => {
     const navigate = useNavigate();
     const {calculatorType, setCalculatorType} = useCalculatorType()
     const [sector, setSector] = useState<string>("");
+    const [provider, setProvider] = useState<string>("Litgrid");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCalculatorType(event.target.value as CalculatorType);
+    };
+
+    const handleProviderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setProvider(event.target.value);
     };
 
     const handleSubmit = (data: GeneralDataSchema) => {
@@ -59,7 +64,7 @@ export const GeneralDataForm = () => {
     }
 
     const handleBackward = () => {
-        navigate({ to: "/" }); 
+        navigate({to: "/"});
     }
 
     const controlProps = (item: string) => ({
@@ -92,11 +97,12 @@ export const GeneralDataForm = () => {
                 }}
             />
             <Form
-                onSubmit={handleSubmit}
-                validationSchema={generalDataSchema}
                 defaultValues={{
-                    network: "",
-                }}>
+                    sector: sector || "Sektorius",
+                    provider: provider || ""
+                }}
+                onSubmit={data => handleSubmit({...data, provider})}
+                validationSchema={generalDataSchema}>
 
                 <div style={{
                     fontSize: '32px',
@@ -116,15 +122,15 @@ export const GeneralDataForm = () => {
                         onChange={e => setSector(e.target.value)}
                         displayEmpty
                         inputProps={{'aria-label': 'Without label'}}
-                        defaultValue={sector}
                     >
                         <MenuItem value="sector">Sektorius</MenuItem>
                         <MenuItem value="concentrator">Esu telkėjas</MenuItem>
                     </Select>
 
                     {sector === 'concentrator' && (
-                        <FormInput name="network" style={{width: '400px'}}
-                                   defaultValue="Įrašykite sektorių (neprivaloma)"/>
+                        <FormInput style={{width: '400px'}}
+                                   placeholder="Sektorius"
+                                   name="sector"/>
                     )}
                 </div>
 
@@ -175,7 +181,7 @@ export const GeneralDataForm = () => {
                     </div>
 
                     <Tooltip title="
-                    Priklausomai nuo įrenginių prijungimo taško, 
+                    Priklausomai nuo įrenginių prijungimo taško,
                     skaičiavimuose vertinamas skirtingas energijos persiuntimo tarifas.">
                         <InfoOutlineIcon/>
                     </Tooltip>
@@ -183,15 +189,15 @@ export const GeneralDataForm = () => {
 
 
                 <RadioGroup
-                    defaultValue={CalculatorType.BEKS}
+                    value={provider}
                     row
                     aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    //onChange={handleSecondRadioGroupChange}
+                    name="provider-radio-group"
+                    onChange={handleProviderChange}
                     style={{columnGap: '32px'}}
                 >
-                    <FormControlLabel value="first" control={<Radio sx={radioStyles}/>} label="Perdavimo tinklas"/>
-                    <FormControlLabel value="second" control={<Radio sx={radioStyles}/>} label="Skirstymo tinklas"/>
+                    <FormControlLabel value="Litgrid" control={<Radio sx={radioStyles}/>} label="Perdavimo tinklas"/>
+                    <FormControlLabel value="ESO" control={<Radio sx={radioStyles}/>} label="Skirstymo tinklas"/>
                 </RadioGroup>
 
 
@@ -205,8 +211,6 @@ export const GeneralDataForm = () => {
 
                         <Select
                             style={{height: '48px', width: '400px'}}
-                            // value={}
-                            // onChange={e => setSector(e.target.value)}
                             displayEmpty
                             inputProps={{'aria-label': 'Without label'}}
                         >

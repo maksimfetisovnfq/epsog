@@ -441,7 +441,7 @@ export function useSummaryData(): ModernSummaryData {
         value: data.aggregated.summary.utilisation_chart_data.values[idx],
     }));
 
-    // Extract FCR
+    //FCR
     const fcr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR;
     const balancingCapacityFCRTable: TableRow[] = [
         { name: 'Įsigytų pajėgumų apimtys', value: fcr.volume_of_procured_reserves.value, unit: fcr.volume_of_procured_reserves.unit },
@@ -449,7 +449,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Potencialios pajamos/sąnaudos', value: fcr.potential_revenue.value, unit: fcr.potential_revenue.unit },
         { name: 'Priimtų kainos pasiūlymų dalis, proc.', value: fcr.bids_selected.value, unit: fcr.bids_selected.unit },
     ];
-    // Extract balancingCapacity aFRR
+    //balancingCapacity aFRR
     const capacityAfrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR;
     const balancingCapacityAFRRTable1: TableRow[] = [
         { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.volume_of_procured_reserves.upward.value, unit: capacityAfrr.volume_of_procured_reserves.upward.unit },
@@ -467,7 +467,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Aukštyn (angl. Upward)', value: capacityAfrr.bids_selected.upward.value, unit: capacityAfrr.bids_selected.upward.unit },
         { name: 'Žemyn (angl. Downward)', value: capacityAfrr.bids_selected.downward.value, unit: capacityAfrr.bids_selected.downward.unit },
     ];
-    // Extract balancingCapacity mFRR
+    //balancingCapacity mFRR
     const capacityMfrr = data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR;
     const balancingCapacityMFRRTable1: TableRow[] = [
         { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.volume_of_procured_reserves.upward.value, unit: capacityMfrr.volume_of_procured_reserves.upward.unit },
@@ -486,7 +486,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Žemyn (angl. Downward)', value: capacityMfrr.bids_selected.downward.value, unit: capacityMfrr.bids_selected.downward.unit },
     ];
     
-    // Extract balancingEnergy aFRR
+    //balancingEnergy aFRR
     const energyAfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.aFRR;
     const balancingEnergyAFRRTable1: TableRow[] = [
         { name: 'Aukštyn (angl. Upward)', value: energyAfrr.volume_of_procured_energy.upward.value, unit: energyAfrr.volume_of_procured_energy.upward.unit },
@@ -504,7 +504,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Aukštyn (angl. Upward)', value: energyAfrr.bids_selected.upward.value, unit: energyAfrr.bids_selected.upward.unit },
         { name: 'Žemyn (angl. Downward)', value: energyAfrr.bids_selected.downward.value, unit: energyAfrr.bids_selected.downward.unit },
     ];
-    // Extract balancingEnergy mFRR
+    //balancingEnergy mFRR
     const energyMfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR;
     const balancingEnergyMFRRTable1: TableRow[] = [
         { name: 'Aukštyn (angl. Upward)', value: energyMfrr.volume_of_procured_energy.upward.value, unit: energyMfrr.volume_of_procured_energy.upward.unit },
@@ -523,7 +523,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Žemyn (angl. Downward)', value: energyMfrr.bids_selected.downward.value, unit: energyMfrr.bids_selected.downward.unit },
     ];
 
-    // Extract electricityTrading Diena prieš (angl. Day-Ahead) rinka
+    //electricityTrading Diena prieš (angl. Day-Ahead) rinka
     const DayAheadMarket = data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead;
     const DayAheadMarketTable1: TableRow[] = [
         { name: 'Nupirkta', value: DayAheadMarket.volume_of_energy_exchange.purchase.value, unit: DayAheadMarket.volume_of_energy_exchange.purchase.unit },
@@ -537,7 +537,7 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Sąnaudos', value: DayAheadMarket.potential_cost_revenue.cost.value, unit: DayAheadMarket.potential_cost_revenue.cost.unit },
         { name: 'Pajamos', value: DayAheadMarket.potential_cost_revenue.revenue.value, unit: DayAheadMarket.potential_cost_revenue.revenue.unit },
     ];
-    // Extract electricityTrading Dienos eigos (angl. Intraday) rinka
+    //electricityTrading Dienos eigos (angl. Intraday) rinka
     const IntradayMarket = data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Intraday;
     const IntradayMarketTable1: TableRow[] = [
         { name: 'Nupirkta', value: IntradayMarket.volume_of_energy_exchange.purchase.value, unit: IntradayMarket.volume_of_energy_exchange.purchase.unit },

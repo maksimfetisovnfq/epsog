@@ -2,8 +2,8 @@ import {z} from 'zod';
 
 export const generalDataSchema = z
     .object({
-        network: z.string().min(20),
+        sector: z.string().min(0),
+        provider: z.string().min(0),
     });
 
 export type GeneralDataSchema = z.infer<typeof generalDataSchema>;
-

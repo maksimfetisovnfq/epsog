@@ -8,40 +8,40 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
-import {CalculatorType} from "../../types.ts";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormLabel from "@mui/material/FormLabel";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Radio from "@mui/material/Radio";
+// import RadioGroup from "@mui/material/RadioGroup";
+// import FormLabel from "@mui/material/FormLabel";
 import {GlobalStyles} from '@mui/material';
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Tooltip from "@mui/material/Tooltip";
+import {useState} from "react";
 
 function valuetext(value: number) {
     return `${value}°C`;
 }
 
-//const handleRadioGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-
-//};
-
-const radioStyles = {
-    '&.Mui-checked': {
-        color: '#00EB8C',
-    },
-    '&:not(.Mui-checked)': {
-        color: '#00EB8C',
-    },
-};
+// const radioStyles = {
+//     '&.Mui-checked': {
+//         color: '#00EB8C',
+//     },
+//     '&:not(.Mui-checked)': {
+//         color: '#00EB8C',
+//     },
+// };
 
 export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
+    const [reaction_time, setReaction_time] = useState<number>(0);
     const defaultValues = location.state?.technicalParameters?.beks || {};
+
+    const handleReactionTimeChange = (_event: Event, value: number | number[]) => {
+        setReaction_time(Array.isArray(value) ? value[0] : value);
+    };
 
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
         navigate({
@@ -77,18 +77,25 @@ export const TechnicalParametersBeksForm = () => {
                 '.MuiAccordionDetails-root': {
                     padding: '0 !important',
                 },
-
             }}/>
 
-            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={defaultValues}>
+            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{...defaultValues, reaction_time}}>
+                <div style={{fontSize: '32px', marginBottom: '8px', fontWeight: 600}}>
+                    Techniniai parametrai
+                </div>
 
-                <FormInput name="q_max" defaultValue="1000 MW"
+                <div style={{fontSize: '14px', marginBottom: '24px', color: '#3F576B'}}>
+                    Užpildykite techninius savo elektros energijos kaupiklio parametrus. Jei nežinote tikslių
+                    verčių, palikite numatytąsias.
+                </div>
+
+                <FormInput name="q_max" placeholder="1000 MW"
                            description="Tik teigiami skaičiai, max reikšmė 1000 MW"
                            title="Elektros energijos kaupiklio maksimali galia"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="q_total" defaultValue="2 MWh"
+                <FormInput name="q_total" placeholder="2 MWh"
                            description="Tik teigiami skaičiai, max reikšmė 1 000 000 (1 TWh)"
                            title="Elektros energijos kaupiklio talpa *"/>
 
@@ -111,11 +118,15 @@ export const TechnicalParametersBeksForm = () => {
                     </div>
 
                     <Slider
+                        name="reaction_time"
+                        onChange={handleReactionTimeChange}
                         aria-label="Temperature"
                         defaultValue={30}
                         getAriaValueText={valuetext}
-                        color="primary"
                     />
+                    {/*<Typography variant="body2" sx={{ mt: 1, mb: 1 }}>*/}
+                    {/*    Reakcijos laikas: {reaction_time} s*/}
+                    {/*</Typography>*/}
 
                     <div style={{
                         fontSize: '12px',
@@ -135,50 +146,48 @@ export const TechnicalParametersBeksForm = () => {
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormLabel id="demo-radio-buttons-group-label"
-                           style={{color: "black", padding: 0, marginBottom: '12px', fontSize: '14px'}}>
-                    Pasirinkite galimą teikti reguliavimo paslaugą *
-                </FormLabel>
-
-                <RadioGroup
-                    defaultValue={CalculatorType.BEKS}
-                    row
-                    aria-labelledby="demo-radio-buttons-group-label"
-                    name="radio-buttons-group"
-                    //onChange={handleRadioGroupChange}
-                    style={{columnGap: '32px'}}
-                >
-
-                    <div>
-                        <FormControlLabel
-                            value="first"
-                            control={<Radio sx={radioStyles}/>}
-                            label="Aukštyn"
-                            sx={{verticalAlign: 'baseline', marginRight: '4px'}}
-                        />
-
-                        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas">
-                            <InfoOutlineIcon/>
-                        </Tooltip>
-                    </div>
-
-                    <div>
-                        <FormControlLabel
-                            value="second"
-                            control={<Radio sx={radioStyles}/>}
-                            label="Žemyn"
-                            sx={{verticalAlign: 'baseline', marginRight: '4px'}}
-                        />
-
-                        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas">
-                            <InfoOutlineIcon/>
-                        </Tooltip>
-                    </div>
-
-                    <FormControlLabel value="third" control={<Radio sx={radioStyles}/>} label="Į abi psues"/>
-                </RadioGroup>
-
-                <Divider style={{marginTop: '48px', marginBottom: '48px'}}/>
+                {/*<FormLabel id="demo-radio-buttons-group-label"*/}
+                {/*           style={{color: "black", padding: 0, marginBottom: '12px', fontSize: '14px'}}>*/}
+                {/*    Pasirinkite galimą teikti reguliavimo paslaugą **/}
+                {/*</FormLabel>*/}
+                
+                {/*<RadioGroup*/}
+                {/*    row*/}
+                {/*    aria-labelledby="demo-radio-buttons-group-label"*/}
+                {/*    name="radio-buttons-group"*/}
+                {/*    style={{columnGap: '32px'}}*/}
+                {/*>*/}
+                
+                {/*    <div>*/}
+                {/*        <FormControlLabel*/}
+                {/*            value="first"*/}
+                {/*            control={<Radio sx={radioStyles}/>}*/}
+                {/*            label="Aukštyn"*/}
+                {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
+                {/*        />*/}
+                
+                {/*        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas">*/}
+                {/*            <InfoOutlineIcon/>*/}
+                {/*        </Tooltip>*/}
+                {/*    </div>*/}
+                
+                {/*    <div>*/}
+                {/*        <FormControlLabel*/}
+                {/*            value="second"*/}
+                {/*            control={<Radio sx={radioStyles}/>}*/}
+                {/*            label="Žemyn"*/}
+                {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
+                {/*        />*/}
+                
+                {/*        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas">*/}
+                {/*            <InfoOutlineIcon/>*/}
+                {/*        </Tooltip>*/}
+                {/*    </div>*/}
+                
+                {/*    <FormControlLabel value="third" control={<Radio sx={radioStyles}/>} label="Į abi psues"/>*/}
+                {/*</RadioGroup>*/}
+                
+                {/*<Divider style={{marginTop: '48px', marginBottom: '48px'}}/>*/}
 
                 <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}}>
                     <AccordionSummary
@@ -189,7 +198,8 @@ export const TechnicalParametersBeksForm = () => {
                         }}
                     >
                         <div>
-                            <Typography component="span" style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
+                            <Typography component="span"
+                                        style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
                                 <div style={{marginBottom: '24px'}}>
                                     Išplėstiniai techniniai parametrai
                                 </div>
@@ -228,37 +238,36 @@ export const TechnicalParametersBeksForm = () => {
 
                     </AccordionSummary>
                     <AccordionDetails>
-                        <FormInput name="RTE" defaultValue="88 %"
+                        <FormInput name="RTE" placeholder="88 %"
                                    description="Pilno ciklo naudingumo koeficientas"
                                    title="Pilno ciklo naudingumo koeficientas"
                                    tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos"/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                        <FormInput name="SOC_min" defaultValue="10 %" description="Skaičius nuo 0 iki 100"
+                        <FormInput name="SOC_min" placeholder="10 %" description="Skaičius nuo 0 iki 100"
                                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis"
                                    tooltip="Mažiausia riba iki kurios galima iškrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                        <FormInput name="SOC_max" defaultValue="95 %" description="Skaičius nuo 0 iki 100"
+                        <FormInput name="SOC_max" placeholder="95 %" description="Skaičius nuo 0 iki 100"
                                    title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"
                                    tooltip="Didžiausia riba iki kurios galima įkrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                        <FormInput name="N_cycles_DA" defaultValue="4 kartai/d."
+                        <FormInput name="N_cycles_DA" placeholder="4 kartai/d."
                                    description="Sveikas skaičius nuo 0 iki 96 imtinai"
                                    title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"
                                    tooltip="Kiek per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."/>
 
                         <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                        <FormInput name="N_cycles_ID" defaultValue="16 kartai/d."
+                        <FormInput name="N_cycles_ID" placeholder="16 kartai/d."
                                    description="Sveikas skaičius nuo 0 iki 96 imtinai"
                                    title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"
                                    tooltip="Dienos eigos rinka skirta išlaikyti kaupiklio talpą leistinose ribose teikiant balansavimo paslaugas."/>
-                        
                     </AccordionDetails>
                 </Accordion>
 

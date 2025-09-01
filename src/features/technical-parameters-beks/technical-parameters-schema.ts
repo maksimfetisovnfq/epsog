@@ -9,7 +9,7 @@ export const technicalParametersSchema = z
         SOC_max: z.number().min(0),
         N_cycles_DA: z.number().min(0),
         N_cycles_ID: z.number().min(0),
+        reaction_time: z.number().min(0),
     });
 
 export type TechnicalBeksParametersSchema = z.infer<typeof technicalParametersSchema>;
-

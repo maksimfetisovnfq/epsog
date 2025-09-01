@@ -1,6 +1,5 @@
 import {TextField, type TextFieldProps} from '@mui/material'
 import {useFormContext} from 'react-hook-form'
-import {useState, useEffect} from 'react';
 import Tooltip from "@mui/material/Tooltip";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 
@@ -13,48 +12,15 @@ export type FormInputProps = TextFieldProps & {
 }
 
 
-export const FormInput = ({name, label, title, description, defaultValue, tooltip, ...props}: FormInputProps) => {
+export const FormInput = ({name, label, title, description, tooltip, ...props}: FormInputProps) => {
     const {
         register,
         formState: {errors},
-        setValue,
-        watch
+        getValues,
     } = useFormContext()
 
-    const [hasUserInteracted, setHasUserInteracted] = useState(false);
-    const [isDefaultValueSet, setIsDefaultValueSet] = useState(false);
-    const currentValue = watch(name);
-
-    useEffect(() => {
-        if (defaultValue && !currentValue && !hasUserInteracted) {
-            setValue(name, defaultValue);
-            setIsDefaultValueSet(true);
-        }
-    }, [defaultValue, currentValue, hasUserInteracted, setValue, name]);
-
-    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-        if (!hasUserInteracted && isDefaultValueSet && defaultValue) {
-            setValue(name, '');
-            setHasUserInteracted(true);
-            setIsDefaultValueSet(false);
-        }
-
-        if (props.onFocus) {
-            props.onFocus(event);
-        }
-    };
-
-    const handleClick = (event: React.MouseEvent<HTMLInputElement>) => {
-        if (!hasUserInteracted && isDefaultValueSet && defaultValue) {
-            setValue(name, '');
-            setHasUserInteracted(true);
-            setIsDefaultValueSet(false);
-        }
-
-        if (props.onClick) {
-            props.onClick(event);
-        }
-    };
+    // Determine if the field is filled
+    const isFilled = getValues(name) !== undefined && getValues(name) !== '';
 
     return (
         <div style={{margin: '24px 0px'}}>
@@ -85,10 +51,9 @@ export const FormInput = ({name, label, title, description, defaultValue, toolti
             <TextField
                 sx={{
                     display: 'block',
-                    '& .MuiFormControl-root-MuiTextField-root': {},
                     '& .MuiInputBase-input': {
                         mb: 2,
-                        color: '#6F8190',
+                        color: isFilled ? 'black' : '#6F8190',
                         borderColor: '#CFD5DA',
                         fontSize: '16px',
                         fontFamily: 'Arial',
@@ -101,8 +66,25 @@ export const FormInput = ({name, label, title, description, defaultValue, toolti
                         borderRadius: 0,
                         width: '400px',
                         height: '48px',
+                        color: isFilled ? '#0F2D46' : '#6F8190',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#CFD5DA',
+                        },
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#00EB8C',
+                        },
+                        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#00EB8C',
+                        },
+                        '&:hover': {
+                            color: '#0F2D46',
+                        },
+                        '&.Mui-focused': {
+                            color: '#0F2D46',
+                        },
                     },
                 }}
+                autoComplete={'off'}
                 {...register(name, {
                     setValueAs: v => {
                         if (typeof v === 'string' && v.trim() !== '' && !isNaN(Number(v))) {
@@ -114,8 +96,6 @@ export const FormInput = ({name, label, title, description, defaultValue, toolti
                 error={Boolean(errors[name])}
                 helperText={errors[name] ? String(errors[name]?.message) : null}
                 label={label}
-                onFocus={handleFocus}
-                onClick={handleClick}
                 {...props}
             />
 

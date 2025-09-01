@@ -15,7 +15,6 @@ import {useMutation} from "@tanstack/react-query";
 export const EconomicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
-
     const {mutate} = useMutation({
         mutationKey: ['beks'],
         mutationFn: async ({parameters}: { parameters: string }) => {
@@ -36,14 +35,9 @@ export const EconomicalParametersBeksForm = () => {
     });
 
     const handleSubmit = (data: EconomicalBeksParametersSchema) => {
-        // Combine data from all previous steps
+        console.log('location.state:', location.state);
+
         const technicalParams = location.state?.technicalParameters?.beks;
-        
-        // Guard against missing technical parameters
-        if (!technicalParams) {
-            console.error('Technical parameters are missing');
-            return;
-        }
         
         // Construct the complete parameters object matching the API requirements
         // const parameters = {
@@ -93,19 +87,19 @@ export const EconomicalParametersBeksForm = () => {
         // const parameters = {
         //     "RTE": 85.0,
         //     "Q_max": 10.0,
-        //     "Q_total": 40.0,
+        //     "Q_total": 40.0,   
         //     "SOC_min": 10.0,
         //     "SOC_max": 90.0,
         //     "N_cycles_DA": 2,
         //     "N_cycles_ID": 4,
-        //     "reaction_time": 30,
+        //     "reaction_time": 30, 
         //     "CAPEX_P": 150.0,
         //     "CAPEX_C": 250.0,
         //     "OPEX_P": 2.5,
         //     "OPEX_C": 1.5,
         //     "discount_rate": 5.0,
         //     "number_of_years": 10,
-        //     "provider": "ESO",
+        //     "provider": "ESO", 
         //     "P_FCR_CAP_BSP": 0,
         //     "P_aFRRu_CAP_BSP": 0,
         //     "P_aFRRd_CAP_BSP": 0,
@@ -115,8 +109,8 @@ export const EconomicalParametersBeksForm = () => {
         //     "P_aFRRd_BSP": 0,
         //     "P_mFRRu_BSP": 0,
         //     "P_mFRRd_BSP": 0,
-        //     "Sector": "Pramonė",
-        //     "produktai": {
+        //     "Sector": "Pramonė", 
+        //     "produktai": { 
         //         "FCR": true,
         //         "aFRRu": true,
         //         "aFRRd": true,
@@ -177,27 +171,27 @@ export const EconomicalParametersBeksForm = () => {
 
             <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema} defaultValues={location.state?.economicParameters?.beks || {}}>
 
-                <FormInput name="CAPEX_P" defaultValue="Eur/MW" description="Tik teigiami skaičiai"
+                <FormInput name="CAPEX_P" placeholder="Eur/MW" description="Tik teigiami skaičiai"
                            title="Investicijos (CAPEX) į galią"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="CAPEX_C" defaultValue="Eur/MWh" description="Tik teigiami skaičiai"
+                <FormInput name="CAPEX_C" placeholder="Eur/MWh" description="Tik teigiami skaičiai"
                            title="Investicijos (CAPEX) į talpą"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="OPEX_P" defaultValue="Eur/MW per metus" description="Tik teigiami skaičiai"
+                <FormInput name="OPEX_P" placeholder="Eur/MW per metus" description="Tik teigiami skaičiai"
                            title="Fiksuotos veiklos sąnaudos (OPEX)"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="OPEX_C" defaultValue="Eur/MWh" description="Tik teigiami skaičiai"
+                <FormInput name="OPEX_C" placeholder="Eur/MWh" description="Tik teigiami skaičiai"
                            title="Kintamos veiklos sąnaudos (OPEX)"/>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
 
-                <FormInput name="number_of_years" defaultValue="10" description="Tik sveikas skaičius nuo 1 iki 50"
+                <FormInput name="number_of_years" placeholder="10" description="Tik sveikas skaičius nuo 1 iki 50"
                            title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"/>
 
                 <Divider style={{marginTop: '48px', marginBottom: '48px'}}/>
@@ -222,7 +216,7 @@ export const EconomicalParametersBeksForm = () => {
                     </AccordionSummary>
 
                     <AccordionDetails>
-                        <FormInput name="discount_rate" defaultValue="5 %" description="Skaičius nuo 0 iki 100"
+                        <FormInput name="discount_rate" placeholder="5 %" description="Skaičius nuo 0 iki 100"
                                    title="Diskonto norma"/>
 
                         <Divider style={{marginTop: '32px', marginBottom: '32px'}}/>
@@ -231,11 +225,11 @@ export const EconomicalParametersBeksForm = () => {
                             Minimali siūloma kainą už balansavimo pajėgumus:
                         </div>
 
-                        <FormInput name="P_FCR_CAP_BSP" defaultValue="0 Eur/MW" title="FCR"/>
-                        <FormInput name="P_aFRRu_CAP_BSP" defaultValue="0 Eur/MW" title="aFRR aukštyn"/>
-                        <FormInput name="P_aFRRd_CAP_BSP" defaultValue="0 Eur/MW" title="aFRR žemyn"/>
-                        <FormInput name="P_mFRRu_CAP_BSP" defaultValue="0 Eur/MW" title="mFRR aukštyn"/>
-                        <FormInput name="P_mFRRd_CAP_BSP" defaultValue="0 Eur/MW" title="mFRR žemyn"/>
+                        <FormInput name="P_FCR_CAP_BSP" placeholder="0 Eur/MW" title="FCR"/>
+                        <FormInput name="P_aFRRu_CAP_BSP" placeholder="0 Eur/MW" title="aFRR aukštyn"/>
+                        <FormInput name="P_aFRRd_CAP_BSP" placeholder="0 Eur/MW" title="aFRR žemyn"/>
+                        <FormInput name="P_mFRRu_CAP_BSP" placeholder="0 Eur/MW" title="mFRR aukštyn"/>
+                        <FormInput name="P_mFRRd_CAP_BSP" placeholder="0 Eur/MW" title="mFRR žemyn"/>
 
                         <Divider style={{marginTop: '32px', marginBottom: '32px'}}/>
 
@@ -243,10 +237,10 @@ export const EconomicalParametersBeksForm = () => {
                             Minimali siūloma kainą už balansavimo energiją:
                         </div>
 
-                        <FormInput name="P_aFRRu_BSP" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
-                        <FormInput name="P_aFRRd_BSP" defaultValue="Eur/MWh" title="aFRR žemyn"/>
-                        <FormInput name="P_mFRRu_BSP" defaultValue="Eur/MWh" title="aFRR aukštyn"/>
-                        <FormInput name="P_mFRRd_BSP" defaultValue="Eur/MWh" title="mFRR žemyn"/>
+                        <FormInput name="P_aFRRu_BSP" placeholder="Eur/MWh" title="aFRR aukštyn"/>
+                        <FormInput name="P_aFRRd_BSP" placeholder="Eur/MWh" title="aFRR žemyn"/>
+                        <FormInput name="P_mFRRu_BSP" placeholder="Eur/MWh" title="aFRR aukštyn"/>
+                        <FormInput name="P_mFRRd_BSP" placeholder="Eur/MWh" title="mFRR žemyn"/>
 
                     </AccordionDetails>
                 </Accordion>
