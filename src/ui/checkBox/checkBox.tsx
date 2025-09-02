@@ -35,7 +35,7 @@ export const CheckBox = ({label, description, error, ...props}: Props) => (
                 '&:hover': {
                     backgroundColor: 'transparent',
                     '& .MuiSvgIcon-root': {
-                        fill: 'black',
+                        fill: '#CCFBE8',
                         borderColor: '#CCFBE8',
                     },
                 },

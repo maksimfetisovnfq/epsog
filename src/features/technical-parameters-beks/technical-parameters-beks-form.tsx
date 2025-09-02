@@ -39,16 +39,27 @@ export const TechnicalParametersBeksForm = () => {
     const [reaction_time, setReaction_time] = useState<number>(0);
     const defaultValues = location.state?.technicalParameters?.beks || {};
 
+    const reactionTimeMap = {
+        0: 30,
+        30: 300,
+        60: 750,
+        90: 1000,
+    };
+
     const handleReactionTimeChange = (_event: Event, value: number | number[]) => {
-        setReaction_time(Array.isArray(value) ? value[0] : value);
+        const sliderValue = Array.isArray(value) ? value[0] : value;
+        setReaction_time(sliderValue);
     };
 
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
+        // Map slider value to schema value before submit
+        const mappedReactionTime = reactionTimeMap[reaction_time] ?? reaction_time;
+        const submitData = { ...data, reaction_time: mappedReactionTime };
         navigate({
             to: "/economic-parameters-beks",
             state: {
                 generalData: location.state.generalData,
-                technicalParameters: {beks: data},
+                technicalParameters: {beks: submitData},
             },
         })
     }
@@ -123,24 +134,27 @@ export const TechnicalParametersBeksForm = () => {
                         aria-label="Temperature"
                         defaultValue={30}
                         getAriaValueText={valuetext}
+                        step={30}
+                        marks
+                        max={90}
                     />
                     {/*<Typography variant="body2" sx={{ mt: 1, mb: 1 }}>*/}
                     {/*    Reakcijos laikas: {reaction_time} s*/}
                     {/*</Typography>*/}
 
                     <div style={{
+                        color: 'black',
                         fontSize: '12px',
                         fontWeight: 400,
                         marginBottom: '12px',
-                        width: '400px',
+                        width: '430px',
                         display: 'flex',
-                        gap: '12px',
                         justifyContent: 'space-between',
                     }}>
                         <div>&lt; 30 s</div>
                         <div>&lt; 5 min</div>
                         <div>&lt; 12.5 min</div>
-                        <div>&lt; 12.5 min</div>
+                        <div>&gt; 12.5 min</div>
                     </div>
                 </div>
 
