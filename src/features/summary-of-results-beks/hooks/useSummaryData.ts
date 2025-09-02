@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useLocation } from "@tanstack/react-router";
 
 export interface YearlySummaryRow {
     Metric: string;
@@ -102,6 +103,14 @@ export interface ModernSummaryData {
     markets: any; // TODO: type this more strictly
     revenueTable: { Product: string; "Value (tūkst. EUR)": number }[];
     cost_table: { Product: string; "Value (tūkst. EUR)": number }[];
+    detailedAnualDataSource: Array<{
+        metai: number;
+        ciklai: number;
+        capex: number;
+        opex: number;
+        cf: number;
+        npv: number;
+    }>;
 }
 
 const yearlyMetricMap: Record<string, { key: YearlySummaryKey; label: string }> = {
@@ -111,15 +120,26 @@ const yearlyMetricMap: Record<string, { key: YearlySummaryKey; label: string }> 
 };
 
 function parseNumberFromValue(value: string): number {
-    const match = value.match(/[-+]?\d*[\.,]?\d+/);
+    const match = value.match(/[-+]?\d*[.,]?\d+/);
     if (!match) return 0;
     return parseFloat(match[0].replace(',', '.'));
 }
 
 export function useSummaryData(): ModernSummaryData {
-    const data = useMemo(() => ({
-        aggregated: {
-            summary: {
+    const location = useLocation();
+    
+    // Get API response data from navigation state, fallback to mock data
+    const apiData = location.state?.apiResponseData;
+    
+    const data = useMemo(() => {
+        // If we have API data, use it; otherwise use mock data
+        if (apiData) {
+            return apiData;
+        }
+        
+        // Fallback to existing mock data
+        return {
+            aggregated: {
                 yearly_summary_table: [
                     { Metric: "POTENTIAL REVENUE PER YEAR (average)", Value: "+20327.17 tūkst. EUR/year" },
                     { Metric: "POTENTIAL COST PER YEAR (average)", Value: "-1033.77 tūkst. EUR/year" },
@@ -409,15 +429,8 @@ export function useSummaryData(): ModernSummaryData {
             comparison: {
                 BEKS: 20329.344892259156
             }
-        },
-        performance: {
-            total_time: 77.1688928604126,
-            preparation_time: 0.3082458972930908,
-            optimization_step1_time: 75.66500425338745,
-            optimization_step2_time: 1.1362309455871582,
-            results_preparation_time: 0.059395551681518555
-        }
-    }), []);
+        };
+    }, [apiData]);
 
     const yearlySummaryMetrics: YearlySummaryMetric[] = data.aggregated.summary.yearly_summary_table.map(row => {
         const map = yearlyMetricMap[row.Metric];

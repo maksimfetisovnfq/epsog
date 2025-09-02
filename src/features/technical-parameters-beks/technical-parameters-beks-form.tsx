@@ -91,13 +91,8 @@ export const TechnicalParametersBeksForm = () => {
             }}/>
 
             <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{...defaultValues, reaction_time}}>
-                <div style={{fontSize: '32px', marginBottom: '8px', fontWeight: 600}}>
+                <div style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}}>
                     Techniniai parametrai
-                </div>
-
-                <div style={{fontSize: '14px', marginBottom: '24px', color: '#3F576B'}}>
-                    Užpildykite techninius savo elektros energijos kaupiklio parametrus. Jei nežinote tikslių
-                    verčių, palikite numatytąsias.
                 </div>
 
                 <FormInput name="q_max" placeholder="1000 MW"

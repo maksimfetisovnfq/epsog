@@ -46,22 +46,10 @@ export const FormInput = ({name, label, title, description, tooltip, ...props}: 
                     )}
                 </div>
             </div>
-
-
+            
             <TextField
                 sx={{
                     display: 'block',
-                    '& .MuiInputBase-input': {
-                        mb: 2,
-                        color: isFilled ? 'black' : '#6F8190',
-                        borderColor: '#CFD5DA',
-                        fontSize: '16px',
-                        fontFamily: 'Arial',
-                        fontWeight: 400,
-                        lineHeight: '20px',
-                        padding: '14px 16px',
-                        margin: 0,
-                    },
                     '& .MuiOutlinedInput-root': {
                         borderRadius: 0,
                         width: '400px',

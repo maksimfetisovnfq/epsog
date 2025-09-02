@@ -98,7 +98,7 @@ export const GeneralDataForm = () => {
             />
             <Form
                 defaultValues={{
-                    sector: sector || "Sektorius",
+                    sector: sector || "",
                     provider: provider || ""
                 }}
                 onSubmit={data => handleSubmit({...data, provider})}

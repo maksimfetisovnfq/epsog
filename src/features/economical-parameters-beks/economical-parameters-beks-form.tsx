@@ -15,6 +15,7 @@ import {useMutation} from "@tanstack/react-query";
 export const EconomicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    
     const {mutate} = useMutation({
         mutationKey: ['beks'],
         mutationFn: async ({parameters}: { parameters: string }) => {
@@ -30,8 +31,21 @@ export const EconomicalParametersBeksForm = () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             
-            return response.json();
+            const json = await response.json();
+            console.log('BEKS API response:', json);
+            return json;
         },
+        onSuccess: (apiResponseData) => {
+            navigate({
+                to: "/summary-of-results-beks",
+                state: {
+                    generalData: location.state.generalData,
+                    technicalParameters: location.state.technicalParameters,
+                    economicParameters: location.state.economicParameters,
+                    apiResponseData: apiResponseData,
+                },
+            });
+        }
     });
 
     const handleSubmit = (data: EconomicalBeksParametersSchema) => {
@@ -73,22 +87,13 @@ export const EconomicalParametersBeksForm = () => {
             P_mFRRd_BSP: data.P_mFRRd_BSP,
             Sector: generalParams?.sector ?? "Pramonė",
         };
-
-        // const parameters = {
-        //     "RTE": 85.0,
-        //     "Q_max": 10.0,
-        //     "Q_total": 40.0,
-        //     "SOC_min": 10.0,
-        //     "SOC_max": 90.0,
-        //     "N_cycles_DA": 2,
-        //     "N_cycles_ID": 4,
-        //     "reaction_time": 30,
-        //     "CAPEX_P": 150.0,
-        //     "CAPEX_C": 250.0,
-        //     "OPEX_P": 2.5,
-        //     "OPEX_C": 1.5,
-        //     "discount_rate": 5.0,
-        //     "number_of_years": 10,
+        
+        // Store the economic parameters in location state before mutation
+        location.state.economicParameters = {beks: data};
+        
+        mutate({
+            parameters: JSON.stringify(parameters)
+        });
         //     "provider": "ESO",
         //     "P_FCR_CAP_BSP": 0,
         //     "P_aFRRu_CAP_BSP": 0,
@@ -108,12 +113,11 @@ export const EconomicalParametersBeksForm = () => {
         //         "mFRRd": false
         //     }
         // }
-        
-        // Call mutation with JSON string parameters
+
         mutate({
             parameters: JSON.stringify(parameters)
         });
-        
+
         navigate({
             to: "/summary-of-results-beks",
             state: {

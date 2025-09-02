@@ -9,12 +9,6 @@ export const SummaryOfResultsBeksForm = () => {
     const [innerTabValue, setInnerTabValue] = useState(0);
 
     const {
-        dataSource,
-        columns,
-        secondDataSource,
-        secondBarChartLabels,
-        secondBarChartDataset,
-        stackedBarDataSource,
         incomeDataSource,
         marketProductsDataSource,
     } = useSummaryData();
@@ -63,12 +57,6 @@ export const SummaryOfResultsBeksForm = () => {
                 handleChange={handleChange}
                 innerTabValue={innerTabValue}
                 handleInnerTabChange={handleInnerTabChange}
-                dataSource={dataSource}
-                columns={columns}
-                secondDataSource={secondDataSource}
-                secondBarChartLabels={secondBarChartLabels}
-                secondBarChartDataset={secondBarChartDataset}
-                stackedBarDataSource={stackedBarDataSource}
                 incomeDataSource={incomeDataSource}
                 marketProductsDataSource={marketProductsDataSource}
             />
