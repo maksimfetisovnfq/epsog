@@ -1,5 +1,5 @@
 import React from 'react';
-import { NoHeaderTable } from "../../../ui/tables";
+import { NoHeaderTable, Table } from "../../../ui/tables";
 import { VerticalBarChart } from "../../../ui/charts/verticalBarChart";
 import Divider from "@mui/material/Divider";
 import { NavigationButtons } from "./NavigationButtons";
@@ -15,12 +15,17 @@ export const OverviewTab: React.FC = () => {
 
     const { yearlySummaryMetrics, npvChartData, incomeDataSource, marketProductsDataSource } = useSummaryData();
 
+    const columns = [
+        { title: 'Vertinama technologija', dataIndex: 'name', key: 'name' },
+        { title: 'BEKS technologija', dataIndex: 'value', key: 'value' },
+    ];
+    
     const yearlySummaryDataSource = yearlySummaryMetrics.map((row, idx) => ({
         key: String(idx),
         name: row.label,
         value: row.rawValue
     }));
-
+    
     const revenue = yearlySummaryMetrics.find(m => m.key === 'revenue');
     const cost = yearlySummaryMetrics.find(m => m.key === 'cost');
     const profit = yearlySummaryMetrics.find(m => m.key === 'profit');
@@ -29,7 +34,6 @@ export const OverviewTab: React.FC = () => {
     const costValue = Math.abs(cost?.value ?? 0);
     const profitValue = profit?.value ?? 0;
     const floatingBarDataset = [{
-        label: "Metiniai rezultatai",
         data: [revenueValue, [revenueValue - costValue, revenueValue], profitValue],
         backgroundColor: [
             '#FF7070',
@@ -78,7 +82,16 @@ export const OverviewTab: React.FC = () => {
                 Summary
             </div>
 
-            {/*<Table columns={columns} dataSource={dataSource}/> ? */} 
+            <Table columns={columns} dataSource={[
+                { key: '1', name: 'Technologija A', value: Math.floor(Math.random() * 1000) },
+                { key: '2', name: 'Technologija B', value: Math.floor(Math.random() * 1000) },
+                { key: '3', name: 'Technologija C', value: Math.floor(Math.random() * 1000) },
+                { key: '4', name: 'Technologija D', value: Math.floor(Math.random() * 1000) },
+                { key: '5', name: 'Technologija E', value: Math.floor(Math.random() * 1000) },
+                { key: '6', name: 'Technologija F', value: Math.floor(Math.random() * 1000) },
+                { key: '7', name: 'Technologija G', value: Math.floor(Math.random() * 1000) },
+                { key: '8', name: 'Technologija H', value: Math.floor(Math.random() * 1000) },
+            ]}/>
 
             <div style={{
                 fontSize: '18px',

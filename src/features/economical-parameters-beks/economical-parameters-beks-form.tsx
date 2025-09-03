@@ -91,9 +91,6 @@ export const EconomicalParametersBeksForm = () => {
         // Store the economic parameters in location state before mutation
         location.state.economicParameters = {beks: data};
         
-        mutate({
-            parameters: JSON.stringify(parameters)
-        });
         //     "provider": "ESO",
         //     "P_FCR_CAP_BSP": 0,
         //     "P_aFRRu_CAP_BSP": 0,

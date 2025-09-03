@@ -6,12 +6,125 @@ import {GlobalStyles} from "@mui/material";
 import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {useMutation} from "@tanstack/react-query";
 
 export const EconomicalParametersP2hForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
+
+    const {mutate} = useMutation({
+        mutationKey: ['p2h'],
+        mutationFn: async ({parameters}: { parameters: string }) => {
+            const formData = new FormData();
+            formData.append('parameters', parameters);
+
+            const response = await fetch('https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/p2h', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const json = await response.json();
+            console.log('P2H API response:', json);
+            return json;
+        },
+        onSuccess: (apiResponseData) => {
+            navigate({
+                to: "/summary-of-results-p2h",
+                state: {
+                    generalData: location.state.generalData,
+                    technicalParameters: location.state.technicalParameters,
+                    economicParameters: location.state.economicParameters,
+                    apiResponseData: apiResponseData,
+                },
+            });
+        }
+    });
     
     const handleSubmit = (data: EconomicalP2hParametersSchema) => {
+        console.log('location.state:', location.state);
+
+        const generalParams = location.state?.generalData;
+        const technicalParams = location.state?.technicalParameters?.p2h;
+
+        const parameters = {
+            // RTE: technicalParams?.RTE ?? 0,
+            // Q_max: technicalParams?.q_max ?? 0,
+            // Q_total: technicalParams?.q_total ?? 0,
+            // SOC_min: technicalParams?.SOC_min ?? 0,
+            // SOC_max: technicalParams?.SOC_max ?? 0,
+            // N_cycles_DA: technicalParams?.N_cycles_DA ?? 0,
+            // N_cycles_ID: technicalParams?.N_cycles_ID ?? 0,
+            // reaction_time: technicalParams?.reaction_time ?? 0,
+            //
+            // // Economic parameters from form
+            // CAPEX_P: data.CAPEX_P,
+            // CAPEX_C: data.CAPEX_C,
+            // OPEX_P: data.OPEX_P,
+            // OPEX_C: data.OPEX_C,
+            // discount_rate: data.discount_rate,
+            // number_of_years: data.number_of_years,
+            //
+            // // Provider from general data (default from curl example)
+            // provider: generalParams?.provider ?? "ESO",
+            //
+            // // BSP parameters
+            // P_FCR_CAP_BSP: data.P_FCR_CAP_BSP,
+            // P_aFRRu_CAP_BSP: data.P_aFRRu_CAP_BSP,
+            // P_aFRRd_CAP_BSP: data.P_aFRRd_CAP_BSP,
+            // P_mFRRu_CAP_BSP: data.P_mFRRu_CAP_BSP,
+            // P_mFRRd_CAP_BSP: data.P_mFRRd_CAP_BSP,
+            // P_aFRRu_BSP: data.P_aFRRu_BSP,
+            // P_aFRRd_BSP: data.P_aFRRd_BSP,
+            // P_mFRRu_BSP: data.P_mFRRu_BSP,
+            // P_mFRRd_BSP: data.P_mFRRd_BSP,
+            // Sector: generalParams?.sector ?? "Pramonė",
+        };
+
+        // Store the economic parameters in location state before mutation
+        location.state.economicParameters = {p2h: data};
+
+        // {
+        //     "Q_max": 10.0,
+        //     "reaction_time_d": 30,
+        //     "reaction_time_u": 30,
+        //     "electrolyzer_tech": "PEM",
+        //     "eta_H2": 65.0,
+        //     "T0": 25.0,
+        //     "p0": 30.0,
+        //     "eta_C": 75.0,
+        //     "CAPEX": 1500.0,
+        //     "OPEX": 30.0,
+        //     "P_H2": 5.0,
+        //     "discount_rate": 0,
+        //     "number_of_years": 10,
+        //     "provider": "ESO",
+        //     "P_FCR_CAP_BSP": 0,
+        //     "P_aFRRu_CAP_BSP": 0,
+        //     "P_aFRRd_CAP_BSP": 0,
+        //     "P_mFRRu_CAP_BSP": 0,
+        //     "P_mFRRd_CAP_BSP": 0,
+        //     "P_aFRRu_BSP": 0,
+        //     "P_aFRRd_BSP": 0,
+        //     "P_mFRRu_BSP": 0,
+        //     "P_mFRRd_BSP": 0,
+        //     "Sector": "Chemijos pramonė",
+        //     "produktai": {
+        //     "FCR": true,
+        //         "aFRRu": true,
+        //         "aFRRd": true,
+        //         "mFRRu": true,
+        //         "mFRRd": true
+        // }
+        // }
+
+        mutate({
+            parameters: JSON.stringify(parameters)
+        });
+        
         navigate({
             to: "/summary-of-results-p2h",
             state: {

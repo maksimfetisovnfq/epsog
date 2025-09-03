@@ -93,11 +93,9 @@ export const EconomicEvaluationTab: React.FC<EconomicEvaluationTabProps> = () =>
         });
     };
 
-    // Merge cost_table with two specific rows from revenueTable
     const extraRows = revenueTable.filter(row => row.Product === "mFRRd" || row.Product === "parduodama DA");
     const mergedCostTable = [...cost_table, ...extraRows];
 
-    // Transform mergedCostTable for IncomeDataExpenses
     const incomeDataExpensesData = mergedCostTable.map((row, idx) => ({
         key: String(idx),
         name: row.Product,

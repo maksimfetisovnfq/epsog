@@ -62,12 +62,8 @@ export const MainTabs: React.FC<MainTabsProps> = ({
     handleInnerTabChange,
     dataSource,
     columns,
-    secondDataSource,
     secondBarChartLabels,
     secondBarChartDataset,
-    stackedBarDataSource,
-    incomeDataSource,
-    marketProductsDataSource
 }) => {
     const economicEvaluationColumns = [
         { title: "Rinkos produktas", dataIndex: "name", key: "name" },
@@ -114,16 +110,7 @@ export const MainTabs: React.FC<MainTabsProps> = ({
             </Tabs>
 
             <CustomTabPanel value={value} index={0}>
-                <OverviewTab
-                    dataSource={dataSource}
-                    columns={columns}
-                    secondDataSource={secondDataSource}
-                    secondBarChartLabels={secondBarChartLabels}
-                    secondBarChartDataset={secondBarChartDataset}
-                    stackedBarDataSource={stackedBarDataSource}
-                    incomeDataSource={incomeDataSource}
-                    marketProductsDataSource={marketProductsDataSource}
-                />
+                <OverviewTab/>
             </CustomTabPanel>
 
             <CustomTabPanel value={value} index={1}>

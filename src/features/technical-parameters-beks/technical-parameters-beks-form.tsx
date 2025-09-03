@@ -36,10 +36,29 @@ function valuetext(value: number) {
 export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [reaction_time, setReaction_time] = useState<number>(0);
-    const defaultValues = location.state?.technicalParameters?.beks || {};
+    const defaultValues: Partial<TechnicalBeksParametersSchema> = location.state?.technicalParameters?.beks || {};
 
-    const reactionTimeMap = {
+    const reactionTimeReverseMap: Record<number, number> = {
+        30: 0,
+        300: 30,
+        750: 60,
+        1000: 90,
+    };
+
+    const [reaction_time, setReaction_time] = useState<number>(() => {
+        const rt = (defaultValues as any)?.reaction_time;
+        if (typeof rt === 'number') {
+            if (reactionTimeReverseMap[rt] !== undefined) {
+                return reactionTimeReverseMap[rt];
+            }
+            if ([0, 30, 60, 90].includes(rt)) {
+                return rt;
+            }
+        }
+        return 30;
+    });
+
+    const reactionTimeMap: Record<number, number> = {
         0: 30,
         30: 300,
         60: 750,
@@ -52,8 +71,7 @@ export const TechnicalParametersBeksForm = () => {
     };
 
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
-        // Map slider value to schema value before submit
-        const mappedReactionTime = reactionTimeMap[reaction_time] ?? reaction_time;
+        const mappedReactionTime = reactionTimeMap[reaction_time as 0|30|60|90] ?? reaction_time;
         const submitData = { ...data, reaction_time: mappedReactionTime };
         navigate({
             to: "/economic-parameters-beks",
@@ -125,17 +143,13 @@ export const TechnicalParametersBeksForm = () => {
 
                     <Slider
                         name="reaction_time"
+                        value={reaction_time}
                         onChange={handleReactionTimeChange}
                         aria-label="Temperature"
-                        defaultValue={30}
-                        getAriaValueText={valuetext}
                         step={30}
                         marks
                         max={90}
                     />
-                    {/*<Typography variant="body2" sx={{ mt: 1, mb: 1 }}>*/}
-                    {/*    Reakcijos laikas: {reaction_time} s*/}
-                    {/*</Typography>*/}
 
                     <div style={{
                         color: 'black',

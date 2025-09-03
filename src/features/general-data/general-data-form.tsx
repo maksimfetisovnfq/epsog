@@ -1,28 +1,54 @@
 import {Form, FormInput} from "../../components/form";
 import {type GeneralDataSchema, generalDataSchema} from "./general-data-schema";
-import {useNavigate} from "@tanstack/react-router";
+import {useNavigate, useLocation} from "@tanstack/react-router";
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
-import {GlobalStyles} from '@mui/material';
-import {CalculatorType, CalculatorTypeTooltips} from "../../types";
-import {useCalculatorType} from "../../context/CalculatorTypeContext.tsx";
 import Divider from '@mui/material/Divider';
 import {Button} from "../../ui/button";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Select, {} from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Tooltip from '@mui/material/Tooltip';
 import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
+import {CalculatorType, CalculatorTypeTooltips} from "../../types";
+import {useCalculatorType} from "../../context/CalculatorTypeContext.tsx";
 
 export const GeneralDataForm = () => {
     const navigate = useNavigate();
-    const {calculatorType, setCalculatorType} = useCalculatorType()
-    const [sector, setSector] = useState<string>("");
-    const [provider, setProvider] = useState<string>("Litgrid");
+    const location = useLocation();
+    const {calculatorType, setCalculatorType} = useCalculatorType();
+    const navState = location.state?.generalData;
+    const initialIsConcentrator = !!(navState?.sector && navState?.sector !== '' && navState?.sector !== 'Litgrid' && navState?.sector !== 'ESO');
+    const [isConcentrator, setIsConcentrator] = useState<boolean>(initialIsConcentrator);
+    const [sector, setSector] = useState<string>(navState?.sector || "");
+    const [provider, setProvider] = useState<string>(navState?.provider || "Litgrid");
+
+    useEffect(() => {
+        if (navState) {
+            setSector(navState.sector || "");
+            setProvider(navState.provider || "Litgrid");
+            setIsConcentrator(!!(navState.sector && navState.sector !== '' && navState.sector !== 'Litgrid' && navState.sector !== 'ESO'));
+        }
+    }, [navState]);
+
+    const handleSectorSelect = (e: React.ChangeEvent<{ value: unknown }>) => {
+        const value = (e.target as HTMLInputElement).value as string;
+        if (value === 'concentrator') {
+            setIsConcentrator(true);
+            setSector(navState?.sector && navState?.sector !== 'Litgrid' && navState?.sector !== 'ESO' ? navState.sector : "");
+        } else {
+            setIsConcentrator(false);
+            setSector(value);
+        }
+    };
+
+    const handleSectorInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSector(e.target.value);
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCalculatorType(event.target.value as CalculatorType);
@@ -38,7 +64,7 @@ export const GeneralDataForm = () => {
                 to: "/technical-parameters-p2h",
                 state: {generalData: data},
             });
-            return
+            return;
         }
         if (calculatorType === CalculatorType.BEKS) {
             navigate({
@@ -61,11 +87,11 @@ export const GeneralDataForm = () => {
             });
             return;
         }
-    }
+    };
 
     const handleBackward = () => {
         navigate({to: "/"});
-    }
+    };
 
     const controlProps = (item: string) => ({
         checked: calculatorType === item,
@@ -86,22 +112,12 @@ export const GeneralDataForm = () => {
 
     return (
         <div style={{fontFamily: 'Arial', width: '760px'}}>
-            <GlobalStyles
-                styles={{
-                    '.MuiContainer-root': {
-                        padding: '0px !important',
-                    },
-                    'body, *': {
-                        fontWeight: 400,
-                    },
-                }}
-            />
             <Form
                 defaultValues={{
                     sector: sector || "",
                     provider: provider || ""
                 }}
-                onSubmit={data => handleSubmit({...data, provider})}
+                onSubmit={data => handleSubmit({...data, provider, sector})}
                 validationSchema={generalDataSchema}>
 
                 <div style={{
@@ -118,19 +134,23 @@ export const GeneralDataForm = () => {
 
                     <Select
                         style={{height: '48px', width: '400px'}}
-                        value={sector}
-                        onChange={e => setSector(e.target.value)}
+                        value={isConcentrator ? 'concentrator' : sector}
+                        onChange={handleSectorSelect}
                         displayEmpty
                         inputProps={{'aria-label': 'Without label'}}
                     >
-                        <MenuItem value="sector">Sektorius</MenuItem>
-                        <MenuItem value="concentrator">Esu telkėjas</MenuItem>
+                        <MenuItem value="" key="sector">Sektorius</MenuItem>
+                        <MenuItem value="concentrator" key="concentrator">Esu telkėjas</MenuItem>
                     </Select>
 
-                    {sector === 'concentrator' && (
-                        <FormInput style={{width: '400px'}}
-                                   placeholder="Sektorius"
-                                   name="sector"/>
+                    {isConcentrator && (
+                        <FormInput
+                            style={{width: '400px'}}
+                            placeholder="Sektorius"
+                            name="sector"
+                            value={sector}
+                            onChange={handleSectorInput}
+                        />
                     )}
                 </div>
 
@@ -150,10 +170,9 @@ export const GeneralDataForm = () => {
                 >
 
                     {Object.values(CalculatorType).map((type) => (
-                        <div style={{display: 'flex', alignItems: 'center'}}>
+                        <div style={{display: 'flex', alignItems: 'center'}} key={type}>
                             <div>
                                 <FormControlLabel
-                                    key={type}
                                     value={type}
                                     control={<Radio {...controlProps(type)} sx={radioStyles}/>}
                                     label={type.toUpperCase()}
@@ -192,7 +211,7 @@ export const GeneralDataForm = () => {
                     value={provider}
                     row
                     aria-labelledby="demo-radio-buttons-group-label"
-                    name="provider-radio-group"
+                    name="provider"
                     onChange={handleProviderChange}
                     style={{columnGap: '32px'}}
                 >
@@ -201,7 +220,7 @@ export const GeneralDataForm = () => {
                 </RadioGroup>
 
 
-                {sector === 'concentrator' && (
+                {isConcentrator &&  (
                     <div>
                         <Divider variant="fullWidth" sx={{marginTop: '24px', marginBottom: '24px'}}/>
 
@@ -220,7 +239,7 @@ export const GeneralDataForm = () => {
 
                     </div>)}
 
-                {sector === 'concentrator' ? (
+                {isConcentrator ? (
                     <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
                 ) : (
                     <Divider variant="fullWidth" sx={{marginTop: '379px'}}/>
