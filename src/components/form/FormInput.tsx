@@ -1,7 +1,9 @@
-import {TextField, type TextFieldProps} from '@mui/material'
+import {styled, TextField, type TextFieldProps, Typography} from '@mui/material'
 import {useFormContext} from 'react-hook-form'
-import Tooltip from "@mui/material/Tooltip";
+import Tooltip, {tooltipClasses, type TooltipProps} from "@mui/material/Tooltip";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
+import {CalculatorTypeTooltipsDescription, CalculatorTypeTooltipsTitle} from "../../types.ts";
+import React from "react";
 
 export type FormInputProps = TextFieldProps & {
     name: string
@@ -19,8 +21,18 @@ export const FormInput = ({name, label, title, description, tooltip, ...props}: 
         getValues,
     } = useFormContext()
 
-    // Determine if the field is filled
     const isFilled = getValues(name) !== undefined && getValues(name) !== '';
+
+    const HtmlTooltip = styled(({className, ...props}: TooltipProps) => (
+        <Tooltip {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: 'transparent',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            fontSize: theme.typography.pxToRem(12),
+        },
+    }));
 
     return (
         <div style={{margin: '24px 0px'}}>
@@ -40,13 +52,28 @@ export const FormInput = ({name, label, title, description, tooltip, ...props}: 
 
                 <div>
                     {tooltip && (
-                        <Tooltip title={tooltip} sx={{marginLeft: 0}}>
-                            <InfoOutlineIcon/>
-                        </Tooltip>
+                        <HtmlTooltip title={
+                            <div style={{
+                                fontWeight: 400,
+                                width: '230px',
+                                fontSize: '14px',
+                                color: '#000000',
+                                backgroundColor: '#FFFFFF',
+                                padding: '10px 12px',
+                                borderRadius: '6px',
+                                boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.15)',
+                                lineHeight: '1.5',
+                            }}>
+                                {tooltip}
+                            </div>
+                        }
+                        >
+                            <InfoOutlineIcon style={{color: '#6F8190', width: '20px', height: '20px'}}/>
+                        </HtmlTooltip>
                     )}
                 </div>
             </div>
-            
+
             <TextField
                 sx={{
                     display: 'block',

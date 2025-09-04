@@ -8,17 +8,18 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Radio from "@mui/material/Radio";
 // import RadioGroup from "@mui/material/RadioGroup";
 // import FormLabel from "@mui/material/FormLabel";
-import {GlobalStyles} from '@mui/material';
+import {GlobalStyles, styled} from '@mui/material';
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import Tooltip from "@mui/material/Tooltip";
-import {useState} from "react";
+import Tooltip, {tooltipClasses, type TooltipProps} from "@mui/material/Tooltip";
+import React, {useState} from "react";
 
 function valuetext(value: number) {
     return `${value}°C`;
@@ -37,6 +38,17 @@ export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const defaultValues: Partial<TechnicalBeksParametersSchema> = location.state?.technicalParameters?.beks || {};
+
+    const HtmlTooltip = styled(({className, ...props}: TooltipProps) => (
+        <Tooltip {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: 'transparent',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            fontSize: theme.typography.pxToRem(12),
+        },
+    }));
 
     const reactionTimeReverseMap: Record<number, number> = {
         30: 0,
@@ -71,8 +83,8 @@ export const TechnicalParametersBeksForm = () => {
     };
 
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
-        const mappedReactionTime = reactionTimeMap[reaction_time as 0|30|60|90] ?? reaction_time;
-        const submitData = { ...data, reaction_time: mappedReactionTime };
+        const mappedReactionTime = reactionTimeMap[reaction_time as 0 | 30 | 60 | 90] ?? reaction_time;
+        const submitData = {...data, reaction_time: mappedReactionTime};
         navigate({
             to: "/economic-parameters-beks",
             state: {
@@ -91,6 +103,8 @@ export const TechnicalParametersBeksForm = () => {
         });
     }
 
+    const [expanded, setExpanded] = useState(false);
+
     return (
         <div style={{fontFamily: 'Arial', width: '760px'}}>
             <GlobalStyles styles={{
@@ -108,7 +122,8 @@ export const TechnicalParametersBeksForm = () => {
                 },
             }}/>
 
-            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema} defaultValues={{...defaultValues, reaction_time}}>
+            <Form onSubmit={handleSubmit} validationSchema={technicalParametersSchema}
+                  defaultValues={{...defaultValues, reaction_time}}>
                 <div style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}}>
                     Techniniai parametrai
                 </div>
@@ -135,10 +150,30 @@ export const TechnicalParametersBeksForm = () => {
                         <div style={{verticalAlign: 'baseline', marginRight: '4px'}}>
                             Kaip greitai įrenginys gali pasiekti maksimalią galią? *
                         </div>
-                        <Tooltip title="Jeigu nurodomas didesnis laikas per kurį įrenginys pasiekia maksimalią 
-                        galią negu paslaugos reikalavimas, tuomet vertinama kad tos paslaugos įrenginys neteiks.">
-                            <InfoOutlineIcon/>
-                        </Tooltip>
+                        <HtmlTooltip title={
+                            <div style={{
+                                fontWeight: 400,
+                                width: '250px',
+                                fontSize: '14px',
+                                color: '#000000',
+                                backgroundColor: 'white',
+                                padding: '8px',
+                                borderRadius: '4px',
+                                boxShadow: '0px 0px 10px rgba(0,0,0,0.1)',
+                                lineHeight: '1.4'
+                            }}>
+                                <ul style={{paddingLeft: '20px', margin: '0 0 8px 0'}}>
+                                    <li>FCR paslaugai maksimali galia turi būti pasiekta neilgiau negu 30 s</li>
+                                    <li>aFRR – 5 min</li>
+                                    <li>mFRR – 12,5 min</li>
+                                </ul>
+                                <div>
+                                    Jeigu nurodomas didesnis laikas per kurį įrenginys pasiekia maksimalią galią negu
+                                    paslaugos reikalavimas, tuomet vertinama kad tos paslaugos įrenginys neteiks.
+                                </div>
+                            </div>}>
+                            <InfoOutlineIcon style={{color: '#6F8190', width: '16px', height: '16px'}}/>
+                        </HtmlTooltip>
                     </div>
 
                     <Slider
@@ -173,14 +208,14 @@ export const TechnicalParametersBeksForm = () => {
                 {/*           style={{color: "black", padding: 0, marginBottom: '12px', fontSize: '14px'}}>*/}
                 {/*    Pasirinkite galimą teikti reguliavimo paslaugą **/}
                 {/*</FormLabel>*/}
-                
+
                 {/*<RadioGroup*/}
                 {/*    row*/}
                 {/*    aria-labelledby="demo-radio-buttons-group-label"*/}
                 {/*    name="radio-buttons-group"*/}
                 {/*    style={{columnGap: '32px'}}*/}
                 {/*>*/}
-                
+
                 {/*    <div>*/}
                 {/*        <FormControlLabel*/}
                 {/*            value="first"*/}
@@ -188,12 +223,12 @@ export const TechnicalParametersBeksForm = () => {
                 {/*            label="Aukštyn"*/}
                 {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
                 {/*        />*/}
-                
+
                 {/*        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas">*/}
                 {/*            <InfoOutlineIcon/>*/}
                 {/*        </Tooltip>*/}
                 {/*    </div>*/}
-                
+
                 {/*    <div>*/}
                 {/*        <FormControlLabel*/}
                 {/*            value="second"*/}
@@ -201,64 +236,39 @@ export const TechnicalParametersBeksForm = () => {
                 {/*            label="Žemyn"*/}
                 {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
                 {/*        />*/}
-                
+
                 {/*        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas">*/}
                 {/*            <InfoOutlineIcon/>*/}
                 {/*        </Tooltip>*/}
                 {/*    </div>*/}
-                
+
                 {/*    <FormControlLabel value="third" control={<Radio sx={radioStyles}/>} label="Į abi psues"/>*/}
                 {/*</RadioGroup>*/}
-                
+
                 {/*<Divider style={{marginTop: '48px', marginBottom: '48px'}}/>*/}
 
-                <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}}>
+                <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}} expanded={expanded}
+                           onChange={(_, isExpanded) => setExpanded(isExpanded)}>
                     <AccordionSummary
                         aria-controls="panel2-content"
                         id="panel2-header"
+                        expandIcon={expanded ? <HorizontalRuleIcon/> : <AddIcon/>}
                         sx={{
                             padding: 0,
+                            alignItems: 'center',
                         }}
                     >
-                        <div>
-                            <Typography component="span"
-                                        style={{fontSize: '32px', display: 'flex', justifyContent: 'space-between'}}>
-                                <div style={{marginBottom: '24px'}}>
-                                    Išplėstiniai techniniai parametrai
-                                </div>
-                                <div>
-                                    <AddIcon/>
-                                </div>
-                            </Typography>
-
-                            <div style={{
-                                backgroundColor: '#F5F7F8',
+                        <Typography
+                            component="div"
+                            sx={{
+                                fontSize: '32px',
+                                flexGrow: 1,
                                 display: 'flex',
-                                height: '122px',
-                                color: '#3F576B'
-                            }}>
-
-                                <div style={{margin: '16px 16px 0 16px',}}>
-                                    <InfoOutlineIcon/>
-                                </div>
-
-                                <div style={{marginTop: '20px', fontSize: '14px'}}>
-                                    <div style={{marginBottom: '12px'}}>
-                                        Patikslinkite savo įrenginio technines charakteristikas, kad skaičiavimai būtų
-                                        kuo tikslesni.
-                                    </div>
-
-                                    <div style={{width: '736px'}}>
-                                        Atkreipiame dėmesį, kad šios informacijos pateikimui, geriausia pasitelkti
-                                        įrenginio technines specifikacijas. Jei kažkurių verčių nežinote,
-                                        nesijaudinkite,
-                                        parinkome numatytasias reikšmes, kurios atspindi rinkoje esančių įrenginių
-                                        galimybes.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                                alignItems: 'center',
+                            }}
+                        >
+                            Išplėstiniai techniniai parametrai
+                        </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <FormInput name="RTE" placeholder="88 %"

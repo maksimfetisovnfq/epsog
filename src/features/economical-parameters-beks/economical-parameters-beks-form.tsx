@@ -11,10 +11,13 @@ import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {useMutation} from "@tanstack/react-query";
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import React, {useState} from "react";
 
 export const EconomicalParametersBeksForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [expanded, setExpanded] = useState(false);
     
     const {mutate} = useMutation({
         mutationKey: ['beks'],
@@ -90,26 +93,6 @@ export const EconomicalParametersBeksForm = () => {
         
         // Store the economic parameters in location state before mutation
         location.state.economicParameters = {beks: data};
-        
-        //     "provider": "ESO",
-        //     "P_FCR_CAP_BSP": 0,
-        //     "P_aFRRu_CAP_BSP": 0,
-        //     "P_aFRRd_CAP_BSP": 0,
-        //     "P_mFRRu_CAP_BSP": 0,
-        //     "P_mFRRd_CAP_BSP": 0,
-        //     "P_aFRRu_BSP": 0,
-        //     "P_aFRRd_BSP": 0,
-        //     "P_mFRRu_BSP": 0,
-        //     "P_mFRRd_BSP": 0,
-        //     "Sector": "Pramonė",
-        //     "produktai": {
-        //         "FCR": true,
-        //         "aFRRu": true,
-        //         "aFRRd": true,
-        //         "mFRRu": false,
-        //         "mFRRd": false
-        //     }
-        // }
 
         mutate({
             parameters: JSON.stringify(parameters)
@@ -150,7 +133,6 @@ export const EconomicalParametersBeksForm = () => {
                 '.MuiAccordionDetails-root': {
                     padding: '0 !important',
                 },
-
             }}/>
 
             <div style={{
@@ -187,10 +169,12 @@ export const EconomicalParametersBeksForm = () => {
 
                 <Divider style={{marginTop: '48px', marginBottom: '48px'}}/>
 
-                <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}}>
+                <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}} expanded={expanded}
+                           onChange={(_, isExpanded) => setExpanded(isExpanded)}>
                     <AccordionSummary
                         aria-controls="panel2-content"
                         id="panel2-header"
+                        expandIcon={expanded ? <HorizontalRuleIcon/> : <AddIcon/>}
                         sx={{
                             padding: 0,
                         }}
@@ -199,9 +183,6 @@ export const EconomicalParametersBeksForm = () => {
                         <Typography component="span" style={{display: 'flex', width: '744px', fontSize: '32px', justifyContent: 'space-between'}}>
                             <div>
                                 Išplėstiniai ekonominiai parametrai
-                            </div>
-                            <div>
-                                <AddIcon/>
                             </div>
                         </Typography>
                     </AccordionSummary>

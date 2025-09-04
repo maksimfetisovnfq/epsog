@@ -12,10 +12,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import {useState, useEffect} from "react";
-import Tooltip from '@mui/material/Tooltip';
+import Tooltip, {tooltipClasses, type TooltipProps} from '@mui/material/Tooltip';
 import InfoOutlineIcon from '@mui/icons-material/InfoOutline';
-import {CalculatorType, CalculatorTypeTooltips} from "../../types";
+import {CalculatorType, CalculatorTypeTooltipsTitle, CalculatorTypeTooltipsDescription} from "../../types";
 import {useCalculatorType} from "../../context/CalculatorTypeContext.tsx";
+import {styled, Typography} from "@mui/material";
+import React from "react";
 
 export const GeneralDataForm = () => {
     const navigate = useNavigate();
@@ -45,6 +47,18 @@ export const GeneralDataForm = () => {
             setSector(value);
         }
     };
+
+    const HtmlTooltip = styled(({className, ...props}: TooltipProps) => (
+        <Tooltip {...props} classes={{popper: className}}/>
+    ))(({theme}) => ({
+        [`& .${tooltipClasses.tooltip}`]: {
+            backgroundColor: '#FAFAFA',
+            color: 'rgba(0, 0, 0, 0.87)',
+            maxWidth: 220,
+            fontSize: theme.typography.pxToRem(12),
+            border: '1px solid #dadde9',
+        },
+    }));
 
     const handleSectorInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSector(e.target.value);
@@ -179,11 +193,18 @@ export const GeneralDataForm = () => {
                                     sx={{verticalAlign: 'baseline', marginRight: '4px'}}
                                 />
                             </div>
-
                             <div>
-                                <Tooltip title={CalculatorTypeTooltips[type]}>
-                                    <InfoOutlineIcon style={{color: '#6F8190'}}/>
-                                </Tooltip>
+                                <HtmlTooltip title={
+                                    <div style={{ fontSize: '14px', color: '#000000', backgroundColor: 'white'}}>
+                                        <Typography marginBottom={'8px'} width={211} fontWeight={600}>{CalculatorTypeTooltipsTitle[type]}</Typography>
+                                        <div style={{fontWeight: 400, width: '211px'}}>
+                                            {CalculatorTypeTooltipsDescription[type]}
+                                        </div>
+                                    </div>
+                                }
+                                >
+                                    <InfoOutlineIcon style={{color: '#6F8190', width: '20px', height: '20px'}}/>
+                                </HtmlTooltip>
                             </div>
                         </div>
                     ))}
@@ -199,11 +220,17 @@ export const GeneralDataForm = () => {
                         Prie kokio operatoriaus elektros tinklų esate / planuojate prisijungti?
                     </div>
 
-                    <Tooltip title="
-                    Priklausomai nuo įrenginių prijungimo taško,
-                    skaičiavimuose vertinamas skirtingas energijos persiuntimo tarifas.">
-                        <InfoOutlineIcon/>
-                    </Tooltip>
+                    <HtmlTooltip title={
+                        <div style={{ fontSize: '14px', color: '#000000', backgroundColor: 'white'}}>
+                            <div style={{fontWeight: 400, width: '211px'}}>
+                                Priklausomai nuo įrenginių prijungimo taško, skaičiavimuose 
+                                vertinamas skirtingas energijos persiuntimo tarifas.
+                            </div>
+                        </div>
+                    }
+                    >
+                        <InfoOutlineIcon style={{color: '#6F8190', width: '16px', height: '16px'}}/>
+                    </HtmlTooltip>
                 </FormLabel>
 
 
@@ -220,7 +247,7 @@ export const GeneralDataForm = () => {
                 </RadioGroup>
 
 
-                {isConcentrator &&  (
+                {isConcentrator && (
                     <div>
                         <Divider variant="fullWidth" sx={{marginTop: '24px', marginBottom: '24px'}}/>
 
