@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, type Column, CalcDataTable} from "../../../ui/tables";
+import {type Column, CalcDataTable} from "../../../ui/tables";
 import Divider from "@mui/material/Divider";
 import {NavigationButtons} from "./NavigationButtons.tsx";
 import {useSummaryData} from "../hooks/useSummaryData";

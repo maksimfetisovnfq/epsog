@@ -4,7 +4,6 @@ import {useSummaryData} from '../hooks/useSummaryData';
 import Divider from '@mui/material/Divider';
 import {NavigationButtons} from './NavigationButtons.tsx';
 import {useLocation, useNavigate} from '@tanstack/react-router';
-import type { NavigateOptions } from '@tanstack/react-router';
 
 export const BalancingCapacityMarketTab: React.FC = () => {
     const navigate = useNavigate();
@@ -12,7 +11,7 @@ export const BalancingCapacityMarketTab: React.FC = () => {
 
     const handleForward = () => {
         navigate({
-            to: "/finish-page",
+            to: "/summary-of-results-beks",
             state: {
                 generalData: location.state?.generalData,
                 technicalParameters: location.state?.technicalParameters,
