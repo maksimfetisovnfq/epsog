@@ -9,30 +9,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-// import FormControlLabel from "@mui/material/FormControlLabel";
-// import Radio from "@mui/material/Radio";
-// import RadioGroup from "@mui/material/RadioGroup";
-// import FormLabel from "@mui/material/FormLabel";
 import {GlobalStyles, styled} from '@mui/material';
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import {Button} from "../../ui/button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import Tooltip, {tooltipClasses, type TooltipProps} from "@mui/material/Tooltip";
-import React, {useState} from "react";
-
-function valuetext(value: number) {
-    return `${value}°C`;
-}
-
-// const radioStyles = {
-//     '&.Mui-checked': {
-//         color: '#00EB8C',
-//     },
-//     '&:not(.Mui-checked)': {
-//         color: '#00EB8C',
-//     },
-// };
 
 export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
@@ -203,50 +185,7 @@ export const TechnicalParametersBeksForm = () => {
                 </div>
 
                 <Divider style={{marginTop: '24px', marginBottom: '24px'}}/>
-
-                {/*<FormLabel id="demo-radio-buttons-group-label"*/}
-                {/*           style={{color: "black", padding: 0, marginBottom: '12px', fontSize: '14px'}}>*/}
-                {/*    Pasirinkite galimą teikti reguliavimo paslaugą **/}
-                {/*</FormLabel>*/}
-
-                {/*<RadioGroup*/}
-                {/*    row*/}
-                {/*    aria-labelledby="demo-radio-buttons-group-label"*/}
-                {/*    name="radio-buttons-group"*/}
-                {/*    style={{columnGap: '32px'}}*/}
-                {/*>*/}
-
-                {/*    <div>*/}
-                {/*        <FormControlLabel*/}
-                {/*            value="first"*/}
-                {/*            control={<Radio sx={radioStyles}/>}*/}
-                {/*            label="Aukštyn"*/}
-                {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
-                {/*        />*/}
-
-                {/*        <Tooltip title="Gamybos didinimas arba vartojimo mažinimas">*/}
-                {/*            <InfoOutlineIcon/>*/}
-                {/*        </Tooltip>*/}
-                {/*    </div>*/}
-
-                {/*    <div>*/}
-                {/*        <FormControlLabel*/}
-                {/*            value="second"*/}
-                {/*            control={<Radio sx={radioStyles}/>}*/}
-                {/*            label="Žemyn"*/}
-                {/*            sx={{verticalAlign: 'baseline', marginRight: '4px'}}*/}
-                {/*        />*/}
-
-                {/*        <Tooltip title="Gamybos mažinimas arba vartojimo didinimas">*/}
-                {/*            <InfoOutlineIcon/>*/}
-                {/*        </Tooltip>*/}
-                {/*    </div>*/}
-
-                {/*    <FormControlLabel value="third" control={<Radio sx={radioStyles}/>} label="Į abi psues"/>*/}
-                {/*</RadioGroup>*/}
-
-                {/*<Divider style={{marginTop: '48px', marginBottom: '48px'}}/>*/}
-
+                
                 <Accordion sx={{boxShadow: 'none', border: 'none', width: '768px'}} expanded={expanded}
                            onChange={(_, isExpanded) => setExpanded(isExpanded)}>
                     <AccordionSummary
