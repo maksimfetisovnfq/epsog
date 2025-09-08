@@ -5,7 +5,7 @@ import { CalculatorTypeProvider } from './context/CalculatorTypeContext'
 import { routeTree } from './routeTree.gen'
 import type {GeneralDataSchema} from "./features/general-data/general-data-schema";
 import type {TechnicalP2hParametersSchema} from "./features/technical-parameters-p2h/technical-parameters-schema.ts";
-import type {TechnicalP2gParametersSchema} from "./features/technical-parameters-p2g/technical-parameters-schema.ts";
+import type {TechnicalP2gParametersSchema} from "./features/technical-parameters-p2g/technical-parameters-p2g-schema.ts";
 import type {TechnicalBeksParametersSchema} from "./features/technical-parameters-beks/technical-parameters-schema.ts";
 import type {TechnicalDsrParametersSchema} from "./features/technical-parameters-dsr/technical-parameters-schema.ts";
 import type {EconomicalP2hParametersSchema} from "./features/economical-parameters-p2h/economical-parameters-p2h-schema.ts";
