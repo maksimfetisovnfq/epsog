@@ -34,7 +34,6 @@ const reactionTimeMap: Record<number, number> = {
 
 const FormContent = () => {
     const [expanded, setExpanded] = useState(false);
-
     const {control, setValue} = useFormContext<TechnicalBeksParametersSchema>();
 
     const reaction_time = useWatch({

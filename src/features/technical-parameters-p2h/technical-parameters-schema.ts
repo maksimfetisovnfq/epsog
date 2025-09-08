@@ -9,7 +9,7 @@ export const technicalParametersSchema = z
             aFRRd: z.boolean(),
             mFRRu: z.boolean(),
             mFRRd: z.boolean(),
-        }),
+        }).optional(),
         reaction_time_d: z.number().min(0),
         reaction_time_u: z.number().min(0),
         Q_yearly: z.number().min(0),
@@ -21,9 +21,9 @@ export const technicalParametersSchema = z
         P_FUEL: z.number().min(0),
         q_FUEL: z.number().min(0),
         eta_BOILER: z.number().min(0),
-        
-        T_max_HS: z.number().min(0),
-        T_HP: z.number().min(0),
+
+        T_HP: z.number().min(Number.MIN_SAFE_INTEGER),
+        T_max_HS: z.number().min(Number.MIN_SAFE_INTEGER),
     });
 
 export type TechnicalP2hParametersSchema = z.infer<typeof technicalParametersSchema>;

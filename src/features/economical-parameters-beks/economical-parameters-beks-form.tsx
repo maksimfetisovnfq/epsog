@@ -95,10 +95,17 @@ export const EconomicalParametersBeksForm = () => {
     });
 
     const handleSubmit = (data: EconomicalFormValues) => {
-        const { isAccordionExpanded, ...submissionData } = data;
+        const {...submissionData } = data;
 
         const generalParams = location.state?.generalData;
         const technicalParams = location.state?.technicalParameters?.beks;
+
+        // Log all relevant state and request data for debugging
+        console.log('Form submission state:', {
+            generalData: location.state?.generalData,
+            technicalParameters: location.state?.technicalParameters,
+            economicParameters: {beks: submissionData}
+        });
 
         const parameters = {
             RTE: technicalParams?.RTE ?? 0,
@@ -128,8 +135,11 @@ export const EconomicalParametersBeksForm = () => {
             Sector: generalParams?.sector ?? "Pramonė",
         };
 
+        console.log('API request payload:', parameters);
+
         mutate({ parameters: JSON.stringify(parameters) }, {
             onSuccess: (apiResponseData) => {
+                console.log('API response:', apiResponseData);
                 navigate({
                     to: "/summary-of-results-beks",
                     state: {

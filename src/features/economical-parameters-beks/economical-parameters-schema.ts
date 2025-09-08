@@ -17,7 +17,6 @@ export const economicalParametersSchema = z
         P_aFRRd_BSP: z.number().gte(0),
         P_mFRRu_BSP: z.number().gte(0),
         P_mFRRd_BSP: z.number().gte(0),
-            
     });
 
 export type EconomicalBeksParametersSchema = z.infer<typeof economicalParametersSchema>;
