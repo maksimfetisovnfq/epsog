@@ -1,4 +1,5 @@
-import {z} from 'zod';
+import { z } from "zod"
+import { bspDefaultValues, bspSchema } from "@/components/bsp"
 
 export const economicalParametersP2gSchema = z
     .object({
@@ -16,9 +17,10 @@ export const economicalParametersP2gSchema = z
         P_aFRRd_BSP: z.number().min(0),
         P_mFRRu_BSP: z.number().min(0),
         P_mFRRd_BSP: z.number().min(0),
-    });
+    })
+    .extend(bspSchema.shape)
 
-export type EconomicalP2gParametersSchema = z.infer<typeof economicalParametersP2gSchema>;
+export type EconomicalP2gParametersSchema = z.infer<typeof economicalParametersP2gSchema>
 
 export const defaultEconomicalParametersP2gSchema: EconomicalP2gParametersSchema = {
     CAPEX: 2400,
@@ -26,14 +28,5 @@ export const defaultEconomicalParametersP2gSchema: EconomicalP2gParametersSchema
     P_H2: 3.5,
     number_of_years: 2,
     discount_rate: 5,
-    P_FCR_CAP_BSP: 0,
-    P_aFRRu_CAP_BSP: 0,
-    P_aFRRd_CAP_BSP: 0,
-    P_mFRRu_CAP_BSP: 0,
-    P_mFRRd_CAP_BSP: 0,
-    P_aFRRu_BSP: 0,
-    P_aFRRd_BSP: 0,
-    P_mFRRu_BSP: 0,
-    P_mFRRd_BSP: 0,
-
+    ...bspDefaultValues,
 }

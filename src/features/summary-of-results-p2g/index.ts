@@ -1,1 +1,0 @@
-export {SummaryOfResultsP2g} from "./summary-of-results-p2g";

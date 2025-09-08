@@ -1,8 +1,8 @@
 import {useMutation} from "@tanstack/react-query";
-import type {EconomicalP2gParametersSchema} from "./economical-parameters-p2g-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
-import {getProductaiValues} from "../../components/productai-select";
-import type {P2GApiResponse} from "../../types";
+import {getProductaiValues} from "@/components/productai-select";
+import type {P2GApiResponse} from "@/types";
+import type {EconomicalP2gParametersSchema} from "./economical-parameters-p2g-schema";
 
 const mock: P2GApiResponse = {
     "aggregated": {

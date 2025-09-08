@@ -1,6 +1,6 @@
 import {Navigate, useLocation} from "@tanstack/react-router";
-import {EconomicalParametersP2gForm} from "../features/economical-parameters-p2g/economical-parameters-p2g-form.tsx";
-import {Layout} from "../components/layout/layout.tsx";
+import {Layout} from "@/components/layout";
+import {EconomicalParametersP2gForm} from "./economical-parameters-p2g-form";
 
 export const EconomicParametersP2gPage = () => {
     const location = useLocation();

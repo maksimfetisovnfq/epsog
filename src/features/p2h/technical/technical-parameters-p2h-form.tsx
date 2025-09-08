@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router"
 import Divider from "@mui/material/Divider"
 import FormLabel from "@mui/material/FormLabel"
 import { Form, FormInput, ServiceTypeSelect } from "@/components/form"
-import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
+import { FormNavigation } from "@/components/navigation/form-navigation"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 
 export const TechnicalParametersP2hForm = () => {
