@@ -1,5 +1,9 @@
 import {Form, FormInput, FormSlider, ServiceTypeSelect} from "../../components/form";
-import {type TechnicalP2gParametersSchema, technicalParametersP2gSchema} from "./technical-parameters-p2g-schema.ts";
+import {
+    defaultTechnicalParametersP2g,
+    type TechnicalP2gParametersSchema,
+    technicalParametersP2gSchema
+} from "./technical-parameters-p2g-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
 import {GlobalStyles} from "@mui/material";
 import {useFormContext, useWatch} from "react-hook-form";
@@ -47,6 +51,7 @@ export const TechnicalParametersP2gFormContent = () => {
             </>} fieldName={"reaction_time_u"} fieldValue={reaction_time_u} onChange={handleReactionTimeChange}/>
             
             <FormInput name="eta_H2" title="eta_H2" type="number"/>
+            <FormInput name="electrolyzer_tech" title="electrolyzer_tech"/>
     
             <FormInput name="T0" title="T0" type="number"/>
             <FormInput name="p0" title="p0" type="number"/>
@@ -75,8 +80,11 @@ export const TechnicalParametersP2gForm = () => {
     }
 
     return (
-        <Form onSubmit={handleSubmit} validationSchema={technicalParametersP2gSchema}
-              defaultValues={location.state?.technicalParameters?.p2g || {}}>
+        <Form 
+            onSubmit={handleSubmit} 
+            validationSchema={technicalParametersP2gSchema}
+            defaultValues={location.state?.technicalParameters?.p2g || defaultTechnicalParametersP2g}
+        >
             <GlobalStyles styles={{
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',

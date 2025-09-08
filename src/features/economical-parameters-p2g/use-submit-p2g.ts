@@ -1,6 +1,7 @@
 import {useMutation} from "@tanstack/react-query";
 import type {EconomicalP2gParametersSchema} from "./economical-parameters-p2g-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
+import {getProductaiValues} from "../../components/productai-select";
 
 export const useSubmitP2g = () => {
     const navigate = useNavigate();
@@ -56,7 +57,7 @@ export const useSubmitP2g = () => {
             "P_mFRRu_BSP": economicalParams.P_mFRRu_BSP,
             "P_mFRRd_BSP": economicalParams.P_mFRRd_BSP,
             "Sector": generalParams.sector,
-            "produktai": technicalParams.produktai,
+            "produktai": getProductaiValues(technicalParams.service_type),
         }
 
         mutate({
