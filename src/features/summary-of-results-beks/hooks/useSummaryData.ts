@@ -494,10 +494,15 @@ export function useSummaryData(): ModernSummaryData {
         { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.potential_revenue.upward.value, unit: capacityMfrr.potential_revenue.upward.unit },
         { name: 'Žemyn (angl. Downward)', value: capacityMfrr.potential_revenue.downward.value, unit: capacityMfrr.potential_revenue.downward.unit },
     ];
-    const balancingCapacityMFRRTable4: TableRow[] = [
-        { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.bids_selected.upward.value, unit: capacityMfrr.bids_selected.upward.unit },
-        { name: 'Žemyn (angl. Downward)', value: capacityMfrr.bids_selected.downward.value, unit: capacityMfrr.bids_selected.downward.unit },
-    ];
+    // const balancingCapacityMFRRTabl  //balancingEnergy mFRR
+    // const energyMfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR;
+    // const balancingEnergyMFRRTable1: TableRow[] = [
+    //     { name: 'Aukštyn (angl. Upward)', value: energyMfrr.volume_of_procured_energy.upward.value, unit: energyMfrr.volume_of_procured_energy.upward.unit },
+    //     { name: 'Žemyn (angl. Downward)', value: energyMfrr.volume_of_procured_energy.downward.value, unit: energyMfrr.volume_of_procured_energy.downward.unit },
+    // ];e4: TableRow[] = [
+    //     { name: 'Aukštyn (angl. Upward)', value: capacityMfrr.bids_selected.upward.value, unit: capacityMfrr.bids_selected.upward.unit },
+    //     { name: 'Žemyn (angl. Downward)', value: capacityMfrr.bids_selected.downward.value, unit: capacityMfrr.bids_selected.downward.unit },
+    // ];
     
     //balancingEnergy aFRR
     const energyAfrr = data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.aFRR;
