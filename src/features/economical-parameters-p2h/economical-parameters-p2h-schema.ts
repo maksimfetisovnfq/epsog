@@ -1,13 +1,14 @@
 import {z} from 'zod';
 
-export const economicalParametersSchema = z
+export const economicalParametersP2hSchema = z
     .object({
         CAPEX_HP: z.number().min(0),
         OPEX_HP: z.number().min(0),
         CAPEX_HS: z.number().min(0),
         OPEX_HS: z.number().min(0),
-        number_of_years: z.number().min(0),
         discount_rate: z.number().min(0),
+        number_of_years: z.number().min(0),
+        CAPEX_P: z.number().min(0),
         P_FCR_CAP_BSP: z.number().min(0),
         P_aFRRu_CAP_BSP: z.number().min(0),
         P_aFRRd_CAP_BSP: z.number().min(0),
@@ -19,5 +20,5 @@ export const economicalParametersSchema = z
         P_mFRRd_BSP: z.number().min(0),
     });
 
-export type EconomicalP2hParametersSchema = z.infer<typeof economicalParametersSchema>;
+export type EconomicalP2hParametersSchema = z.infer<typeof economicalParametersP2hSchema>;
 

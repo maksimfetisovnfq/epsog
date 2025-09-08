@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, useWatch, FormProvider, Controller } from 'react-hook-form';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Checkbox from '@mui/material/Checkbox';
 import {useSummaryData} from '../hooks/useSummaryData';

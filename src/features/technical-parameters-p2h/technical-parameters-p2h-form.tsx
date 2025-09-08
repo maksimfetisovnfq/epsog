@@ -207,7 +207,6 @@ export const TechnicalParametersP2hForm = () => {
     const location = useLocation();
 
     const handleSubmit = (data: TechnicalP2hParametersSchema) => {
-        console.log("Final Form Data:", data);
         navigate({
             to: "/economic-parameters-p2h",
             state: {

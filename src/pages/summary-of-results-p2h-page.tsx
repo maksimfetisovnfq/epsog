@@ -1,7 +1,7 @@
 import {useIsMutating} from '@tanstack/react-query'
 import {Navigate, useLocation} from "@tanstack/react-router";
 import {Layout} from "../components/layout/layout.tsx";
-import {SummaryOfResultsBeksForm} from "../features/summary-of-results-beks";
+import {Loader} from "../ui/loader";
 
 export const SummaryOfResultsP2hPage = () => {
     const location = useLocation();
@@ -13,11 +13,11 @@ export const SummaryOfResultsP2hPage = () => {
         return <Navigate to="/economic-parameters-p2h" state={location.state}/>
     }
 
-    if (isMutating) return "Loading...";
+    if (isMutating) return <Loader />;
 
     return (
         <Layout>
-            <SummaryOfResultsBeksForm/>
+            <SummaryOfResultsP2hPage/>
         </Layout>
     )
 }
