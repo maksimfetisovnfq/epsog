@@ -1,139 +1,17 @@
-import {Form, FormInput} from "../../components/form";
-import {type EconomicalP2gParametersSchema, economicalParametersSchema,} from "./economical-parameters-schema.ts";
-import {useLocation, useNavigate} from "@tanstack/react-router";
-import Divider from "@mui/material/Divider";
 import {GlobalStyles} from "@mui/material";
-import {Button} from "../../ui/button";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import {useMutation} from "@tanstack/react-query";
+import {useLocation, useNavigate} from "@tanstack/react-router";
+import {Form} from "../../components/form";
+import {FormNavigation} from "../../components/navigation/form-navigation";
+import {defaultEconomicalParametersP2gSchema, economicalParametersP2gSchema,} from "./economical-parameters-p2g-schema";
+import {useSubmitP2g} from "./use-submit-p2g";
+import {EconomicalParametersP2gFields} from "./economical-parameters-p2g-fields";
+
 
 export const EconomicalParametersP2gForm = () => {
-    const navigate = useNavigate();
     const location = useLocation();
+    const navigate = useNavigate();
 
-    const {mutate} = useMutation({
-        mutationKey: ['p2g'],
-        mutationFn: async ({parameters}: { parameters: string }) => {
-            const formData = new FormData();
-            formData.append('parameters', parameters);
-
-            const response = await fetch('https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/p2g', {
-                method: 'POST',
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const json = await response.json();
-            console.log('P2G API response:', json);
-            return json;
-        },
-        onSuccess: (apiResponseData) => {
-            navigate({
-                to: "/summary-of-results-p2g",
-                state: {
-                    generalData: location.state.generalData,
-                    technicalParameters: location.state.technicalParameters,
-                    economicParameters: location.state.economicParameters,
-                    apiResponseData: apiResponseData,
-                },
-            });
-        }
-    });
-
-    const handleSubmit = (data: EconomicalP2gParametersSchema) => {
-        console.log('location.state:', location.state);
-
-        const generalParams = location.state?.generalData;
-        const technicalParams = location.state?.technicalParameters?.p2g;
-
-        const parameters = {
-            // RTE: technicalParams?.RTE ?? 0,
-            // Q_max: technicalParams?.q_max ?? 0,
-            // Q_total: technicalParams?.q_total ?? 0,
-            // SOC_min: technicalParams?.SOC_min ?? 0,
-            // SOC_max: technicalParams?.SOC_max ?? 0,
-            // N_cycles_DA: technicalParams?.N_cycles_DA ?? 0,
-            // N_cycles_ID: technicalParams?.N_cycles_ID ?? 0,
-            // reaction_time: technicalParams?.reaction_time ?? 0,
-            //
-            // // Economic parameters from form
-            // CAPEX_P: data.CAPEX_P,
-            // CAPEX_C: data.CAPEX_C,
-            // OPEX_P: data.OPEX_P,
-            // OPEX_C: data.OPEX_C,
-            // discount_rate: data.discount_rate,
-            // number_of_years: data.number_of_years,
-            //
-            // // Provider from general data (default from curl example)
-            // provider: generalParams?.provider ?? "ESO",
-            //
-            // // BSP parameters
-            // P_FCR_CAP_BSP: data.P_FCR_CAP_BSP,
-            // P_aFRRu_CAP_BSP: data.P_aFRRu_CAP_BSP,
-            // P_aFRRd_CAP_BSP: data.P_aFRRd_CAP_BSP,
-            // P_mFRRu_CAP_BSP: data.P_mFRRu_CAP_BSP,
-            // P_mFRRd_CAP_BSP: data.P_mFRRd_CAP_BSP,
-            // P_aFRRu_BSP: data.P_aFRRu_BSP,
-            // P_aFRRd_BSP: data.P_aFRRd_BSP,
-            // P_mFRRu_BSP: data.P_mFRRu_BSP,
-            // P_mFRRd_BSP: data.P_mFRRd_BSP,
-            // Sector: generalParams?.sector ?? "Pramonė",
-        };
-
-        // Store the economic parameters in location state before mutation
-        location.state.economicParameters = {p2g: data};
-
-        // {
-        //     "Q_max": 10.0,
-        //     "reaction_time_d": 30,
-        //     "reaction_time_u": 30,
-        //     "electrolyzer_tech": "PEM",
-        //     "eta_H2": 65.0,
-        //     "T0": 25.0,
-        //     "p0": 30.0,
-        //     "eta_C": 75.0,
-        //     "CAPEX": 1500.0,
-        //     "OPEX": 30.0,
-        //     "P_H2": 5.0,
-        //     "discount_rate": 0,
-        //     "number_of_years": 10,
-        //     "provider": "ESO",
-        //     "P_FCR_CAP_BSP": 0,
-        //     "P_aFRRu_CAP_BSP": 0,
-        //     "P_aFRRd_CAP_BSP": 0,
-        //     "P_mFRRu_CAP_BSP": 0,
-        //     "P_mFRRd_CAP_BSP": 0,
-        //     "P_aFRRu_BSP": 0,
-        //     "P_aFRRd_BSP": 0,
-        //     "P_mFRRu_BSP": 0,
-        //     "P_mFRRd_BSP": 0,
-        //     "Sector": "Chemijos pramonė",
-        //     "produktai": {
-        //     "FCR": true,
-        //         "aFRRu": true,
-        //         "aFRRd": true,
-        //         "mFRRu": true,
-        //         "mFRRd": true
-        // }
-        // }
-
-        mutate({
-            parameters: JSON.stringify(parameters)
-        });
-
-        navigate({
-            to: "/summary-of-results-p2g",
-            state: {
-                generalData: location.state.generalData,
-                technicalParameters: location.state.technicalParameters,
-                economicParameters: {p2g: data},
-            },
-        })
-    }
+    const {submit} = useSubmitP2g()
 
     const handleBackward = () => {
         navigate({
@@ -146,8 +24,11 @@ export const EconomicalParametersP2gForm = () => {
     }
 
     return (
-        <Form onSubmit={handleSubmit} validationSchema={economicalParametersSchema}
-              defaultValues={location.state?.economicParameters?.p2g || {}}>
+        <Form
+            onSubmit={submit}
+            validationSchema={economicalParametersP2gSchema}
+            defaultValues={location.state?.economicParameters?.p2g || defaultEconomicalParametersP2gSchema}
+        >
             <GlobalStyles styles={{
                 '.MuiPaper-root.MuiAccordion-root::before': {
                     backgroundColor: 'transparent',
@@ -167,39 +48,9 @@ export const EconomicalParametersP2gForm = () => {
                 Minimali siūloma kaina už balansavimo pajėgumus:
             </div>
 
-            <FormInput name="FCR" title='FCR' defaultValue="0"/>
-            <FormInput name="aFRRu1" title='aFRRu' defaultValue="0"/>
-            <FormInput name="aFRRd1" title='aFRRd' defaultValue="0"/>
-            <FormInput name="mFRRu1" title='mFRRu' defaultValue="0"/>
-            <FormInput name="mFRRd1" title='mFRRd' defaultValue="0"/>
+            <EconomicalParametersP2gFields/>
 
-            <div style={{
-                fontSize: '32px',
-                marginTop: '48px',
-            }}>
-                Minimali siūloma kaina už balansavimo energiją:
-            </div>
-
-            <FormInput name="aFRRu2" title='aFRRu' defaultValue="0"/>
-            <FormInput name="aFRRd2" title='aFRRd' defaultValue="0"/>
-            <FormInput name="mFRRu2" title='mFRRu' defaultValue="0"/>
-            <FormInput name="mFRRd2" title='mFRRd' defaultValue="0"/>
-
-            <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
-
-            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button
-                    variant="outlined"
-                    startIcon={<ArrowBackIcon/>}
-                    onClick={handleBackward}
-                >
-                    Atgal
-                </Button>
-                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
-                    Toliau
-                </Button>
-            </div>
-
+            <FormNavigation handleBackward={handleBackward}/>
         </Form>
     )
 }

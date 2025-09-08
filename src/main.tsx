@@ -9,7 +9,7 @@ import type {TechnicalP2gParametersSchema} from "./features/technical-parameters
 import type {TechnicalBeksParametersSchema} from "./features/technical-parameters-beks/technical-parameters-schema.ts";
 import type {TechnicalDsrParametersSchema} from "./features/technical-parameters-dsr/technical-parameters-schema.ts";
 import type {EconomicalP2hParametersSchema} from "./features/economical-parameters-p2h/economical-parameters-p2h-schema.ts";
-import type {EconomicalP2gParametersSchema} from "./features/economical-parameters-p2g/economical-parameters-schema.ts";
+import type {EconomicalP2gParametersSchema} from "./features/economical-parameters-p2g/economical-parameters-p2g-schema.ts";
 import type {EconomicalDsrParametersSchema} from "./features/economical-parameters-dsr/economical-parameters-schema.ts";
 import type {EconomicalBeksParametersSchema} from "./features/economical-parameters-beks/economical-parameters-schema.ts";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

@@ -1,12 +1,9 @@
 import {Form, FormInput, FormSlider, ServiceTypeSelect} from "../../components/form";
 import {type TechnicalP2gParametersSchema, technicalParametersP2gSchema} from "./technical-parameters-p2g-schema.ts";
 import {useLocation, useNavigate} from "@tanstack/react-router";
-import Divider from "@mui/material/Divider";
 import {GlobalStyles} from "@mui/material";
-import {Button} from "../../ui/button";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {useFormContext, useWatch} from "react-hook-form";
+import {FormNavigation} from "../../components/navigation/form-navigation.tsx";
 
 export const TechnicalParametersP2gFormContent = () => {
     const {control, setValue} = useFormContext()
@@ -94,20 +91,7 @@ export const TechnicalParametersP2gForm = () => {
 
             <TechnicalParametersP2gFormContent/>
 
-            <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
-
-            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
-                <Button
-                    variant="outlined"
-                    startIcon={<ArrowBackIcon/>}
-                    onClick={handleBackward}
-                >
-                    Atgal
-                </Button>
-                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
-                    Toliau
-                </Button>
-            </div>
+            <FormNavigation handleBackward={handleBackward} />
         </Form>
     )
 }
