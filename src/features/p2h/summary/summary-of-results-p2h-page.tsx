@@ -1,7 +1,7 @@
 import {useIsMutating} from '@tanstack/react-query'
 import {Navigate, useLocation} from "@tanstack/react-router";
-import {Layout} from "../components/layout/layout.tsx";
-import {Loader} from "../ui/loader";
+import {Layout} from "@/components/layout";
+import {Loader} from "@/ui/loader";
 
 export const SummaryOfResultsP2hPage = () => {
     const location = useLocation();
@@ -17,7 +17,7 @@ export const SummaryOfResultsP2hPage = () => {
 
     return (
         <Layout>
-            <SummaryOfResultsP2hPage/>
+            summary of results p2h
         </Layout>
     )
 }
