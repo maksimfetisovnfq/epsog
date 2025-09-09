@@ -4,6 +4,7 @@ import { BspFields } from "@/components/bsp"
 import { Form, FormInput } from "@/components/form"
 import { defaultEconomicalParametersP2gSchema, economicalParametersP2gSchema } from "./economical-parameters-p2g-schema"
 import { useSubmitP2g } from "./use-submit-p2g"
+import { Stack } from "@mui/material"
 
 export const EconomicalParametersP2gForm = () => {
     const location = useLocation()
@@ -27,23 +28,15 @@ export const EconomicalParametersP2gForm = () => {
             validationSchema={economicalParametersP2gSchema}
             defaultValues={location.state?.economicParameters?.p2g || defaultEconomicalParametersP2gSchema}
         >
-            <div
-                style={{
-                    fontSize: "32px",
-                    marginTop: "48px",
-                }}
-            >
-                Minimali siūloma kaina už balansavimo pajėgumus:
-            </div>
+            <Stack spacing={2}>
+                <FormInput name="CAPEX" title="CAPEX" type="number" />
+                <FormInput name="OPEX" title="OPEX" type="number" />
+                <FormInput name="P_H2" title="P_H2" type="number" />
+                <FormInput name="number_of_years" title="number_of_years" type="number" />
+                <FormInput name="discount_rate" title="discount_rate" type="number" />
 
-            <FormInput name="CAPEX" title="CAPEX" type="number" />
-            <FormInput name="OPEX" title="OPEX" type="number" />
-            <FormInput name="P_H2" title="P_H2" type="number" />
-            <FormInput name="number_of_years" title="number_of_years" type="number" />
-            <FormInput name="discount_rate" title="discount_rate" type="number" />
-
-            <BspFields />
-
+                <BspFields />
+            </Stack>
             <FormNavigation handleBackward={handleBackward} />
         </Form>
     )

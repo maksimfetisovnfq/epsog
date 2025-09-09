@@ -11,7 +11,7 @@ export const BspFields = () => {
             <FormInput name="P_mFRRu_CAP_BSP" placeholder="0 Eur/MW" title="mFRR aukštyn" />
             <FormInput name="P_mFRRd_CAP_BSP" placeholder="0 Eur/MW" title="mFRR žemyn" />
 
-            <Divider style={{ marginTop: "32px", marginBottom: "32px" }} />
+            <Divider />
 
             <div style={{ fontSize: "18px" }}>Minimali siūloma kainą už balansavimo energiją:</div>
             <FormInput name="P_aFRRu_BSP" placeholder="Eur/MWh" title="aFRR aukštyn" />

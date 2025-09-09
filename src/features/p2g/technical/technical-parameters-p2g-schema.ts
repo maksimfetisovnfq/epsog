@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {Productai} from "../../components/productai-select";
+import {Productai} from "@/components/productai-select";
 
 export const technicalParametersP2gSchema = z
     .object({

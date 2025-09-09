@@ -30,7 +30,7 @@ export interface P2GApiResponse {
         Metric: string;
         Value: string;
       }>;
-      npv_chart_data: {//done
+      npv_chart_data: {
         years: number[];
         npv: number[];
         dcfs: number[];

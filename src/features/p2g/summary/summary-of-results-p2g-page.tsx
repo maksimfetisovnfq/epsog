@@ -2,6 +2,7 @@ import { useIsMutating } from "@tanstack/react-query"
 import { Navigate, useLocation } from "@tanstack/react-router"
 import { Layout } from "@/components/layout"
 import { Loader } from "@/ui/loader"
+import { SummaryOfResultsP2gView } from "./summary-of-results-p2g-view"
 
 export const SummaryOfResultsP2gPage = () => {
     const location = useLocation()
@@ -14,5 +15,7 @@ export const SummaryOfResultsP2gPage = () => {
 
     if (isMutating) return <Loader />
 
-    return <Layout>summary of results p2g</Layout>
+    return <Layout>
+        <SummaryOfResultsP2gView />
+    </Layout>
 }
