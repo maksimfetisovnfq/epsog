@@ -32,7 +32,7 @@ export const FormInput = ({ name, label, title, description, tooltip, ...props }
     }))
 
     return (
-        <div>
+        <div style={{marginBottom: '24px'}}>
             <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: "12px" }}>
                 {title && (
                     <div
@@ -46,7 +46,7 @@ export const FormInput = ({ name, label, title, description, tooltip, ...props }
                         {title}
                     </div>
                 )}
-
+                
                 <div>
                     {tooltip && (
                         <HtmlTooltip
@@ -68,7 +68,7 @@ export const FormInput = ({ name, label, title, description, tooltip, ...props }
                                 </div>
                             }
                         >
-                            <InfoOutlineIcon style={{ color: "#6F8190", width: "20px", height: "20px" }} />
+                            <InfoOutlineIcon style={{ color: "#6F8190", width: "16px", height: "16px" }} />
                         </HtmlTooltip>
                     )}
                 </div>

@@ -161,7 +161,6 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
     );
 }
 
-// The main form component is now much cleaner. It handles logic and state, but not the UI fields.
 export const GeneralDataForm = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -196,7 +195,6 @@ export const GeneralDataForm = () => {
                 onSubmit={handleSubmit}
                 validationSchema={generalDataSchema}
             >
-                {/* CHANGED: Render the new component that contains all the form fields */}
                 <FormContent handleBackward={handleBackward} />
             </Form>
         </div>

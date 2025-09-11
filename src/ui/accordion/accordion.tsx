@@ -6,9 +6,10 @@ import { Accordion as MuiAccordion, AccordionDetails, AccordionSummary } from "@
 
 type AccordionProps = PropsWithChildren<{
     title: string
+    children?: React.ReactNode | undefined
 }>
 
-export const Accordion = ({ title }: AccordionProps) => {
+export const Accordion = ({ title, children }: AccordionProps) => {
     const [expanded, setExpanded] = useState(false)
 
     return (
@@ -30,7 +31,7 @@ export const Accordion = ({ title }: AccordionProps) => {
                     {title}
                 </Typography>
             </AccordionSummary>
-            <AccordionDetails></AccordionDetails>
+            <AccordionDetails> {children} </AccordionDetails>
         </MuiAccordion>
     )
 }

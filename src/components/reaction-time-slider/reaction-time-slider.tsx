@@ -9,7 +9,7 @@ type ReactionTimeSliderProps = {
 export const ReactionTimeSlider = ({field, label}: ReactionTimeSliderProps) => {
     const {setValue, control} = useFormContext();
     const fieldValue = useWatch({control, name: field});
-    
+
     const handleReactionTimeChange = (fieldName: string, value: number | number[]) => {
         const sliderValue = Array.isArray(value) ? value[0] : value;
         setValue(fieldName, sliderValue, {shouldValidate: true});
@@ -29,4 +29,3 @@ export const ReactionTimeSlider = ({field, label}: ReactionTimeSliderProps) => {
         </>} fieldName={field} fieldValue={fieldValue} onChange={handleReactionTimeChange}/>
     )
 }
-

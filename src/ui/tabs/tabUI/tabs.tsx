@@ -1,6 +1,6 @@
-import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { Box, SxProps, Tab, Tabs, Theme } from '@mui/material';
-import { TabsProps } from '../types';
+import { type FC, type SyntheticEvent, useEffect, useState } from 'react';
+import { Box, type SxProps, Tab, Tabs, type Theme } from '@mui/material';
+import { type TabsProps } from '../types';
 import { CustomTabPanel } from './tabPanel';
 import { createPortal } from 'react-dom';
 
@@ -88,7 +88,7 @@ export const BasicTab: FC<TabsProps> = ({
   );
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box>
       {tabLabelsContainer
         ? containerEl
           ? createPortal(tabLabelsNode, containerEl)

@@ -8,6 +8,7 @@ export const ProjectSummaryTable = () => {
 
     return (
         <Table
+            title="PROJECT (LIFETIME) SUMMARY"
             dataSource={data.aggregated.summary.project_summary_table}
             columns={[
                 { title: "Metric", dataIndex: "Metric" },

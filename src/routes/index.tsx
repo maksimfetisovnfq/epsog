@@ -6,7 +6,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {useState} from 'react';
 import {useNavigate} from '@tanstack/react-router';
 import {CheckBox} from "../ui/checkBox/checkBox";
-import {Checkbox as MUICheckbox} from '@mui/material';
 
 export const Route = createFileRoute('/')({
     component: RouteComponent,

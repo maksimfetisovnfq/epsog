@@ -65,7 +65,7 @@ export const StackedBarChart = ({ labels, datasets } : StackedBarChartProps) => 
   };
   return (
     <div style={{ width: 768, maxWidth: '100%' }}>
-      <div style={{ marginTop: 24, position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
+      <div style={{position: 'relative', width: 768, maxWidth: '100%', marginLeft: 'auto', marginRight: 'auto' }}>
         <Bar data={data} options={options} style={{ width: '100%', maxWidth: 768 }} />
       </div>
     </div>

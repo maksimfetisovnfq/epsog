@@ -22,11 +22,11 @@ export const CalculatorTypeTooltipsTitle: Record<CalculatorType, string> = {
 export interface P2GApiResponse {
   aggregated: {
     summary: {
-      yearly_summary_table: Array<{ //done
+      yearly_summary_table: Array<{
         Metric: string;
         Value: string;
       }>;
-      project_summary_table: Array<{//done
+      project_summary_table: Array<{
         Metric: string;
         Value: string;
       }>;

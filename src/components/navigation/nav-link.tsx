@@ -16,7 +16,7 @@ export const NavLink = ({to, state, children, disabled = false, isHome = false}:
     return (
         <div style={{
             marginRight: "12px",
-            width: "183px",
+            width: "100%",
             height: "37px",
             cursor: disabled ? "not-allowed" : "pointer",
         }}>
