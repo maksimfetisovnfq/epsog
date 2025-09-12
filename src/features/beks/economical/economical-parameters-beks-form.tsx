@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import { BspFields } from "@/components/bsp"
 import { Form, FormInput } from "@/components/form"
-import {economicalParametersSchema,} from "./economical-parameters-schema";
+import { economicalParametersDefaultValues, economicalParametersSchema } from "./economical-parameters-schema"
 import { useSubmitBeks } from "./use-submit-beks"
 import Divider from "@mui/material/Divider";
 import { Accordion } from "@/ui/accordion"
@@ -54,7 +54,7 @@ export const EconomicalParametersBeksForm = () => {
         <Form
             onSubmit={submit}
             validationSchema={economicalParametersSchema}
-            defaultValues={location.state?.economicParameters?.beks}
+            defaultValues={location.state?.economicParameters?.beks ?? economicalParametersDefaultValues}
         >
             <FormContent />
             <FormNavigation handleBackward={handleBackward} />

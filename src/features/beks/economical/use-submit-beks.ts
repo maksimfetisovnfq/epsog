@@ -1,9 +1,8 @@
 import { useMutation } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { getProductaiValues } from "@/components/productai-select"
-import type { BeksApiResponse } from "@/features/beks/economical/types.ts"
 import type { EconomicalBeksParametersSchema } from "@/features/beks/economical/economical-parameters-schema.ts"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
+import type { BeksApiResponse } from "@/beks-response.ts"
 
 const mock: BeksApiResponse = {
     aggregated: {
@@ -432,17 +431,6 @@ export const useSubmitBeks = () => {
             const formData = new FormData()
             formData.append("parameters", parameters)
 
-            // const response = await fetch('https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/beks', {
-            //     method: 'POST',
-            //     body: formData,
-            // });
-            //
-            // if (!response.ok) {
-            //     throw new Error(`HTTP error! status: ${response.status}`);
-            // }
-            //
-            // return await response.json();
-
             return new Promise((resolve) => resolve(mock))
         },
     })
@@ -477,8 +465,7 @@ export const useSubmitBeks = () => {
             P_aFRRd_BSP: economicalParams.P_aFRRd_BSP,
             P_mFRRu_BSP: economicalParams.P_mFRRu_BSP,
             P_mFRRd_BSP: economicalParams.P_mFRRd_BSP,
-            produktai: getProductaiValues(technicalParams.service_type),
-            reaction_time: getReactionTimeValue(technicalParams.service_type),
+            reaction_time: getReactionTimeValue(technicalParams?.reaction_time),
         }
 
         mutate({

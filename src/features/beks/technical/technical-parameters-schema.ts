@@ -13,3 +13,14 @@ export const technicalParametersSchema = z
     });
 
 export type TechnicalBeksParametersSchema = z.infer<typeof technicalParametersSchema>;
+
+export const defaultTechnicalBeksParams: TechnicalBeksParametersSchema = {
+    q_max: 100,
+    q_total: 200,
+    RTE: 88,
+    SOC_min: 10,
+    SOC_max: 95,
+    N_cycles_DA: 4,
+    N_cycles_ID: 4,
+    reaction_time: 0,
+}

@@ -17,7 +17,7 @@ export const Table = ({ columns, dataSource, boldHeaders, title, description, hi
         {title && <Title variant="h6">{title}</Title>}
         {description && <Title variant="subtitle2" sx={{ color: "#6F8190" }}>{description}</Title>}
 
-        <MuiTable sx={{ border: "1px solid #CFD5DA", width: "768px" }} aria-label="simple table">
+        <MuiTable sx={{ border: "1px solid #CFD5DA", width: "768px"}} aria-label="simple table">
             {!hideHead && <TableHead columns={columns} boldHeaders={boldHeaders} />}
             <TableBody columns={columns} dataSource={dataSource} />
         </MuiTable>

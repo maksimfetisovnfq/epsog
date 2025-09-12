@@ -9,3 +9,4 @@ export const useSummaryBeks = () => {
 
     return data[0] as BeksApiResponse | undefined
 }
+

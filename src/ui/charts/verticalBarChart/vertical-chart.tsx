@@ -88,7 +88,7 @@ export const VerticalBarChart = ({ labels, datasets}: VerticalBarChartProps) => 
 
   return (
     <div>
-      <div style={{ marginTop: 24, position: 'relative', width: '100%', maxWidth: 768, marginLeft: 'auto', marginRight: 'auto' }}>
+      <div style={{ marginTop: 24, position: 'relative', width: '100%', maxWidth: 768, marginLeft: 'auto', marginRight: 'auto'}}>
         <Bar data={barData} options={options} plugins={[ChartDataLabels]} style={{ width: '100%', maxWidth: 768 }} />
         <div style={{
           display: 'grid',
@@ -112,7 +112,7 @@ export const VerticalBarChart = ({ labels, datasets}: VerticalBarChartProps) => 
           ))}
         </div>
       </div>
-      <div style={{ height: 48 }} /> {}
+      <div style={{ height: 48 }} />
     </div>
   );
 };

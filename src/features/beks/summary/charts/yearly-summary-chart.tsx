@@ -1,5 +1,6 @@
 import { VerticalBarChart } from "@/ui/charts/verticalBarChart/vertical-chart.tsx";
 import { useSummaryBeks } from "@/features/beks/summary/use-summary-beks.ts";
+import { Stack } from "@mui/material"
 
 export const YearlySummaryChart = () => {
     const data = useSummaryBeks();
@@ -46,12 +47,12 @@ export const YearlySummaryChart = () => {
     ];
 
     return (
-        <div style={{width: '768px', border: '1px solid #CFD5DA', marginTop: 16}}>
+        <Stack spacing={1} style={{width: '768px', border: '1px solid #CFD5DA'}}>
             <VerticalBarChart
                 datasets={floatingBarDataset}
                 labels={floatingBarLabels}
             />
-        </div>
+        </Stack>
         
     );
 };

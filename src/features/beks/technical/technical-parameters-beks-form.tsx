@@ -1,8 +1,11 @@
 import {Form, FormInput} from "../../../components/form";
-import {type TechnicalBeksParametersSchema, technicalParametersSchema} from "./technical-parameters-schema.ts";
+import {
+    defaultTechnicalBeksParams,
+    type TechnicalBeksParametersSchema,
+    technicalParametersSchema,
+} from "./technical-parameters-schema.ts"
 import {useLocation, useNavigate} from "@tanstack/react-router";
 import Divider from "@mui/material/Divider";
-import {useMemo} from "react";
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { Accordion } from "@/ui/accordion/accordion.tsx"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
@@ -79,14 +82,8 @@ const FormContent = () => {
 
 export const TechnicalParametersBeksForm = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const location = useLocation()
 
-    const formDefaultValues = useMemo(() => {
-        const persistedValues: Partial<TechnicalBeksParametersSchema> = location.state?.technicalParameters?.beks || {};
-        const reactionTimeSliderValue = 30;
-
-        return {...persistedValues, reaction_time: reactionTimeSliderValue};
-    }, [location.state?.technicalParameters?.beks]);
 
     const handleSubmit = (data: TechnicalBeksParametersSchema) => {
         const reactionTime = data.reaction_time;
@@ -112,9 +109,9 @@ export const TechnicalParametersBeksForm = () => {
         <div style={{fontFamily: 'Arial', width: '760px'}}>
 
             <Form
+                defaultValues={location.state?.technicalParameters?.beks || defaultTechnicalBeksParams}
                 onSubmit={handleSubmit}
                 validationSchema={technicalParametersSchema}
-                defaultValues={formDefaultValues} 
             >
                 <FormContent/>
                 <FormNavigation handleBackward={handleBackward} />

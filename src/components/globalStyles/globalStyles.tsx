@@ -15,10 +15,10 @@ export const GlobalStyles = () => (
             '.MuiTabs-list': {
                 marginBottom: '48px',
             },
-            '.MuiStack-root': {
-                margin: 0,
-            },
-
+            // '.MuiStack-root>:not(style):not(style)': {
+            //     margin: "0 !important",
+            // },
+            
         }}
     />
 );

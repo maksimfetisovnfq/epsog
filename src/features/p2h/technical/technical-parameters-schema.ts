@@ -37,5 +37,4 @@ export const defaultTechnicalP2hParams: TechnicalP2hParametersSchema = {
     eta_BOILER: 98,
     T_HP: -10,
     T_max_HS: 90,
-    
 }

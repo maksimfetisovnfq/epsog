@@ -9,7 +9,7 @@ export type BaseFormProps<T extends FormData> = {
     defaultValues: DefaultValues<T>
     validationSchema: ZodType<T>
     onSubmit: SubmitHandler<T>
-    onBackward?: () => void // Added optional onBackward prop
+    onBackward?: () => void
 } & Omit<ComponentProps<'form'>, 'onSubmit' | 'ref'>
 
 export type SetErrorRef<T extends FormData> = {
