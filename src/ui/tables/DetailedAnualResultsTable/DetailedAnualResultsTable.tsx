@@ -1,5 +1,3 @@
-import React from 'react';
-
 const columns = [
   { key: 'metai', label: 'Metai' },
   { key: 'ciklai', label: 'Ciklai' },
@@ -23,7 +21,7 @@ interface DetailedAnualResultsTableProps {
   visibleColumns?: string[];
 }
 
-const DetailedAnualResultsTable: React.FC<DetailedAnualResultsTableProps> = ({ data, visibleColumns }) => {
+export const DetailedAnualResultsTable = ({ data, visibleColumns }: DetailedAnualResultsTableProps) => {
   const shownColumns = !visibleColumns || visibleColumns.length === 0
     ? columns.map(col => col.key)
     : visibleColumns;
@@ -49,4 +47,3 @@ const DetailedAnualResultsTable: React.FC<DetailedAnualResultsTableProps> = ({ d
   );
 };
 
-export default DetailedAnualResultsTable;

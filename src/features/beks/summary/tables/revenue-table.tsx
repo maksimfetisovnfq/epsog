@@ -10,9 +10,10 @@ export const RevenueTable = () => {
         <Table
             dataSource={data.aggregated.economic_results.revenue_table}
             columns={[
-                { title: "Product", dataIndex: "Product" },
-                { title: "Value (tūkst. EUR)", dataIndex: "Value (tūkst. EUR)" },
+                { title: "Rinkos produktas", dataIndex: 'Product', key: 'Product' },
+                { title: "Suma (tūkst. Eur)", dataIndex: 'Value (tūkst. EUR)', key: 'Value (tūkst. EUR)' },
             ]}
+            boldHeaders={true}
         />
     )
 }

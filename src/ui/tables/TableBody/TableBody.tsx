@@ -1,4 +1,3 @@
-import React from 'react';
 import { TableBody as MuiTableBody, TableRow, TableCell } from '@mui/material';
 import type { Column } from '../types';
 
@@ -20,12 +19,14 @@ export const TableBody: React.FC<TableBodyProps> = ({ columns, dataSource }) => 
                     } else if (column.dataIndex) {
                         cellContent = row[column.dataIndex] as React.ReactNode;
                     }
+                    const isLast = colIdx === columns.length - 1;
                     return (
                         <TableCell
                             key={column.key || column.title || colIdx}
                             sx={{
                                 ...(colIdx === 0 ? {backgroundColor: '#F5F7F8'} : {}),
-                                width: 384
+                                width: 384,
+                                borderRight: isLast ? 'none' : '1px solid #CFD5DA',
                             }}
                         >
                             {cellContent}

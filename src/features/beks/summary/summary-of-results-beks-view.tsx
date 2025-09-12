@@ -2,7 +2,7 @@ import { Stack } from "@mui/material"
 import { YearlySummaryTable } from "./tables/yearly-summary-table"
 import { RevenueTable } from "./tables/revenue-table"
 import { CostTable } from "./tables/cost-table"
-import { YearlyTable } from "./tables/yearly-table"
+import { YearlySummary } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
 import { Fragment } from "react"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
@@ -18,6 +18,8 @@ import { MfrrBalancingCapacityTable } from "@/features/beks/summary/tables/mfrr-
 import { DayAheadTable } from "@/features/beks/summary/tables/day-ahead-table.tsx"
 import { IntradayTable } from "@/features/beks/summary/tables/intraday-table.tsx"
 import { NPVAnalysisChart } from "@/features/beks/summary/charts/npv-analysis-chart.tsx"
+import { RevenueChart } from "@/features/beks/summary/charts/revenue-chart.tsx"
+import { CostChart } from "@/features/beks/summary/charts/cost-economic-evaluation-chart.tsx"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -46,9 +48,9 @@ export const SummaryOfResultsBeksView = () => {
         <Fragment key={1}>
             <Stack spacing={0}>
                 <FcrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -58,7 +60,7 @@ export const SummaryOfResultsBeksView = () => {
         <Fragment key={2}>
             <Stack spacing={0}>
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -68,8 +70,8 @@ export const SummaryOfResultsBeksView = () => {
         <Fragment key={3}>
             <Stack spacing={0}>
                 <DayAheadTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
-                <IntradayTable/>
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
+                <IntradayTable />
             </Stack>
         </Fragment>
     )
@@ -87,9 +89,15 @@ export const SummaryOfResultsBeksView = () => {
 
     const economicTab = (
         <Fragment key={3}>
-            <RevenueTable />
-            <CostTable />
-            <YearlyTable />
+            <Stack spacing={0}>
+                <RevenueTable />
+                <RevenueChart />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
+                <CostTable />
+                <CostChart />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
+                <YearlySummary />
+            </Stack>
         </Fragment>
     )
 
