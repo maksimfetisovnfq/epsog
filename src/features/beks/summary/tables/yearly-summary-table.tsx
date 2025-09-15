@@ -6,7 +6,7 @@ export const YearlySummaryTable = () => {
 
     if (!data) return
 
-    const translatedData = data.aggregated.summary.yearly_summary_table.map((item) => {
+    const translatedData = data.aggregated.summary.yearly_summary_table.map((item: { Metric: string }) => {
         if (item.Metric === "POTENTIAL REVENUE PER YEAR (average)") {
             return { ...item, Metric: "Potencialios sąnaudos per metus (vidurkis)" }
         }

@@ -38,7 +38,7 @@ export const SummaryOfResultsBeksView = () => {
                 <Title style={{fontSize: 24}}>Summary</Title>
                 <YearlySummaryTable />
                 <YearlySummaryChartBeks />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <NpvAnalysisChartBeks />
                 <CostProductsChartBeks />
                 <UtilisationChartBeks />

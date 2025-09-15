@@ -1,121 +1,52 @@
 import { Stack } from "@mui/material"
 import { YearlySummaryTable } from "./tables/yearly-summary-table"
+import { ProjectSummaryTable } from "./tables/project-summary-table"
 import { RevenueTable } from "./tables/revenue-table"
 import { CostTable } from "./tables/cost-table"
-import { YearlySummary } from "./tables/yearly-table"
+import { YearlyTable } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
 import { Fragment } from "react"
-import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
-import { YearlySummaryChart } from "@/features/p2h/summary/charts/yearly-summary-chart.tsx"
-import { CostProductsChart } from "@/features/p2h/summary/charts/cost-products-chart.tsx"
-import { UtilisationChart } from "@/features/p2h/summary/charts/utilisation-chart.tsx"
-import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
-import { useLocation, useNavigate } from "@tanstack/react-router"
-import { FcrBalancingCapacityTable } from "@/features/p2h/summary/tables/fsr-balancing-capacity-table.tsx"
-import { AfrrBalancingCapacityTable } from "@/features/p2h/summary/tables/afrr-balancing-capacity-table.tsx"
-import Divider from "@mui/material/Divider"
-import { MfrrBalancingCapacityTable } from "@/features/p2h/summary/tables/mfrr-balancing-capacity-table.tsx"
-import { DayAheadTable } from "@/features/p2h/summary/tables/day-ahead-table.tsx"
-import { IntradayTable } from "@/features/p2h/summary/tables/intraday-table.tsx"
-import { NPVAnalysisChart } from "@/features/p2h/summary/charts/npv-analysis-chart.tsx"
-import { RevenueChart } from "@/features/p2h/summary/charts/revenue-chart.tsx"
-import { CostChart } from "@/features/p2h/summary/charts/cost-economic-evaluation-chart.tsx"
-import { Title } from "@/ui/title"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner"
+import { YearlySummaryChartP2h } from "@/features/p2h/summary/charts/yearly-summary-chart-p2h.tsx"
+import { NpvAnalysisChartP2h } from "./charts/npv-analysis-chart-p2h"
+import { CostProductsChartP2h } from "@/features/p2h/summary/charts/cost-products-chart-p2h.tsx"
+import { UtilisationChartP2h } from "./charts/utilisation-chart-p2h"
+import { RevenueChartP2h } from "./charts/revenue-chart-p2h"
+import { CostChartP2h } from "@/features/p2h/summary/charts/cost-economic-evaluation-chart-p2h.tsx"
 
 export const SummaryOfResultsP2hView = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const handleBackward = () => {
-        navigate({
-            to: "/economic-parameters-p2h",
-            state: { generalData: location.state.generalData },
-        })
-    }
-
     const summaryTab = (
         <Fragment key={1}>
-            <Stack spacing={1}>
-                <Title style={{fontSize: 24}}>Summary</Title>
-                <YearlySummaryTable />
-                <YearlySummaryChart />
-                <Divider style={{ marginBottom: 32, marginTop: 32 }} />
-                <NPVAnalysisChart />
-                <CostProductsChart />
-                <UtilisationChart />
-            </Stack>
-        </Fragment>
-    )
-
-    const balancingCapacityTab = (
-        <Fragment key={1}>
-            <Stack spacing={0}>
-                <FcrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <MfrrBalancingCapacityTable />
-            </Stack>
-        </Fragment>
-    )
-
-    const BalancingEnergyTab = (
-        <Fragment key={2}>
-            <Stack spacing={0}>
-                <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <MfrrBalancingCapacityTable />
-            </Stack>
-        </Fragment>
-    )
-
-    const ElectricityTradeTab = (
-        <Fragment key={3}>
-            <Stack spacing={0}>
-                <DayAheadTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <IntradayTable />
-            </Stack>
+            <YearlySummaryTable />
+            <YearlySummaryChartP2h />
+            <NpvAnalysisChartP2h />
+            <CostProductsChartP2h />
+            <ProjectSummaryTable />
+            <UtilisationChartP2h />
         </Fragment>
     )
 
     const marketTab = (
         <Fragment key={2}>
-            <Stack spacing={2}>
-                <Title style={{fontSize: 24}}>Rinkos duomenys</Title>
-                <Tabs
-                    labels={["Balansavimo pajėgumų rinka", "Balansavimo energijos rinka", "Elektros energijos prekyba"]}
-                    content={[balancingCapacityTab, BalancingEnergyTab, ElectricityTradeTab]}
-                />
-            </Stack>
+            <p>123</p>
         </Fragment>
     )
 
     const economicTab = (
         <Fragment key={3}>
-            <Stack spacing={3}>
-                <Title style={{fontSize: 24}}>Rinkų produktų ekonominiai rezultatai</Title>
-                <RevenueTable />
-                <RevenueChart />
-                <Divider style={{ marginBottom: 8, marginTop: 32, maxWidth: 768 }} />
-                <CostTable />
-                <CostChart />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <YearlySummary />
-            </Stack>
+            <RevenueTable />
+            <RevenueChartP2h />
+            <CostTable />
+            <CostChartP2h />
+            <YearlyTable />
         </Fragment>
     )
 
     return (
-        <>
+        <Stack spacing={2}>
             <InfoBanner />
-            <Stack spacing={2}>
-                <Tabs
-                    labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
-                    content={[summaryTab, marketTab, economicTab]}
-                />
-            </Stack>
 
-            <FormNavigation handleBackward={handleBackward} />
-        </>
+            <Tabs labels={["1", "2", "3"]} content={[summaryTab, marketTab, economicTab]} />
+        </Stack>
     )
 }

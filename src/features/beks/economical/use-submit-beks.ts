@@ -422,18 +422,18 @@ const mock: BeksApiResponse = {
 }
 
 export const useSubmitBeks = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-
-    const { mutate, ...rest } = useMutation<BeksApiResponse, Error, { parameters: string }>({
-        mutationKey: ["beks"],
-        mutationFn: async ({ parameters }: { parameters: string }): Promise<BeksApiResponse> => {
-            const formData = new FormData()
-            formData.append("parameters", parameters)
-
-            return new Promise((resolve) => resolve(mock))
-        },
-    })
+        const navigate = useNavigate()
+        const location = useLocation()
+    
+        const { mutate, ...rest } = useMutation<BeksApiResponse, Error, { parameters: string }>({
+            mutationKey: ["beks"],
+            mutationFn: async ({ parameters }: { parameters: string }): Promise<BeksApiResponse> => {
+                const formData = new FormData()
+                formData.append("parameters", parameters)
+    
+                return new Promise((resolve) => resolve(mock))
+            },
+        })
 
     const submit = (economicalParams: EconomicalBeksParametersSchema) => {
         const generalParams = location.state?.generalData
