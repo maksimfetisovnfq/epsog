@@ -1,9 +1,9 @@
-import { useSummaryBeks } from "../use-summary-beks.ts"
+import { useSummaryP2h } from "../use-summary-p2h.ts"
 import { Table } from "@/ui/tables"
 import { Stack } from "@mui/material"
 
 export const RevenueTable = () => {
-    const data = useSummaryBeks()
+    const data = useSummaryP2h()
 
     if (!data) return
 

@@ -12,6 +12,7 @@ import { CssBaseline } from "@mui/material"
 import { GlobalStyles } from "@/components/globalStyles/globalStyles.tsx"
 import type { TechnicalBeksParametersSchema } from "@/features/beks/technical/technical-parameters-schema.ts"
 import type { EconomicalBeksParametersSchema } from "@/features/beks/economical/economical-parameters-schema.ts"
+import type { EconomicalP2gParametersSchema } from "@/features/p2g/economical/economical-parameters-p2g-schema.ts"
 
 const router = createRouter({ routeTree })
 const queryClient = new QueryClient()
@@ -31,7 +32,7 @@ declare module "@tanstack/react-router" {
         economicParameters?: {
             p2h?: EconomicalP2hParametersSchema
             beks?: EconomicalBeksParametersSchema
-            p2g?: TechnicalP2hParametersSchema
+            p2g?: EconomicalP2gParametersSchema
         }
     }
 }

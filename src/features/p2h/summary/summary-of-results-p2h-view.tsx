@@ -6,28 +6,28 @@ import { YearlySummary } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
 import { Fragment } from "react"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
-import { CostProductsChartBeks } from "@/features/beks/summary/charts/cost-products-chart-beks.tsx"
+import { YearlySummaryChart } from "@/features/p2h/summary/charts/yearly-summary-chart.tsx"
+import { CostProductsChart } from "@/features/p2h/summary/charts/cost-products-chart.tsx"
+import { UtilisationChart } from "@/features/p2h/summary/charts/utilisation-chart.tsx"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { FcrBalancingCapacityTable } from "@/features/beks/summary/tables/fsr-balancing-capacity-table.tsx"
-import { AfrrBalancingCapacityTable } from "@/features/beks/summary/tables/afrr-balancing-capacity-table.tsx"
+import { FcrBalancingCapacityTable } from "@/features/p2h/summary/tables/fsr-balancing-capacity-table.tsx"
+import { AfrrBalancingCapacityTable } from "@/features/p2h/summary/tables/afrr-balancing-capacity-table.tsx"
 import Divider from "@mui/material/Divider"
-import { MfrrBalancingCapacityTable } from "@/features/beks/summary/tables/mfrr-balancing-capacity-table.tsx"
-import { DayAheadTable } from "@/features/beks/summary/tables/day-ahead-table.tsx"
-import { IntradayTable } from "@/features/beks/summary/tables/intraday-table.tsx"
-import { NpvAnalysisChartBeks } from "@/features/beks/summary/charts/npv-analysis-chart-beks.tsx"
-import { CostChartBeks } from "@/features/beks/summary/charts/cost-economic-evaluation-chart-beks.tsx"
+import { MfrrBalancingCapacityTable } from "@/features/p2h/summary/tables/mfrr-balancing-capacity-table.tsx"
+import { DayAheadTable } from "@/features/p2h/summary/tables/day-ahead-table.tsx"
+import { IntradayTable } from "@/features/p2h/summary/tables/intraday-table.tsx"
+import { NPVAnalysisChart } from "@/features/p2h/summary/charts/npv-analysis-chart.tsx"
+import { RevenueChart } from "@/features/p2h/summary/charts/revenue-chart.tsx"
+import { CostChart } from "@/features/p2h/summary/charts/cost-economic-evaluation-chart.tsx"
 import { Title } from "@/ui/title"
-import { YearlySummaryChartBeks } from "@/features/beks/summary/charts/yearly-summary-chart-beks.tsx"
-import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation-chart-beks.tsx"
-import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks.tsx"
 
-export const SummaryOfResultsBeksView = () => {
+export const SummaryOfResultsP2hView = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const handleBackward = () => {
         navigate({
-            to: "/economic-parameters-beks",
+            to: "/economic-parameters-p2h",
             state: { generalData: location.state.generalData },
         })
     }
@@ -37,11 +37,11 @@ export const SummaryOfResultsBeksView = () => {
             <Stack spacing={1}>
                 <Title style={{fontSize: 24}}>Summary</Title>
                 <YearlySummaryTable />
-                <YearlySummaryChartBeks />
+                <YearlySummaryChart />
                 <Divider style={{ marginBottom: 32, marginTop: 32 }} />
-                <NpvAnalysisChartBeks />
-                <CostProductsChartBeks />
-                <UtilisationChartBeks />
+                <NPVAnalysisChart />
+                <CostProductsChart />
+                <UtilisationChart />
             </Stack>
         </Fragment>
     )
@@ -95,10 +95,10 @@ export const SummaryOfResultsBeksView = () => {
             <Stack spacing={3}>
                 <Title style={{fontSize: 24}}>Rinkų produktų ekonominiai rezultatai</Title>
                 <RevenueTable />
-                <RevenueChartBeks />
+                <RevenueChart />
                 <Divider style={{ marginBottom: 8, marginTop: 32, maxWidth: 768 }} />
                 <CostTable />
-                <CostChartBeks />
+                <CostChart />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <YearlySummary />
             </Stack>
@@ -108,7 +108,6 @@ export const SummaryOfResultsBeksView = () => {
     return (
         <>
             <InfoBanner />
-
             <Stack spacing={2}>
                 <Tabs
                     labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}

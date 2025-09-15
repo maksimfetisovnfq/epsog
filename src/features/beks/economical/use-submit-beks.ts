@@ -470,11 +470,7 @@ export const useSubmitBeks = () => {
 
         mutate({
             parameters: JSON.stringify(payload),
-        }, {
-            onSuccess: (response) => {
-                console.log(response);
-            }
-        });
+        })
 
         navigate({
             to: "/summary-of-results-beks",

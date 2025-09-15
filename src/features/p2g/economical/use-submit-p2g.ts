@@ -436,17 +436,6 @@ export const useSubmitP2g = () => {
         mutationFn: async ({parameters}: { parameters: string }): Promise<P2GApiResponse> => {
             const formData = new FormData();
             formData.append('parameters', parameters);
-
-            // const response = await fetch('https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/p2g', {
-            //     method: 'POST',
-            //     body: formData,
-            // });
-            //
-            // if (!response.ok) {
-            //     throw new Error(`HTTP error! status: ${response.status}`);
-            // }
-            //
-            // return await response.json();
             
             return new Promise((resolve) => resolve(mock));
         },

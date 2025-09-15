@@ -64,16 +64,16 @@ export interface P2GApiResponse {
       };
     };
     economic_results: {
-      revenue_table: Array<{//done
+      revenue_table: Array<{
         Product: string;
         "Value (tūkst. EUR)": number;
       }>;
-      cost_table: Array<{//done
+      cost_table: Array<{
         Product: string;
         "Value (tūkst. EUR)": number;
       }>;
       total_profit: number;
-      yearly_table: Array<{//done
+      yearly_table: Array<{
         YEAR: number;
         "SOH (%)": number;
         "CAPEX (tūkst. EUR)": number;
