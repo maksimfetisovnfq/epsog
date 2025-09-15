@@ -1,5 +1,5 @@
-import { YearlySummaryChart } from "@/features/charts/yearly-summary-chart.tsx"
-import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g.ts"
+import { YearlySummaryChart } from "@/features/charts/yearly-summary-chart"
+import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g"
 
 export const YearlySummaryChartP2g = () => {
     const data = useSummaryP2g()

@@ -25,9 +25,9 @@ export const ErrorPage = ({error}: ErrorComponentProps) => {
             gap: 10,
             py: 20
         }}>
-            <Typography>There was an error during request</Typography>
+            <Typography>Nepavyko įkelti duomenų</Typography>
 
-            <Button variant="contained"  onClick={tryAgain}>Try again</Button>
+            <Button variant="contained"  onClick={tryAgain}>Bandyti dar kartą</Button>
         </Box>
     )
 }

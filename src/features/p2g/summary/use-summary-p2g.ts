@@ -1,5 +1,5 @@
 import { useMutationState } from "@tanstack/react-query"
-import type { P2GApiResponse } from "@/types"
+import type { P2GApiResponse } from "@/features/p2g/types.ts"
 
 export const useSummaryP2g = () => {
     const data = useMutationState({

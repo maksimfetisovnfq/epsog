@@ -1,1 +1,1 @@
-export { SummaryOfResultsP2gPage } from "./summary-of-results-p2g-page"
+export { SummaryOfResultsP2gPage } from "./summary-of-results-p2g-page.tsx"

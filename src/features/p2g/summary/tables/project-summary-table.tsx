@@ -1,8 +1,8 @@
-import { useSummaryP2g } from "../use-summary-p2g.ts"
 import { Table } from "@/ui/tables"
+import { useSummaryP2h } from "@/features/p2h/summary/use-summary-p2h.ts"
 
 export const ProjectSummaryTable = () => {
-    const data = useSummaryP2g()
+    const data = useSummaryP2h()
 
     if (!data) return
 

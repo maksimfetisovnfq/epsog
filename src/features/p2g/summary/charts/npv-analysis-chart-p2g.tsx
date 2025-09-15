@@ -1,5 +1,5 @@
 import { NpvAnalysisChart } from "@/components/charts/npv-analysis-chart"
-import { useSummaryP2g } from "../use-summary-p2g"
+import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g.ts"
 
 export const NpvAnalysisChartP2g = () => {
     const data = useSummaryP2g()
