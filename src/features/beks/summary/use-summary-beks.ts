@@ -1,5 +1,5 @@
 import { useMutationState } from "@tanstack/react-query"
-import type { BeksApiResponse } from "@/beks-response.ts"
+import type { BeksApiResponse } from "@/features/beks/types.ts"
 
 export const useSummaryBeks = () => {
     const data = useMutationState({

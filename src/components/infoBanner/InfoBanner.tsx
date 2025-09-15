@@ -33,8 +33,6 @@ export const InfoBanner = () => {
                         Pirmuoju etapu, atsižvelgiant į techninius apribojimus, įvertinamas įrenginio dalyvavimas dienos
                         prieš rinkoje bei balansavimo pajėgumų aukcione.
                     </div>
-
-                    <div>Daugiau</div>
                 </div>
             </div>
         </>

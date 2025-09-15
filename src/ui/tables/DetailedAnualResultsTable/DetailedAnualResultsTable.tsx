@@ -46,4 +46,3 @@ export const DetailedAnualResultsTable = ({ data, visibleColumns }: DetailedAnua
     </table>
   );
 };
-

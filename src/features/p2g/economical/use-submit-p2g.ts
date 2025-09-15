@@ -1,8 +1,9 @@
 import {useMutation} from "@tanstack/react-query";
 import {useLocation, useNavigate} from "@tanstack/react-router";
 import {getProductaiValues} from "@/components/productai-select";
-import type {P2GApiResponse} from "@/types";
 import type {EconomicalP2gParametersSchema} from "./economical-parameters-p2g-schema";
+import type { P2GApiResponse } from "@/features/p2g/types.ts"
+import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
 
 const mock: P2GApiResponse = {
     "aggregated": {
@@ -448,31 +449,31 @@ export const useSubmitP2g = () => {
         if (!generalParams || !technicalParams) return
 
         const payload = {
-            "Q_max": technicalParams.Q_max,
-            "reaction_time_d": technicalParams.reaction_time_d,
-            "reaction_time_u": technicalParams.reaction_time_u,
-            "electrolyzer_tech": "PEM",
-            "eta_H2": technicalParams.eta_H2,
-            "T0": technicalParams.T0,
-            "p0": technicalParams.p0,
-            "eta_C": technicalParams.eta_C,
-            "CAPEX": economicalParams.CAPEX,
-            "OPEX": economicalParams.OPEX,
-            "P_H2": economicalParams.P_H2,
-            "discount_rate": economicalParams.discount_rate,
-            "number_of_years": economicalParams.number_of_years,
-            "provider": generalParams.provider,
-            "P_FCR_CAP_BSP": economicalParams.P_FCR_CAP_BSP,
-            "P_aFRRu_CAP_BSP": economicalParams.P_aFRRu_CAP_BSP,
-            "P_aFRRd_CAP_BSP": economicalParams.P_aFRRd_CAP_BSP,
-            "P_mFRRu_CAP_BSP": economicalParams.P_mFRRu_CAP_BSP,
-            "P_mFRRd_CAP_BSP": economicalParams.P_mFRRd_CAP_BSP,
-            "P_aFRRu_BSP": economicalParams.P_aFRRu_BSP,
-            "P_aFRRd_BSP": economicalParams.P_aFRRd_BSP,
-            "P_mFRRu_BSP": economicalParams.P_mFRRu_BSP,
-            "P_mFRRd_BSP": economicalParams.P_mFRRd_BSP,
-            "Sector": generalParams.sector,
-            "produktai": getProductaiValues(technicalParams.service_type),
+            Q_max: technicalParams.Q_max,
+            reaction_time_d: getReactionTimeValue(technicalParams.reaction_time_d),
+            reaction_time_u: getReactionTimeValue(technicalParams.reaction_time_u),
+            electrolyzer_tech: "PEM",
+            eta_H2: technicalParams.eta_H2,
+            T0: technicalParams.T0,
+            p0: technicalParams.p0,
+            eta_C: technicalParams.eta_C,
+            CAPEX: economicalParams.CAPEX,
+            OPEX: economicalParams.OPEX,
+            P_H2: economicalParams.P_H2,
+            discount_rate: economicalParams.discount_rate,
+            number_of_years: economicalParams.number_of_years,
+            provider: generalParams.provider,
+            P_FCR_CAP_BSP: economicalParams.P_FCR_CAP_BSP,
+            P_aFRRu_CAP_BSP: economicalParams.P_aFRRu_CAP_BSP,
+            P_aFRRd_CAP_BSP: economicalParams.P_aFRRd_CAP_BSP,
+            P_mFRRu_CAP_BSP: economicalParams.P_mFRRu_CAP_BSP,
+            P_mFRRd_CAP_BSP: economicalParams.P_mFRRd_CAP_BSP,
+            P_aFRRu_BSP: economicalParams.P_aFRRu_BSP,
+            P_aFRRd_BSP: economicalParams.P_aFRRd_BSP,
+            P_mFRRu_BSP: economicalParams.P_mFRRu_BSP,
+            P_mFRRd_BSP: economicalParams.P_mFRRd_BSP,
+            Sector: generalParams.concentratorName,
+            produktai: getProductaiValues(technicalParams.service_type),
         }
 
         mutate({

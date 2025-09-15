@@ -35,7 +35,7 @@ export const SummaryOfResultsBeksView = () => {
     const summaryTab = (
         <Fragment key={1}>
             <Stack spacing={1}>
-                <Title style={{fontSize: 24}}>Summary</Title>
+                <Title style={{ fontSize: 24 }}>Summary</Title>
                 <YearlySummaryTable />
                 <YearlySummaryChartBeks />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -81,7 +81,7 @@ export const SummaryOfResultsBeksView = () => {
     const marketTab = (
         <Fragment key={2}>
             <Stack spacing={2}>
-                <Title style={{fontSize: 24}}>Rinkos duomenys</Title>
+                <Title style={{ fontSize: 24 }}>Rinkos duomenys</Title>
                 <Tabs
                     labels={["Balansavimo pajėgumų rinka", "Balansavimo energijos rinka", "Elektros energijos prekyba"]}
                     content={[balancingCapacityTab, BalancingEnergyTab, ElectricityTradeTab]}
@@ -93,7 +93,7 @@ export const SummaryOfResultsBeksView = () => {
     const economicTab = (
         <Fragment key={3}>
             <Stack spacing={3}>
-                <Title style={{fontSize: 24}}>Rinkų produktų ekonominiai rezultatai</Title>
+                <Title style={{ fontSize: 24 }}>Rinkų produktų ekonominiai rezultatai</Title>
                 <RevenueTable />
                 <RevenueChartBeks />
                 <Divider style={{ marginBottom: 8, marginTop: 32, maxWidth: 768 }} />
@@ -107,9 +107,9 @@ export const SummaryOfResultsBeksView = () => {
 
     return (
         <>
-            <InfoBanner />
-
             <Stack spacing={2}>
+                <InfoBanner />
+
                 <Tabs
                     labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
                     content={[summaryTab, marketTab, economicTab]}

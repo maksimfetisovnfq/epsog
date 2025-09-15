@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import type { EconomicalBeksParametersSchema } from "@/features/beks/economical/economical-parameters-schema.ts"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
-import type { BeksApiResponse } from "@/beks-response.ts"
+import type { BeksApiResponse } from "@/features/beks/types.ts"
 
 const mock: BeksApiResponse = {
     aggregated: {
@@ -424,13 +424,14 @@ const mock: BeksApiResponse = {
 export const useSubmitBeks = () => {
         const navigate = useNavigate()
         const location = useLocation()
-    
+
         const { mutate, ...rest } = useMutation<BeksApiResponse, Error, { parameters: string }>({
             mutationKey: ["beks"],
             mutationFn: async ({ parameters }: { parameters: string }): Promise<BeksApiResponse> => {
-                const formData = new FormData()
+                console.log("Request Payload:", parameters); // Log the request payload
+                const formData = new FormData();
                 formData.append("parameters", parameters)
-    
+
                 return new Promise((resolve) => resolve(mock))
             },
         })
@@ -455,7 +456,8 @@ export const useSubmitBeks = () => {
             OPEX_C: economicalParams.OPEX_C,
             discount_rate: economicalParams.discount_rate,
             number_of_years: economicalParams.number_of_years,
-            provider: generalParams?.provider ?? "ESO",
+            provider: generalParams?.provider,
+            Sector: generalParams?.concentratorName,
             P_FCR_CAP_BSP: economicalParams.P_FCR_CAP_BSP,
             P_aFRRu_CAP_BSP: economicalParams.P_aFRRu_CAP_BSP,
             P_aFRRd_CAP_BSP: economicalParams.P_aFRRd_CAP_BSP,

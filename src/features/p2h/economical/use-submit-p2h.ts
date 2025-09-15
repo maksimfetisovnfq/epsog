@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "@tanstack/react-router"
 import type { EconomicalP2hParametersSchema } from "./economical-parameters-p2h-schema"
 import { getProductaiValues } from "@/components/productai-select"
 import type { P2hApiResponse } from "@/features/p2h/types.ts"
+import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
 
 const mock: P2hApiResponse = {
     aggregated: {
@@ -534,9 +535,9 @@ export const useSubmitP2h = () => {
     const { mutate, ...rest } = useMutation({
         mutationKey: ["p2h"],
         mutationFn: async ({ parameters }: { parameters: string }) => {
-            // const formData = new FormData()
-            // formData.append("parameters", parameters)
-            //
+            const formData = new FormData()
+            formData.append("parameters", parameters)
+
             // const response = await fetch(
             //     "https://p2x-container-app.wonderfulpebble-6684d847.westeurope.azurecontainerapps.io/p2h",
             //     {
@@ -550,7 +551,7 @@ export const useSubmitP2h = () => {
             // }
             //
             // return await response.json()
-            return new Promise((resolve) => resolve(mock))
+             return new Promise((resolve) => resolve(mock))
         },
     })
 
@@ -563,8 +564,8 @@ export const useSubmitP2h = () => {
         const payload = {
             Q_yearly: technicalParams.Q_yearly,
             Q_max_HP: technicalParams.Q_max_HP,
-            reaction_time_d: technicalParams.reaction_time_d,
-            reaction_time_u: technicalParams.reaction_time_u,
+            reaction_time_d: getReactionTimeValue(technicalParams.reaction_time_d),
+            reaction_time_u: getReactionTimeValue(technicalParams.reaction_time_u),
             T_HP: technicalParams.T_HP,
             Q_max_BOILER: technicalParams.Q_max_BOILER,
             P_FUEL: technicalParams.P_FUEL,
@@ -591,7 +592,7 @@ export const useSubmitP2h = () => {
             P_aFRRd_BSP: data.P_aFRRd_BSP,
             P_mFRRu_BSP: data.P_mFRRu_BSP,
             P_mFRRd_BSP: data.P_mFRRd_BSP,
-            Sector: generalParams.sector,
+            Sector: generalParams.concentratorName,
             County: generalParams.country,
             produktai: getProductaiValues(technicalParams.service_type),
         }
