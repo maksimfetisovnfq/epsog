@@ -11,7 +11,7 @@ export const DayAheadTable = () => {
             dataSource: [
                 {
                     key: "upward_volume",
-                    parameter: "Nupirkta",
+                    parameter: "VOLUME",
                     value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.value}
                     ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.unit}`,
                 },
@@ -21,7 +21,7 @@ export const DayAheadTable = () => {
             dataSource: [
                 {
                     key: "upward_utilisation",
-                    parameter: "Nupirkta",
+                    parameter: "% OF TIME",
                     value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.percentage_of_time.purchase.value} 
                     ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.percentage_of_time.purchase.unit}`,
                 },
@@ -31,7 +31,7 @@ export const DayAheadTable = () => {
             dataSource: [
                 {
                     key: "upward_revenue",
-                    parameter: "Sąnaudos",
+                    parameter: "COST",
                     value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.value} 
                     ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.unit}`,
                 },

@@ -20,6 +20,7 @@ import { DayAheadTable } from "./tables/day-ahead-table"
 import { RevenueChartP2g } from "@/features/p2g/summary/charts/revenue-chart-p2g.tsx"
 import { CostChartP2g } from "@/features/p2g/summary/charts/cost-economic-evaluation-chart-p2g.tsx"
 import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table.tsx"
+import { HydrogenSalesTable } from "@/features/p2g/summary/tables/hydrogen-sales-table.tsx"
 
 export const SummaryOfResultsP2gView = () => {
     const navigate = useNavigate()
@@ -71,7 +72,14 @@ export const SummaryOfResultsP2gView = () => {
         <Fragment key={3}>
             <Stack spacing={0}>
                 <DayAheadTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
+            </Stack>
+        </Fragment>
+    )
+
+    const FourthTab = (
+        <Fragment key={4}>
+            <Stack spacing={0}>
+                <HydrogenSalesTable />
             </Stack>
         </Fragment>
     )
@@ -81,8 +89,8 @@ export const SummaryOfResultsP2gView = () => {
             <Stack spacing={2}>
                 <Title style={{ fontSize: 24 }}>Rinkos duomenys</Title>
                 <Tabs
-                    labels={["Balansavimo pajėgumų rinka", "Balansavimo energijos rinka", "Elektros energijos prekyba"]}
-                    content={[balancingCapacityTab, BalancingEnergyTab, ElectricityTradeTab]}
+                    labels={["Balansavimo pajėgumų rinka", "Balansavimo energijos rinka", "Elektros energijos prekyba", "FourthTab"]}
+                    content={[balancingCapacityTab, BalancingEnergyTab, ElectricityTradeTab, FourthTab]}
                 />
             </Stack>
         </Fragment>
