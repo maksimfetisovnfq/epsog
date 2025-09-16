@@ -20,15 +20,14 @@ export const YearlySummaryTable = () => {
     })
 
     return (
-            <Table
-                title="Metiniai rezultatai"
-                hideHead={true}
-                dataSource={translatedData}
-                columns={[
-                    { title: "Metric", dataIndex: "Metric" },
-                    { title: "Value", dataIndex: "Value" },
-                ]}
-            />
-        
+        <Table
+            title="Metiniai rezultatai"
+            hideHead={true}
+            dataSource={translatedData}
+            columns={[
+                { title: "Metric", dataIndex: "Metric" },
+                { title: "Value", dataIndex: "Value" },
+            ]}
+        />
     )
 }

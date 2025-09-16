@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react"
 
 // Types for table components
 export interface Column {

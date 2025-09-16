@@ -1,10 +1,10 @@
-import { Table } from "@/ui/tables";
+import { Table } from "@/ui/tables"
 import { useSummaryDsr } from "@/features/dsr/summary/use-summary-dsr.ts"
 
 export const FcrBalancingCapacityTable = () => {
-    const data = useSummaryDsr();
+    const data = useSummaryDsr()
 
-    if (!data) return null;
+    if (!data) return null
 
     const translatedData = [
         {
@@ -27,7 +27,7 @@ export const FcrBalancingCapacityTable = () => {
             Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.value} 
             ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.unit}`,
         },
-    ];
+    ]
 
     return (
         <Table
@@ -40,5 +40,5 @@ export const FcrBalancingCapacityTable = () => {
                 { title: "Value", dataIndex: "Value" },
             ]}
         />
-    );
-};
+    )
+}

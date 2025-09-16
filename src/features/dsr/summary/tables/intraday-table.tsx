@@ -68,8 +68,8 @@ export const IntradayTable = () => {
                         index === 0
                             ? "Energijos prekybos apimtys"
                             : index === 1
-                            ? "Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                            : "Tikėtinos pajamos / sąnaudos"
+                              ? "Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
+                              : "Tikėtinos pajamos / sąnaudos"
                     }
                 />
             ))}

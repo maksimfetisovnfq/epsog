@@ -13,7 +13,7 @@ export const Title = ({ variant, sx, ...props }: TypographyProps) => {
             sx={{
                 ...sx,
                 ...(variant === "h3" ? h3Sx : {}),
-            }} 
+            }}
             variant={variant}
         />
     )

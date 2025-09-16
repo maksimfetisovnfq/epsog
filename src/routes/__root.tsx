@@ -1,7 +1,7 @@
-import {createRootRoute, Outlet} from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-import {Layout} from "../components/layout/layout.tsx";
-import { Navigation } from '../components/navigation/navigation.tsx';
+import { createRootRoute, Outlet } from "@tanstack/react-router"
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools"
+import { Layout } from "../components/layout/layout.tsx"
+import { Navigation } from "../components/navigation/navigation.tsx"
 
 const Component = () => {
     return (
@@ -14,5 +14,5 @@ const Component = () => {
 }
 
 export const Route = createRootRoute({
-    component: Component
+    component: Component,
 })

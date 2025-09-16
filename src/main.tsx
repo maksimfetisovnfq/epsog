@@ -1,7 +1,6 @@
 import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
 import { createRouter, RouterProvider } from "@tanstack/react-router"
-import { CalculatorTypeProvider } from "./context/CalculatorTypeContext"
 import { routeTree } from "./routeTree.gen"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import type { GeneralDataSchema } from "./features/general-data/general-data-schema"
@@ -48,11 +47,9 @@ if (!rootElement.innerHTML) {
     root.render(
         <StrictMode>
             <QueryClientProvider client={queryClient}>
-                <CalculatorTypeProvider>
-                    <RouterProvider router={router} />
-                    <CssBaseline/>
-                    <GlobalStyles/>
-                </CalculatorTypeProvider>
+                <RouterProvider router={router} />
+                <CssBaseline />
+                <GlobalStyles />
             </QueryClientProvider>
         </StrictMode>
     )

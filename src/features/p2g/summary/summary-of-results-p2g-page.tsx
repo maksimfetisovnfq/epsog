@@ -17,5 +17,5 @@ export const SummaryOfResultsP2gPage = () => {
 
     return <Layout>
         <SummaryOfResultsP2gView />
-    </Layout>
+    </Layout>   
 }

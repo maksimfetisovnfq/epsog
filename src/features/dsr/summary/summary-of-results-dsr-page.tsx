@@ -15,7 +15,9 @@ export const SummaryOfResultsDsrPage = () => {
 
     if (isMutating) return <Loader />
 
-    return <Layout>
-        <SummaryOfResultsDsrView />
-    </Layout>
+    return (
+        <Layout>
+            <SummaryOfResultsDsrView />
+        </Layout>
+    )
 }

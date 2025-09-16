@@ -2,11 +2,8 @@ import { z } from "zod"
 import { Productai } from "@/components/productai-select"
 
 const hourlyPowerFields = Object.fromEntries(
-        Array.from({ length: 24 }, (_, i) => [
-            i.toString(),
-            z.number().min(0).max(12),
-        ]),
-    )
+    Array.from({ length: 24 }, (_, i) => [i.toString(), z.number().min(0).max(12)])
+)
 
 export const technicalParametersDsrSchema = z.object({
     Q_avg: z.number().min(0).max(1000000),
@@ -27,10 +24,5 @@ export const defaultTechnicalParametersDsr: TechnicalDsrParametersSchema = {
     T_shift: 2,
     reaction_time: 1,
     service_type: Productai.UP,
-    hourly_power: Object.fromEntries(
-            Array.from({ length: 24 }, (_, i) => [
-                i.toString(),
-                3,
-            ]),
-        ),
-};
+    hourly_power: Object.fromEntries(Array.from({ length: 24 }, (_, i) => [i.toString(), 3])),
+}

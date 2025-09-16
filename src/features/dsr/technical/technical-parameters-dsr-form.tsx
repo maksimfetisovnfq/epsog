@@ -1,14 +1,14 @@
-import { type ComponentProps, type ForwardedRef, forwardRef, type ReactNode, useImperativeHandle } from 'react'
+import { type ComponentProps, type ForwardedRef, forwardRef, type ReactNode, useImperativeHandle } from "react"
 import {
     type DefaultValues,
+    type FieldValues,
     FormProvider,
     type SubmitHandler,
     useForm,
     type UseFormSetError,
-    type FieldValues // 1. Import FieldValues
-} from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { ZodType } from 'zod'
+} from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { ZodType } from "zod"
 
 export type FormValues = FieldValues
 
@@ -17,10 +17,10 @@ export type BaseFormProps<T extends FormValues> = {
     validationSchema: ZodType<T>
     onSubmit: SubmitHandler<T>
     onBackward?: () => void
-} & Omit<ComponentProps<'form'>, 'onSubmit' | 'ref'>
+} & Omit<ComponentProps<"form">, "onSubmit" | "ref">
 
 export type SetErrorRef<T extends FormValues> = {
-    setError: UseFormSetError<T>;
+    setError: UseFormSetError<T>
 }
 
 const InnerForm = <T extends FormValues>(
@@ -42,7 +42,7 @@ const InnerForm = <T extends FormValues>(
 
     const handleChange = () => {
         if (!methods.formState.errors.root) return
-        methods.clearErrors('root')
+        methods.clearErrors("root")
     }
 
     return (
