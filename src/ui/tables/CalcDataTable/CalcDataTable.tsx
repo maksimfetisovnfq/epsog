@@ -1,4 +1,3 @@
-import React from "react"
 import { Table } from "../Table"
 
 interface CalcDataTableProps {
@@ -12,31 +11,30 @@ interface CalcDataTableProps {
     }>
 }
 
-export const CalcDataTable: React.FC<CalcDataTableProps> = ({ dataSource = [], source = "Header" }) => {
-    const calcDataTableColumns = [
-        {
-            title: source,
-            dataIndex: "parameter",
-            key: "combined-header",
-            colSpan: 2,
-        },
-        {
-            title: "Value",
-            dataIndex: "value",
-            key: "value",
-            colSpan: 0,
-            render: (row: { key: string; parameter: string; value: string }) => {
-                const text = row.value
-                const num = parseFloat(text)
-                const isNegative = !isNaN(num) && num < 0
-                return <span style={isNegative ? { color: "#FF3232" } : {}}>{text}</span>
-            },
-        },
-    ]
+export const CalcDataTable = ({ dataSource = [], source = "Header" }: CalcDataTableProps) => {
 
     return (
         <div>
-            <Table columns={calcDataTableColumns} dataSource={dataSource} boldHeaders={true} />
+            <Table columns={[
+                {
+                    title: source,
+                    dataIndex: "parameter",
+                    key: "combined-header",
+                    colSpan: 2,
+                },
+                {
+                    title: "Value",
+                    dataIndex: "value",
+                    key: "value",
+                    colSpan: 0,
+                    render: (row) => {
+                        const text = row.value
+                        const num = parseFloat( String(text))
+                        const isNegative = !isNaN(num) && num < 0
+                        return <span style={isNegative ? { color: "#FF3232" } : {}}>{String(text)}</span>
+                    },
+                },
+            ]} dataSource={dataSource} boldHeaders={true} />
         </div>
     )
 }

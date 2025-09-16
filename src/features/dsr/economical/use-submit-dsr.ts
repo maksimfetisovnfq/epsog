@@ -543,7 +543,7 @@ export const useSubmitDsr = () => {
             P_mFRRd_BSP: economicalParams.P_mFRRd_BSP,
             Sector: generalParams.concentratorName,
             produktai: getProductaiValues(technicalParams.service_type, false),
-            hourly_power: technicalParams.hourly_power,
+            // hourly_power: technicalParams.,
         }
 
         mutate({
@@ -551,7 +551,7 @@ export const useSubmitDsr = () => {
         })
 
         navigate({
-            to: "/summary-of-results-dsr",
+            to: "/dsr/summary-of-results",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

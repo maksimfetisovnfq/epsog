@@ -27,7 +27,7 @@ export const SummaryOfResultsBeksView = () => {
     const location = useLocation()
     const handleBackward = () => {
         navigate({
-            to: "/economic-parameters-beks",
+            to: "/beks/economic-parameters",
             state: { generalData: location.state.generalData },
         })
     }

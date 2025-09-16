@@ -9,7 +9,7 @@ export const EconomicParametersP2gPage = () => {
     const generalData = location.state.generalData;
     
     if (!technicalParameters || !generalData) {
-        return <Navigate to="/technical-parameters-p2g" state={location.state} />
+        return <Navigate to="/p2g/technical-parameters" state={location.state} />
     }
 
     return (

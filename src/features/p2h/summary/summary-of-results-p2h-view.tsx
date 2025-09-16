@@ -28,7 +28,7 @@ export const SummaryOfResultsP2hView = () => {
     const location = useLocation()
     const handleBackward = () => {
         navigate({
-            to: "/economic-parameters-p2h",
+            to: "/p2h/economic-parameters",
             state: { generalData: location.state.generalData },
         })
     }

@@ -602,7 +602,7 @@ export const useSubmitP2h = () => {
         })
 
         navigate({
-            to: "/summary-of-results-p2h",
+            to: "/p2h/summary-of-results",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

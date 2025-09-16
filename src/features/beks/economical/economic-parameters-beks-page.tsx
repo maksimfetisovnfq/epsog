@@ -9,7 +9,7 @@ export const EconomicParametersBeksPage = () => {
     const generalData = location.state.generalData;
     
     if (!technicalParameters || !generalData) {
-        return <Navigate to="/technical-parameters-beks" state={location.state} />
+        return <Navigate to="/beks/technical-parameters" state={location.state} />
     }
 
     return (

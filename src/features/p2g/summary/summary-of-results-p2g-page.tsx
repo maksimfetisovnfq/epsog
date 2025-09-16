@@ -10,7 +10,7 @@ export const SummaryOfResultsP2gPage = () => {
     const isMutating = useIsMutating({ mutationKey: ["p2g"] })
 
     if (!p2gEconomicalParameters) {
-        return <Navigate to="/economic-parameters-p2g" state={location.state} />
+        return <Navigate to="/p2g/economic-parameters" state={location.state} />
     }
 
     if (isMutating) return <Loader />

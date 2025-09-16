@@ -1,66 +1,56 @@
-import { type ComponentProps, type ForwardedRef, forwardRef, type ReactNode, useImperativeHandle } from "react"
+import { Form, FormInput, ServiceTypeSelect } from "@/components/form"
 import {
-    type DefaultValues,
-    type FieldValues,
-    FormProvider,
-    type SubmitHandler,
-    useForm,
-    type UseFormSetError,
-} from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ZodType } from "zod"
+    defaultTechnicalParametersDsr,
+    type TechnicalDsrParametersSchema,
+    technicalParametersDsrSchema,
+} from "./technical-parameters-dsr-schema.ts"
+import { useLocation, useNavigate } from "@tanstack/react-router"
+import { Stack } from "@mui/material"
+import { FormNavigation } from "@/components/navigation/form-navigation"
+import Divider from "@mui/material/Divider"
+import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 
-export type FormValues = FieldValues
+export const TechnicalParametersDsrForm = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
 
-export type BaseFormProps<T extends FormValues> = {
-    defaultValues: DefaultValues<T>
-    validationSchema: ZodType<T>
-    onSubmit: SubmitHandler<T>
-    onBackward?: () => void
-} & Omit<ComponentProps<"form">, "onSubmit" | "ref">
+    const handleSubmit = (data: TechnicalDsrParametersSchema) => {
+        navigate({
+            to: "/dsr/economic-parameters",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: { dsr: data },
+            },
+        })
+    }
 
-export type SetErrorRef<T extends FormValues> = {
-    setError: UseFormSetError<T>
-}
-
-const InnerForm = <T extends FormValues>(
-    { defaultValues, validationSchema, onSubmit, onBackward, children, ...props }: BaseFormProps<T>,
-    ref: ForwardedRef<SetErrorRef<T>>
-) => {
-    const methods = useForm({
-        defaultValues,
-        resolver: zodResolver(validationSchema),
-    })
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            setError: methods.setError,
-        }),
-        [methods]
-    )
-
-    const handleChange = () => {
-        if (!methods.formState.errors.root) return
-        methods.clearErrors("root")
+    const handleBackward = () => {
+        navigate({ to: "/general-data" })
     }
 
     return (
-        <FormProvider {...methods}>
-            <form {...props} noValidate onChange={handleChange} onSubmit={methods.handleSubmit(onSubmit)}>
-                {onBackward && (
-                    <button type="button" onClick={onBackward} style={{ marginRight: 8 }}>
-                        Back
-                    </button>
-                )}
-                {children}
-            </form>
-        </FormProvider>
+        <Form
+            onSubmit={handleSubmit}
+            validationSchema={technicalParametersDsrSchema}
+            defaultValues={location.state?.technicalParameters?.dsr || defaultTechnicalParametersDsr}
+        >
+            <Stack spacing={3}>
+                <FormInput name="Q_avg" title="Q_avg" description="Q_avg" type="number" />
+                <FormInput name="Q_min" title="Q_min" description="Q_min" type="number" />
+                <FormInput name="Q_max" title="Q_max" description="Q_max" type="number" />
+                <FormInput name="T_shift" title="T_shift" description="T_shift" type="number" />
+
+                <Divider />
+                {Array.from({ length: 24 }).map((_, i) => (
+                    <FormInput name={`hourly_power_${i}`} title={`hourly_power ${i}`} type="number" />
+                ))}
+
+                <ServiceTypeSelect />
+
+                <ReactionTimeSlider field={"reaction_time"} label={"reaction_time"} />
+            </Stack>
+
+            <FormNavigation handleBackward={handleBackward} />
+        </Form>
     )
 }
-
-export default forwardRef(InnerForm) as <T extends FormValues>(
-    props: BaseFormProps<T> & {
-        ref?: ForwardedRef<SetErrorRef<T>>
-    }
-) => ReactNode

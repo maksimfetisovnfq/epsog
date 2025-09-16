@@ -1,5 +1,5 @@
 import {NavLink} from "./nav-link.tsx";
-import {type HistoryState, useLocation} from "@tanstack/react-router";
+import {type HistoryState, useLocation, useRouterState} from "@tanstack/react-router";
 
 const links = [
     { to: '/general-data', label: 'Bendrieji duomenys' },
@@ -28,7 +28,9 @@ const isPageAccessible = (pagePath: string, state: HistoryState): boolean => {
 
 export const Navigation = () => {
     const location = useLocation();
-
+const state = useRouterState()
+    console.log(state)
+    
     return (
         <nav className="p-2 flex gap-2" style={{
             display: "flex",
@@ -42,7 +44,7 @@ export const Navigation = () => {
                 return (
                     <NavLink
                         key={link.to}
-                        to={link.to === '/general-data' ? link.to : `${link.to}-${"beks"}`}
+                        to={link.to === '/general-data' ? link.to : `${link.to}-${""}`}
                         state={location.state}
                         disabled={!isAccessible}
                         isHome={isHome}

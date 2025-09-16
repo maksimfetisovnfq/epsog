@@ -10,7 +10,7 @@ export const SummaryOfResultsBeksPage = () => {
     const isMutating = useIsMutating({ mutationKey: ["beks"] })
 
     if (!beksEconomicalParameters) {
-        return <Navigate to="/economic-parameters-beks" state={location.state} />
+        return <Navigate to="/beks/economic-parameters" state={location.state} />
     }
 
     if (isMutating) return <Loader />

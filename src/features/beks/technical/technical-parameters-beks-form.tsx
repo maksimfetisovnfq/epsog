@@ -90,7 +90,7 @@ export const TechnicalParametersBeksForm = () => {
         const submitData = {...data, reaction_time: reactionTime};
 
         navigate({
-            to: "/economic-parameters-beks",
+            to: "/beks/economic-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: {beks: submitData},

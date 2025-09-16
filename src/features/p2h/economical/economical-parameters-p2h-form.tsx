@@ -12,7 +12,7 @@ export const EconomicalParametersP2hForm = () => {
 
     const handleBackward = () => {
         navigate({
-            to: "/technical-parameters-p2h",
+            to: "/p2h/technical-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

@@ -444,7 +444,7 @@ export const useSubmitP2g = () => {
         })
 
         navigate({
-            to: "/summary-of-results-p2g",
+            to: "/p2g/summary-of-results",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

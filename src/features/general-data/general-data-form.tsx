@@ -178,13 +178,13 @@ export const GeneralDataForm = () => {
         console.log("Form State:", data)
 
         if (data.calculatorType === CalculatorType.P2H) {
-            navigate({ to: "/technical-parameters-p2h", state: { generalData: data } })
+            navigate({ to: "/p2h/technical-parameters", state: { generalData: data } })
         } else if (data.calculatorType === CalculatorType.BEKS) {
-            navigate({ to: "/technical-parameters-beks", state: { generalData: data } })
+            navigate({ to: "/beks/technical-parameters", state: { generalData: data } })
         } else if (data.calculatorType === CalculatorType.P2G) {
-            navigate({ to: "/technical-parameters-p2g", state: { generalData: data } })
+            navigate({ to: "/p2g/technical-parameters", state: { generalData: data } })
         } else if (data.calculatorType === CalculatorType.DSR) {
-            navigate({ to: "/technical-parameters-dsr", state: { generalData: data } })
+            navigate({ to: "/dsr/technical-parameters", state: { generalData: data } })
         }
     }
 

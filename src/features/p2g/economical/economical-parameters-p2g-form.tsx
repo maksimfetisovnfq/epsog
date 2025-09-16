@@ -14,7 +14,7 @@ export const EconomicalParametersP2gForm = () => {
 
     const handleBackward = () => {
         navigate({
-            to: "/technical-parameters-p2g",
+            to: "/p2g/technical-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

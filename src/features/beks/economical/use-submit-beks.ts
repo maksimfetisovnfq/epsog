@@ -475,7 +475,7 @@ export const useSubmitBeks = () => {
         })
 
         navigate({
-            to: "/summary-of-results-beks",
+            to: "/beks/summary-of-results",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

@@ -10,7 +10,7 @@ export const SummaryOfResultsDsrPage = () => {
     const isMutating = useIsMutating({ mutationKey: ["dsr"] })
 
     if (!dsrEconomicalParameters) {
-        return <Navigate to="/economic-parameters-dsr" state={location.state} />
+        return <Navigate to="/dsr/economic-parameters" state={location.state} />
     }
 
     if (isMutating) return <Loader />

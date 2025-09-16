@@ -10,10 +10,10 @@ export const Title = ({ variant, sx, ...props }: TypographyProps) => {
     return (
         <Typography
             {...props}
-            sx={{
-                ...sx,
-                ...(variant === "h3" ? h3Sx : {}),
-            }}
+            sx={[
+                ...(Array.isArray(sx) ? sx : sx ? [sx] : []),
+                variant === "h3" && h3Sx,
+            ]}
             variant={variant}
         />
     )

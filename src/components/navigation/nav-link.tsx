@@ -1,4 +1,5 @@
 import {type HistoryState, Link} from "@tanstack/react-router";
+//@ts-expect-error TODO 
 import IndicatorSvg from './indicator.svg?react';
 
 type Props = {

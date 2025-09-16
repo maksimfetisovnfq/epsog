@@ -16,7 +16,7 @@ export const TechnicalParametersP2gForm = () => {
 
     const handleSubmit = (data: TechnicalP2gParametersSchema) => {
         navigate({
-            to: "/economic-parameters-p2g",
+            to: "/p2g/economic-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: { p2g: data },

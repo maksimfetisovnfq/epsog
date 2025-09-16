@@ -1,9 +1,7 @@
 import { z } from "zod"
 import { Productai } from "@/components/productai-select"
 
-const hourlyPowerFields = Object.fromEntries(
-    Array.from({ length: 24 }, (_, i) => [i.toString(), z.number().min(0).max(12)])
-)
+const powerHours = z.number().min(0).max(12)
 
 export const technicalParametersDsrSchema = z.object({
     Q_avg: z.number().min(0).max(1000000),
@@ -12,7 +10,30 @@ export const technicalParametersDsrSchema = z.object({
     T_shift: z.number().min(0).max(1000000),
     reaction_time: z.number().min(0),
     service_type: z.nativeEnum(Productai),
-    hourly_power: z.object(hourlyPowerFields),
+    hourly_power_0: powerHours,
+    hourly_power_1: powerHours,
+    hourly_power_2: powerHours,
+    hourly_power_3: powerHours,
+    hourly_power_4: powerHours,
+    hourly_power_5: powerHours,
+    hourly_power_6: powerHours,
+    hourly_power_7: powerHours,
+    hourly_power_8: powerHours,
+    hourly_power_9: powerHours,
+    hourly_power_10: powerHours,
+    hourly_power_11: powerHours,
+    hourly_power_12: powerHours,
+    hourly_power_13: powerHours,
+    hourly_power_14: powerHours,
+    hourly_power_15: powerHours,
+    hourly_power_16: powerHours,
+    hourly_power_17: powerHours,
+    hourly_power_18: powerHours,
+    hourly_power_19: powerHours,
+    hourly_power_20: powerHours,
+    hourly_power_21: powerHours,
+    hourly_power_22: powerHours,
+    hourly_power_23: powerHours,
 })
 
 export type TechnicalDsrParametersSchema = z.infer<typeof technicalParametersDsrSchema>
@@ -24,5 +45,29 @@ export const defaultTechnicalParametersDsr: TechnicalDsrParametersSchema = {
     T_shift: 2,
     reaction_time: 1,
     service_type: Productai.UP,
-    hourly_power: Object.fromEntries(Array.from({ length: 24 }, (_, i) => [i.toString(), 3])),
+
+    hourly_power_0: 3.0,
+    hourly_power_1: 3.0,
+    hourly_power_2: 3.0,
+    hourly_power_3: 3.0,
+    hourly_power_4: 3.5,
+    hourly_power_5: 4.0,
+    hourly_power_6: 5.0,
+    hourly_power_7: 6.0,
+    hourly_power_8: 7.0,
+    hourly_power_9: 7.5,
+    hourly_power_10: 7.5,
+    hourly_power_11: 7.0,
+    hourly_power_12: 6.5,
+    hourly_power_13: 6.5,
+    hourly_power_14: 7.0,
+    hourly_power_15: 7.5,
+    hourly_power_16: 7.0,
+    hourly_power_17: 6.5,
+    hourly_power_18: 6.0,
+    hourly_power_19: 5.5,
+    hourly_power_20: 5.0,
+    hourly_power_21: 4.5,
+    hourly_power_22: 4.0,
+    hourly_power_23: 3.5,
 }

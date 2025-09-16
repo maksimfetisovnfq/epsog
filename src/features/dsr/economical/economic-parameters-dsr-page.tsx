@@ -9,7 +9,7 @@ export const EconomicParametersDsrPage = () => {
     const generalData = location.state.generalData;
     
     if (!technicalParameters || !generalData) {
-        return <Navigate to="/technical-parameters-dsr" state={location.state} />
+        return <Navigate to="/dsr/technical-parameters" state={location.state} />
     }
 
     return (

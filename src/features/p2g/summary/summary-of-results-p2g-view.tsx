@@ -27,7 +27,7 @@ export const SummaryOfResultsP2gView = () => {
     const location = useLocation()
     const handleBackward = () => {
         navigate({
-            to: "/economic-parameters-p2g",
+            to: "/p2g/economic-parameters",
             state: { generalData: location.state.generalData },
         })
     }

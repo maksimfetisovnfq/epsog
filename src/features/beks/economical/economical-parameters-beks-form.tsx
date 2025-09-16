@@ -42,7 +42,7 @@ export const EconomicalParametersBeksForm = () => {
 
     const handleBackward = () => {
         navigate({
-            to: "/technical-parameters-beks",
+            to: "/beks/technical-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,

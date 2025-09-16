@@ -9,84 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TechnicalParametersP2hRouteImport } from './routes/technical-parameters-p2h'
-import { Route as TechnicalParametersP2gRouteImport } from './routes/technical-parameters-p2g'
-import { Route as TechnicalParametersDsrRouteImport } from './routes/technical-parameters-dsr'
-import { Route as TechnicalParametersBeksRouteImport } from './routes/technical-parameters-beks'
-import { Route as SummaryOfResultsP2hRouteImport } from './routes/summary-of-results-p2h'
-import { Route as SummaryOfResultsP2gRouteImport } from './routes/summary-of-results-p2g'
-import { Route as SummaryOfResultsDsrRouteImport } from './routes/summary-of-results-dsr'
-import { Route as SummaryOfResultsBeksRouteImport } from './routes/summary-of-results-beks'
 import { Route as GeneralDataRouteImport } from './routes/general-data'
-import { Route as EconomicParametersP2hRouteImport } from './routes/economic-parameters-p2h'
-import { Route as EconomicParametersP2gRouteImport } from './routes/economic-parameters-p2g'
-import { Route as EconomicParametersDsrRouteImport } from './routes/economic-parameters-dsr'
-import { Route as EconomicParametersBeksRouteImport } from './routes/economic-parameters-beks'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as P2hTechnicalParametersRouteImport } from './routes/p2h/technical-parameters'
+import { Route as P2hSummaryOfResultsRouteImport } from './routes/p2h/summary-of-results'
+import { Route as P2hEconomicParametersRouteImport } from './routes/p2h/economic-parameters'
+import { Route as P2gTechnicalParametersRouteImport } from './routes/p2g/technical-parameters'
+import { Route as P2gSummaryOfResultsRouteImport } from './routes/p2g/summary-of-results'
+import { Route as P2gEconomicParametersRouteImport } from './routes/p2g/economic-parameters'
+import { Route as DsrTechnicalParametersRouteImport } from './routes/dsr/technical-parameters'
+import { Route as DsrSummaryOfResultsRouteImport } from './routes/dsr/summary-of-results'
+import { Route as DsrEconomicParametersRouteImport } from './routes/dsr/economic-parameters'
+import { Route as BeksTechnicalParametersRouteImport } from './routes/beks/technical-parameters'
+import { Route as BeksSummaryOfResultsRouteImport } from './routes/beks/summary-of-results'
+import { Route as BeksEconomicParametersRouteImport } from './routes/beks/economic-parameters'
 
-const TechnicalParametersP2hRoute = TechnicalParametersP2hRouteImport.update({
-  id: '/technical-parameters-p2h',
-  path: '/technical-parameters-p2h',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TechnicalParametersP2gRoute = TechnicalParametersP2gRouteImport.update({
-  id: '/technical-parameters-p2g',
-  path: '/technical-parameters-p2g',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TechnicalParametersDsrRoute = TechnicalParametersDsrRouteImport.update({
-  id: '/technical-parameters-dsr',
-  path: '/technical-parameters-dsr',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TechnicalParametersBeksRoute = TechnicalParametersBeksRouteImport.update({
-  id: '/technical-parameters-beks',
-  path: '/technical-parameters-beks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SummaryOfResultsP2hRoute = SummaryOfResultsP2hRouteImport.update({
-  id: '/summary-of-results-p2h',
-  path: '/summary-of-results-p2h',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SummaryOfResultsP2gRoute = SummaryOfResultsP2gRouteImport.update({
-  id: '/summary-of-results-p2g',
-  path: '/summary-of-results-p2g',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SummaryOfResultsDsrRoute = SummaryOfResultsDsrRouteImport.update({
-  id: '/summary-of-results-dsr',
-  path: '/summary-of-results-dsr',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SummaryOfResultsBeksRoute = SummaryOfResultsBeksRouteImport.update({
-  id: '/summary-of-results-beks',
-  path: '/summary-of-results-beks',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const GeneralDataRoute = GeneralDataRouteImport.update({
   id: '/general-data',
   path: '/general-data',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EconomicParametersP2hRoute = EconomicParametersP2hRouteImport.update({
-  id: '/economic-parameters-p2h',
-  path: '/economic-parameters-p2h',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EconomicParametersP2gRoute = EconomicParametersP2gRouteImport.update({
-  id: '/economic-parameters-p2g',
-  path: '/economic-parameters-p2g',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EconomicParametersDsrRoute = EconomicParametersDsrRouteImport.update({
-  id: '/economic-parameters-dsr',
-  path: '/economic-parameters-dsr',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EconomicParametersBeksRoute = EconomicParametersBeksRouteImport.update({
-  id: '/economic-parameters-beks',
-  path: '/economic-parameters-beks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -94,215 +34,191 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const P2hTechnicalParametersRoute = P2hTechnicalParametersRouteImport.update({
+  id: '/p2h/technical-parameters',
+  path: '/p2h/technical-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const P2hSummaryOfResultsRoute = P2hSummaryOfResultsRouteImport.update({
+  id: '/p2h/summary-of-results',
+  path: '/p2h/summary-of-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const P2hEconomicParametersRoute = P2hEconomicParametersRouteImport.update({
+  id: '/p2h/economic-parameters',
+  path: '/p2h/economic-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const P2gTechnicalParametersRoute = P2gTechnicalParametersRouteImport.update({
+  id: '/p2g/technical-parameters',
+  path: '/p2g/technical-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const P2gSummaryOfResultsRoute = P2gSummaryOfResultsRouteImport.update({
+  id: '/p2g/summary-of-results',
+  path: '/p2g/summary-of-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const P2gEconomicParametersRoute = P2gEconomicParametersRouteImport.update({
+  id: '/p2g/economic-parameters',
+  path: '/p2g/economic-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DsrTechnicalParametersRoute = DsrTechnicalParametersRouteImport.update({
+  id: '/dsr/technical-parameters',
+  path: '/dsr/technical-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DsrSummaryOfResultsRoute = DsrSummaryOfResultsRouteImport.update({
+  id: '/dsr/summary-of-results',
+  path: '/dsr/summary-of-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DsrEconomicParametersRoute = DsrEconomicParametersRouteImport.update({
+  id: '/dsr/economic-parameters',
+  path: '/dsr/economic-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeksTechnicalParametersRoute = BeksTechnicalParametersRouteImport.update({
+  id: '/beks/technical-parameters',
+  path: '/beks/technical-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeksSummaryOfResultsRoute = BeksSummaryOfResultsRouteImport.update({
+  id: '/beks/summary-of-results',
+  path: '/beks/summary-of-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeksEconomicParametersRoute = BeksEconomicParametersRouteImport.update({
+  id: '/beks/economic-parameters',
+  path: '/beks/economic-parameters',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/economic-parameters-beks': typeof EconomicParametersBeksRoute
-  '/economic-parameters-dsr': typeof EconomicParametersDsrRoute
-  '/economic-parameters-p2g': typeof EconomicParametersP2gRoute
-  '/economic-parameters-p2h': typeof EconomicParametersP2hRoute
   '/general-data': typeof GeneralDataRoute
-  '/summary-of-results-beks': typeof SummaryOfResultsBeksRoute
-  '/summary-of-results-dsr': typeof SummaryOfResultsDsrRoute
-  '/summary-of-results-p2g': typeof SummaryOfResultsP2gRoute
-  '/summary-of-results-p2h': typeof SummaryOfResultsP2hRoute
-  '/technical-parameters-beks': typeof TechnicalParametersBeksRoute
-  '/technical-parameters-dsr': typeof TechnicalParametersDsrRoute
-  '/technical-parameters-p2g': typeof TechnicalParametersP2gRoute
-  '/technical-parameters-p2h': typeof TechnicalParametersP2hRoute
+  '/beks/economic-parameters': typeof BeksEconomicParametersRoute
+  '/beks/summary-of-results': typeof BeksSummaryOfResultsRoute
+  '/beks/technical-parameters': typeof BeksTechnicalParametersRoute
+  '/dsr/economic-parameters': typeof DsrEconomicParametersRoute
+  '/dsr/summary-of-results': typeof DsrSummaryOfResultsRoute
+  '/dsr/technical-parameters': typeof DsrTechnicalParametersRoute
+  '/p2g/economic-parameters': typeof P2gEconomicParametersRoute
+  '/p2g/summary-of-results': typeof P2gSummaryOfResultsRoute
+  '/p2g/technical-parameters': typeof P2gTechnicalParametersRoute
+  '/p2h/economic-parameters': typeof P2hEconomicParametersRoute
+  '/p2h/summary-of-results': typeof P2hSummaryOfResultsRoute
+  '/p2h/technical-parameters': typeof P2hTechnicalParametersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/economic-parameters-beks': typeof EconomicParametersBeksRoute
-  '/economic-parameters-dsr': typeof EconomicParametersDsrRoute
-  '/economic-parameters-p2g': typeof EconomicParametersP2gRoute
-  '/economic-parameters-p2h': typeof EconomicParametersP2hRoute
   '/general-data': typeof GeneralDataRoute
-  '/summary-of-results-beks': typeof SummaryOfResultsBeksRoute
-  '/summary-of-results-dsr': typeof SummaryOfResultsDsrRoute
-  '/summary-of-results-p2g': typeof SummaryOfResultsP2gRoute
-  '/summary-of-results-p2h': typeof SummaryOfResultsP2hRoute
-  '/technical-parameters-beks': typeof TechnicalParametersBeksRoute
-  '/technical-parameters-dsr': typeof TechnicalParametersDsrRoute
-  '/technical-parameters-p2g': typeof TechnicalParametersP2gRoute
-  '/technical-parameters-p2h': typeof TechnicalParametersP2hRoute
+  '/beks/economic-parameters': typeof BeksEconomicParametersRoute
+  '/beks/summary-of-results': typeof BeksSummaryOfResultsRoute
+  '/beks/technical-parameters': typeof BeksTechnicalParametersRoute
+  '/dsr/economic-parameters': typeof DsrEconomicParametersRoute
+  '/dsr/summary-of-results': typeof DsrSummaryOfResultsRoute
+  '/dsr/technical-parameters': typeof DsrTechnicalParametersRoute
+  '/p2g/economic-parameters': typeof P2gEconomicParametersRoute
+  '/p2g/summary-of-results': typeof P2gSummaryOfResultsRoute
+  '/p2g/technical-parameters': typeof P2gTechnicalParametersRoute
+  '/p2h/economic-parameters': typeof P2hEconomicParametersRoute
+  '/p2h/summary-of-results': typeof P2hSummaryOfResultsRoute
+  '/p2h/technical-parameters': typeof P2hTechnicalParametersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/economic-parameters-beks': typeof EconomicParametersBeksRoute
-  '/economic-parameters-dsr': typeof EconomicParametersDsrRoute
-  '/economic-parameters-p2g': typeof EconomicParametersP2gRoute
-  '/economic-parameters-p2h': typeof EconomicParametersP2hRoute
   '/general-data': typeof GeneralDataRoute
-  '/summary-of-results-beks': typeof SummaryOfResultsBeksRoute
-  '/summary-of-results-dsr': typeof SummaryOfResultsDsrRoute
-  '/summary-of-results-p2g': typeof SummaryOfResultsP2gRoute
-  '/summary-of-results-p2h': typeof SummaryOfResultsP2hRoute
-  '/technical-parameters-beks': typeof TechnicalParametersBeksRoute
-  '/technical-parameters-dsr': typeof TechnicalParametersDsrRoute
-  '/technical-parameters-p2g': typeof TechnicalParametersP2gRoute
-  '/technical-parameters-p2h': typeof TechnicalParametersP2hRoute
+  '/beks/economic-parameters': typeof BeksEconomicParametersRoute
+  '/beks/summary-of-results': typeof BeksSummaryOfResultsRoute
+  '/beks/technical-parameters': typeof BeksTechnicalParametersRoute
+  '/dsr/economic-parameters': typeof DsrEconomicParametersRoute
+  '/dsr/summary-of-results': typeof DsrSummaryOfResultsRoute
+  '/dsr/technical-parameters': typeof DsrTechnicalParametersRoute
+  '/p2g/economic-parameters': typeof P2gEconomicParametersRoute
+  '/p2g/summary-of-results': typeof P2gSummaryOfResultsRoute
+  '/p2g/technical-parameters': typeof P2gTechnicalParametersRoute
+  '/p2h/economic-parameters': typeof P2hEconomicParametersRoute
+  '/p2h/summary-of-results': typeof P2hSummaryOfResultsRoute
+  '/p2h/technical-parameters': typeof P2hTechnicalParametersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/economic-parameters-beks'
-    | '/economic-parameters-dsr'
-    | '/economic-parameters-p2g'
-    | '/economic-parameters-p2h'
     | '/general-data'
-    | '/summary-of-results-beks'
-    | '/summary-of-results-dsr'
-    | '/summary-of-results-p2g'
-    | '/summary-of-results-p2h'
-    | '/technical-parameters-beks'
-    | '/technical-parameters-dsr'
-    | '/technical-parameters-p2g'
-    | '/technical-parameters-p2h'
+    | '/beks/economic-parameters'
+    | '/beks/summary-of-results'
+    | '/beks/technical-parameters'
+    | '/dsr/economic-parameters'
+    | '/dsr/summary-of-results'
+    | '/dsr/technical-parameters'
+    | '/p2g/economic-parameters'
+    | '/p2g/summary-of-results'
+    | '/p2g/technical-parameters'
+    | '/p2h/economic-parameters'
+    | '/p2h/summary-of-results'
+    | '/p2h/technical-parameters'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/economic-parameters-beks'
-    | '/economic-parameters-dsr'
-    | '/economic-parameters-p2g'
-    | '/economic-parameters-p2h'
     | '/general-data'
-    | '/summary-of-results-beks'
-    | '/summary-of-results-dsr'
-    | '/summary-of-results-p2g'
-    | '/summary-of-results-p2h'
-    | '/technical-parameters-beks'
-    | '/technical-parameters-dsr'
-    | '/technical-parameters-p2g'
-    | '/technical-parameters-p2h'
+    | '/beks/economic-parameters'
+    | '/beks/summary-of-results'
+    | '/beks/technical-parameters'
+    | '/dsr/economic-parameters'
+    | '/dsr/summary-of-results'
+    | '/dsr/technical-parameters'
+    | '/p2g/economic-parameters'
+    | '/p2g/summary-of-results'
+    | '/p2g/technical-parameters'
+    | '/p2h/economic-parameters'
+    | '/p2h/summary-of-results'
+    | '/p2h/technical-parameters'
   id:
     | '__root__'
     | '/'
-    | '/economic-parameters-beks'
-    | '/economic-parameters-dsr'
-    | '/economic-parameters-p2g'
-    | '/economic-parameters-p2h'
     | '/general-data'
-    | '/summary-of-results-beks'
-    | '/summary-of-results-dsr'
-    | '/summary-of-results-p2g'
-    | '/summary-of-results-p2h'
-    | '/technical-parameters-beks'
-    | '/technical-parameters-dsr'
-    | '/technical-parameters-p2g'
-    | '/technical-parameters-p2h'
+    | '/beks/economic-parameters'
+    | '/beks/summary-of-results'
+    | '/beks/technical-parameters'
+    | '/dsr/economic-parameters'
+    | '/dsr/summary-of-results'
+    | '/dsr/technical-parameters'
+    | '/p2g/economic-parameters'
+    | '/p2g/summary-of-results'
+    | '/p2g/technical-parameters'
+    | '/p2h/economic-parameters'
+    | '/p2h/summary-of-results'
+    | '/p2h/technical-parameters'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EconomicParametersBeksRoute: typeof EconomicParametersBeksRoute
-  EconomicParametersDsrRoute: typeof EconomicParametersDsrRoute
-  EconomicParametersP2gRoute: typeof EconomicParametersP2gRoute
-  EconomicParametersP2hRoute: typeof EconomicParametersP2hRoute
   GeneralDataRoute: typeof GeneralDataRoute
-  SummaryOfResultsBeksRoute: typeof SummaryOfResultsBeksRoute
-  SummaryOfResultsDsrRoute: typeof SummaryOfResultsDsrRoute
-  SummaryOfResultsP2gRoute: typeof SummaryOfResultsP2gRoute
-  SummaryOfResultsP2hRoute: typeof SummaryOfResultsP2hRoute
-  TechnicalParametersBeksRoute: typeof TechnicalParametersBeksRoute
-  TechnicalParametersDsrRoute: typeof TechnicalParametersDsrRoute
-  TechnicalParametersP2gRoute: typeof TechnicalParametersP2gRoute
-  TechnicalParametersP2hRoute: typeof TechnicalParametersP2hRoute
+  BeksEconomicParametersRoute: typeof BeksEconomicParametersRoute
+  BeksSummaryOfResultsRoute: typeof BeksSummaryOfResultsRoute
+  BeksTechnicalParametersRoute: typeof BeksTechnicalParametersRoute
+  DsrEconomicParametersRoute: typeof DsrEconomicParametersRoute
+  DsrSummaryOfResultsRoute: typeof DsrSummaryOfResultsRoute
+  DsrTechnicalParametersRoute: typeof DsrTechnicalParametersRoute
+  P2gEconomicParametersRoute: typeof P2gEconomicParametersRoute
+  P2gSummaryOfResultsRoute: typeof P2gSummaryOfResultsRoute
+  P2gTechnicalParametersRoute: typeof P2gTechnicalParametersRoute
+  P2hEconomicParametersRoute: typeof P2hEconomicParametersRoute
+  P2hSummaryOfResultsRoute: typeof P2hSummaryOfResultsRoute
+  P2hTechnicalParametersRoute: typeof P2hTechnicalParametersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/technical-parameters-p2h': {
-      id: '/technical-parameters-p2h'
-      path: '/technical-parameters-p2h'
-      fullPath: '/technical-parameters-p2h'
-      preLoaderRoute: typeof TechnicalParametersP2hRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/technical-parameters-p2g': {
-      id: '/technical-parameters-p2g'
-      path: '/technical-parameters-p2g'
-      fullPath: '/technical-parameters-p2g'
-      preLoaderRoute: typeof TechnicalParametersP2gRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/technical-parameters-dsr': {
-      id: '/technical-parameters-dsr'
-      path: '/technical-parameters-dsr'
-      fullPath: '/technical-parameters-dsr'
-      preLoaderRoute: typeof TechnicalParametersDsrRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/technical-parameters-beks': {
-      id: '/technical-parameters-beks'
-      path: '/technical-parameters-beks'
-      fullPath: '/technical-parameters-beks'
-      preLoaderRoute: typeof TechnicalParametersBeksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/summary-of-results-p2h': {
-      id: '/summary-of-results-p2h'
-      path: '/summary-of-results-p2h'
-      fullPath: '/summary-of-results-p2h'
-      preLoaderRoute: typeof SummaryOfResultsP2hRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/summary-of-results-p2g': {
-      id: '/summary-of-results-p2g'
-      path: '/summary-of-results-p2g'
-      fullPath: '/summary-of-results-p2g'
-      preLoaderRoute: typeof SummaryOfResultsP2gRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/summary-of-results-dsr': {
-      id: '/summary-of-results-dsr'
-      path: '/summary-of-results-dsr'
-      fullPath: '/summary-of-results-dsr'
-      preLoaderRoute: typeof SummaryOfResultsDsrRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/summary-of-results-beks': {
-      id: '/summary-of-results-beks'
-      path: '/summary-of-results-beks'
-      fullPath: '/summary-of-results-beks'
-      preLoaderRoute: typeof SummaryOfResultsBeksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/general-data': {
       id: '/general-data'
       path: '/general-data'
       fullPath: '/general-data'
       preLoaderRoute: typeof GeneralDataRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/economic-parameters-p2h': {
-      id: '/economic-parameters-p2h'
-      path: '/economic-parameters-p2h'
-      fullPath: '/economic-parameters-p2h'
-      preLoaderRoute: typeof EconomicParametersP2hRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/economic-parameters-p2g': {
-      id: '/economic-parameters-p2g'
-      path: '/economic-parameters-p2g'
-      fullPath: '/economic-parameters-p2g'
-      preLoaderRoute: typeof EconomicParametersP2gRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/economic-parameters-dsr': {
-      id: '/economic-parameters-dsr'
-      path: '/economic-parameters-dsr'
-      fullPath: '/economic-parameters-dsr'
-      preLoaderRoute: typeof EconomicParametersDsrRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/economic-parameters-beks': {
-      id: '/economic-parameters-beks'
-      path: '/economic-parameters-beks'
-      fullPath: '/economic-parameters-beks'
-      preLoaderRoute: typeof EconomicParametersBeksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -312,24 +228,108 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/p2h/technical-parameters': {
+      id: '/p2h/technical-parameters'
+      path: '/p2h/technical-parameters'
+      fullPath: '/p2h/technical-parameters'
+      preLoaderRoute: typeof P2hTechnicalParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p2h/summary-of-results': {
+      id: '/p2h/summary-of-results'
+      path: '/p2h/summary-of-results'
+      fullPath: '/p2h/summary-of-results'
+      preLoaderRoute: typeof P2hSummaryOfResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p2h/economic-parameters': {
+      id: '/p2h/economic-parameters'
+      path: '/p2h/economic-parameters'
+      fullPath: '/p2h/economic-parameters'
+      preLoaderRoute: typeof P2hEconomicParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p2g/technical-parameters': {
+      id: '/p2g/technical-parameters'
+      path: '/p2g/technical-parameters'
+      fullPath: '/p2g/technical-parameters'
+      preLoaderRoute: typeof P2gTechnicalParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p2g/summary-of-results': {
+      id: '/p2g/summary-of-results'
+      path: '/p2g/summary-of-results'
+      fullPath: '/p2g/summary-of-results'
+      preLoaderRoute: typeof P2gSummaryOfResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p2g/economic-parameters': {
+      id: '/p2g/economic-parameters'
+      path: '/p2g/economic-parameters'
+      fullPath: '/p2g/economic-parameters'
+      preLoaderRoute: typeof P2gEconomicParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dsr/technical-parameters': {
+      id: '/dsr/technical-parameters'
+      path: '/dsr/technical-parameters'
+      fullPath: '/dsr/technical-parameters'
+      preLoaderRoute: typeof DsrTechnicalParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dsr/summary-of-results': {
+      id: '/dsr/summary-of-results'
+      path: '/dsr/summary-of-results'
+      fullPath: '/dsr/summary-of-results'
+      preLoaderRoute: typeof DsrSummaryOfResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dsr/economic-parameters': {
+      id: '/dsr/economic-parameters'
+      path: '/dsr/economic-parameters'
+      fullPath: '/dsr/economic-parameters'
+      preLoaderRoute: typeof DsrEconomicParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beks/technical-parameters': {
+      id: '/beks/technical-parameters'
+      path: '/beks/technical-parameters'
+      fullPath: '/beks/technical-parameters'
+      preLoaderRoute: typeof BeksTechnicalParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beks/summary-of-results': {
+      id: '/beks/summary-of-results'
+      path: '/beks/summary-of-results'
+      fullPath: '/beks/summary-of-results'
+      preLoaderRoute: typeof BeksSummaryOfResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beks/economic-parameters': {
+      id: '/beks/economic-parameters'
+      path: '/beks/economic-parameters'
+      fullPath: '/beks/economic-parameters'
+      preLoaderRoute: typeof BeksEconomicParametersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EconomicParametersBeksRoute: EconomicParametersBeksRoute,
-  EconomicParametersDsrRoute: EconomicParametersDsrRoute,
-  EconomicParametersP2gRoute: EconomicParametersP2gRoute,
-  EconomicParametersP2hRoute: EconomicParametersP2hRoute,
   GeneralDataRoute: GeneralDataRoute,
-  SummaryOfResultsBeksRoute: SummaryOfResultsBeksRoute,
-  SummaryOfResultsDsrRoute: SummaryOfResultsDsrRoute,
-  SummaryOfResultsP2gRoute: SummaryOfResultsP2gRoute,
-  SummaryOfResultsP2hRoute: SummaryOfResultsP2hRoute,
-  TechnicalParametersBeksRoute: TechnicalParametersBeksRoute,
-  TechnicalParametersDsrRoute: TechnicalParametersDsrRoute,
-  TechnicalParametersP2gRoute: TechnicalParametersP2gRoute,
-  TechnicalParametersP2hRoute: TechnicalParametersP2hRoute,
+  BeksEconomicParametersRoute: BeksEconomicParametersRoute,
+  BeksSummaryOfResultsRoute: BeksSummaryOfResultsRoute,
+  BeksTechnicalParametersRoute: BeksTechnicalParametersRoute,
+  DsrEconomicParametersRoute: DsrEconomicParametersRoute,
+  DsrSummaryOfResultsRoute: DsrSummaryOfResultsRoute,
+  DsrTechnicalParametersRoute: DsrTechnicalParametersRoute,
+  P2gEconomicParametersRoute: P2gEconomicParametersRoute,
+  P2gSummaryOfResultsRoute: P2gSummaryOfResultsRoute,
+  P2gTechnicalParametersRoute: P2gTechnicalParametersRoute,
+  P2hEconomicParametersRoute: P2hEconomicParametersRoute,
+  P2hSummaryOfResultsRoute: P2hSummaryOfResultsRoute,
+  P2hTechnicalParametersRoute: P2hTechnicalParametersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -27,7 +27,7 @@ export const SummaryOfResultsDsrView = () => {
     const location = useLocation()
     const handleBackward = () => {
         navigate({
-            to: "/economic-parameters-dsr",
+            to: "/dsr/economic-parameters",
             state: { generalData: location.state.generalData },
         })
     }

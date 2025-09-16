@@ -10,7 +10,7 @@ export const SummaryOfResultsP2hPage = () => {
     const isMutating = useIsMutating({ mutationKey: ["p2h"] })
 
     if (!p2hEconomicalParameters) {
-        return <Navigate to="/economic-parameters-p2h" state={location.state} />
+        return <Navigate to="/p2h/economic-parameters" state={location.state} />
     }
 
     if (isMutating) return <Loader />

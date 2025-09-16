@@ -14,7 +14,7 @@ export const EconomicalParametersDsrForm = () => {
 
     const handleBackward = () => {
         navigate({
-            to: "/technical-parameters-dsr",
+            to: "/dsr/technical-parameters",
             state: {
                 generalData: location.state.generalData,
                 technicalParameters: location.state.technicalParameters,
