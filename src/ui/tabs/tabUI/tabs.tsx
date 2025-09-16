@@ -1,4 +1,4 @@
-import { type FC, type SyntheticEvent, useEffect, useState } from 'react';
+import {type SyntheticEvent, useEffect, useState } from 'react';
 import { Box, type SxProps, Tab, Tabs, type Theme } from '@mui/material';
 import { type TabsProps } from '../types';
 import { CustomTabPanel } from './tabPanel';
@@ -42,7 +42,7 @@ const tabsSx: SxProps<Theme> = {
   },
 };
 
-export const BasicTab: FC<TabsProps> = ({
+export const BasicTab = ({
   tabComponents,
   tabLabels,
   tabLabelsContainer,
@@ -50,7 +50,7 @@ export const BasicTab: FC<TabsProps> = ({
   style,
   value,
   onChange,
-}) => {
+}: TabsProps) => {
   const [tabValue, setTabValue] = useState(value ?? 0);
   const [containerEl, setContainerEl] = useState<Element | null>(null)
 

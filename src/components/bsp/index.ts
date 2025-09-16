@@ -1,2 +1,2 @@
-export { bspSchema, bspDefaultValues } from "./bsp-schema"
+export { getBspSchema, bspDefaultValues } from "./bsp-schema"
 export { BspFields } from "./bsp-fields"

@@ -13,6 +13,8 @@ import { GlobalStyles } from "@/components/globalStyles/globalStyles.tsx"
 import type { TechnicalBeksParametersSchema } from "@/features/beks/technical/technical-parameters-schema.ts"
 import type { EconomicalBeksParametersSchema } from "@/features/beks/economical/economical-parameters-schema.ts"
 import type { EconomicalP2gParametersSchema } from "@/features/p2g/economical/economical-parameters-p2g-schema.ts"
+import type { TechnicalDsrParametersSchema } from "@/features/dsr/technical/technical-parameters-dsr-schema.ts"
+import type { EconomicalDsrParametersSchema } from "@/features/dsr/economical/economical-parameters-dsr-schema.ts"
 
 const router = createRouter({ routeTree })
 const queryClient = new QueryClient()
@@ -28,11 +30,13 @@ declare module "@tanstack/react-router" {
             p2h?: TechnicalP2hParametersSchema
             beks?: TechnicalBeksParametersSchema
             p2g?: TechnicalP2gParametersSchema
+            dsr?: TechnicalDsrParametersSchema
         }
         economicParameters?: {
             p2h?: EconomicalP2hParametersSchema
             beks?: EconomicalBeksParametersSchema
             p2g?: EconomicalP2gParametersSchema
+            dsr?: EconomicalDsrParametersSchema
         }
     }
 }

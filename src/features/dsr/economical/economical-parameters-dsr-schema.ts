@@ -1,22 +1,20 @@
 import { z } from "zod"
 import { bspDefaultValues, getBspSchema } from "@/components/bsp"
 
-export const economicalParametersP2gSchema = z
+export const economicalParametersDsrSchema = z
     .object({
         CAPEX: z.number().min(0),
         OPEX: z.number().min(0),
-        P_H2: z.number().min(0),
         number_of_years: z.number().min(0),
         discount_rate: z.number().min(0),
     })
-    .extend(getBspSchema(true).shape)
+    .extend(getBspSchema(false).shape)
 
-export type EconomicalP2gParametersSchema = z.infer<typeof economicalParametersP2gSchema>
+export type EconomicalDsrParametersSchema = z.infer<typeof economicalParametersDsrSchema>
 
-export const defaultEconomicalParametersP2gSchema: EconomicalP2gParametersSchema = {
+export const defaultEconomicalParametersDsrSchema: EconomicalDsrParametersSchema = {
     CAPEX: 2400,
     OPEX: 16,
-    P_H2: 3.5,
     number_of_years: 2,
     discount_rate: 5,
     ...bspDefaultValues,

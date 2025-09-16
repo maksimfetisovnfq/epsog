@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import { bspDefaultValues, bspSchema } from "@/components/bsp"
+import { bspDefaultValues, getBspSchema } from "@/components/bsp"
 
 export const economicalParametersSchema = z
     .object({
@@ -9,7 +9,7 @@ export const economicalParametersSchema = z
         OPEX_C: z.number().gt(0),
         number_of_years: z.number().int().gte(1).lte(50),
         discount_rate: z.number().gte(0).lte(100),
-    }).extend(bspSchema.shape);
+    }).extend(getBspSchema(true).shape);
 
 export type EconomicalBeksParametersSchema = z.infer<typeof economicalParametersSchema>;
 

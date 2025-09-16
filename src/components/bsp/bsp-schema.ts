@@ -1,7 +1,7 @@
 import { z } from "zod"
 
-export const bspSchema = z.object({
-    P_FCR_CAP_BSP: z.number().min(0),
+export const getBspSchema = (useFcr = true) => z.object({
+    P_FCR_CAP_BSP: useFcr ? z.number().min(0) : z.number().min(0).optional(),
     P_aFRRu_CAP_BSP: z.number().min(0),
     P_aFRRd_CAP_BSP: z.number().min(0),
     P_mFRRu_CAP_BSP: z.number().min(0),
@@ -12,7 +12,7 @@ export const bspSchema = z.object({
     P_mFRRd_BSP: z.number().min(0),
 })
 
-export type CapexSchema = z.infer<typeof bspSchema>
+export type CapexSchema = z.infer<ReturnType<typeof getBspSchema>>;
 
 export const bspDefaultValues: CapexSchema = {
     P_FCR_CAP_BSP: 0,

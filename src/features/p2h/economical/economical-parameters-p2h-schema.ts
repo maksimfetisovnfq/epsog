@@ -1,5 +1,5 @@
 import { z } from "zod"
-import { bspSchema, bspDefaultValues } from "@/components/bsp"
+import { getBspSchema, bspDefaultValues } from "@/components/bsp"
 
 export const economicalParametersP2hSchema = z
     .object({
@@ -11,7 +11,7 @@ export const economicalParametersP2hSchema = z
         number_of_years: z.number().min(0),
         CAPEX_P: z.number().min(0),
     })
-    .extend(bspSchema.shape)
+    .extend(getBspSchema(true).shape)
 
 export type EconomicalP2hParametersSchema = z.infer<typeof economicalParametersP2hSchema>
 
