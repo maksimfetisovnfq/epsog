@@ -17,7 +17,6 @@ import { NpvAnalysisChartP2g } from "./charts/npv-analysis-chart-p2g"
 import { CostProductsChartP2g } from "./charts/cost-products-chart-p2g"
 import { UtilisationChartP2g } from "@/features/p2g/summary/charts/utilisation-chart-p2g.tsx"
 import { DayAheadTable } from "./tables/day-ahead-table"
-import { IntradayTable } from "@/features/p2g/summary/tables/intraday-table.tsx"
 import { RevenueChartP2g } from "@/features/p2g/summary/charts/revenue-chart-p2g.tsx"
 import { CostChartP2g } from "@/features/p2g/summary/charts/cost-economic-evaluation-chart-p2g.tsx"
 import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table.tsx"
@@ -73,7 +72,6 @@ export const SummaryOfResultsP2gView = () => {
             <Stack spacing={0}>
                 <DayAheadTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <IntradayTable />
             </Stack>
         </Fragment>
     )

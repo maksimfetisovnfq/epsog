@@ -1,4 +1,3 @@
-
 import { useForm, FormProvider, Controller } from "react-hook-form"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
@@ -8,15 +7,15 @@ import { type ChartOptions } from "chart.js"
 import {
     DetailedAnualResultsTable,
     type DetailedAnualResultsTableRow,
-} from "@/features/p2h/summary/tables/detailed-annual-results-table.tsx"
-import { useSummaryDsr } from "@/features/dsr/summary/use-summary-dsr.ts"
+} from "@/features/p2g/summary/tables/detailed-annual-results-table"
+import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g"
 
 interface FormValues {
     selectedColumns: string[]
 }
 
 export const YearlySummary = () => {
-    const data = useSummaryDsr()
+    const data = useSummaryP2g()
     
     const methods = useForm<FormValues>({
         defaultValues: {
@@ -31,7 +30,6 @@ export const YearlySummary = () => {
 
     const columns = [
         { value: "metai", label: "Metai" },
-        { value: "ciklai", label: "Ciklai" },
         { value: "capex", label: "CAPEX" },
         { value: "opex", label: "OPEX" },
         { value: "cf", label: "CF" },

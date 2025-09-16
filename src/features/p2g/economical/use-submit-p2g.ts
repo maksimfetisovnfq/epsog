@@ -436,7 +436,7 @@ export const useSubmitP2g = () => {
             P_mFRRu_BSP: economicalParams.P_mFRRu_BSP,
             P_mFRRd_BSP: economicalParams.P_mFRRd_BSP,
             Sector: generalParams.concentratorName,
-            produktai: getProductaiValues(technicalParams.service_type),
+            produktai: getProductaiValues(technicalParams.service_type, false),
         }
 
         mutate({

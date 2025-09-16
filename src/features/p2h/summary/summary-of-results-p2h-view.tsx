@@ -18,9 +18,10 @@ import Divider from "@mui/material/Divider"
 import { FcrBalancingCapacityTable } from "@/features/p2h/summary/tables/fsr-balancing-capacity-table"
 import { AfrrBalancingCapacityTable } from "./tables/afrr-balancing-capacity-table"
 import { MfrrBalancingCapacityTable } from "./tables/mfrr-balancing-capacity-table"
-import { DayAheadTable } from "@/features/p2h/summary/tables/day-ahead-table"
+import { ElectricityConsumptionTable } from "@/features/p2h/summary/tables/electricity-consumption-table.tsx"
 import { IntradayTable } from "@/features/p2h/summary/tables/intraday-table"
 import { CostChartP2h } from "@/features/p2h/summary/charts/cost-economic-evaluation-chart-p2h"
+import { HitGenerationTable } from "@/features/p2h/summary/tables/heat-generation-table.tsx"
 
 export const SummaryOfResultsP2hView = () => {
     const navigate = useNavigate()
@@ -71,9 +72,10 @@ export const SummaryOfResultsP2hView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <DayAheadTable />
+                <ElectricityConsumptionTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
+                <HitGenerationTable/>
             </Stack>
         </Fragment>
     )
