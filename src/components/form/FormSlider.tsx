@@ -60,6 +60,7 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                 step={30}
                 marks
                 max={90}
+                style={{color: '#000000'}} 
             />
 
             <div style={{
