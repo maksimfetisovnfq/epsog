@@ -1,4 +1,3 @@
-import React from "react"
 import { Line } from "react-chartjs-2"
 import type { ChartData, ChartOptions } from "chart.js"
 import {
@@ -21,7 +20,7 @@ export interface LineChartProps {
     width?: number
 }
 
-const LineChart: React.FC<LineChartProps> = ({ data, options, height, width }) => {
+const LineChart = ({ data, options, height, width }: LineChartProps) => {
     const npvDataset = data.datasets.find((ds) => ds.label?.toLowerCase().includes("npv")) || data.datasets[0]
     const customData = {
         labels: data.labels,

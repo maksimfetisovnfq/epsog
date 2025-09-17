@@ -15,12 +15,17 @@ import { useFormContext, useWatch, Controller } from "react-hook-form"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { Tooltip } from "@/components/tooltip"
 
-const country = ["Marijampolė",
+const country = [
+    "Kaunas",
+    "Klaipėda",
+    "Marijampolė",
     "Panevėžys",
     "Šiauliai",
     "Tauragė",
     "Telšiai",
-    "Utena"
+    "Utena",
+    "Vilnius",
+
 ]
 
 const GeneralContext = () => {
