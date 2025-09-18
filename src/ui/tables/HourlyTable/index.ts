@@ -1,0 +1,2 @@
+export { HourlyTable } from './hourlyTable';
+

@@ -1,4 +1,4 @@
-import { Form, FormInput, ServiceTypeSelect } from "@/components/form"
+import { Form, ServiceTypeSelect, FormInput } from "@/components/form"
 import {
     defaultTechnicalParametersDsr,
     type TechnicalDsrParametersSchema,
@@ -9,6 +9,7 @@ import { Stack } from "@mui/material"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import Divider from "@mui/material/Divider"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
+import { HourlyTable } from "@/ui/tables/HourlyTable/hourlyTable"
 
 export const TechnicalParametersDsrForm = () => {
     const navigate = useNavigate()
@@ -41,9 +42,13 @@ export const TechnicalParametersDsrForm = () => {
                 <FormInput name="T_shift" title="T_shift" description="T_shift" type="number" />
 
                 <Divider />
-                {Array.from({ length: 24 }).map((_, i) => (
-                    <FormInput name={`hourly_power_${i}`} title={`hourly_power ${i}`} type="number" />
-                ))}
+                
+                <div>
+                    <h6 style={{ margin: '0 0 16px 0', fontSize: '16px', fontWeight: 400 }}>
+                        Hourly Power (24 hours)
+                    </h6>
+                    <HourlyTable inputWidth="186px" />
+                </div>
 
                 <ServiceTypeSelect />
 

@@ -9,9 +9,10 @@ export type FormInputProps = TextFieldProps & {
     title?: string
     defaultValue?: string
     tooltip?: string
+    width?: string
 }
 
-export const FormInput = ({ name, label, title, description, tooltip, ...props }: FormInputProps) => {
+export const FormInput = ({ width, name, label, title, description, tooltip, ...props }: FormInputProps) => {
     const {
         register,
         formState: { errors },
@@ -79,7 +80,7 @@ export const FormInput = ({ name, label, title, description, tooltip, ...props }
                     display: "block",
                     "& .MuiOutlinedInput-root": {
                         borderRadius: 0,
-                        width: "400px",
+                        width: width || "400px",
                         height: "48px",
                         color: isFilled ? "#0F2D46" : "#6F8190",
                         "& .MuiOutlinedInput-notchedOutline": {
