@@ -114,7 +114,7 @@ export const YearlySummary = () => {
                         display: "flex",
                     }}
                 >
-                    <LineChart data={chartData} options={chartOptions} width={768} height={382} />
+                    <LineChart data={chartData} options={chartOptions} />
                 </div>
             </div>
         </FormProvider>
