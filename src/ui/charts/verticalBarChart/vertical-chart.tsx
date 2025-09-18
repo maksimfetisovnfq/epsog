@@ -1,6 +1,7 @@
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js"
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
+import { Box } from "@mui/material"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -85,29 +86,20 @@ export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) =>
 
     return (
         <div>
-            <div
-                style={{
-                    marginTop: 24,
+            <Box
+                sx={{
                     position: "relative",
-                    width: "100%",
-                    maxWidth: 768,
+                    maxWidth: { sm: 768 },
                     marginLeft: "auto",
                     marginRight: "auto",
                 }}
             >
-                <Bar
-                    data={barData}
-                    options={options}
-                    plugins={[ChartDataLabels]}
-                    style={{ width: "100%", maxWidth: 768 }}
-                />
-                <div
-                    style={{
+                <Bar data={barData} options={options} plugins={[ChartDataLabels]} />
+                <Box
+                    sx={{
                         display: "grid",
                         gridTemplateColumns: `repeat(${filteredChartLabels.length}, 1fr)`,
-                        width: "100%",
-                        maxWidth: 768,
-                        position: "absolute",
+                        maxWidth: { sm: 768 },
                         left: 0,
                         right: 0,
                         bottom: -36,
@@ -128,9 +120,8 @@ export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) =>
                             {label}
                         </div>
                     ))}
-                </div>
-            </div>
-            <div style={{ height: 48 }} />
+                </Box>
+            </Box>
         </div>
     )
 }

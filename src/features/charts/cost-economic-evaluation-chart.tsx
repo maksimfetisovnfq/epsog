@@ -1,4 +1,5 @@
 import { IncomeChart } from "@/ui/charts/incomeDataExpensesChart"
+import { Box } from "@mui/material"
 
 type Props = {
     data: {
@@ -16,8 +17,8 @@ export const CostChart = ({ data }: Props) => {
     const values = costChartData.map((item: { "Value (tūkst. EUR)": number }) => item["Value (tūkst. EUR)"]);
 
     return (
-        <div style={{border: '1px solid #CFD5DA', maxWidth: '768px'}}>
-            <div style={{width: '768px'}}>
+        <Box sx={{border: '1px solid #CFD5DA', maxWidth: '768px'}}>
+            <Box sx={{width: {sm: '768px'}}}>
                 <IncomeChart
                     labels={labels}
                     datasets={[
@@ -27,7 +28,7 @@ export const CostChart = ({ data }: Props) => {
                         },
                     ]}
                 />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };

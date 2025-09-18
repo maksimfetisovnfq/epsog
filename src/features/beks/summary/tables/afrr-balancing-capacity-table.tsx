@@ -1,10 +1,11 @@
-import { useSummaryBeks } from "../use-summary-beks.ts";
+import { useSummaryBeks } from "../use-summary-beks.ts"
 import { CombinedTable } from "@/ui/tables/combinedTable"
+import { Box } from "@mui/material"
 
 export const AfrrBalancingCapacityTable = () => {
-    const data = useSummaryBeks();
+    const data = useSummaryBeks()
 
-    if (!data) return null;
+    if (!data) return null
 
     const tables = [
         {
@@ -42,7 +43,6 @@ export const AfrrBalancingCapacityTable = () => {
         {
             dataSource: [
                 {
-                    
                     key: "upward_revenue",
                     parameter: "Potencialios pajamos/sąnaudos (Upward)",
                     value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.upward.value} 
@@ -72,15 +72,15 @@ export const AfrrBalancingCapacityTable = () => {
                 },
             ],
         },
-    ];
+    ]
 
     return (
         <>
-            <div style={{ fontSize: '18px', marginBottom: '16px' }}>
+            <div style={{ fontSize: "18px", marginBottom: "16px" }}>
                 <div style={{ marginBottom: 4 }}>aFRR</div>
-                <div style={{ fontSize: '14px', color: '#6F8190', width: 768 }}>
+                <Box sx={{ fontSize: "14px", color: "#6F8190", width: { sm: 768 } }}>
                     Automatinis dažnio atkūrimo rezervas (angl. Automatic frequency restoration reserve)
-                </div>
+                </Box>
             </div>
             {tables.map((table, index) => (
                 <CombinedTable
@@ -90,13 +90,13 @@ export const AfrrBalancingCapacityTable = () => {
                         index === 0
                             ? "Užsakytų balansavimo pajėgumų kiekis"
                             : index === 1
-                            ? "Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
-                            : index === 2
-                            ? "Tikėtinos pajamos"
-                            : "Užsakytų pasiūlymų kiekis (%)"
+                              ? "Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
+                              : index === 2
+                                ? "Tikėtinos pajamos"
+                                : "Užsakytų pasiūlymų kiekis (%)"
                     }
                 />
             ))}
         </>
-    );
-};
+    )
+}

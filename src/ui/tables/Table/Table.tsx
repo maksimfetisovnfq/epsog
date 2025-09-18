@@ -23,12 +23,12 @@ export const Table = ({
     <Stack spacing={1}>
         {title && <Title variant="h6">{title}</Title>}
         {description && (
-            <Title variant="subtitle2" sx={{ color: "#6F8190" }}>
+            <Title variant="subtitle2" sx={{ color: "#6F8190", }}>
                 {description}
             </Title>
         )}
 
-        <MuiTable sx={{ border: "1px solid #CFD5DA", width: "768px" }} aria-label="simple table">
+        <MuiTable sx={{ border: "1px solid #CFD5DA", width: { sm: "768px"}}} aria-label="simple table">
             {!hideHead && <TableHead columns={columns} boldHeaders={boldHeaders} />}
             <TableBody columns={columns} dataSource={dataSource} />
         </MuiTable>

@@ -26,23 +26,25 @@ export const DetailedAnualResultsTable = ({ data, visibleColumns }: DetailedAnua
     ? columns.map(col => col.key)
     : visibleColumns;
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-      <thead>
-        <tr>
-          {columns.filter(col => shownColumns.includes(col.key)).map((col) => (
-            <th key={col.key} style={{ border: '1px solid #ccc', padding: '8px', background: '#E7EAED' }}>{col.label}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((row, idx) => (
-          <tr key={idx}>
-            {columns.filter(col => shownColumns.includes(col.key)).map(col => (
-              <td key={col.key} style={{ border: '1px solid #ccc', padding: '8px' }}>{row[col.key as keyof DetailedAnualResultsTableRow]}</td>
+    <div style={{ overflowX: 'auto', width: '100%' }}>
+      <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 'max-content' }}>
+        <thead>
+          <tr>
+            {columns.filter(col => shownColumns.includes(col.key)).map((col) => (
+              <th key={col.key} style={{ border: '1px solid #ccc', padding: '8px', background: '#E7EAED' }}>{col.label}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((row, idx) => (
+            <tr key={idx}>
+              {columns.filter(col => shownColumns.includes(col.key)).map(col => (
+                <td key={col.key} style={{ border: '1px solid #ccc', padding: '8px' }}>{row[col.key as keyof DetailedAnualResultsTableRow]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };

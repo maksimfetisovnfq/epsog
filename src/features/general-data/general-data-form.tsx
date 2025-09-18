@@ -15,18 +15,7 @@ import { useFormContext, useWatch, Controller } from "react-hook-form"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { Tooltip } from "@/components/tooltip"
 
-const country = [
-    "Kaunas",
-    "Klaipėda",
-    "Marijampolė",
-    "Panevėžys",
-    "Šiauliai",
-    "Tauragė",
-    "Telšiai",
-    "Utena",
-    "Vilnius",
-
-]
+const country = ["Kaunas", "Klaipėda", "Marijampolė", "Panevėžys", "Šiauliai", "Tauragė", "Telšiai", "Utena", "Vilnius"]
 
 const GeneralContext = () => {
     const { control } = useFormContext()
@@ -42,7 +31,7 @@ const GeneralContext = () => {
                     name="sector"
                     control={control}
                     render={({ field }) => (
-                        <Select {...field} style={{ height: "48px", width: "400px" }} displayEmpty>
+                        <Select {...field} sx={{ height: "48px", width: { sm: 400 } }} displayEmpty>
                             <MenuItem value="">
                                 <em>Sektorius</em>
                             </MenuItem>
@@ -82,7 +71,12 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="calculatorType"
                 control={control}
                 render={({ field }) => (
-                    <RadioGroup {...field} row aria-labelledby="technology-group-label" style={{ columnGap: "32px" }}>
+                    <RadioGroup
+                        {...field}
+                        row
+                        aria-labelledby="technology-group-label"
+                        style={{ columnGap: "32px", display: "flex", flexWrap: "wrap" }}
+                    >
                         {Object.values(CalculatorType).map((type) => (
                             <div style={{ display: "flex", alignItems: "center" }} key={type}>
                                 <FormControlLabel
@@ -140,7 +134,12 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="provider"
                 control={control}
                 render={({ field }) => (
-                    <RadioGroup {...field} row aria-labelledby="provider-group-label" style={{ columnGap: "32px" }}>
+                    <RadioGroup
+                        {...field}
+                        row
+                        aria-labelledby="provider-group-label"
+                        style={{ columnGap: "32px", display: "flex", flexWrap: "wrap" }}
+                    >
                         <FormControlLabel
                             value="Litgrid"
                             control={<Radio sx={radioStyles} />}
@@ -150,7 +149,7 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                     </RadioGroup>
                 )}
             />
-            
+
             {sector === "concentrator" && (
                 <div>
                     <Divider variant="fullWidth" sx={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -198,20 +197,18 @@ export const GeneralDataForm = () => {
     }
 
     return (
-        <div style={{ fontFamily: "Arial", width: "760px" }}>
-            <Form
-                defaultValues={{
-                    sector: navState?.sector || "",
-                    provider: navState?.provider || "Litgrid",
-                    country: navState?.country || "",
-                    concentratorName: navState?.concentratorName || "",
-                    calculatorType: navState?.calculatorType || CalculatorType.BEKS,
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={generalDataSchema}
-            >
-                <FormContent handleBackward={handleBackward} />
-            </Form>
-        </div>
+        <Form
+            defaultValues={{
+                sector: navState?.sector || "",
+                provider: navState?.provider || "Litgrid",
+                country: navState?.country || "",
+                concentratorName: navState?.concentratorName || "",
+                calculatorType: navState?.calculatorType || CalculatorType.BEKS,
+            }}
+            onSubmit={handleSubmit}
+            validationSchema={generalDataSchema}
+        >
+            <FormContent handleBackward={handleBackward} />
+        </Form>
     )
 }

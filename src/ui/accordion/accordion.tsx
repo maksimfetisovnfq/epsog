@@ -14,7 +14,7 @@ export const Accordion = ({ title, children }: AccordionProps) => {
 
     return (
         <MuiAccordion
-            sx={{ boxShadow: "none", border: "none", width: "768px" }}
+            sx={{ boxShadow: "none", border: "none", width: {sm: "768px"} }}
             expanded={expanded}
             onChange={(_, isExpanded) => setExpanded(isExpanded)}
         >

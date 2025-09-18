@@ -1,4 +1,5 @@
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline"
+import { Box } from "@mui/material"
 
 export const InfoBanner = () => {
     return (
@@ -12,13 +13,13 @@ export const InfoBanner = () => {
                 Rezultatai
             </div>
 
-            <div
-                style={{
+            <Box
+                sx={{
                     backgroundColor: "#F5F7F8",
                     display: "flex",
-                    height: "148px",
+                    height: {sm: "148px"},
                     color: "#3F576B",
-                    width: "768px",
+                    width: {sm: "768px"},
                     marginBottom: "24px",
                 }}
             >
@@ -26,15 +27,15 @@ export const InfoBanner = () => {
                     <InfoOutlineIcon />
                 </div>
 
-                <div style={{ marginTop: "20px", fontSize: "14px" }}>
+                <Box style={{ marginTop: "20px", fontSize: "14px" }}>
                     <div style={{ marginBottom: "12px" }}>Skaičiavimas vykdomas dviem optimizaciniais etapais.</div>
 
-                    <div style={{ marginBottom: "12.5px", width: "696px" }}>
+                    <Box sx={{ marginBottom: "12.5px", width: {sm: "696px"} }}>
                         Pirmuoju etapu, atsižvelgiant į techninius apribojimus, įvertinamas įrenginio dalyvavimas dienos
                         prieš rinkoje bei balansavimo pajėgumų aukcione.
-                    </div>
-                </div>
-            </div>
+                    </Box>
+                </Box>
+            </Box>
         </>
     )
 }

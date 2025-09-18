@@ -1,4 +1,4 @@
-import {styled} from "@mui/material";
+import { Box, styled } from "@mui/material"
 import Tooltip, {tooltipClasses, type TooltipProps} from "@mui/material/Tooltip";
 import type {ReactNode} from "react";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
@@ -10,7 +10,6 @@ const HtmlTooltip = styled(({className, ...props}: TooltipProps) => (
     [`& .${tooltipClasses.tooltip}`]: {
         backgroundColor: 'transparent',
         color: 'rgba(0, 0, 0, 0.87)',
-        maxWidth: 220,
         fontSize: theme.typography.pxToRem(12),
     },
 }));
@@ -25,20 +24,20 @@ type FormSliderProps = {
 
 export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChange}: FormSliderProps) => {
     return (
-        <div style={{
+        <Box sx={{
             fontSize: '14px',
             fontWeight: 400,
             marginBottom: '12px',
-            width: '400px',
+            width: {sm: "300px"},
         }}>
             <div style={{display: 'flex'}}>
                 <div style={{verticalAlign: 'baseline', marginRight: '4px'}}>
                     {label}
                 </div>
                 <HtmlTooltip title={
-                    <div style={{
+                    <Box sx={{
                         fontWeight: 400,
-                        width: '250px',
+                        width: {sm: "250px"},
                         fontSize: '14px',
                         color: '#000000',
                         backgroundColor: 'white',
@@ -48,7 +47,7 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                         lineHeight: '1.4'
                     }}>
                         {tooltipContent}
-                    </div>}>
+                    </Box>}>
                     <InfoOutlineIcon style={{color: '#6F8190', width: '16px', height: '16px'}}/>
                 </HtmlTooltip>
             </div>
@@ -60,15 +59,15 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                 step={30}
                 marks
                 max={90}
-                style={{color: '#000000'}} 
+                sx={{color: '#000000', width: {sm: "399px"}}} 
             />
 
-            <div style={{
+            <Box sx={{
                 color: 'black',
                 fontSize: '12px',
                 fontWeight: 400,
                 marginBottom: '12px',
-                width: '430px',
+                width: {sm: "430px"},
                 display: 'flex',
                 justifyContent: 'space-between',
             }}>
@@ -76,8 +75,8 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                 <div>&lt; 5 min</div>
                 <div>&lt; 12.5 min</div>
                 <div>&gt; 12.5 min</div>
-            </div>
-        </div>
+            </Box>
+        </Box>
 
     )
 }

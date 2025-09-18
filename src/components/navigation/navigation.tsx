@@ -34,6 +34,7 @@ export const Navigation = () => {
     return (
         <nav className="p-2 flex gap-2" style={{
             display: "flex",
+            flexWrap: "wrap",
         }}>
             {links.map(link => {
                 const isHome = location.pathname === '/';

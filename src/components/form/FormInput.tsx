@@ -80,7 +80,7 @@ export const FormInput = ({ width, name, label, title, description, tooltip, ...
                     display: "block",
                     "& .MuiOutlinedInput-root": {
                         borderRadius: 0,
-                        width: width || "400px",
+                        width: {sm: width || "400px"},
                         height: "48px",
                         color: isFilled ? "#0F2D46" : "#6F8190",
                         "& .MuiOutlinedInput-notchedOutline": {

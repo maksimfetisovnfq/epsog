@@ -1,5 +1,6 @@
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import { StackedBarChart } from '../../ui/charts/stackedBarChart';
+import { Box } from "@mui/material"
 
 type NpvAnalysisChartProps = {
     data: {
@@ -20,7 +21,7 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
     });
     
     return (
-        <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
+        <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}, marginBottom: '16px'}}>
             <div style={{
                 fontSize: '16px',
                 marginBottom: '16px',
@@ -31,7 +32,7 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                 Dabartinės grynosios vertės analizė rezultatai
             </div>
 
-            <div style={{width: '768px'}}>
+            <Box sx={{width: {sm: '768px'}}}>
                 <StackedBarChart
                     labels={dataSource.map(item => item.name)}
                     datasets={[
@@ -46,11 +47,11 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                     ]}
                 />
 
-                <div style={{
+                <Box sx={{
                     backgroundColor: '#F5F7F8',
                     display: 'flex',
                     color: '#3F576B',
-                    width: '736px',
+                    width: {sm: '736px'},
                     margin: '16px',
                 }}>
                     <div style={{margin: '16px 16px 0 16px',}}>
@@ -58,7 +59,7 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                     </div>
 
                     <div style={{marginTop: '20px', fontSize: '14px'}}>
-                        <div style={{marginBottom: '12.5px', width: '668px'}}>
+                        <Box sx={{marginBottom: '12.5px', width: {sm: '668px'}}}>
                             <strong style={{fontWeight: '700'}}>
                                 Grynosios dabartinės vertės analizė
                             </strong>
@@ -67,7 +68,7 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                             metodas, kuris leidžia įvertinti investicijos
                             vertę per visą jos gyvavimo laikotarpį, atsižvelgiant
                             į pinigų vertės kitimą laikui bėgant.
-                        </div>
+                        </Box>
 
                         <ul style={{paddingLeft: 0}}>
                             Ką rodo analizė:
@@ -81,8 +82,8 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 };

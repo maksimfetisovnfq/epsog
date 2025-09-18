@@ -6,7 +6,7 @@ interface TableBodyProps {
     dataSource: Record<string, unknown>[]
 }
 
-export const TableBody: React.FC<TableBodyProps> = ({ columns, dataSource }) => (
+export const TableBody = ({ columns, dataSource }: TableBodyProps) => (
     <MuiTableBody>
         {dataSource.map((row, rowIdx) => (
             <TableRow key={(row.key as string) || String(rowIdx)} sx={{ height: "auto" }}>
@@ -25,7 +25,7 @@ export const TableBody: React.FC<TableBodyProps> = ({ columns, dataSource }) => 
                             key={column.key || column.title || colIdx}
                             sx={{
                                 ...(colIdx === 0 ? { backgroundColor: "#F5F7F8" } : {}),
-                                width: 384,
+                                width: {sm: 384},
                                 borderRight: isLast ? "none" : "1px solid #CFD5DA",
                             }}
                         >

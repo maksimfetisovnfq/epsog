@@ -10,17 +10,18 @@ import {
     Title,
     Tooltip,
 } from "chart.js"
+import { Box } from "@mui/material"
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export interface LineChartProps {
     data: ChartData<"line">
     options?: ChartOptions<"line">
-    height?: number
-    width?: number
+    leftAxisLabel?: string
+    bottomAxisLabel?: string
 }
 
-const LineChart = ({ data, options, height, width }: LineChartProps) => {
+const LineChart = ({ data, options, leftAxisLabel, bottomAxisLabel }: LineChartProps) => {
     const npvDataset = data.datasets.find((ds) => ds.label?.toLowerCase().includes("npv")) || data.datasets[0]
     const customData = {
         labels: data.labels,
@@ -62,16 +63,36 @@ const LineChart = ({ data, options, height, width }: LineChartProps) => {
                     ...options?.scales?.x?.grid,
                     display: false,
                 },
+                title: {
+                    display: true,
+                    text: bottomAxisLabel || "X Axis Label",
+                },
             },
             y: {
                 ...options?.scales?.y,
                 grid: {
                     ...options?.scales?.y?.grid,
                 },
+                title: {
+                    display: true,
+                    text: leftAxisLabel || "Y Axis Label",
+                },
             },
         },
     }
-    return <Line data={customData} options={customOptions} height={height} width={width} />
+    return (
+        <Box sx={{ width: { sm: 768 }, maxWidth: "100%" }}>
+            <Box
+                sx={{
+                    position: "relative",
+                    width: { sm: 768 },
+                    overflow: "visible",
+                }}
+            >
+                <Line data={customData} options={customOptions} style={{ width: "100%", maxWidth: 768 }} />
+            </Box>
+        </Box>
+    )
 }
 
 export default LineChart

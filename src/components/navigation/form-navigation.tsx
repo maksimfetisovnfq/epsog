@@ -9,10 +9,10 @@ type FormNavigationProps = {
 
 export const FormNavigation = ({handleBackward}: FormNavigationProps) => {
     return (
-        <>
+        <div style={{ fontFamily: "Arial" }}>
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
-            <div style={{marginTop: '24px', display: 'flex', justifyContent: 'space-between'}}>
+            <div style={{marginTop: '24px', display: 'flex',  flexWrap: "wrap", gap: 16, justifyContent: 'space-between'}}>
                 <Button
                     variant="outlined"
                     startIcon={<ArrowBackIcon/>}
@@ -24,6 +24,6 @@ export const FormNavigation = ({handleBackward}: FormNavigationProps) => {
                     Toliau
                 </Button>
             </div>
-        </>
+        </div>
     )
 }

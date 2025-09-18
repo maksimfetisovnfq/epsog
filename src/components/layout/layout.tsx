@@ -8,7 +8,7 @@ export const Layout = ({children}: Props) => {
     const location = useLocation();
     const isHome = location.pathname.replace(/\/+$/, '') === '';
     return (
-        <Box sx={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
+        <Box sx={{ position: 'relative', minHeight: '100vh', width: '100%'}}>
             {isHome && (
                 <Box
                     sx={{
@@ -30,6 +30,8 @@ export const Layout = ({children}: Props) => {
                 my: '80px',
                 position: 'relative',
                 zIndex: 1,
+                paddingLeft: {xs: "10px", sm: "0px"},
+                paddingRight: {xs: "10px", sm: "0px"},
             }}>
                 {children}
             </Box>

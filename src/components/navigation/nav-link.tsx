@@ -12,14 +12,14 @@ type Props = {
 
 export const NavLink = ({to, state, children, disabled = false, isHome = false}: Props) => {
     const textColor = !disabled ? "#0F2D46" : (isHome ? "#B7C0C8" : "#E7EAED");
-    const svgColor = !disabled ? "#00EB8C" : (isHome ? "#B7C0C8" : "#E7EAED");
+    const borderColor = !disabled ? "#00EB8C" : (isHome ? "#B7C0C8" : "#E7EAED");
     
     return (
         <div style={{
             marginRight: "12px",
-            width: "100%",
             height: "37px",
             cursor: disabled ? "not-allowed" : "pointer",
+            borderBottom: `4px solid ${borderColor}`
         }}>
             {disabled ? (
                 <span style={{
@@ -38,7 +38,7 @@ export const NavLink = ({to, state, children, disabled = false, isHome = false}:
                 </Link>
             )}
 
-            <IndicatorSvg style={{color: svgColor}}/>
+            {/*<IndicatorSvg style={{color: svgColor}}/>*/}
         </div>
     );
 };

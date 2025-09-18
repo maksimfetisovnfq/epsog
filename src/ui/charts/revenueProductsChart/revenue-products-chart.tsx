@@ -1,6 +1,7 @@
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js"
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
+import { Box } from "@mui/material"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -78,20 +79,16 @@ export const RevenueProductsChart = ({ labels, datasets }: RevenueProductsChartP
     }
 
     return (
-        <div style={{ width: 768, maxWidth: "100%" }}>
-            <div
-                style={{
-                    marginTop: 24,
+        <Box sx={{ width: {sm: 768}}}>
+            <Box
+                sx={{
                     position: "relative",
-                    width: 768,
-                    maxWidth: "100%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
+                    width: {sm: 768},
                     overflow: "visible",
                 }}
             >
-                <Bar data={data} options={options} style={{ marginBottom: 16, width: "100%", maxWidth: 768 }} />
-            </div>
-        </div>
+                <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
+            </Box>
+        </Box>
     )
 }

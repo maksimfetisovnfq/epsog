@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem"
 import Checkbox from "@mui/material/Checkbox"
 import LineChart from "@/ui/charts/lineChart/line-chart"
 import { type ChartOptions } from "chart.js"
+import { Box } from "@mui/material"
 
 interface FormValues {
     selectedColumns: string[]
@@ -71,10 +72,9 @@ export const YearlySummary = () => {
 
     return (
         <FormProvider {...methods}>
-            <div style={{ width: "768px", marginTop: "24px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div style={{ fontSize: "18px" }}>Pasirinkite stulpelius</div>
-                    <div>
+            <Box sx={{ width: {sm:"768px"}, marginTop: "24px" }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelius</Box>
                         <Controller
                             name="selectedColumns"
                             control={control}
@@ -82,7 +82,7 @@ export const YearlySummary = () => {
                                 <Select
                                     {...field}
                                     multiple
-                                    style={{ height: "40px", width: "230px" }}
+                                    sx={{ height: "40px", width: {sm: "230px" }, overflow: "hidden" }}
                                     displayEmpty
                                     inputProps={{ "aria-label": "Without label" }}
                                     renderValue={(selected) =>
@@ -102,24 +102,24 @@ export const YearlySummary = () => {
                                 </Select>
                             )}
                         />
-                    </div>
-                </div>
-                <div style={{ marginTop: "24px" }}>
+                </Box>
+                <Box sx={{ marginTop: "24px" }}>
                     <DetailedAnualResultsTable data={transformedData} visibleColumns={selectedColumns} />
-                </div>
-                <div
-                    style={{
+                </Box>
+                <Box
+                    sx={{
                         marginTop: "24px",
                         border: "1px solid #CFD5DA",
-                        width: "768px",
-                        height: "382px",
+                        width: { sm: "768px" },
                         boxSizing: "border-box",
                         display: "flex",
                     }}
                 >
-                    <LineChart data={chartData} options={chartOptions} width={768} height={382} />
-                </div>
-            </div>
+                    <Box sx={{ width: { sm: 768 } }}>
+                        <LineChart data={chartData} options={chartOptions} leftAxisLabel="NPV (tūkst. EUR)" bottomAxisLabel="Year" />
+                    </Box>
+                </Box>
+            </Box>
         </FormProvider>
     )
 }

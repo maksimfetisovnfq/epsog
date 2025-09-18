@@ -1,4 +1,5 @@
 import { MarketProductsChart } from "@/ui/charts/marketProductsChart"
+import { Box } from "@mui/material"
 
 type Props = {
     data: {
@@ -10,7 +11,7 @@ type Props = {
 export const UtilisationChart = ({ data }: Props) => {
 
     if (!data) return (
-        <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
+        <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}, marginBottom: '16px'}}>
             <div style={{
                 fontSize: '16px',
                 marginBottom: '16px',
@@ -23,14 +24,14 @@ export const UtilisationChart = ({ data }: Props) => {
             <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
                 Duomenys kraunami...
             </div>
-        </div>
+        </Box>
     );
 
     const utilisationChartData = data;
 
     if (!utilisationChartData.products || utilisationChartData.products.length === 0) {
         return (
-            <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
+            <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}, marginBottom: '16px'}}>
                 <div style={{
                     fontSize: '16px',
                     marginBottom: '16px',
@@ -43,12 +44,12 @@ export const UtilisationChart = ({ data }: Props) => {
                 <div style={{ padding: '20px', textAlign: 'center', color: '#666' }}>
                     Duomenys kraunami...
                 </div>
-            </div>
+            </Box>
         );
     }
 
     return (
-        <div style={{border: '1px solid #CFD5DA', width: '768px', marginBottom: '16px'}}>
+        <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}, marginBottom: '16px'}}>
             <div style={{
                 fontSize: '16px',
                 marginBottom: '16px',
@@ -59,7 +60,7 @@ export const UtilisationChart = ({ data }: Props) => {
                 Rinkų produktai
             </div>
 
-            <div style={{width: '768px'}}>
+            <Box sx={{width: {sm: '768px'}}}>
                 <MarketProductsChart
                     labels={utilisationChartData.products.map((product: string) => product)}
                     datasets={[
@@ -69,7 +70,7 @@ export const UtilisationChart = ({ data }: Props) => {
                         },
                     ]}
                 />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 };
