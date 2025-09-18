@@ -12,15 +12,16 @@ import Divider from "@mui/material/Divider"
 import { FcrBalancingCapacityTable } from "@/features/p2g/summary/tables/fsr-balancing-capacity-table"
 import { AfrrBalancingCapacityTable } from "./tables/afrr-balancing-capacity-table"
 import { MfrrBalancingCapacityTable } from "./tables/mfrr-balancing-capacity-table"
-import { YearlySummaryChartP2g } from "@/features/p2g/summary/charts/yearly-summary-chart-p2g.tsx"
+import { YearlySummaryChartP2g } from "@/features/p2g/summary/charts/yearly-summary-chart-p2g"
 import { NpvAnalysisChartP2g } from "./charts/npv-analysis-chart-p2g"
 import { CostProductsChartP2g } from "./charts/cost-products-chart-p2g"
-import { UtilisationChartP2g } from "@/features/p2g/summary/charts/utilisation-chart-p2g.tsx"
+import { UtilisationChartP2g } from "@/features/p2g/summary/charts/utilisation-chart-p2g"
 import { DayAheadTable } from "./tables/day-ahead-table"
-import { RevenueChartP2g } from "@/features/p2g/summary/charts/revenue-chart-p2g.tsx"
-import { CostChartP2g } from "@/features/p2g/summary/charts/cost-economic-evaluation-chart-p2g.tsx"
-import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table.tsx"
-import { HydrogenSalesTable } from "@/features/p2g/summary/tables/hydrogen-sales-table.tsx"
+import { RevenueChartP2g } from "@/features/p2g/summary/charts/revenue-chart-p2g"
+import { CostChartP2g } from "@/features/p2g/summary/charts/cost-economic-evaluation-chart-p2g"
+import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table"
+import { HydrogenSalesTable } from "@/features/p2g/summary/tables/hydrogen-sales-table"
+import { DefaultP2gSummaryTable } from "@/features/p2g/summary/tables/default-p2g-summary-table"
 
 export const SummaryOfResultsP2gView = () => {
     const navigate = useNavigate()
@@ -36,6 +37,7 @@ export const SummaryOfResultsP2gView = () => {
         <Fragment key={1}>
             <Stack spacing={1}>
                 <Title style={{ fontSize: 24 }}>Summary</Title>
+                <DefaultP2gSummaryTable/>
                 <YearlySummaryTable />
                 <YearlySummaryChartP2g />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -49,6 +51,7 @@ export const SummaryOfResultsP2gView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
+                <DefaultP2gSummaryTable/>
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -61,6 +64,7 @@ export const SummaryOfResultsP2gView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
+                <DefaultP2gSummaryTable/>
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -71,6 +75,7 @@ export const SummaryOfResultsP2gView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
+                <DefaultP2gSummaryTable/>
                 <DayAheadTable />
             </Stack>
         </Fragment>
@@ -79,6 +84,7 @@ export const SummaryOfResultsP2gView = () => {
     const FourthTab = (
         <Fragment key={4}>
             <Stack spacing={0}>
+                <DefaultP2gSummaryTable/>
                 <HydrogenSalesTable />
             </Stack>
         </Fragment>

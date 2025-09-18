@@ -1,0 +1,1 @@
+export { DefaultSummaryTable } from './defaultSummaryTable';

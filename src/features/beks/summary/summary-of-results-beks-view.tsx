@@ -5,22 +5,23 @@ import { CostTable } from "./tables/cost-table"
 import { YearlySummary } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
 import { Fragment } from "react"
-import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
-import { CostProductsChartBeks } from "@/features/beks/summary/charts/cost-products-chart-beks.tsx"
-import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner"
+import { CostProductsChartBeks } from "@/features/beks/summary/charts/cost-products-chart-beks"
+import { FormNavigation } from "@/components/navigation/form-navigation"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { FcrBalancingCapacityTable } from "@/features/beks/summary/tables/fsr-balancing-capacity-table.tsx"
-import { AfrrBalancingCapacityTable } from "@/features/beks/summary/tables/afrr-balancing-capacity-table.tsx"
+import { FcrBalancingCapacityTable } from "@/features/beks/summary/tables/fsr-balancing-capacity-table"
+import { AfrrBalancingCapacityTable } from "@/features/beks/summary/tables/afrr-balancing-capacity-table"
 import Divider from "@mui/material/Divider"
-import { MfrrBalancingCapacityTable } from "@/features/beks/summary/tables/mfrr-balancing-capacity-table.tsx"
-import { DayAheadTable } from "@/features/beks/summary/tables/day-ahead-table.tsx"
-import { IntradayTable } from "@/features/beks/summary/tables/intraday-table.tsx"
-import { NpvAnalysisChartBeks } from "@/features/beks/summary/charts/npv-analysis-chart-beks.tsx"
-import { CostChartBeks } from "@/features/beks/summary/charts/cost-economic-evaluation-chart-beks.tsx"
+import { MfrrBalancingCapacityTable } from "@/features/beks/summary/tables/mfrr-balancing-capacity-table"
+import { DayAheadTable } from "@/features/beks/summary/tables/day-ahead-table"
+import { IntradayTable } from "@/features/beks/summary/tables/intraday-table"
+import { NpvAnalysisChartBeks } from "@/features/beks/summary/charts/npv-analysis-chart-beks"
+import { CostChartBeks } from "@/features/beks/summary/charts/cost-economic-evaluation-chart-beks"
 import { Title } from "@/ui/title"
-import { YearlySummaryChartBeks } from "@/features/beks/summary/charts/yearly-summary-chart-beks.tsx"
-import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation-chart-beks.tsx"
-import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks.tsx"
+import { YearlySummaryChartBeks } from "@/features/beks/summary/charts/yearly-summary-chart-beks"
+import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation-chart-beks"
+import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks"
+import { DefaultBeksSummaryTable } from "./tables/default-beks-summary-table"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -36,6 +37,7 @@ export const SummaryOfResultsBeksView = () => {
         <Fragment key={1}>
             <Stack spacing={1}>
                 <Title style={{ fontSize: 24 }}>Summary</Title>
+                <DefaultBeksSummaryTable />
                 <YearlySummaryTable />
                 <YearlySummaryChartBeks />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -49,6 +51,7 @@ export const SummaryOfResultsBeksView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
+                <DefaultBeksSummaryTable />
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -61,6 +64,7 @@ export const SummaryOfResultsBeksView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
+                <DefaultBeksSummaryTable />
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -71,6 +75,7 @@ export const SummaryOfResultsBeksView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
+                <DefaultBeksSummaryTable />
                 <DayAheadTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
@@ -109,7 +114,6 @@ export const SummaryOfResultsBeksView = () => {
         <>
             <Stack spacing={2}>
                 <InfoBanner />
-
                 <Tabs
                     labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
                     content={[summaryTab, marketTab, economicTab]}
