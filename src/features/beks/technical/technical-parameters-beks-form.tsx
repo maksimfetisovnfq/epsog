@@ -9,13 +9,12 @@ import Divider from "@mui/material/Divider";
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { Accordion } from "@/ui/accordion/accordion.tsx"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
+import { Title } from "@/ui/title/index.ts"
 
 const FormContent = () => {
     return (
         <>
-            <div style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}}>
-                Techniniai parametrai
-            </div>
+            <Title style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}} >Techniniai parametrai</Title>
 
             <FormInput name="q_max" placeholder="1000 MW"
                        description="Tik teigiami skaičiai, max reikšmė 1000 MW"

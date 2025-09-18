@@ -5,6 +5,7 @@ import { Form, FormInput } from "@/components/form"
 import { defaultEconomicalParametersDsrSchema, economicalParametersDsrSchema } from "./economical-parameters-dsr-schema"
 import { useSubmitDsr } from "./use-submit-dsr"
 import { Stack } from "@mui/material"
+import { Title } from "@/ui/title"
 
 export const EconomicalParametersDsrForm = () => {
     const location = useLocation()
@@ -29,10 +30,11 @@ export const EconomicalParametersDsrForm = () => {
             defaultValues={location.state?.economicParameters?.dsr || defaultEconomicalParametersDsrSchema}
         >
             <Stack spacing={2}>
-                <FormInput name="CAPEX" title="CAPEX" type="number" />
-                <FormInput name="OPEX" title="OPEX" type="number" />
-                <FormInput name="number_of_years" title="number_of_years" type="number" />
-                <FormInput name="discount_rate" title="discount_rate" type="number" />
+                <Title style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}} >Ekonominiai parametrai</Title>
+                <FormInput name="CAPEX" title="Investicijos, CAPEX (tūkst. EUR/MW)" type="number" />
+                <FormInput name="OPEX" title="Veiklos sąnaudos, OPEX (tūkst. EUR/MW per metus)" type="number" />
+                <FormInput name="number_of_years" title="Projekto gyvavimo laikotarpis (metais)" type="number" />
+                <FormInput name="discount_rate" title="Taikoma diskonto norma (%)" type="number" />
 
                 <BspFields />
             </Stack>

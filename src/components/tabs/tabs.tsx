@@ -17,6 +17,10 @@ export const Tabs = ({ labels, content }: Props) => {
                 textColor="secondary"
                 indicatorColor="secondary"
                 sx={{
+                    "& .MuiTabs-flexContainer": {
+                        flexWrap: "wrap",
+                        gap: "4px", 
+                    },
                     "& .MuiTab-root": {
                         textTransform: "none",
                         marginLeft: "8px",

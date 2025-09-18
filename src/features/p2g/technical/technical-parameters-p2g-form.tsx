@@ -9,6 +9,7 @@ import { Stack } from "@mui/material"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import Divider from "@mui/material/Divider"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
+import { Title } from "@/ui/title"
 
 export const TechnicalParametersP2gForm = () => {
     const navigate = useNavigate()
@@ -35,15 +36,17 @@ export const TechnicalParametersP2gForm = () => {
             defaultValues={location.state?.technicalParameters?.p2g || defaultTechnicalParametersP2g}
         >
             <Stack spacing={3}>
-                <FormInput name="Q_max" title="Q_max" description="Q_max" type="number" />
+                <Title style={{fontSize: '32px', marginBottom: '48px', fontWeight: 400}} >Techniniai parametrai</Title>
+                
+                <FormInput name="Q_max" title="Maksimali įrenginio galia (MW)" type="number" />
 
                 <Divider />
 
                 <ServiceTypeSelect />
 
-                <ReactionTimeSlider field={"reaction_time_d"} label={"reaction_time_d"} />
+                <ReactionTimeSlider field={"reaction_time_d"} label={"Reakcijos laikas įjungiant elektrolizerį (reguliavimas žemyn) "} />
 
-                <ReactionTimeSlider field={"reaction_time_u"} label={"reaction_time_y"} />
+                <ReactionTimeSlider field={"reaction_time_u"} label={"Reakcijos laikas išjungiant elektrolizerį (reguliavimas aukštyn)"} />
             </Stack>
 
             <Stack spacing={2}>
