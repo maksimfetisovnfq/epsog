@@ -15,35 +15,35 @@ const FormContent = () => {
                 name="CAPEX_P"
                 placeholder="Eur/MW"
                 description="Tik teigiami skaičiai"
-                title="Investicijos (CAPEX) į galią"
+                title="Investicijos (CAPEX) į galią *"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="CAPEX_C"
                 placeholder="Eur/MWh"
                 description="Tik teigiami skaičiai"
-                title="Investicijos (CAPEX) į talpą"
+                title="Investicijos (CAPEX) į talpą *"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="OPEX_P"
                 placeholder="Eur/MW per metus"
                 description="Tik teigiami skaičiai"
-                title="Fiksuotos veiklos sąnaudos (OPEX)"
+                title="Fiksuotos veiklos sąnaudos (OPEX) *"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="OPEX_C"
                 placeholder="Eur/MWh"
                 description="Tik teigiami skaičiai"
-                title="Kintamos veiklos sąnaudos (OPEX)"
+                title="Kintamos veiklos sąnaudos (OPEX) *"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="number_of_years"
                 placeholder="10"
                 description="Tik sveikas skaičius nuo 1 iki 50"
-                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"
+                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą? *"
             />
             <Divider style={{ marginTop: "48px", marginBottom: "48px" }} />
 
