@@ -11,6 +11,7 @@ import { Accordion } from "@/ui/accordion/accordion.tsx"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { Title } from "@/ui/title/index.ts"
 import { Box } from "@mui/material"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
 
 const FormContent = () => {
     return (
@@ -51,7 +52,20 @@ const FormContent = () => {
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <Accordion title="Išplėstiniai techniniai parametrai">
+            <Accordion
+                title="Išplėstiniai techniniai parametrai"
+                titleDescription={
+                    <InfoBanner
+                        title=""
+                        subtitle="Patikslinkite savo įrenginio technines charakteristikas, 
+                        kad skaičiavimai būtų kuo tikslesni."
+                        description="Atkreipiame dėmesį, kad šios informacijos pateikimui, 
+                        geriausia pasitelkti įrenginio technines specifikacijas. Jei kažkurių 
+                        verčių nežinote, nesijaudinkite, parinkome numatytąsias reikšmes, kurios atspindi 
+                        rinkoje esančių įrenginių galimybes."
+                    />
+                }
+            >
                 <FormInput
                     name="RTE"
                     placeholder="88 %"

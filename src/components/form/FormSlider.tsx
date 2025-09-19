@@ -78,7 +78,7 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                     },
                     '& .MuiSlider-thumb': {
                         backgroundColor: '#FFFFFF',
-                        border: '1px solid #0F2D46', // Set border color of the circle point
+                        border: '1px solid #0F2D46',
                     },
                 }} 
             />
