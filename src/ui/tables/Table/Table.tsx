@@ -1,4 +1,4 @@
-import { Stack, Table as MuiTable } from "@mui/material"
+import { Table as MuiTable } from "@mui/material"
 import { TableHead } from "../TableHead"
 import { TableBody } from "../TableBody"
 import type { Column } from "../types"
@@ -10,6 +10,8 @@ export interface TableProps {
     boldHeaders?: boolean
     title?: string
     description?: string
+    headerBackgroundColor?: { left?: string; right?: string }
+    textAlign?: "left" | "center" | "right"
 }
 
 export const Table = ({
@@ -19,18 +21,27 @@ export const Table = ({
     title,
     description,
     hideHead,
+    headerBackgroundColor,
+    textAlign = "center", 
 }: TableProps & { hideHead?: boolean }) => (
-    <Stack spacing={1}>
+    <>
         {title && <Title variant="h6">{title}</Title>}
         {description && (
-            <Title variant="subtitle2" sx={{ color: "#6F8190", }}>
+            <Title variant="subtitle2" style={{ color: "#6F8190"}}>
                 {description}
             </Title>
         )}
 
-        <MuiTable sx={{ border: "1px solid #CFD5DA", width: { sm: "768px"}}} aria-label="simple table">
-            {!hideHead && <TableHead columns={columns} boldHeaders={boldHeaders} />}
+        <MuiTable sx={{ border: "1px solid #CFD5DA", width: { sm: "768px" } }} aria-label="simple table">
+            {!hideHead && (
+                <TableHead
+                    columns={columns}
+                    boldHeaders={boldHeaders}
+                    headerBackgroundColor={headerBackgroundColor}
+                    textAlign={textAlign}
+                />
+            )}
             <TableBody columns={columns} dataSource={dataSource} />
         </MuiTable>
-    </Stack>
+    </>
 )

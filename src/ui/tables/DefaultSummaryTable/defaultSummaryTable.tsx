@@ -1,5 +1,4 @@
 import { Table } from "../Table";
-import { Box } from "@mui/material"
 
 type DefaultSummaryTableProps = {
   values: { [key: number]: string };
@@ -34,8 +33,11 @@ export const DefaultSummaryTable = ({ values, columnTitles }: DefaultSummaryTabl
   }));
 
   return (
-    <Box sx={{ marginBottom: {sm:5}}}>
-      <Table columns={columns} dataSource={dataSource} />
-    </Box>
+      <Table
+        columns={columns}
+        dataSource={dataSource}
+        headerBackgroundColor={{ left: "#F5F7F8", right: "#FFFFFF" }}
+        textAlign={"left"}
+      />
   );
 };

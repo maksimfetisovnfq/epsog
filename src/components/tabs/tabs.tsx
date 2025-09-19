@@ -1,16 +1,17 @@
-import { Tab, Tabs as MuiTabs, Stack } from "@mui/material"
+import { Tab, Tabs as MuiTabs, Stack, Box } from "@mui/material"
 import { type ReactNode, useState } from "react"
 
 type Props = {
     labels: string[]
     content: ReactNode[]
+    bordered?: boolean 
 }
 
-export const Tabs = ({ labels, content }: Props) => {
+export const Tabs = ({ labels, content, bordered = false }: Props) => {
     const [tab, setTab] = useState(0)
 
     return (
-        <Stack spacing={2}>
+        <Box style={{ marginBottom: 24 }}>
             <MuiTabs
                 value={tab}
                 onChange={(_, newValue) => setTab(newValue)}
@@ -19,7 +20,11 @@ export const Tabs = ({ labels, content }: Props) => {
                 sx={{
                     "& .MuiTabs-flexContainer": {
                         flexWrap: "wrap",
-                        gap: "4px", 
+                        gap: "6px",
+                        border: bordered ? "1px solid #CFD5DA" : "none", borderRadius: "100px",
+                        width: bordered ? {sm:"490px"} : {sm: "768px"},
+                        paddingBottom: bordered ? "8px" : "0px",
+                        paddingTop: bordered ? "8px" : "0px",
                     },
                     "& .MuiTab-root": {
                         textTransform: "none",
@@ -45,6 +50,6 @@ export const Tabs = ({ labels, content }: Props) => {
             </MuiTabs>
 
             {content[tab] && <Stack spacing={6}>{content[tab]}</Stack>}
-        </Stack>
+        </Box>
     )
 }

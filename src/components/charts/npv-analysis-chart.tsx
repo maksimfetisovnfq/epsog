@@ -21,7 +21,7 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
     });
     
     return (
-        <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}, marginBottom: '16px'}}>
+        <Box sx={{border: '1px solid #CFD5DA', width: {sm: '768px'}}}>
             <div style={{
                 fontSize: '16px',
                 marginBottom: '16px',

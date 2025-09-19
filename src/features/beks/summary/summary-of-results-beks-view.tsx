@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material"
+import { Box, Stack } from "@mui/material"
 import { YearlySummaryTable } from "./tables/yearly-summary-table"
 import { RevenueTable } from "./tables/revenue-table"
 import { CostTable } from "./tables/cost-table"
@@ -36,13 +36,21 @@ export const SummaryOfResultsBeksView = () => {
     const summaryTab = (
         <Fragment key={1}>
             <Stack spacing={1}>
-                <Title style={{ fontSize: 24 }}>Summary</Title>
-                <DefaultBeksSummaryTable />
-                <YearlySummaryTable />
+                <Title style={{ fontSize: 24 }}>Santrauka</Title>
+                <Box style={{ marginBottom: 32 }}>
+                    <DefaultBeksSummaryTable />
+                </Box>
+                <Box style={{ marginBottom: 16 }}>
+                    <YearlySummaryTable />
+                </Box>
                 <YearlySummaryChartBeks />
-                <Divider sx={{ marginBottom: 32, marginTop: 32, maxWidth: {sm: "760px"}}} />
-                <NpvAnalysisChartBeks />
-                <CostProductsChartBeks />
+                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: "760px" }} />
+                <Box style={{ marginBottom: 16 }}>
+                    <NpvAnalysisChartBeks />
+                </Box>
+                <Box style={{ marginBottom: 16 }}>
+                    <CostProductsChartBeks />
+                </Box>
                 <UtilisationChartBeks />
             </Stack>
         </Fragment>
@@ -51,7 +59,9 @@ export const SummaryOfResultsBeksView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
-                <DefaultBeksSummaryTable />
+                <Box style={{ marginBottom: 32 }}>
+                    <DefaultBeksSummaryTable />
+                </Box>
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -64,7 +74,9 @@ export const SummaryOfResultsBeksView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <DefaultBeksSummaryTable />
+                <Box style={{ marginBottom: 32 }}>
+                    <DefaultBeksSummaryTable />
+                </Box>
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -75,7 +87,9 @@ export const SummaryOfResultsBeksView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <DefaultBeksSummaryTable />
+                <Box style={{ marginBottom: 32 }}>
+                    <DefaultBeksSummaryTable />
+                </Box>
                 <DayAheadTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
@@ -112,15 +126,18 @@ export const SummaryOfResultsBeksView = () => {
 
     return (
         <>
-            <Stack spacing={2}>
-                <InfoBanner />
-                <Tabs
-                    labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
-                    content={[summaryTab, marketTab, economicTab]}
-                />
-            </Stack>
+            <InfoBanner />
+            <Tabs
+                bordered={true}
+                labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
+                content={[summaryTab, marketTab, economicTab]}
+            />
 
-            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
+            <FormNavigation
+                handleBackward={handleBackward}
+                backButtonTitle="Koreguoti duomenys"
+                nextButtonTitle="Susisiekti"
+            />
         </>
     )
 }

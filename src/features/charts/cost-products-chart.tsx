@@ -21,7 +21,7 @@ export const CostProductsChart = ({ data }: Props) => {
     }))
 
     return (
-        <Stack spacing={0} sx={{ border: "1px solid #CFD5DA", width: { sm: "768px" }, marginBottom: 16 }}>
+        <Stack spacing={0} sx={{ border: "1px solid #CFD5DA", width: { sm: "768px" }}}>
             <div
                 style={{
                     fontSize: "16px",

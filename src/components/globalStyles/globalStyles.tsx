@@ -15,7 +15,9 @@ export const GlobalStyles = () => (
             '.MuiTabs-list': {
                 marginBottom: '48px',
             },
-            
+            '.css-nvechd-MuiStack-root>:not(style)~:not(style)': {
+                marginTop: '0 !important',
+            },
         }}
     />
 );
