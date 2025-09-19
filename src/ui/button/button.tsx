@@ -10,7 +10,7 @@ const commonSx: SxProps = {
     letterSpacing: 0,
     textTransform: "none",
     borderRadius: 0,
-    width: "188px",
+    minWidth: "188px",
     height: "48px",
 }
 

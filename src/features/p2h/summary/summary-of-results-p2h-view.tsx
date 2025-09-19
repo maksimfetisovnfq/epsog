@@ -123,7 +123,7 @@ export const SummaryOfResultsP2hView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} />
+            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
         </>
     )
 }

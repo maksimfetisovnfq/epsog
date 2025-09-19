@@ -121,7 +121,7 @@ export const SummaryOfResultsDsrView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} />
+            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
         </>
     )
 }

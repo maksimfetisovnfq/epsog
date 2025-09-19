@@ -120,7 +120,7 @@ export const SummaryOfResultsBeksView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} />
+            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
         </>
     )
 }

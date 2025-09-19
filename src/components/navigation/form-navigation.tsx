@@ -1,29 +1,37 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import {Divider} from "@mui/material";
+import { Box, Divider } from "@mui/material"
 import {Button} from "../../ui/button";
 
 type FormNavigationProps = {
     handleBackward: () => void;
+    backButtonTitle?: string;
+    nextButtonTitle?: string;
 }
 
-export const FormNavigation = ({handleBackward}: FormNavigationProps) => {
+export const FormNavigation = ({handleBackward, backButtonTitle = "Atgal", nextButtonTitle = "Toliau"}: FormNavigationProps) => {
     return (
-        <div style={{ fontFamily: "Arial" }}>
+        <Box sx={{ fontFamily: "Arial" }}>
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
 
-            <div style={{marginTop: '24px', display: 'flex',  flexWrap: "wrap", gap: 16, justifyContent: 'space-between'}}>
+            <Box sx={{marginTop: '24px', display: 'flex', gap: 16, justifyContent: 'space-between'}}>
                 <Button
                     variant="outlined"
                     startIcon={<ArrowBackIcon/>}
                     onClick={handleBackward}
+                    sx={{ whiteSpace: 'nowrap' }}
                 >
-                    Atgal
+                    {backButtonTitle}
                 </Button>
-                <Button variant="contained" type="submit" endIcon={<ArrowForwardIcon/>}>
-                    Toliau
+                <Button 
+                    variant="contained" 
+                    type="submit" 
+                    endIcon={<ArrowForwardIcon/>} 
+                    sx={{ whiteSpace: 'nowrap' }}
+                >
+                    {nextButtonTitle}
                 </Button>
-            </div>
-        </div>
+            </Box>
+        </Box>
     )
 }

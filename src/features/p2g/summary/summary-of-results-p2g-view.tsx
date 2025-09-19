@@ -128,7 +128,7 @@ export const SummaryOfResultsP2gView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} />
+            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
         </>
     )
 }
