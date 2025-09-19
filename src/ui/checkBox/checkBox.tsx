@@ -12,8 +12,8 @@ export const CheckBox = ({ label, description, error, ...props }: Props) => (
             {...props}
             sx={{
                 "& .MuiSvgIcon-root": {
-                    width: 20,
-                    height: 20,
+                    width: {sm: 20},
+                    height: {sm: 20},
                     fill: "#999999",
                 },
 

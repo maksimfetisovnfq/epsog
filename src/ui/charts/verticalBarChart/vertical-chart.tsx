@@ -25,10 +25,6 @@ export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) =>
 
     const chartDatasets = datasets
 
-    const maxY = Math.max(
-        ...chartDatasets.flatMap((ds) => ds.data.map((d: number | [number, number]) => (Array.isArray(d) ? d[1] : d)))
-    )
-
     const options = {
         responsive: true,
         plugins: {
@@ -69,7 +65,6 @@ export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) =>
                 beginAtZero: true,
                 grid: { drawOnChartArea: true, drawBorder: false },
                 ticks: { display: false },
-                max: maxY + Math.max(10, 0.15 * maxY),
             },
         },
     }

@@ -1,4 +1,3 @@
-
 import { useForm, FormProvider, Controller } from "react-hook-form"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
@@ -10,6 +9,7 @@ import {
     DetailedAnualResultsTable,
     type DetailedAnualResultsTableRow,
 } from "@/features/p2h/summary/tables/detailed-annual-results-table.tsx"
+import { Box } from "@mui/material"
 
 interface FormValues {
     selectedColumns: string[]
@@ -69,55 +69,54 @@ export const YearlySummary = () => {
 
     return (
         <FormProvider {...methods}>
-            <div style={{ width: "768px", marginTop: "24px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div style={{ fontSize: "18px" }}>Pasirinkite stulpelius</div>
-                    <div>
-                        <Controller
-                            name="selectedColumns"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    {...field}
-                                    multiple
-                                    style={{ height: "40px", width: "230px" }}
-                                    displayEmpty
-                                    inputProps={{ "aria-label": "Without label" }}
-                                    renderValue={(selected) =>
-                                        selected.length === 0
-                                            ? "Pasirinkite stulpelius"
-                                            : selected
-                                                  .map((val) => columns.find((col) => col.value === val)?.label)
-                                                  .join(", ")
-                                    }
-                                >
-                                    {columns.map((col) => (
-                                        <MenuItem key={col.value} value={col.value}>
-                                            <Checkbox checked={field.value.indexOf(col.value) > -1} />
-                                            {col.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            )}
-                        />
-                    </div>
-                </div>
-                <div style={{ marginTop: "24px" }}>
+            <Box sx={{ width: { sm: "768px" }, marginTop: "24px" }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelius</Box>
+                    <Controller
+                        name="selectedColumns"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                multiple
+                                sx={{ height: "40px", width: { sm: "230px" } }}
+                                displayEmpty
+                                inputProps={{ "aria-label": "Without label" }}
+                                renderValue={(selected) =>
+                                    selected.length === 0
+                                        ? "Pasirinkite stulpelius"
+                                        : selected
+                                              .map((val) => columns.find((col) => col.value === val)?.label)
+                                              .join(", ")
+                                }
+                            >
+                                {columns.map((col) => (
+                                    <MenuItem key={col.value} value={col.value}>
+                                        <Checkbox checked={field.value.indexOf(col.value) > -1} />
+                                        {col.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        )}
+                    />  
+                </Box>
+                <Box sx={{ marginTop: "24px" }}>
                     <DetailedAnualResultsTable data={transformedData} visibleColumns={selectedColumns} />
-                </div>
-                <div
-                    style={{
+                </Box>
+                <Box
+                    sx={{
                         marginTop: "24px",
                         border: "1px solid #CFD5DA",
-                        width: "768px",
-                        height: "382px",
+                        width: { sm: "768px" },
                         boxSizing: "border-box",
                         display: "flex",
                     }}
                 >
-                    <LineChart data={chartData} options={chartOptions} />
-                </div>
-            </div>
+                    <Box sx={{ width: { sm: 768 } }}>
+                        <LineChart data={chartData} options={chartOptions} />
+                    </Box>
+                </Box>
+            </Box>
         </FormProvider>
     )
 }

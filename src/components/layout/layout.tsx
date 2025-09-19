@@ -26,7 +26,7 @@ export const Layout = ({children}: Props) => {
             )}
             <Box sx={{
                 margin: '0 auto',
-                maxWidth: '816px',
+                maxWidth: '768px',
                 my: '80px',
                 position: 'relative',
                 zIndex: 1,

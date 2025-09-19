@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
-import { GlobalStyles } from "@mui/material"
+import { Box, GlobalStyles } from "@mui/material"
 import Divider from "@mui/material/Divider"
 import { Button } from "../ui/button"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
@@ -24,10 +24,10 @@ function RouteComponent() {
     }
 
     return (
-        <div
-            style={{
+        <Box
+            sx={{
                 fontFamily: "Arial",
-                width: "760px",
+                width: {sm: "760px"},
                 color: "#FFFFFF",
             }}
         >
@@ -48,10 +48,10 @@ function RouteComponent() {
                 }}
             />
 
-            <div style={{ marginTop: "64px", marginBottom: "48px" }}>
-                <div style={{ fontSize: "48px", marginBottom: "12px" }}>Simuliuokite savo uždarbį</div>
-                <div style={{ fontSize: "20px" }}>Sužinokite lanksčių produktų galimybes</div>
-            </div>
+            <Box sx={{ marginTop: "64px", marginBottom: "48px" }}>
+                <Box sx={{ fontSize: {sm: "48px" }, marginBottom: "12px" }}>Simuliuokite savo uždarbį</Box>
+                <Box sx={{ fontSize: {sm: "20px" } }}>Sužinokite lanksčių produktų galimybes</Box>
+            </Box>
 
             <div style={{ fontSize: "16px", marginBottom: "24px" }}>
                 <div style={{ marginBottom: "8px", fontWeight: 700 }}>Numatomas laikas:</div>
@@ -86,19 +86,19 @@ function RouteComponent() {
                     <CheckBox checked={checked} onChange={(e) => setChecked(e.target.checked)} />
                 </div>
 
-                <div style={{ width: "768px", marginLeft: 6, fontSize: "16px" }}>
+                <Box sx={{ width: { sm: "768px" }, marginLeft: 6, fontSize: "16px" }}>
                     Patvirtinu, kad su skaičiuoklės naudojimosi taisyklėmis susipažinau ir sutinku
-                </div>
+                </Box>
             </div>
 
-            <div style={{ width: "736px", marginLeft: "32px", fontSize: "14px" }}>
+            <Box sx={{ width: { sm: "736px" }, marginLeft: "32px", fontSize: "14px" }}>
                 Tai nėra investicinis patarimas ar garantija dėl būsimų pajamų. Ši skaičiuoklė skirta padėti įvertinti
                 lankstumo technologijų potencialą, remiantis pastarųjų 12 mėn. istoriniais rinkos duomenimis. Prieš
                 priimant sprendimus dėl investicijų ar įgyvendinimo, rekomenduojama atlikti išsamią kaštų ir naudos
                 analizę arba pasikonsultuoti su specialistais.
-            </div>
+            </Box>
 
-            <Divider variant="fullWidth" sx={{ marginTop: "147px", width: "760px" }} />
+            <Divider variant="fullWidth" sx={{ marginTop: "147px", width: { sm: "760px" } }} />
 
             <div style={{ marginTop: "24px", display: "flex", justifyContent: "end" }}>
                 <Button
@@ -115,6 +115,6 @@ function RouteComponent() {
                     Toliau
                 </Button>
             </div>
-        </div>
+        </Box>
     )
 }

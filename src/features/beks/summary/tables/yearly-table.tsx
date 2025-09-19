@@ -72,36 +72,36 @@ export const YearlySummary = () => {
 
     return (
         <FormProvider {...methods}>
-            <Box sx={{ width: {sm:"768px"}, marginTop: "24px" }}>
+            <Box sx={{ width: { sm: "768px" }, marginTop: "24px" }}>
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                     <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelius</Box>
-                        <Controller
-                            name="selectedColumns"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    {...field}
-                                    multiple
-                                    sx={{ height: "40px", width: {sm: "230px" }, overflow: "hidden" }}
-                                    displayEmpty
-                                    inputProps={{ "aria-label": "Without label" }}
-                                    renderValue={(selected) =>
-                                        selected.length === 0
-                                            ? "Pasirinkite stulpelius"
-                                            : selected
-                                                  .map((val) => columns.find((col) => col.value === val)?.label)
-                                                  .join(", ")
-                                    }
-                                >
-                                    {columns.map((col) => (
-                                        <MenuItem key={col.value} value={col.value}>
-                                            <Checkbox checked={field.value.indexOf(col.value) > -1} />
-                                            {col.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            )}
-                        />
+                    <Controller
+                        name="selectedColumns"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                multiple
+                                sx={{ height: "40px", width: { sm: "230px" }, overflow: "hidden" }}
+                                displayEmpty
+                                inputProps={{ "aria-label": "Without label" }}
+                                renderValue={(selected) =>
+                                    selected.length === 0
+                                        ? "Pasirinkite stulpelius"
+                                        : selected
+                                              .map((val) => columns.find((col) => col.value === val)?.label)
+                                              .join(", ")
+                                }
+                            >
+                                {columns.map((col) => (
+                                    <MenuItem key={col.value} value={col.value}>
+                                        <Checkbox checked={field.value.indexOf(col.value) > -1} />
+                                        {col.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        )}
+                    />
                 </Box>
                 <Box sx={{ marginTop: "24px" }}>
                     <DetailedAnualResultsTable data={transformedData} visibleColumns={selectedColumns} />
@@ -116,7 +116,12 @@ export const YearlySummary = () => {
                     }}
                 >
                     <Box sx={{ width: { sm: 768 } }}>
-                        <LineChart data={chartData} options={chartOptions} leftAxisLabel="NPV (tūkst. EUR)" bottomAxisLabel="Year" />
+                        <LineChart
+                            data={chartData}
+                            options={chartOptions}
+                            leftAxisLabel="NPV (tūkst. EUR)"
+                            bottomAxisLabel="Year"
+                        />
                     </Box>
                 </Box>
             </Box>

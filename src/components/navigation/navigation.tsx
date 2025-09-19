@@ -1,5 +1,6 @@
 import {NavLink} from "./nav-link.tsx";
 import {type HistoryState, useLocation} from "@tanstack/react-router";
+import { Box } from "@mui/material"
 
 const links = [
     { to: '/general-data', label: 'Bendrieji duomenys' },
@@ -32,9 +33,11 @@ export const Navigation = () => {
     
     
     return (
-        <nav className="p-2 flex gap-2" style={{
+        <Box className="p-2 flex gap-2" sx={{
             display: "flex",
             flexWrap: "wrap",
+            justifyContent: "space-between",
+            width: {sm: 768},
         }}>
             {links.map(link => {
                 const isHome = location.pathname === '/';
@@ -53,6 +56,6 @@ export const Navigation = () => {
                     </NavLink>
                 );
             })}
-        </nav>
+        </Box>
     );
 };

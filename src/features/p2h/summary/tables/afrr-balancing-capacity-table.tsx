@@ -1,5 +1,6 @@
 import { CombinedTable } from "@/ui/tables/combinedTable"
 import { useSummaryP2h } from "@/features/p2h/summary/use-summary-p2h.ts"
+import { Box } from "@mui/material"
 
 export const AfrrBalancingCapacityTable = () => {
     const data = useSummaryP2h();
@@ -78,9 +79,9 @@ export const AfrrBalancingCapacityTable = () => {
         <>
             <div style={{ fontSize: '18px', marginBottom: '16px' }}>
                 <div style={{ marginBottom: 4 }}>aFRR</div>
-                <div style={{ fontSize: '14px', color: '#6F8190', width: 768 }}>
+                <Box sx={{ fontSize: '14px', color: '#6F8190', width: {sm: 768} }}>
                     Automatinis dažnio atkūrimo rezervas (angl. Automatic frequency restoration reserve)
-                </div>
+                </Box>
             </div>
             {tables.map((table, index) => (
                 <CombinedTable

@@ -1,5 +1,6 @@
 import { CombinedTable } from "@/ui/tables/combinedTable"
 import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g.ts"
+import { Box } from "@mui/material"
 
 export const AfrrBalancingCapacityTable = () => {
     const data = useSummaryP2g();
@@ -76,12 +77,12 @@ export const AfrrBalancingCapacityTable = () => {
 
     return (
         <>
-            <div style={{ fontSize: '18px', marginBottom: '16px' }}>
-                <div style={{ marginBottom: 4 }}>aFRR</div>
-                <div style={{ fontSize: '14px', color: '#6F8190', width: 768 }}>
+            <Box sx={{ fontSize: '18px', marginBottom: '16px' }}>
+                <Box sx={{ marginBottom: 4 }}>aFRR</Box>
+                <Box sx={{ fontSize: '14px', color: '#6F8190', width: {sm: 768} }}>
                     Automatinis dažnio atkūrimo rezervas (angl. Automatic frequency restoration reserve)
-                </div>
-            </div>
+                </Box>
+            </Box>
             {tables.map((table, index) => (
                 <CombinedTable
                     key={index}

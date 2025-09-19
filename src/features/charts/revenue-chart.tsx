@@ -16,7 +16,7 @@ export const RevenueChart = ({ data }: Props) => {
     const values = revenueChartData.map((item: { "Value (tūkst. EUR)": number }) => item["Value (tūkst. EUR)"])
 
     return (
-        <div style={{ border: "1px solid #CFD5DA", maxWidth: "768px" }}>
+        <Box sx={{ border: "1px solid #CFD5DA", maxWidth: {sm: "768px"} }}>
             <Box sx={{ width: { sm: "768px" } }}>
                 <RevenueProductsChart
                     labels={labels}
@@ -28,6 +28,6 @@ export const RevenueChart = ({ data }: Props) => {
                     ]}
                 />
             </Box>
-        </div>
+        </Box>
     )
 }

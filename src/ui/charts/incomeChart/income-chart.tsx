@@ -39,10 +39,12 @@ export const IncomeChart = ({ labels, datasets }: IncomeChart) => {
             x: {
                 stacked: true,
                 ticks: {
+                    autoSkip: true,
                     padding: 10,
                     font: {
                         size: 12,
                     },
+                    
                 },
                 grid: { display: false },
                 barPercentage: 0.9,
