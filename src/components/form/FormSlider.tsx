@@ -28,11 +28,19 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
             fontSize: '14px',
             fontWeight: 400,
             marginBottom: '12px',
+            whiteSpace: {sm: "nowrap"},
             width: {sm: "300px"},
         }}>
             <div style={{display: 'flex'}}>
                 <div style={{verticalAlign: 'baseline', marginRight: '4px'}}>
-                    {label}
+                    {typeof label === 'string' ? label.split('*').map((part, index) => (
+                        <span key={index}>
+                            {part}
+                            {index < label.split('*').length - 1 && (
+                                <span style={{ color: 'red' }}>*</span>
+                            )}
+                        </span>
+                    )) : label}
                 </div>
                 <HtmlTooltip title={
                     <Box sx={{
@@ -57,9 +65,22 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                 value={typeof fieldValue === 'number' ? fieldValue : 30}
                 onChange={(_, value) => onChange(fieldName, value)}
                 step={30}
-                marks
+                marks={false}
                 max={90}
-                sx={{color: '#000000', width: {sm: "399px"}}} 
+                sx={{
+                    color: '#0F2D46',
+                    width: {sm: "399px"},
+                    '& .MuiSlider-track': {
+                        backgroundColor: '#0F2D46',
+                    },
+                    '& .MuiSlider-rail': {
+                        backgroundColor: '#E7EAED',
+                    },
+                    '& .MuiSlider-thumb': {
+                        backgroundColor: '#FFFFFF',
+                        border: '1px solid #0F2D46', // Set border color of the circle point
+                    },
+                }} 
             />
 
             <Box sx={{

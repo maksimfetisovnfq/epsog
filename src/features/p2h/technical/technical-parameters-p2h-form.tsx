@@ -39,7 +39,14 @@ export const TechnicalParametersP2hForm = () => {
             <FormInput name="Q_yearly" title="Metinis šilumos energijos poreikis (MWh)" placeholder="13000000.00" />
 
             <FormLabel style={{ color: "black", padding: 0, marginBottom: "12px", fontSize: "14px" }}>
-                Pasirinkite galimą teikti reguliavimo paslaugą *
+                {"Pasirinkite galimą teikti reguliavimo paslaugą".split('*').map((part, index) => (
+                    <span key={index}>
+                        {part}
+                        {index < "Pasirinkite galimą teikti reguliavimo paslaugą".split('*').length - 1 && (
+                            <span style={{ color: 'red' }}>*</span>
+                        )}
+                    </span>
+                ))}
             </FormLabel>
 
             <ServiceTypeSelect />

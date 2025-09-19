@@ -44,7 +44,14 @@ export const FormInput = ({ width, name, label, title, description, tooltip, ...
                             fontWeight: 400,
                         }}
                     >
-                        {title}
+                        {title.split('*').map((part, index) => (
+                            <span key={index}>
+                                {part}
+                                {index < title.split('*').length - 1 && (
+                                    <span style={{ color: 'red' }}>*</span>
+                                )}
+                            </span>
+                        ))}
                     </div>
                 )}
                 

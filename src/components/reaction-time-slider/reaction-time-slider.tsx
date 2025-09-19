@@ -20,7 +20,7 @@ export const ReactionTimeSlider = ({ field, label }: ReactionTimeSliderProps) =>
             label={label}
             tooltipContent={
                 <>
-                    <ul style={{ paddingLeft: "20px", margin: "0 0 8px 0" }}>
+                    <ul style={{ paddingLeft: "20px", margin: "0 0 8px 0"}}>
                         <li>FCR paslaugai maksimali galia turi būti pasiekta neilgiau negu 30 s</li>
                         <li>aFRR – 5 min</li>
                         <li>mFRR – 12,5 min</li>

@@ -153,14 +153,18 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
             {sector === "concentrator" && (
                 <div>
                     <Divider variant="fullWidth" sx={{ marginTop: "24px", marginBottom: "24px" }} />
-                    <div style={{ height: "18px", marginBottom: "12px" }}>Pasirinkite savo apskritį *</div>
+                    <div style={{ height: "18px", marginBottom: "12px", display: "flex" }}>
+                        Pasirinkite savo apskritį  <div style={{ color: "red" }}> * </div>
+                    </div>
                     <Controller
                         name="country"
                         control={control}
                         render={({ field }) => (
                             <Select {...field} style={{ height: "48px", width: "400px" }} displayEmpty>
                                 {country.map((c) => (
-                                    <MenuItem value={c} key={c}>{c}</MenuItem>
+                                    <MenuItem value={c} key={c}>
+                                        {c}
+                                    </MenuItem>
                                 ))}
                             </Select>
                         )}
