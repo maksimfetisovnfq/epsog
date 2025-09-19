@@ -183,7 +183,6 @@ export const GeneralDataForm = () => {
     const navState = location.state?.generalData
 
     const handleSubmit = (data: GeneralDataSchema) => {
-        console.log("Form State:", data)
 
         if (data.calculatorType === CalculatorType.P2H) {
             navigate({ to: "/p2h/technical-parameters", state: { generalData: data } })
@@ -205,7 +204,7 @@ export const GeneralDataForm = () => {
             defaultValues={{
                 sector: navState?.sector || "",
                 provider: navState?.provider || "Litgrid",
-                country: navState?.country || "",
+                country: navState?.country || "Kaunas",
                 concentratorName: navState?.concentratorName || "",
                 calculatorType: navState?.calculatorType || CalculatorType.BEKS,
             }}
