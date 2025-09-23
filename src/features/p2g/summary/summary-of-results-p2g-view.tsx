@@ -29,7 +29,7 @@ export const SummaryOfResultsP2gView = () => {
     const handleBackward = () => {
         navigate({
             to: "/p2g/economic-parameters",
-            state: { generalData: location.state.generalData },
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
         })
     }
 

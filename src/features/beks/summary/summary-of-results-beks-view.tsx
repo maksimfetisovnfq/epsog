@@ -29,7 +29,7 @@ export const SummaryOfResultsBeksView = () => {
     const handleBackward = () => {
         navigate({
             to: "/beks/economic-parameters",
-            state: { generalData: location.state.generalData },
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
         })
     }
 
