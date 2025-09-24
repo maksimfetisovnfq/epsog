@@ -1,12 +1,11 @@
-import { useMutationState } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 import type { BeksApiResponse } from "@/features/beks/types.ts"
 
 export const useSummaryBeks = () => {
-    const data = useMutationState({
-        filters: { mutationKey: ["beks"], status: "success" },
-        select: (mutation) => mutation.state.data,
-    })
+	const { data } = useQuery<BeksApiResponse>({
+		queryKey: ["summary-beks"],
+		gcTime: Infinity,
+	})
 
-    return data[0] as BeksApiResponse | undefined
+	return data
 }
-
