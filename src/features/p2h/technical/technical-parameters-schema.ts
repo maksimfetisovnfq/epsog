@@ -15,7 +15,7 @@ export const technicalParametersSchema = z.object({
     P_FUEL: z.number().min(0),
     q_FUEL: z.number().min(0),
     eta_BOILER: z.number().min(0),
-    T_HP: z.number().min(Number.MIN_SAFE_INTEGER),
+    T_HP: z.number().min(Number.MIN_SAFE_INTEGER).optional(),
     T_max_HS: z.number().min(Number.MIN_SAFE_INTEGER),
 })
 
