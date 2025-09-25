@@ -20,7 +20,7 @@ const country = ["Kaunas", "Klaipėda", "Marijampolė", "Panevėžys", "Šiaulia
 const GeneralContext = () => {
     const { control } = useFormContext()
     const sector = useWatch({ control, name: "sector" })
-    const isConcentrator = sector === "concentrator"
+    const isConcentrator = sector === "other"
 
     return (
         <>
@@ -32,14 +32,15 @@ const GeneralContext = () => {
                     control={control}
                     render={({ field }) => (
                         <Select {...field} sx={{ height: "48px", width: { sm: 400 } }} displayEmpty>
-                            <MenuItem value="">
-                                <em>Sektorius</em>
-                            </MenuItem>
-                            <MenuItem value="concentrator">Esu telkėjas</MenuItem>
+                            <MenuItem value="services">Paslaugų</MenuItem>
+                            <MenuItem value="energy">Energetikos</MenuItem>
+                            <MenuItem value="industries">Pramonės</MenuItem>
+                            <MenuItem value="collector">Telkėjas</MenuItem>
+                            <MenuItem value="other">Kita</MenuItem>
                         </Select>
                     )}
                 />
-                {isConcentrator && (
+                {(isConcentrator ) && (
                     <div style={{ marginTop: "24px" }}>
                         <FormInput
                             style={{ width: "400px" }}
@@ -55,7 +56,7 @@ const GeneralContext = () => {
 
 const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
     const { control } = useFormContext()
-    const sector = useWatch({ control, name: "sector" })
+    //const sector = useWatch({ control, name: "sector" })
 
     const radioStyles = { "&.Mui-checked": { color: "#00EB8C" } }
 
@@ -150,11 +151,11 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 )}
             />
 
-            {sector === "concentrator" && (
+            {useWatch({ control, name: "calculatorType" }) === CalculatorType.P2H && (
                 <div>
                     <Divider variant="fullWidth" sx={{ marginTop: "24px", marginBottom: "24px" }} />
                     <div style={{ height: "18px", marginBottom: "12px", display: "flex" }}>
-                        Pasirinkite savo apskritį  <div style={{ color: "red" }}> * </div>
+                        Pasirinkite savo apskritį <div style={{ color: "red" }}> * </div>
                     </div>
                     <Controller
                         name="country"
@@ -183,7 +184,6 @@ export const GeneralDataForm = () => {
     const navState = location.state?.generalData
 
     const handleSubmit = (data: GeneralDataSchema) => {
-
         if (data.calculatorType === CalculatorType.P2H) {
             navigate({ to: "/p2h/technical-parameters", state: { generalData: data } })
         } else if (data.calculatorType === CalculatorType.BEKS) {

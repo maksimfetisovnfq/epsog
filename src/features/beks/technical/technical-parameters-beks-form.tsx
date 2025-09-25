@@ -21,8 +21,8 @@ const FormContent = () => {
             <FormInput
                 name="q_max"
                 placeholder="1000 MW"
-                description="Tik teigiami skaičiai, max reikšmė 1000 MW"
-                title="Elektros energijos kaupiklio maksimali galia"
+                description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
+                title="Elektros energijos kaupiklio maksimali galia (MW)"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -30,8 +30,8 @@ const FormContent = () => {
             <FormInput
                 name="q_total"
                 placeholder="2 MWh"
-                description="Tik teigiami skaičiai, max reikšmė 1 000 000 (1 TWh)"
-                title="Elektros energijos kaupiklio talpa *"
+                description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MWh (1 TWh)"
+                title="Elektros energijos kaupiklio talpa (MWh)"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -69,8 +69,8 @@ const FormContent = () => {
                 <FormInput
                     name="RTE"
                     placeholder="88 %"
-                    description="Pilno ciklo naudingumo koeficientas"
-                    title="Pilno ciklo naudingumo koeficientas"
+                    description="Skaičius nuo 0 iki 100"
+                    title="Pilno ciklo naudingumo koeficientas (%)"
                     tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos"
                 />
 
@@ -80,7 +80,7 @@ const FormContent = () => {
                     name="SOC_min"
                     placeholder="10 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis"
+                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis (%)"
                     tooltip="Mažiausia riba iki kurios galima iškrauti kaupiklį."
                 />
 
@@ -101,7 +101,7 @@ const FormContent = () => {
                     placeholder="4 kartai/d."
                     description="Sveikas skaičius nuo 0 iki 96 imtinai"
                     title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"
-                    tooltip="Kiek per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."
+                    tooltip="Kiek kartų per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />

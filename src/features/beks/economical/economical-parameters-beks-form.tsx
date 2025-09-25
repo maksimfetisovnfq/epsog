@@ -14,35 +14,35 @@ const FormContent = () => {
             <FormInput
                 name="CAPEX_P"
                 placeholder="Eur/MW"
-                description="Tik teigiami skaičiai"
-                title="Investicijos (CAPEX) į galią *"
+                description="Įvedami tik teigiami skaičiai"
+                title="Investicijos į kaupiklio galią, CAPEX (tūkst. EUR/MW)"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="CAPEX_C"
                 placeholder="Eur/MWh"
-                description="Tik teigiami skaičiai"
-                title="Investicijos (CAPEX) į talpą *"
+                description="Įvedami tik teigiami skaičiai"
+                title="Investicijos į kaupiklio talpą, CAPEX (tūkst. EUR/MWh)"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="OPEX_P"
                 placeholder="Eur/MW per metus"
-                description="Tik teigiami skaičiai"
-                title="Fiksuotos veiklos sąnaudos (OPEX) *"
+                description="Įvedami tik teigiami skaičiai"
+                title="Fiksuotos veiklos sąnaudos, OPEX (tūkst. EUR/MW per metus)"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="OPEX_C"
                 placeholder="Eur/MWh"
-                description="Tik teigiami skaičiai"
-                title="Kintamos veiklos sąnaudos (OPEX) *"
+                description="Įvedami tik teigiami skaičiai"
+                title="Kintamos veiklos sąnaudos, OPEX (tūkst. EUR/MWh)"
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="number_of_years"
                 placeholder="10"
-                description="Tik sveikas skaičius nuo 1 iki 50"
+                description="Skaičius nuo 1 iki 50"
                 title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą? *"
             />
             <Divider style={{ marginTop: "48px", marginBottom: "48px" }} />
@@ -52,7 +52,7 @@ const FormContent = () => {
                     name="discount_rate"
                     placeholder="5 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Diskonto norma"
+                    title="Taikoma diskonto norma (%)"
                 />
                 <Divider style={{ marginTop: "32px", marginBottom: "32px" }} />
                 <BspFields />

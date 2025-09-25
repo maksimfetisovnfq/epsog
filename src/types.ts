@@ -1,6 +1,6 @@
 export enum CalculatorType {
-    P2H = 'p2h',
     BEKS = 'beks',
+    P2H = 'p2h',
     P2G = 'p2g',
     DSR = 'dsr',
 }

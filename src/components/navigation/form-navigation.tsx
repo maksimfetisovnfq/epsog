@@ -31,6 +31,7 @@ export const FormNavigation = ({handleBackward, backButtonTitle = "Atgal", nextB
                 >
                     {nextButtonTitle}
                 </Button>
+                
             </Box>
         </Box>
     )
