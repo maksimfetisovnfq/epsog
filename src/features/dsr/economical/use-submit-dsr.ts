@@ -4,6 +4,7 @@ import { getProductaiValues } from "@/components/productai-select"
 import type { EconomicalDsrParametersSchema } from "./economical-parameters-dsr-schema"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value"
 import type { DsrApiResponse } from "../types"
+import { ApiValidationError } from "@/types"
 
 export const useSubmitDsr = () => {
     const navigate = useNavigate()
@@ -22,6 +23,12 @@ export const useSubmitDsr = () => {
             })
 
             if (!response.ok) {
+                const responseData = await response.json()
+
+                if (responseData.detail) {
+                    throw new ApiValidationError(responseData.detail)
+                }
+
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
 

@@ -1,10 +1,13 @@
-import { Box, Typography } from "@mui/material"
+import { Container, Typography } from "@mui/material"
 import { type ErrorComponentProps, useLocation, useNavigate } from "@tanstack/react-router"
 import { Button } from "../ui/button"
+import { ApiValidationError } from "@/types"
 
 export const ErrorPage = ({ error }: ErrorComponentProps) => {
     const navigate = useNavigate()
     const location = useLocation()
+
+    console.log(error)
 
     const tryAgain = () => {
         console.error(error)
@@ -16,22 +19,28 @@ export const ErrorPage = ({ error }: ErrorComponentProps) => {
     }
 
     return (
-        <Box
+        <Container
+            maxWidth="md"
             sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                height: "100%",
+                minHeight: "90vh",
                 flexDirection: "column",
                 gap: 10,
                 py: 20,
+                px: "20px !important",
             }}
         >
-            <Typography>Nepavyko įkelti duomenų</Typography>
+            {error instanceof ApiValidationError ? (
+                <Typography>{error.message}</Typography>
+            ) : (
+                <Typography>Nepavyko įkelti duomenų</Typography>
+            )}
 
             <Button variant="contained" onClick={tryAgain}>
                 Bandyti dar kartą
             </Button>
-        </Box>
+        </Container>
     )
 }

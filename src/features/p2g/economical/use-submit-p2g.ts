@@ -4,6 +4,7 @@ import { getProductaiValues } from "@/components/productai-select"
 import type { EconomicalP2gParametersSchema } from "./economical-parameters-p2g-schema"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
 import type { P2GApiResponse } from "../types"
+import { ApiValidationError } from "@/types"
 
 export const useSubmitP2g = () => {
     const navigate = useNavigate()
@@ -22,9 +23,15 @@ export const useSubmitP2g = () => {
             })
 
             if (!response.ok) {
+                const responseData = await response.json()
+
+                if (responseData.detail) {
+                    throw new ApiValidationError(responseData.detail)
+                }
+
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
-
+            
             return await response.json()
         },
         onSuccess: (data) => {

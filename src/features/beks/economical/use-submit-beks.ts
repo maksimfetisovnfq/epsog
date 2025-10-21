@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import type { EconomicalBeksParametersSchema } from "@/features/beks/economical/economical-parameters-schema.ts"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
-import type { BeksApiResponse } from "@/features/beks/types.ts"
+import type { BeksApiResponse } from "../types"
+import { ApiValidationError } from "@/types"
 
 export const useSubmitBeks = () => {
 	const navigate = useNavigate()
@@ -28,9 +29,15 @@ export const useSubmitBeks = () => {
 				body: formData,
 			})
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`)
-			}
+            if (!response.ok) {
+                const responseData = await response.json()
+
+                if (responseData.detail) {
+                    throw new ApiValidationError(responseData.detail)
+                }
+
+                throw new Error(`HTTP error! status: ${response.status}`)
+            }
 
 			return await response.json()
 		},

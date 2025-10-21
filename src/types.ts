@@ -18,3 +18,10 @@ export const CalculatorTypeTooltipsTitle: Record<CalculatorType, string> = {
     [CalculatorType.P2G]: 'P2G - Power-to-Gas',
     [CalculatorType.DSR]: 'DSR - Demand Side Response',
 };
+
+export class ApiValidationError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "ApiValidationError";
+    }
+}

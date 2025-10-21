@@ -4,6 +4,7 @@ import type { EconomicalP2hParametersSchema } from "./economical-parameters-p2h-
 import { getProductaiValues } from "@/components/productai-select"
 import { getReactionTimeValue } from "@/components/reaction-time-slider/get-reaction-time-value.ts"
 import type { P2hApiResponse } from "../types"
+import { ApiValidationError } from "@/types.ts"
 
 export const useSubmitP2h = () => {
     const navigate = useNavigate()
@@ -22,6 +23,12 @@ export const useSubmitP2h = () => {
             })
 
             if (!response.ok) {
+                const responseData = await response.json()
+
+                if (responseData.detail) {
+                    throw new ApiValidationError(responseData.detail)
+                }
+
                 throw new Error(`HTTP error! status: ${response.status}`)
             }
 

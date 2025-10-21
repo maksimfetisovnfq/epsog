@@ -1,4 +1,4 @@
-import { useIsMutating } from "@tanstack/react-query"
+import { useIsMutating, useMutationState } from "@tanstack/react-query"
 import { Navigate, useLocation } from "@tanstack/react-router"
 import { Layout } from "@/components/layout"
 import { Loader } from "@/ui/loader"
@@ -11,12 +11,20 @@ export const SummaryOfResultsP2gPage = () => {
     const isMutating = useIsMutating({ mutationKey: ["p2g"] })
     const p2gData = useSummaryP2g()
     
+    const mutationError = useMutationState({
+        filters: { mutationKey: ["p2g"] },
+        select: (mutation) => mutation.state.error,
+    })?.[0]
+    
     if (!p2gEconomicalParameters) {
         return <Navigate to="/p2g/economic-parameters" state={location.state} />
     }
 
     if (isMutating) return <Loader />
 
+    if (mutationError) {
+        throw mutationError
+    }
 
     if (!p2gData) {
         throw new Error("P2G summary data is not available")
