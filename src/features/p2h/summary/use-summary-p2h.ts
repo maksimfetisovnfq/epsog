@@ -1,11 +1,11 @@
-import { useMutationState } from "@tanstack/react-query"
-import type { P2hApiResponse } from "@/features/p2h/types.ts"//double check
+import { useQuery } from "@tanstack/react-query"
+import type { P2hApiResponse } from "../types"
 
 export const useSummaryP2h = () => {
-    const data = useMutationState({
-        filters: { mutationKey: ["p2h"], status: "success" },
-        select: (mutation) => mutation.state.data,
+    const { data } = useQuery<P2hApiResponse>({
+        queryKey: ["summary-p2h"],
+        gcTime: Infinity,
     })
 
-    return data[0] as P2hApiResponse | undefined
+    return data
 }

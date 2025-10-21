@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import type { EconomicalP2hParametersSchema } from "./economical-parameters-p2h-schema"
 import { getProductaiValues } from "@/components/productai-select"
@@ -531,6 +531,7 @@ const mock: P2hApiResponse = {
 export const useSubmitP2h = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    const queryClient = useQueryClient()
 
     const { mutate, ...rest } = useMutation({
         mutationKey: ["p2h"],
@@ -552,6 +553,9 @@ export const useSubmitP2h = () => {
             //
             // return await response.json()
              return new Promise((resolve) => resolve(mock))
+        },
+        onSuccess: (data) => {
+            queryClient.setQueryData(["summary-p2h"], data)
         },
     })
 

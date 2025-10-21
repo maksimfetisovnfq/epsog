@@ -1,11 +1,11 @@
-import { useMutationState } from "@tanstack/react-query"
-import type { DsrApiResponse } from "@/features/dsr/types"
+import { useQuery } from "@tanstack/react-query"
+import type { DsrApiResponse } from "../types"
 
 export const useSummaryDsr = () => {
-    const data = useMutationState({
-        filters: { mutationKey: ["dsr"], status: "success" },
-        select: (mutation) => mutation.state.data,
+    const { data } = useQuery<DsrApiResponse>({
+        queryKey: ["summary-dsr"],
+        gcTime: Infinity,
     })
 
-    return data[0] as DsrApiResponse | undefined
+    return data
 }

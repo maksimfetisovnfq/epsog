@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { getProductaiValues } from "@/components/productai-select"
 import type { EconomicalDsrParametersSchema } from "./economical-parameters-dsr-schema.ts"
@@ -505,6 +505,7 @@ const mock: DsrApiResponse = {
 export const useSubmitDsr = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    const queryClient = useQueryClient()
 
     const { mutate, ...rest } = useMutation<DsrApiResponse, Error, { parameters: string }>({
         mutationKey: ["dsr"],
@@ -513,6 +514,9 @@ export const useSubmitDsr = () => {
             formData.append("parameters", parameters)
 
             return new Promise((resolve) => resolve(mock))
+        },
+        onSuccess: (data) => {
+            queryClient.setQueryData(["summary-dsr"], data)
         },
     })
 

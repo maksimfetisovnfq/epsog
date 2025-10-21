@@ -1,11 +1,11 @@
-import { useMutationState } from "@tanstack/react-query"
-import type { P2GApiResponse } from "@/features/p2g/types.ts"
+import { useQuery } from "@tanstack/react-query"
+import type { P2GApiResponse } from "../types"
 
 export const useSummaryP2g = () => {
-    const data = useMutationState({
-        filters: { mutationKey: ["p2g"], status: "success" },
-        select: (mutation) => mutation.state.data,
+    const { data } = useQuery<P2GApiResponse>({
+        queryKey: ["summary-p2g"],
+        gcTime: Infinity,
     })
 
-    return data[0] as P2GApiResponse | undefined
+    return data
 }

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import type { BeksApiResponse } from "@/features/beks/types.ts"
+import type { BeksApiResponse } from "../types"
 
 export const useSummaryBeks = () => {
 	const { data } = useQuery<BeksApiResponse>({

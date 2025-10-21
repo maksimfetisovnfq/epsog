@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { getProductaiValues } from "@/components/productai-select"
 import type { EconomicalP2gParametersSchema } from "./economical-parameters-p2g-schema"
@@ -394,6 +394,7 @@ const mock: P2GApiResponse = {
 export const useSubmitP2g = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    const queryClient = useQueryClient()
 
     const { mutate, ...rest } = useMutation<P2GApiResponse, Error, { parameters: string }>({
         mutationKey: ["p2g"],
@@ -402,6 +403,9 @@ export const useSubmitP2g = () => {
             formData.append("parameters", parameters)
 
             return new Promise((resolve) => resolve(mock))
+        },
+        onSuccess: (data) => {
+            queryClient.setQueryData(["summary-p2g"], data)
         },
     })
 
