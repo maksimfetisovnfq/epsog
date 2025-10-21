@@ -23,12 +23,11 @@ export const Loader = () => {
                 style={{
                     backgroundColor: "#F5F7F8",
                     display: "flex",
-                    height: "90px",
                     color: "#3F576B",
                     width: "768px",
                 }}
             >
-                <div style={{ marginTop: "20px", fontSize: "24px", marginLeft: "16px" }}>
+                <div style={{ marginTop: "20px", marginBottom: "20px", fontSize: "24px", marginLeft: "16px" }}>
                     <div style={{ marginBottom: "8px", color: "black" }}>Palaukite, vykdomas skaičiavimas...</div>
 
                     <div style={{ fontSize: "16px", width: "696px" }}>
