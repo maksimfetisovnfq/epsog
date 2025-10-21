@@ -123,6 +123,7 @@ export const SummaryOfResultsP2gView = () => {
                 <InfoBanner />
 
                 <Tabs
+                    bordered
                     labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
                     content={[summaryTab, marketTab, economicTab]}
                 />

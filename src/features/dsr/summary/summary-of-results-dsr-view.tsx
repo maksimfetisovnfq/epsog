@@ -116,6 +116,7 @@ export const SummaryOfResultsDsrView = () => {
                 <InfoBanner />
 
                 <Tabs
+                    bordered
                     labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
                     content={[summaryTab, marketTab, economicTab]}
                 />

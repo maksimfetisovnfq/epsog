@@ -128,7 +128,7 @@ export const SummaryOfResultsBeksView = () => {
         <>
             <InfoBanner />
             <Tabs
-                bordered={true}
+                bordered
                 labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
                 content={[summaryTab, marketTab, economicTab]}
             />
