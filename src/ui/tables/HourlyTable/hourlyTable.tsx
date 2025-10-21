@@ -20,7 +20,7 @@ export const HourlyTable = ({ inputWidth = "186px", rows = 6, cols = 4 }: Hourly
                             htmlFor={`hourly_power_${hour}`}
                             style={{ display: "block", fontWeight: 400, fontSize: "13px", marginBottom: "2px" }}
                         >
-                            Hour {hour}
+                            {hour} valanda
                         </label>
                         <FormInput
                             id={`hourly_power_${hour}`}
