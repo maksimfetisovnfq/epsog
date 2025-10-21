@@ -36,7 +36,7 @@ export const SummaryOfResultsP2gView = () => {
     const summaryTab = (
         <Fragment key={1}>
             <Stack spacing={1}>
-                <Title style={{ fontSize: 24 }}>Summary</Title>
+                <Title style={{ fontSize: 24 }}>Santrauka</Title>
                 <DefaultP2gSummaryTable/>
                 <YearlySummaryTable />
                 <YearlySummaryChartP2g />

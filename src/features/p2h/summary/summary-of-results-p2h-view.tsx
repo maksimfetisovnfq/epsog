@@ -37,7 +37,7 @@ export const SummaryOfResultsP2hView = () => {
     const summaryTab = (
         <Fragment key={1}>
             <Stack spacing={1}>
-                <Title style={{ fontSize: 24 }}>Summary</Title>
+                <Title style={{ fontSize: 24 }}>Santrauka</Title>
                 <DefaultP2hSummaryTable/>
                 <YearlySummaryTable />
                 <YearlySummaryChartP2h />
