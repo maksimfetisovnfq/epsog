@@ -51,6 +51,7 @@ export const YearlySummaryChart = ({data}: Props) => {
     return (
         <Stack spacing={1} sx={{width: {sm: '768px'}, border: '1px solid #CFD5DA'}}>
             <VerticalBarChart
+                showYAxis={false}
                 datasets={floatingBarDataset}
                 labels={floatingBarLabels}
             />

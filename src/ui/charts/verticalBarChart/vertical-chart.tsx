@@ -12,11 +12,10 @@ export interface VerticalBarChartProps {
         data: number[] | [number, number][]
         backgroundColor?: string | string[]
     }[]
-    showLegend?: boolean
-    showLabels?: boolean
+    showYAxis?: boolean
 }
 
-export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) => {
+export const VerticalBarChart = ({ labels, datasets, showYAxis = true }: VerticalBarChartProps) => {
     const chartLabels = labels || [
         "Vidutinės metinės išlados",
         "Vidutinės metinis pelnas/nuostolis",
@@ -63,8 +62,14 @@ export const VerticalBarChart = ({ labels, datasets }: VerticalBarChartProps) =>
             },
             y: {
                 beginAtZero: true,
-                grid: { drawOnChartArea: true, drawBorder: false },
+                grid: { 
+                    drawOnChartArea: true, 
+                    drawBorder: showYAxis 
+                },
                 ticks: { display: false },
+                border: {
+                    display: showYAxis
+                }
             },
         },
     }
