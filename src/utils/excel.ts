@@ -1,20 +1,27 @@
 import type { TableProps } from "@/ui/tables"
 import * as XLSX from "xlsx"
 
+type StandardTable = {
+    title?: string
+    description?: string
+    columns: TableProps["columns"]
+    dataSource: TableProps["dataSource"]
+}
+
+type CombinedTable = {
+    title?: string
+    description?: string
+    tables: Array<{
+        source?: string
+        dataSource: Array<Record<string, unknown>>
+    }>
+}
+
 type ExportToExcelProps = {
     filename: string;
     sheets: {
         name: string;
-        tables: {
-            title?: string
-            description?: string
-            columns: TableProps["columns"]
-            dataSource: TableProps["dataSource"]
-            tables?: Array<{
-                source?: string
-                dataSource: Array<Record<string, unknown>>
-            }>
-        }[];
+        tables: (StandardTable | CombinedTable)[];
     }[];
 }
 
@@ -34,18 +41,18 @@ export const exportToExcel = ({filename, sheets}: ExportToExcelProps) => {
                 const titleText = table.description 
                     ? `${table.title} (${table.description})`
                     : table.title
-                sheetData.push([titleText])
+                sheetData.push([titleText, ''])
                 // Add empty row after title for spacing
                 sheetData.push([])
             }
 
             // Check if this is a combined table format (has nested tables)
-            if (table.tables && table.tables.length > 0) {
+            if ('tables' in table && table.tables && table.tables.length > 0) {
                 // Process each nested table (CombinedTable format)
-                table.tables.forEach((nestedTable, nestedIndex) => {
+                table.tables.forEach((nestedTable) => {
                     // Add source as a header if it exists
                     if (nestedTable.source) {
-                        sheetData.push([nestedTable.source])
+                        sheetData.push([nestedTable.source, ''])
                     }
 
                     // Add header row for parameter and value
@@ -60,12 +67,9 @@ export const exportToExcel = ({filename, sheets}: ExportToExcelProps) => {
                         sheetData.push(dataRow)
                     })
 
-                    // Add empty row between nested tables (if not the last one)
-                    if (nestedIndex < table.tables!.length - 1) {
-                        sheetData.push([])
-                    }
+                    // No empty row between nested tables - removed spacing
                 })
-            } else {
+            } else if ('dataSource' in table && table.dataSource && 'columns' in table && table.columns) {
                 // Standard table format
                 // Add header row
                 const headerRow = table.columns.map((column) => column.title)
@@ -77,10 +81,7 @@ export const exportToExcel = ({filename, sheets}: ExportToExcelProps) => {
                         let cellContent: unknown = null
                         
                         if (typeof column.render === "function") {
-                            // Call the render function to get the value
-                            const rendered = column.render(row, rowIdx, colIdx)
-                            // Extract text content from React nodes if needed
-                            cellContent = rendered
+                            cellContent = column.render(row, rowIdx, colIdx)
                         } else if (typeof column.render === "string") {
                             cellContent = row[column.render]
                         } else if (column.dataIndex) {
@@ -102,10 +103,82 @@ export const exportToExcel = ({filename, sheets}: ExportToExcelProps) => {
         // Create worksheet from data
         const worksheet = XLSX.utils.aoa_to_sheet(sheetData)
 
+        // Apply merges and styles
+        const merges: XLSX.Range[] = []
+        let currentRow = 0
+
+        sheet.tables.forEach((table, tableIndex) => {
+            // Handle title merge and styling
+            if (table.title) {
+                const titleText = table.description 
+                    ? `${table.title} (${table.description})`
+                    : table.title
+                
+                // Merge cells for title
+                merges.push({
+                    s: { r: currentRow, c: 0 },
+                    e: { r: currentRow, c: 1 }
+                })
+                
+                // Apply styling to title cell
+                const cellAddress = XLSX.utils.encode_cell({ r: currentRow, c: 0 })
+                if (!worksheet[cellAddress]) worksheet[cellAddress] = { v: titleText, t: 's' }
+                worksheet[cellAddress].s = {
+                    font: { bold: true, color: { rgb: "FFFFFF" } },
+                    fill: { fgColor: { rgb: "4A4A4A" } },
+                    alignment: { horizontal: 'left', vertical: 'center' }
+                }
+                
+                currentRow++ // title row
+                currentRow++ // empty row after title
+            }
+
+            // Handle combined tables
+            if ('tables' in table && table.tables && table.tables.length > 0) {
+                table.tables.forEach((nestedTable) => {
+                    if (nestedTable.source) {
+                        // Merge cells for source
+                        merges.push({
+                            s: { r: currentRow, c: 0 },
+                            e: { r: currentRow, c: 1 }
+                        })
+                        
+                        // Apply styling to source cell
+                        const cellAddress = XLSX.utils.encode_cell({ r: currentRow, c: 0 })
+                        if (!worksheet[cellAddress]) worksheet[cellAddress] = { v: nestedTable.source, t: 's' }
+                        worksheet[cellAddress].s = {
+                            font: { bold: true, color: { rgb: "FFFFFF" } },
+                            fill: { fgColor: { rgb: "4A4A4A" } },
+                            alignment: { horizontal: 'left', vertical: 'center' }
+                        }
+                        
+                        currentRow++ // source row
+                    }
+                    
+                    currentRow++ // header row
+                    currentRow += nestedTable.dataSource.length // data rows
+                })
+            } else if ('dataSource' in table && table.dataSource) {
+                // Standard table
+                currentRow++ // header row
+                currentRow += table.dataSource.length // data rows
+            }
+
+            // Empty row between tables
+            if (tableIndex < sheet.tables.length - 1) {
+                currentRow++
+            }
+        })
+
+        // Apply merges
+        if (merges.length > 0) {
+            worksheet['!merges'] = merges
+        }
+
         // Add worksheet to workbook
         XLSX.utils.book_append_sheet(workbook, worksheet, sheet.name)
     })
 
     // Generate Excel file and trigger download
-    XLSX.writeFile(workbook, `${filename}.xlsx`)
+    XLSX.writeFile(workbook, `${filename}.xlsx`, { cellStyles: true })
 }

@@ -6,9 +6,7 @@ import { useAfrrBalancingCapacityTable } from "./hooks/use-afrr-balancing-capaci
 
 export const ExportToExcelBeks = () => {
     const yearlySummary = useYearlySummaryTable()
-
     const fcrBalancingCapacity = useFcrBalancingCapacityTable()
-    
     const afrrBalancingCapacity = useAfrrBalancingCapacityTable()
 
     const exportBeks = () => {
@@ -16,9 +14,9 @@ export const ExportToExcelBeks = () => {
 
         const sheets = [
             { name: "Apžvalga", tables: [yearlySummary!].filter(Boolean) },
-            { 
-                name: "Balansavimo pajėgumų rinka", 
-                tables: [fcrBalancingCapacity!, afrrBalancingCapacity!].filter(Boolean) 
+            {
+                name: "Balansavimo pajėgumų rinka",
+                tables: [fcrBalancingCapacity!, afrrBalancingCapacity!].filter(Boolean),
             },
             { name: "Balansavimo energijos rinka", tables: [] },
             { name: "Elektros energijos prekyba", tables: [] },

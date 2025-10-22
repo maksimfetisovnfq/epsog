@@ -8,11 +8,6 @@ export const useAfrrBalancingCapacityTable = () => {
     const title = "aFRR"
     const description = "Automatinis dažnio atkūrimo rezervas (angl. Automatic frequency restoration reserve)"
 
-    const columns = [
-        { title: "Header", dataIndex: "Header" },
-        { title: "Value", dataIndex: "Value" },
-    ]
-
     const tables = [
         {
             source: "Užsakytų balansavimo pajėgumų kiekis",
@@ -84,6 +79,5 @@ export const useAfrrBalancingCapacityTable = () => {
         },
     ]
 
-    return { title, description, tables, columns }
+    return { title, description, tables }
 }
-
