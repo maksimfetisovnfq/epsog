@@ -22,6 +22,7 @@ import { YearlySummaryChartBeks } from "@/features/beks/summary/charts/yearly-su
 import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation-chart-beks"
 import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks"
 import { DefaultBeksSummaryTable } from "./tables/default-beks-summary-table"
+import { ExportToExcelBeks } from "./export-to-excel"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -29,7 +30,7 @@ export const SummaryOfResultsBeksView = () => {
     const handleBackward = () => {
         navigate({
             to: "/beks/economic-parameters",
-            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters },
         })
     }
 
@@ -59,9 +60,6 @@ export const SummaryOfResultsBeksView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
-                <Box style={{ marginBottom: 32 }}>
-                    <DefaultBeksSummaryTable />
-                </Box>
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -74,9 +72,6 @@ export const SummaryOfResultsBeksView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <Box style={{ marginBottom: 32 }}>
-                    <DefaultBeksSummaryTable />
-                </Box>
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -87,9 +82,6 @@ export const SummaryOfResultsBeksView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <Box style={{ marginBottom: 32 }}>
-                    <DefaultBeksSummaryTable />
-                </Box>
                 <DayAheadTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
@@ -127,6 +119,8 @@ export const SummaryOfResultsBeksView = () => {
     return (
         <>
             <InfoBanner />
+            <ExportToExcelBeks />
+
             <Tabs
                 bordered
                 labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
