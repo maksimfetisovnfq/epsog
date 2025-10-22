@@ -74,8 +74,17 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
             doc.setFontSize(14)
             doc.setFont("helvetica", "bold")
             doc.setTextColor(74, 74, 74) // Dark gray
-            doc.text(titleText, 14, startY)
-            startY += 8
+            
+            // Split text to fit within page width (A4 width - margins)
+            const maxWidth = 182 // 210mm (A4 width) - 28mm (14mm left + 14mm right margins)
+            const splitTitle = doc.splitTextToSize(titleText, maxWidth)
+            
+            // Add wrapped text
+            doc.text(splitTitle, 14, startY)
+            
+            // Calculate height of wrapped text (each line is approximately 6mm at font size 14)
+            const titleHeight = splitTitle.length * 6
+            startY += titleHeight + 2
         }
 
         // Check if this is a combined table format (has nested tables)
@@ -92,8 +101,15 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                     doc.setFontSize(12)
                     doc.setFont("helvetica", "bold")
                     doc.setTextColor(74, 74, 74)
-                    doc.text(normalizeTextForPdf(nestedTable.source), 14, startY)
-                    startY += 6
+                    
+                    // Split text to fit within page width
+                    const maxWidth = 182 // A4 width - margins
+                    const splitSource = doc.splitTextToSize(normalizeTextForPdf(nestedTable.source), maxWidth)
+                    doc.text(splitSource, 14, startY)
+                    
+                    // Calculate height of wrapped text (each line is approximately 5mm at font size 12)
+                    const sourceHeight = splitSource.length * 5
+                    startY += sourceHeight + 1
                 }
 
                 // Create table data
@@ -130,7 +146,7 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
 
                 // Update startY for next table
                 // @ts-expect-error - lastAutoTable is added by jspdf-autotable plugin
-                startY = doc.lastAutoTable.finalY + 5
+                startY = doc.lastAutoTable.finalY + 10 // Increased spacing between nested tables
             })
         } else if ('dataSource' in table && table.dataSource && 'columns' in table && table.columns) {
             // Standard table format
