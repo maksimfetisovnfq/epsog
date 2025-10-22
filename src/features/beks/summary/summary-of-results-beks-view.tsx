@@ -23,6 +23,7 @@ import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation
 import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks"
 import { DefaultBeksSummaryTable } from "./tables/default-beks-summary-table"
 import { ExportToExcelBeks } from "./export-to-excel"
+import { ExportToPdfBeks } from "@/features/beks/summary/export-to-pdf.tsx"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -120,7 +121,8 @@ export const SummaryOfResultsBeksView = () => {
         <>
             <InfoBanner />
             <ExportToExcelBeks />
-
+            <ExportToPdfBeks />
+            
             <Tabs
                 bordered
                 labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}
