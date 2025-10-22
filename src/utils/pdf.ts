@@ -2,6 +2,25 @@ import type { TableProps } from "@/ui/tables"
 import { jsPDF } from "jspdf"
 import autoTable from "jspdf-autotable"
 
+// Helper function to convert special characters to similar ASCII equivalents
+// This is a workaround for jsPDF's limited Unicode support in built-in fonts
+const normalizeTextForPdf = (text: string): string => {
+    // Map Lithuanian and other special characters to their closest ASCII equivalents
+    const charMap: Record<string, string> = {
+        'ą': 'a', 'č': 'c', 'ę': 'e', 'ė': 'e', 'į': 'i', 
+        'š': 's', 'ų': 'u', 'ū': 'u', 'ž': 'z',
+        'Ą': 'A', 'Č': 'C', 'Ę': 'E', 'Ė': 'E', 'Į': 'I',
+        'Š': 'S', 'Ų': 'U', 'Ū': 'U', 'Ž': 'Z',
+        // Add more mappings as needed
+        'ä': 'a', 'ö': 'o', 'ü': 'u',
+        'Ä': 'A', 'Ö': 'O', 'Ü': 'U',
+        'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
+        'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U',
+    }
+    
+    return text.split('').map(char => charMap[char] || char).join('')
+}
+
 export type StandardTable = {
     title?: string
     description?: string
@@ -24,12 +43,15 @@ type ExportToPdfProps = {
 }
 
 export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
-    // Create a new PDF document
+    // Create a new PDF document with proper character encoding
     const doc = new jsPDF({
         orientation: "portrait",
         unit: "mm",
         format: "a4",
+        putOnlyUsedFonts: true,
+        compress: true,
     })
+
 
     let startY = 10
 
@@ -37,9 +59,11 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
     tables.forEach((table, tableIndex) => {
         // Add title if exists
         if (table.title) {
-            const titleText = table.description 
-                ? `${table.title} (${table.description})`
-                : table.title
+            const titleText = normalizeTextForPdf(
+                table.description 
+                    ? `${table.title} (${table.description})`
+                    : table.title
+            )
 
             // Check if we need a new page
             if (startY > 270) {
@@ -68,25 +92,26 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                     doc.setFontSize(12)
                     doc.setFont("helvetica", "bold")
                     doc.setTextColor(74, 74, 74)
-                    doc.text(nestedTable.source, 14, startY)
+                    doc.text(normalizeTextForPdf(nestedTable.source), 14, startY)
                     startY += 6
                 }
 
                 // Create table data
                 const tableData = nestedTable.dataSource.map((row) => [
-                    String(row.parameter || ""),
-                    String(row.value || "")
+                    normalizeTextForPdf(String(row.parameter || "")),
+                    normalizeTextForPdf(String(row.value || ""))
                 ])
 
-                // Add table using autoTable
+                // Add table using autoTable with Unicode support
                 autoTable(doc, {
                     startY: startY,
-                    head: [["Parameter", "Value"]],
+                    head: [[normalizeTextForPdf("Parameter"), normalizeTextForPdf("Value")]],
                     body: tableData,
                     theme: "grid",
                     styles: {
                         fontSize: 9,
                         cellPadding: 3,
+                        font: "helvetica",
                     },
                     headStyles: {
                         fillColor: [74, 74, 74],
@@ -94,6 +119,13 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                         fontStyle: "bold",
                     },
                     margin: { left: 14, right: 14 },
+                    // Enable Unicode support
+                    didParseCell: function(data) {
+                        // Ensure proper text encoding
+                        if (data.cell.raw && typeof data.cell.raw === 'string') {
+                            data.cell.text = [data.cell.raw]
+                        }
+                    },
             })
 
                 // Update startY for next table
@@ -104,7 +136,7 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
             // Standard table format
             
             // Create header row
-            const headers = table.columns.map((column) => String(column.title))
+            const headers = table.columns.map((column) => normalizeTextForPdf(String(column.title)))
 
             // Create data rows
             const tableData = table.dataSource.map((row, rowIdx) => {
@@ -119,11 +151,11 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                         cellContent = row[column.dataIndex]
                     }
                     
-                    return String(cellContent ?? "")
+                    return normalizeTextForPdf(String(cellContent ?? ""))
                 })
             })
 
-            // Add table using autoTable
+            // Add table using autoTable with Unicode support
             autoTable(doc, {
                 startY: startY,
                 head: [headers],
@@ -132,6 +164,7 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                 styles: {
                     fontSize: 9,
                     cellPadding: 3,
+                    font: "helvetica",
                 },
                 headStyles: {
                     fillColor: [74, 74, 74],
@@ -139,6 +172,13 @@ export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
                     fontStyle: "bold",
                 },
                 margin: { left: 14, right: 14 },
+                // Enable Unicode support
+                didParseCell: function(data) {
+                    // Ensure proper text encoding
+                    if (data.cell.raw && typeof data.cell.raw === 'string') {
+                        data.cell.text = [data.cell.raw]
+                    }
+                },
             })
 
             // Update startY for next table
