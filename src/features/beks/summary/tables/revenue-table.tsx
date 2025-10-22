@@ -1,21 +1,18 @@
-import { useSummaryBeks } from "../use-summary-beks.ts"
 import { Table } from "@/ui/tables"
 import { Stack } from "@mui/material"
+import { useRevenueTable } from "../hooks/use-revenue-table"
 
 export const RevenueTable = () => {
-    const data = useSummaryBeks()
+    const tableData = useRevenueTable()
 
-    if (!data) return
+    if (!tableData) return null
 
     return (
         <Stack spacing={2}>
-            <div>Pajamos už produktus</div>
+            <div>{tableData.title}</div>
             <Table
-                dataSource={data.aggregated.economic_results.revenue_table}
-                columns={[
-                    { title: "Rinkos produktas", dataIndex: "Product", key: "Product" },
-                    { title: "Suma (tūkst. Eur)", dataIndex: "Value (tūkst. EUR)", key: "Value (tūkst. EUR)" },
-                ]}
+                dataSource={tableData.dataSource}
+                columns={tableData.columns}
                 boldHeaders={true}
             />
         </Stack>

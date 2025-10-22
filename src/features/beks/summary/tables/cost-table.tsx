@@ -1,21 +1,18 @@
-import { useSummaryBeks } from "../use-summary-beks.ts"
 import { Table } from "@/ui/tables"
 import { Stack } from "@mui/material"
+import { useCostTable } from "../hooks/use-cost-table"
 
 export const CostTable = () => {
-    const data = useSummaryBeks()
+    const tableData = useCostTable()
 
-    if (!data) return
+    if (!tableData) return null
 
     return (
         <Stack spacing={2}>
-            <div>Pajamos / sąnaudos</div>
+            <div>{tableData.title}</div>
             <Table
-                dataSource={data.aggregated.economic_results.cost_table}
-                columns={[
-                    { title: "Product", dataIndex: "Product" },
-                    { title: "Value (tūkst. EUR)", dataIndex: "Value (tūkst. EUR)" },
-                ]}
+                dataSource={tableData.dataSource}
+                columns={tableData.columns}
             />
         </Stack>
     )
