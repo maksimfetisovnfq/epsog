@@ -3,7 +3,7 @@ import { type DefaultValues, FormProvider, type SubmitHandler, useForm, type Use
 import { zodResolver } from '@hookform/resolvers/zod'
 import { ZodType } from 'zod'
 
-export type FormData = Record<string, string | null | number | string[]>
+export type FormData = Record<string, string | null | number | string[] | unknown>
 
 export type BaseFormProps<T extends FormData> = {
     defaultValues: DefaultValues<T>

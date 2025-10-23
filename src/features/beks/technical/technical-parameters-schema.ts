@@ -1,22 +1,32 @@
-import {z} from 'zod';
+import { z } from "zod"
+import { numberField, errorMessages } from "@/utils/zod"
 
-export const technicalParametersSchema = z
-    .object({
-        q_max: z.number().gt(0).lte(1_000_000),
-        q_total: z.number().gt(0).lte(1_000_000),
-        RTE: z.number().gte(0).lte(100),
-        SOC_min: z.number().gte(0).lte(100),
-        SOC_max: z.number().gte(0).lte(100),
-        N_cycles_DA: z.number().int().gte(0).lte(96),
-        N_cycles_ID: z.number().int().gte(0).lte(96),
-        reaction_time: z.number().min(0),
-    });
+export const technicalParametersSchema = z.object({
+    q_max: numberField().pipe(
+        z.number().gt(0, errorMessages.greaterThan(0)).lte(1_000_000, errorMessages.lessThanOrEqual(1_000_000))
+    ),
+    q_total: numberField().pipe(
+        z.number().gt(0, errorMessages.greaterThan(0)).lte(1_000_000, errorMessages.lessThanOrEqual(1_000_000))
+    ),
+    RTE: numberField().pipe(z.number().gte(0, errorMessages.between(0, 100)).lte(100, errorMessages.between(0, 100))),
+    SOC_min: numberField().pipe(
+        z.number().gte(0, errorMessages.between(0, 100)).lte(100, errorMessages.between(0, 100))
+    ),
+    SOC_max: numberField().pipe(
+        z.number().gte(0, errorMessages.between(0, 100)).lte(100, errorMessages.between(0, 100))
+    ),
+    N_cycles_DA: numberField().pipe(
+        z.number().int(errorMessages.integer).gte(0, errorMessages.between(0, 96)).lte(96, errorMessages.between(0, 96))
+    ),
+    N_cycles_ID: numberField().pipe(
+        z.number().int(errorMessages.integer).gte(0, errorMessages.between(0, 96)).lte(96, errorMessages.between(0, 96))
+    ),
+    reaction_time: numberField().pipe(z.number().min(0, errorMessages.greaterThanOrEqual(0))),
+})
 
-export type TechnicalBeksParametersSchema = z.infer<typeof technicalParametersSchema>;
+export type TechnicalBeksParametersSchema = z.infer<typeof technicalParametersSchema>
 
-export const defaultTechnicalBeksParams: TechnicalBeksParametersSchema = {
-    q_max: 100,
-    q_total: 200,
+export const defaultTechnicalBeksParams: Partial<TechnicalBeksParametersSchema> = {
     RTE: 88,
     SOC_min: 10,
     SOC_max: 95,

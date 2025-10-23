@@ -10,9 +10,19 @@ export type FormInputProps = TextFieldProps & {
     defaultValue?: string
     tooltip?: string
     width?: string
+    isRequired?: boolean
 }
 
-export const FormInput = ({ width, name, label, title, description, tooltip, ...props }: FormInputProps) => {
+export const FormInput = ({
+    width,
+    name,
+    label,
+    title,
+    description,
+    tooltip,
+    isRequired,
+    ...props
+}: FormInputProps) => {
     const {
         register,
         formState: { errors },
@@ -33,7 +43,7 @@ export const FormInput = ({ width, name, label, title, description, tooltip, ...
     }))
 
     return (
-        <div style={{marginBottom: '24px'}}>
+        <div style={{ marginBottom: "24px" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: "12px" }}>
                 {title && (
                     <div
@@ -44,17 +54,11 @@ export const FormInput = ({ width, name, label, title, description, tooltip, ...
                             fontWeight: 400,
                         }}
                     >
-                        {title.split('*').map((part, index) => (
-                            <span key={index}>
-                                {part}
-                                {index < title.split('*').length - 1 && (
-                                    <span style={{ color: 'red' }}>*</span>
-                                )}
-                            </span>
-                        ))}
+                        {title}
+                        {isRequired && <span style={{ color: "red" }}> *</span>}
                     </div>
                 )}
-                
+
                 <div>
                     {tooltip && (
                         <HtmlTooltip
@@ -87,7 +91,7 @@ export const FormInput = ({ width, name, label, title, description, tooltip, ...
                     display: "block",
                     "& .MuiOutlinedInput-root": {
                         borderRadius: 0,
-                        width: {sm: width || "400px"},
+                        width: { sm: width || "400px" },
                         height: "48px",
                         color: isFilled ? "#0F2D46" : "#6F8190",
                         "& .MuiOutlinedInput-notchedOutline": {

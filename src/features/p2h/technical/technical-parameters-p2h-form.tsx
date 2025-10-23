@@ -25,6 +25,8 @@ const TechnicalParametersFormContent = () => {
                 title="Šilumos siurblio maksimali elektrinė galia (MW)"
                 placeholder="2"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
+                tooltip="TODO"
+                isRequired
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -34,16 +36,20 @@ const TechnicalParametersFormContent = () => {
                 title="Metinis šilumos energijos poreikis (MWh)"
                 placeholder="13000000.00"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
+                tooltip="TODO"
+                isRequired
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-
 
             <FormInput
                 name="T_HP"
                 title="Aplinkos temperatūra nuo kurios išjungiamas šilumos siurblys (°C)"
                 placeholder="-10"
                 type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -78,42 +84,81 @@ const TechnicalParametersFormContent = () => {
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <Title sx={{marginBottom: '16px', fontSize: "22px"}}>Šilumos kaupiklio (talpyklos) parametrai</Title>
-            <FormInput name="d_HS" title="Diametras (m)" placeholder="10" type="number" />
+            <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos kaupiklio (talpyklos) parametrai</Title>
+            <FormInput name="d_HS" title="Diametras (m)" placeholder="10" type="number" tooltip="TODO" isRequired
+                       description="TODO" />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput name="H_HS" title="Šilumos kaupiklio aukštis (m)" placeholder="20" type="number" />
+            <FormInput
+                name="H_HS"
+                title="Šilumos kaupiklio aukštis (m)"
+                placeholder="20"
+                type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
+            />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            
+
             <FormInput
                 name="lambda_HS"
                 title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C))"
                 placeholder="0.032"
                 type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput name="dx_HS" title="Izoliacinės medžiagos storis (m)" placeholder="0.3" type="number" />
-            
-            <Title sx={{marginBottom: '16px', fontSize: "22px"}}>Šilumos katilo (boilerio) parametrai</Title>
-            
+            <FormInput
+                name="dx_HS"
+                title="Izoliacinės medžiagos storis (m)"
+                placeholder="0.3"
+                type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
+            />
+
+            <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos katilo (boilerio) parametrai</Title>
+
             <FormInput
                 name="Q_max_BOILER"
                 title="Šilumos katilo maksimali šiluminė galia (MW)"
                 placeholder="4.5"
                 type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            
-            <FormInput name="P_FUEL" title="Deginamo kuro kaina (EUR/m³)" placeholder="0.44" type="number" />
+
+            <FormInput
+                name="P_FUEL"
+                title="Deginamo kuro kaina (EUR/m³)"
+                placeholder="0.44"
+                type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
+            />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            
-            <FormInput name="q_FUEL" title="Deginamo kuro kaloringumas (Wh/m³)" placeholder="9550" type="number" />
+
+            <FormInput
+                name="q_FUEL"
+                title="Deginamo kuro kaloringumas (Wh/m³)"
+                placeholder="9550"
+                type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
+            />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
@@ -122,11 +167,22 @@ const TechnicalParametersFormContent = () => {
                 title="Šilumos katilo naudingumo koeficientas (%)"
                 placeholder="98"
                 type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput name="T_max_HS" title="Maksimali vandens temperatūra (°C)" placeholder="-10" type="number" />
+            <FormInput
+                name="T_max_HS"
+                title="Maksimali vandens temperatūra (°C)"
+                placeholder="-10"
+                type="number"
+                tooltip="TODO"
+                isRequired
+                description="TODO"
+            />
         </>
     )
 }
@@ -150,6 +206,7 @@ export const TechnicalParametersP2hForm = () => {
     return (
         <Form
             onSubmit={handleSubmit}
+            // @ts-expect-error Zod schema inference
             validationSchema={technicalParametersSchema}
             defaultValues={location.state?.technicalParameters?.p2h || defaultTechnicalP2hParams}
         >

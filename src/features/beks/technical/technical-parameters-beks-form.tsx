@@ -19,19 +19,23 @@ const FormContent = () => {
             <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
 
             <FormInput
+                type="number"
                 name="q_max"
                 placeholder="1000 MW"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
                 title="Elektros energijos kaupiklio maksimali galia (MW)"
+                isRequired
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormInput
+                type="number"
                 name="q_total"
                 placeholder="2 MWh"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MWh (1 TWh)"
                 title="Elektros energijos kaupiklio talpa (MWh)"
+                isRequired
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -67,51 +71,61 @@ const FormContent = () => {
                 }
             >
                 <FormInput
+                    type="number"
                     name="RTE"
                     placeholder="88 %"
                     description="Skaičius nuo 0 iki 100"
                     title="Pilno ciklo naudingumo koeficientas (%)"
                     tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos"
+                    isRequired
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
+                    type="number"
                     name="SOC_min"
                     placeholder="10 %"
                     description="Skaičius nuo 0 iki 100"
                     title="Elektros energijos kaupiklio minimalus įkrovimo lygis (%)"
                     tooltip="Mažiausia riba iki kurios galima iškrauti kaupiklį."
+                    isRequired
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
+                    type="number"
                     name="SOC_max"
                     placeholder="95 %"
                     description="Skaičius nuo 0 iki 100"
                     title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"
                     tooltip="Didžiausia riba iki kurios galima įkrauti kaupiklį."
+                    isRequired
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
+                    type="number"
                     name="N_cycles_DA"
                     placeholder="4 kartai/d."
                     description="Sveikas skaičius nuo 0 iki 96 imtinai"
                     title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"
                     tooltip="Kiek kartų per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."
+                    isRequired
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
+                    type="number"
                     name="N_cycles_ID"
                     placeholder="16 kartai/d."
                     description="Sveikas skaičius nuo 0 iki 96 imtinai"
                     title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"
                     tooltip="Dienos eigos rinka skirta išlaikyti kaupiklio talpą leistinose ribose teikiant balansavimo paslaugas."
+                    isRequired
                 />
             </Accordion>
         </>
@@ -146,6 +160,7 @@ export const TechnicalParametersBeksForm = () => {
         <Form
             defaultValues={location.state?.technicalParameters?.beks || defaultTechnicalBeksParams}
             onSubmit={handleSubmit}
+            // @ts-expect-error Zod schema inference
             validationSchema={technicalParametersSchema}
         >
             <FormContent />

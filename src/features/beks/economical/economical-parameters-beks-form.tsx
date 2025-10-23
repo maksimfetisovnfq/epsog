@@ -12,47 +12,65 @@ const FormContent = () => {
         <>
             <div style={{ fontSize: "32px", marginBottom: "48px" }}>Ekonominiai parametrai</div>
             <FormInput
+                type="number"
                 name="CAPEX_P"
                 placeholder="Eur/MW"
                 description="Įvedami tik teigiami skaičiai"
                 title="Investicijos į kaupiklio galią, CAPEX (tūkst. EUR/MW)"
+                tooltip="TODO"
+                isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
+                type="number"
                 name="CAPEX_C"
                 placeholder="Eur/MWh"
                 description="Įvedami tik teigiami skaičiai"
                 title="Investicijos į kaupiklio talpą, CAPEX (tūkst. EUR/MWh)"
+                tooltip="TODO"
+                isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
+                type="number"
                 name="OPEX_P"
                 placeholder="Eur/MW per metus"
                 description="Įvedami tik teigiami skaičiai"
                 title="Fiksuotos veiklos sąnaudos, OPEX (tūkst. EUR/MW per metus)"
+                tooltip="TODO"
+                isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
+                type="number"
                 name="OPEX_C"
                 placeholder="Eur/MWh"
                 description="Įvedami tik teigiami skaičiai"
                 title="Kintamos veiklos sąnaudos, OPEX (tūkst. EUR/MWh)"
+                tooltip="TODO"
+                isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
+                type="number"
                 name="number_of_years"
                 placeholder="10"
                 description="Skaičius nuo 1 iki 50"
-                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą? *"
+                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"
+                tooltip="TODO"
+                isRequired
             />
             <Divider style={{ marginTop: "48px", marginBottom: "48px" }} />
 
             <Accordion title="Išplėstiniai ekonominiai parametrai">
                 <FormInput
+                    type="number"
                     name="discount_rate"
                     placeholder="5 %"
                     description="Skaičius nuo 0 iki 100"
                     title="Taikoma diskonto norma (%)"
+                    tooltip="TODO"
+                    isRequired
                 />
                 <Divider style={{ marginTop: "32px", marginBottom: "32px" }} />
                 <BspFields />
@@ -80,6 +98,7 @@ export const EconomicalParametersBeksForm = () => {
     return (
         <Form
             onSubmit={submit}
+            // @ts-expect-error Zod schema inference
             validationSchema={economicalParametersSchema}
             defaultValues={location.state?.economicParameters?.beks ?? economicalParametersDefaultValues}
         >
