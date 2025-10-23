@@ -44,6 +44,7 @@ export const EconomicalParametersDsrForm = () => {
                     description="TODO"
                     placeholder="TODO"
                     isRequired
+                    tooltip="TODO"
                 />
                 <Divider />
                 <FormInput
@@ -53,6 +54,7 @@ export const EconomicalParametersDsrForm = () => {
                     description="TODO"
                     placeholder="TODO"
                     isRequired
+                    tooltip="TODO"
                 />
                 <Divider />
                 <FormInput
@@ -62,6 +64,7 @@ export const EconomicalParametersDsrForm = () => {
                     description="TODO"
                     placeholder="TODO"
                     isRequired
+                    tooltip="TODO"
                 />
                 <Divider />
 
@@ -75,18 +78,18 @@ export const EconomicalParametersDsrForm = () => {
                         />
                     }
                 >
-                <FormInput
-                    name="discount_rate"
-                    title="Taikoma diskonto norma (%)"
-                    type="number"
-                    description="TODO"
-                    placeholder="TODO"
-                    isRequired
-                />
-                <Divider />
+                    <FormInput
+                        name="discount_rate"
+                        title="Taikoma diskonto norma (%)"
+                        type="number"
+                        description="TODO"
+                        placeholder="TODO"
+                        tooltip="TODO"
+                        isRequired
+                    />
+                    <Divider style={{marginBottom: "24px"}} />
 
-                <BspFields />
-                    
+                    <BspFields />
                 </Accordion>
             </Stack>
             <FormNavigation handleBackward={handleBackward} />

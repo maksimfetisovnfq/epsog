@@ -17,7 +17,7 @@ import { useState } from "react"
 export const TechnicalParametersDsrForm = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    
+
     const [useHourlyPower, setUseHourlyPower] = useState(true)
     const [useMinMaxPower, setUseMinMaxPower] = useState(true)
 
@@ -40,20 +40,51 @@ export const TechnicalParametersDsrForm = () => {
             onSubmit={handleSubmit}
             // @ts-expect-error Zod schema inference
             validationSchema={getTechnicalParametersDsrSchema(useHourlyPower, useMinMaxPower)}
-            defaultValues={location.state?.technicalParameters?.dsr || getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)}
+            defaultValues={
+                location.state?.technicalParameters?.dsr ||
+                getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)
+            }
         >
             <Stack spacing={2}>
                 <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
-                <FormInput name="Q_avg" title="Vidutinė įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
+                <FormInput
+                    name="Q_avg"
+                    title="Vidutinė įrenginio galia (MW)"
+                    type="number"
+                    description="TODO"
+                    placeholder="TODO"
+                    tooltip="TODO"
+                    isRequired
+                />
                 <Divider />
-                <FormInput name="Q_min" title="Minimali įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
+                <FormInput
+                    name="Q_min"
+                    title="Minimali įrenginio galia (MW)"
+                    type="number"
+                    description="TODO"
+                    placeholder="TODO"
+                    tooltip="TODO"
+                    isRequired
+                />
                 <Divider />
-                <FormInput name="Q_max" title="Maksimali įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
+                <FormInput
+                    name="Q_max"
+                    title="Maksimali įrenginio galia (MW)"
+                    type="number"
+                    description="TODO"
+                    placeholder="TODO"
+                    tooltip="TODO"
+                    isRequired
+                />
                 <Divider />
                 <FormInput
                     name="T_shift"
                     title="Laiko poslinkis (15 min. intervalais) energijos atstatymui"
-                    type="number" description="TODO" placeholder="TODO" isRequired
+                    type="number"
+                    description="TODO"
+                    placeholder="TODO"
+                    tooltip="TODO"
+                    isRequired
                 />
 
                 <Divider />
@@ -68,9 +99,9 @@ export const TechnicalParametersDsrForm = () => {
                                 <Checkbox
                                     checked={useHourlyPower}
                                     onChange={(e) => setUseHourlyPower(e.target.checked)}
-                                    sx={{ 
+                                    sx={{
                                         color: "#00EB8C",
-                                        '&.Mui-checked': { color: "#00EB8C" }
+                                        "&.Mui-checked": { color: "#00EB8C" },
                                     }}
                                 />
                             }
@@ -81,16 +112,16 @@ export const TechnicalParametersDsrForm = () => {
                                 <Checkbox
                                     checked={useMinMaxPower}
                                     onChange={(e) => setUseMinMaxPower(e.target.checked)}
-                                    sx={{ 
+                                    sx={{
                                         color: "#00EB8C",
-                                        '&.Mui-checked': { color: "#00EB8C" }
+                                        "&.Mui-checked": { color: "#00EB8C" },
                                     }}
                                 />
                             }
                             label="Use Min/Max Power"
                         />
                     </Box>
-                    
+
                     {useHourlyPower && (
                         <Box sx={{ marginBottom: "24px" }}>
                             <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
@@ -99,7 +130,7 @@ export const TechnicalParametersDsrForm = () => {
                             <HourlyTable namePrefix="hourly_power" />
                         </Box>
                     )}
-                    
+
                     {useMinMaxPower && (
                         <>
                             <Box sx={{ marginBottom: "24px" }}>
