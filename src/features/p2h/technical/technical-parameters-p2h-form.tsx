@@ -27,6 +27,8 @@ const TechnicalParametersFormContent = () => {
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
             />
 
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
             <FormInput
                 name="Q_yearly"
                 title="Metinis šilumos energijos poreikis (MWh)"
@@ -34,12 +36,17 @@ const TechnicalParametersFormContent = () => {
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
             />
 
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
+
             <FormInput
                 name="T_HP"
                 title="Aplinkos temperatūra nuo kurios išjungiamas šilumos siurblys (°C)"
                 placeholder="-10"
                 type="number"
             />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormLabel style={{ color: "black", padding: 0, marginBottom: "12px", fontSize: "14px" }}>
                 {"Pasirinkite galimą teikti reguliavimo paslaugą".split("*").map((part, index) => (
@@ -73,17 +80,24 @@ const TechnicalParametersFormContent = () => {
 
             <Title sx={{marginBottom: '16px', fontSize: "22px"}}>Šilumos kaupiklio (talpyklos) parametrai</Title>
             <FormInput name="d_HS" title="Diametras (m)" placeholder="10" type="number" />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
             <FormInput name="H_HS" title="Šilumos kaupiklio aukštis (m)" placeholder="20" type="number" />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+            
             <FormInput
                 name="lambda_HS"
                 title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C))"
                 placeholder="0.032"
                 type="number"
             />
-            <FormInput name="dx_HS" title="Izoliacinės medžiagos storis (m)" placeholder="0.3" type="number" />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
+            <FormInput name="dx_HS" title="Izoliacinės medžiagos storis (m)" placeholder="0.3" type="number" />
+            
             <Title sx={{marginBottom: '16px', fontSize: "22px"}}>Šilumos katilo (boilerio) parametrai</Title>
             
             <FormInput
@@ -92,9 +106,17 @@ const TechnicalParametersFormContent = () => {
                 placeholder="4.5"
                 type="number"
             />
-            <FormInput name="P_FUEL" title="Deginamo kuro kaina (EUR/m³)" placeholder="0.44" type="number" />
-            <FormInput name="q_FUEL" title="Deginamo kuro kaloringumas (Wh/m³)" placeholder="9550" type="number" />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             
+            <FormInput name="P_FUEL" title="Deginamo kuro kaina (EUR/m³)" placeholder="0.44" type="number" />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+            
+            <FormInput name="q_FUEL" title="Deginamo kuro kaloringumas (Wh/m³)" placeholder="9550" type="number" />
+
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
             <FormInput
                 name="eta_BOILER"
                 title="Šilumos katilo naudingumo koeficientas (%)"
