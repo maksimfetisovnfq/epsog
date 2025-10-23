@@ -90,9 +90,6 @@ export const EconomicalParametersP2hForm = () => {
                 description="TODO"
             />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-
-            <FormInput name="CAPEX_P" title="CAPEX_P" type="number" tooltip="TODO" isRequired description="TODO" />
             
             <Accordion
                 title="Išplėstiniai ekonominiai parametrai"

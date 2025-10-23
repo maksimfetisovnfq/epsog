@@ -10,7 +10,6 @@ export const economicalParametersP2hSchema = z
         OPEX_HS: numberField().pipe(z.number().min(0, errorMessages.greaterThanOrEqual(0))),
         discount_rate: numberField().pipe(z.number().min(0, errorMessages.greaterThanOrEqual(0))),
         number_of_years: numberField().pipe(z.number().min(0, errorMessages.greaterThanOrEqual(0))),
-        CAPEX_P: numberField().pipe(z.number().min(0, errorMessages.greaterThanOrEqual(0))),
     })
     .extend(getBspSchema(true).shape)
 
@@ -23,6 +22,5 @@ export const defaultEconomicalP2hParameters: Partial<EconomicalP2hParametersSche
     // OPEX_HS: 0.05,
     discount_rate: 10,
     number_of_years: 10,
-    CAPEX_P: 5,
     ...bspDefaultValues,
 }
