@@ -38,21 +38,22 @@ export const TechnicalParametersDsrForm = () => {
     return (
         <Form
             onSubmit={handleSubmit}
+            // @ts-expect-error Zod schema inference
             validationSchema={getTechnicalParametersDsrSchema(useHourlyPower, useMinMaxPower)}
             defaultValues={location.state?.technicalParameters?.dsr || getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)}
         >
             <Stack spacing={2}>
                 <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
-                <FormInput name="Q_avg" title="Vidutinė įrenginio galia (MW)" type="number" />
+                <FormInput name="Q_avg" title="Vidutinė įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
                 <Divider />
-                <FormInput name="Q_min" title="Minimali įrenginio galia (MW)" type="number" />
+                <FormInput name="Q_min" title="Minimali įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
                 <Divider />
-                <FormInput name="Q_max" title="Maksimali įrenginio galia (MW)" type="number" />
+                <FormInput name="Q_max" title="Maksimali įrenginio galia (MW)" type="number" description="TODO" placeholder="TODO" isRequired />
                 <Divider />
                 <FormInput
                     name="T_shift"
                     title="Laiko poslinkis (15 min. intervalais) energijos atstatymui"
-                    type="number"
+                    type="number" description="TODO" placeholder="TODO" isRequired
                 />
 
                 <Divider />

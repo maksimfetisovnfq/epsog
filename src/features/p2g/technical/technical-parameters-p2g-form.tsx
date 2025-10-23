@@ -28,6 +28,8 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                     title="Maksimali įrenginio galia (MW)"
                     type="number"
                     description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
+                    tooltip="TODO"
+                    isRequired
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -61,13 +63,25 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 </Stack>
             </Stack>
 
-            <FormInput name="eta_H2" title="Vandenilio kaina (EUR/kg)" type="number" />
+            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
+            <FormInput
+                name="eta_H2"
+                title="Vandenilio kaina (EUR/kg)"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormInput
                 name="electrolyzer_tech"
                 title="Elektrolizerio (elektra → vandenilis) naudingumo koeficientas (%)"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
             />
 
             <Accordion
@@ -84,15 +98,15 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                     />
                 }
             >
-                <FormInput name="T0" title="T0" type="number" />
+                <FormInput name="T0" title="T0" type="number" description="TODO" tooltip="TODO" isRequired />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-                <FormInput name="p0" title="p0" type="number" />
+                <FormInput name="p0" title="p0" type="number" description="TODO" tooltip="TODO" isRequired />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-                <FormInput name="eta_C" title="eta_C" type="number" />
+                <FormInput name="eta_C" title="eta_C" type="number" description="TODO" tooltip="TODO" isRequired />
             </Accordion>
 
             <FormNavigation handleBackward={handleBackward} />
@@ -121,6 +135,7 @@ export const TechnicalParametersP2gForm = () => {
     return (
         <Form
             onSubmit={handleSubmit}
+            // @ts-expect-error Zod schema inference
             validationSchema={technicalParametersP2gSchema}
             defaultValues={location.state?.technicalParameters?.p2g || defaultTechnicalParametersP2g}
         >

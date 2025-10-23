@@ -26,19 +26,34 @@ export const EconomicalParametersP2gForm = () => {
     return (
         <Form
             onSubmit={submit}
+            // @ts-expect-error Zod schema inference
             validationSchema={economicalParametersP2gSchema}
             defaultValues={location.state?.economicParameters?.p2g || defaultEconomicalParametersP2gSchema}
         >
             <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Ekonominiai parametrai</Title>
-            <FormInput name="CAPEX" title="CAPEX" type="number" />
+            <FormInput name="CAPEX" title="CAPEX" type="number" description="TODO" tooltip="TODO" isRequired />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="OPEX" title="OPEX" type="number" />
+            <FormInput name="OPEX" title="OPEX" type="number" description="TODO" tooltip="TODO" isRequired />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="P_H2" title="P_H2" type="number" />
+            <FormInput name="P_H2" title="P_H2" type="number" description="TODO" tooltip="TODO" isRequired />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="number_of_years" title="number_of_years" type="number" />
+            <FormInput
+                name="number_of_years"
+                title="number_of_years"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="discount_rate" title="discount_rate" type="number" />
+            <FormInput
+                name="discount_rate"
+                title="discount_rate"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
 
             <BspFields />
             <FormNavigation handleBackward={handleBackward} />
