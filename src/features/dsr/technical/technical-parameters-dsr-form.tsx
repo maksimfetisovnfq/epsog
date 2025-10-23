@@ -57,7 +57,7 @@ export const TechnicalParametersDsrForm = () => {
                     <h6 style={{ margin: "0 0 16px 0", fontSize: "16px", fontWeight: 400 }}>
                         Pasirenkami valandiniai galios profiliai
                     </h6>
-                    <HourlyTable inputWidth="186px" />
+                    <HourlyTable />
                 </div>
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
