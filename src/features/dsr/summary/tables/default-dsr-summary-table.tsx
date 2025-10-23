@@ -1,19 +1,35 @@
 import { useLocation } from "@tanstack/react-router";
-import { DefaultSummaryTable } from "@/ui/tables/DefaultSummaryTable/defaultSummaryTable";
+import { Table } from "@/ui/tables/Table";
+
+const rowHeaders = [
+    'Įrenginio galia ir talpa',
+    'Projekto investicijos CAPEX',
+    'Projekto sąnaudos OPEX',
+];
 
 export const DefaultDsrSummaryTable = () => {
     const location = useLocation();
     const technicalParams = location.state?.technicalParameters?.dsr;
     const economicParams = location.state?.economicParameters?.dsr;
-    const values = {
-        0: technicalParams ? `${technicalParams.Q_max} MW` : '',
-        1: '12',
-        2: '12',
-        3: '12',
-        4: economicParams ? `${economicParams.CAPEX} Eur/MW` : '',
-        5: economicParams ? `${economicParams.OPEX} Eur/MW/met` : '',
-        6: '12',
-    };
-    return <DefaultSummaryTable columnTitles={["Vertinama technologija", "DSR technologija"]} values={values} />;
+    
+    const columns = [
+        { title: "Vertinama technologija", dataIndex: "label", key: "label" },
+        { title: "DSR technologija", dataIndex: "value", key: "value" },
+    ];
+
+    const dataSource = [
+        { label: rowHeaders[0], value: technicalParams ? `${technicalParams.Q_max} MW` : '' },
+        { label: rowHeaders[4], value: economicParams ? `${economicParams.CAPEX} Eur/MW` : '' },
+        { label: rowHeaders[5], value: economicParams ? `${economicParams.OPEX} Eur/MW/met` : '' },
+    ];
+
+    return (
+        <Table
+            columns={columns}
+            dataSource={dataSource}
+            headerBackgroundColor={{ left: "#F5F7F8", right: "#FFFFFF" }}
+            textAlign="left"
+        />
+    );
 };
 

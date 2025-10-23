@@ -1,18 +1,36 @@
 import { useLocation } from "@tanstack/react-router"
-import { DefaultSummaryTable } from "@/ui/tables/DefaultSummaryTable/defaultSummaryTable"
+import { Table } from "@/ui/tables/Table"
+
+const rowHeaders = [
+    'Įrenginio galia ir talpa',
+    'Pasirinkta teikti reguliavimo paslauga',
+    'Projekto investicijos CAPEX',
+    'Projekto sąnaudos OPEX',
+]
 
 export const DefaultBeksSummaryTable = () => {
     const location = useLocation()
     const technicalParams = location.state?.technicalParameters?.beks
     const economicParams = location.state?.economicParameters?.beks
-    const values = {
-        0: technicalParams ? `${technicalParams.q_max} MW / ${technicalParams.q_total} MWh` : "",
-        1: "12",
-        2: "12",
-        3: "12",
-        4: economicParams ? `${economicParams.CAPEX_P} Eur/MW, ${economicParams.CAPEX_C} Eur/MWh` : "",
-        5: economicParams ? `${economicParams.OPEX_P} Eur/MW/met, ${economicParams.OPEX_C} Eur/MWh` : "",
-        6: "12",
-    }
-    return <DefaultSummaryTable values={values} />
+    
+    const columns = [
+        { title: "Vertinama technologija", dataIndex: "label", key: "label" },
+        { title: "BEKS technologija", dataIndex: "value", key: "value" },
+    ]
+
+    const dataSource = [
+        { label: rowHeaders[0], value: technicalParams ? `${technicalParams.q_max} MW / ${technicalParams.q_total} MWh` : "" },
+        { label: rowHeaders[1], value: technicalParams ? `${technicalParams.reaction_time} min` : "" },
+        { label: rowHeaders[2], value: economicParams ? `${economicParams.CAPEX_P} Eur/MW, ${economicParams.CAPEX_C} Eur/MWh` : "" },
+        { label: rowHeaders[3], value: economicParams ? `${economicParams.OPEX_P} Eur/MW/met, ${economicParams.OPEX_C} Eur/MWh` : "" },
+    ]
+
+    return (
+        <Table
+            columns={columns}
+            dataSource={dataSource}
+            headerBackgroundColor={{ left: "#F5F7F8", right: "#FFFFFF" }}
+            textAlign="left"
+        />
+    )
 }
