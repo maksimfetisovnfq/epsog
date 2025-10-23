@@ -12,22 +12,22 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
     const [checked, setChecked] = useState(false)
+    const [isError, setIsError] = useState(false)
     const navigate = useNavigate()
 
-    function canNavigate(path: string) {
-        switch (path) {
-            case "/general-data":
-                return true
-            default:
-                return false
+    const handleNavigate = () => {
+        if (checked) {
+            return navigate({ to: "/general-data" })
         }
+
+        setIsError(true)
     }
 
     return (
         <Box
             sx={{
                 fontFamily: "Arial",
-                width: {sm: "760px"},
+                width: { sm: "760px" },
                 color: "#FFFFFF",
             }}
         >
@@ -49,8 +49,8 @@ function RouteComponent() {
             />
 
             <Box sx={{ marginTop: "64px", marginBottom: "48px" }}>
-                <Box sx={{ fontSize: {sm: "48px" }, marginBottom: "12px" }}>Simuliuokite savo uždarbį</Box>
-                <Box sx={{ fontSize: {sm: "20px" } }}>Sužinokite lanksčių produktų galimybes</Box>
+                <Box sx={{ fontSize: { sm: "48px" }, marginBottom: "12px" }}>Simuliuokite savo uždarbį</Box>
+                <Box sx={{ fontSize: { sm: "20px" } }}>Sužinokite lanksčių produktų galimybes</Box>
             </Box>
 
             <div style={{ fontSize: "16px", marginBottom: "24px" }}>
@@ -83,7 +83,7 @@ function RouteComponent() {
 
             <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
                 <div>
-                    <CheckBox checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+                    <CheckBox error={isError} checked={checked} onChange={(e) => setChecked(e.target.checked)} />
                 </div>
 
                 <Box sx={{ width: { sm: "768px" }, marginLeft: 6, fontSize: "16px" }}>
@@ -101,17 +101,7 @@ function RouteComponent() {
             <Divider variant="fullWidth" sx={{ marginTop: "147px", width: { sm: "760px" } }} />
 
             <div style={{ marginTop: "24px", display: "flex", justifyContent: "end" }}>
-                <Button
-                    variant="contained"
-                    type="button"
-                    disabled={!checked}
-                    endIcon={<ArrowForwardIcon />}
-                    onClick={() => {
-                        if (canNavigate("/general-data")) {
-                            navigate({ to: "/general-data" })
-                        }
-                    }}
-                >
+                <Button variant="contained" type="button" endIcon={<ArrowForwardIcon />} onClick={handleNavigate}>
                     Toliau
                 </Button>
             </div>

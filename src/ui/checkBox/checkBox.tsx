@@ -14,7 +14,7 @@ export const CheckBox = ({ label, description, error, ...props }: Props) => (
                 "& .MuiSvgIcon-root": {
                     width: {sm: 20},
                     height: {sm: 20},
-                    fill: "#999999",
+                    fill: error ? "#FF3232" : "#999999",
                 },
 
                 // Default unchecked state
