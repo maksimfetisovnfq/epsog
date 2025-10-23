@@ -10,7 +10,7 @@ export interface HourlyTableProps {
 }
 
 export const HourlyTable = ({ 
-    maxValue = 12, 
+    maxValue = 24, 
     hours = 24, 
     sliderHeight = 200,
     namePrefix = "hourly_power"

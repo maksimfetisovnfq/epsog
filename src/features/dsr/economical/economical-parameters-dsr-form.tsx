@@ -12,7 +12,7 @@ export const EconomicalParametersDsrForm = () => {
     const navigate = useNavigate()
 
     const { submit } = useSubmitDsr()
-
+    
     const handleBackward = () => {
         navigate({
             to: "/dsr/technical-parameters",

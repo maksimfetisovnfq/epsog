@@ -1,73 +1,82 @@
 import { z } from "zod"
 import { Productai } from "@/components/productai-select"
 
-const powerHours = z.number().min(0).max(12)
+const powerHours = z.number().min(0).max(24)
 
-export const technicalParametersDsrSchema = z.object({
-    Q_avg: z.number().min(0).max(1000000),
-    Q_min: z.number().min(0).max(1000000),
-    Q_max: z.number().min(0).max(1000000),
-    T_shift: z.number().min(0).max(1000000),
-    reaction_time: z.number().min(0),
-    service_type: z.nativeEnum(Productai),
-    hourly_power_0: powerHours,
-    hourly_power_1: powerHours,
-    hourly_power_2: powerHours,
-    hourly_power_3: powerHours,
-    hourly_power_4: powerHours,
-    hourly_power_5: powerHours,
-    hourly_power_6: powerHours,
-    hourly_power_7: powerHours,
-    hourly_power_8: powerHours,
-    hourly_power_9: powerHours,
-    hourly_power_10: powerHours,
-    hourly_power_11: powerHours,
-    hourly_power_12: powerHours,
-    hourly_power_13: powerHours,
-    hourly_power_14: powerHours,
-    hourly_power_15: powerHours,
-    hourly_power_16: powerHours,
-    hourly_power_17: powerHours,
-    hourly_power_18: powerHours,
-    hourly_power_19: powerHours,
-    hourly_power_20: powerHours,
-    hourly_power_21: powerHours,
-    hourly_power_22: powerHours,
-    hourly_power_23: powerHours,
-})
+export const getTechnicalParametersDsrSchema = (
+    useHourlyPower: boolean,
+    useMinMaxPower: boolean
+) => {
+    const baseSchema = {
+        Q_avg: z.number().min(0).max(1000000),
+        Q_min: z.number().min(0).max(1000000),
+        Q_max: z.number().min(0).max(1000000),
+        T_shift: z.number().min(0).max(1000000),
+        reaction_time: z.number().min(0),
+        service_type: z.nativeEnum(Productai),
+    }
 
-export type TechnicalDsrParametersSchema = z.infer<typeof technicalParametersDsrSchema>
+    const hourlyPowerFields: Record<string, z.ZodNumber> = {}
+    const minHourlyPowerFields: Record<string, z.ZodNumber> = {}
+    const maxHourlyPowerFields: Record<string, z.ZodNumber> = {}
 
-export const defaultTechnicalParametersDsr: TechnicalDsrParametersSchema = {
-    Q_avg: 500,
-    Q_min: 100,
-    Q_max: 1000,
-    T_shift: 2,
-    reaction_time: 1,
-    service_type: Productai.UP,
+    if (useHourlyPower) {
+        for (let i = 0; i < 24; i++) {
+            hourlyPowerFields[`hourly_power_${i}`] = powerHours
+        }
+    }
 
-    hourly_power_0: 3.0,
-    hourly_power_1: 3.0,
-    hourly_power_2: 3.0,
-    hourly_power_3: 3.0,
-    hourly_power_4: 3.5,
-    hourly_power_5: 4.0,
-    hourly_power_6: 5.0,
-    hourly_power_7: 6.0,
-    hourly_power_8: 7.0,
-    hourly_power_9: 7.5,
-    hourly_power_10: 7.5,
-    hourly_power_11: 7.0,
-    hourly_power_12: 6.5,
-    hourly_power_13: 6.5,
-    hourly_power_14: 7.0,
-    hourly_power_15: 7.5,
-    hourly_power_16: 7.0,
-    hourly_power_17: 6.5,
-    hourly_power_18: 6.0,
-    hourly_power_19: 5.5,
-    hourly_power_20: 5.0,
-    hourly_power_21: 4.5,
-    hourly_power_22: 4.0,
-    hourly_power_23: 3.5,
+    if (useMinMaxPower) {
+        for (let i = 0; i < 24; i++) {
+            minHourlyPowerFields[`min_hourly_power_${i}`] = powerHours
+            maxHourlyPowerFields[`max_hourly_power_${i}`] = powerHours
+        }
+    }
+
+    return z.object({
+        ...baseSchema,
+        ...hourlyPowerFields,
+        ...minHourlyPowerFields,
+        ...maxHourlyPowerFields,
+    })
+}
+
+export type TechnicalDsrParametersSchema = z.infer<ReturnType<typeof getTechnicalParametersDsrSchema>>
+
+export const getDefaultTechnicalParametersDsr = (
+    useHourlyPower: boolean,
+    useMinMaxPower: boolean
+): Record<string, number | string> => {
+    const baseDefaults = {
+        Q_avg: 500,
+        Q_min: 100,
+        Q_max: 1000,
+        T_shift: 2,
+        reaction_time: 1,
+        service_type: Productai.UP,
+    }
+
+    const hourlyPowerDefaults: Record<string, number> = {}
+    const minHourlyPowerDefaults: Record<string, number> = {}
+    const maxHourlyPowerDefaults: Record<string, number> = {}
+
+    if (useHourlyPower) {
+        for (let i = 0; i < 24; i++) {
+            hourlyPowerDefaults[`hourly_power_${i}`] = 10
+        }
+    }
+
+    if (useMinMaxPower) {
+        for (let i = 0; i < 24; i++) {
+            minHourlyPowerDefaults[`min_hourly_power_${i}`] = 5
+            maxHourlyPowerDefaults[`max_hourly_power_${i}`] = 15
+        }
+    }
+
+    return {
+        ...baseDefaults,
+        ...hourlyPowerDefaults,
+        ...minHourlyPowerDefaults,
+        ...maxHourlyPowerDefaults,
+    }
 }

@@ -46,6 +46,7 @@ export const useSubmitDsr = () => {
         if (!generalParams || !technicalParams) return
 
         const payload = {
+            ...technicalParams,
             Q_max: technicalParams.Q_max,
             Q_min: technicalParams.Q_min,
             Q_avg: technicalParams.Q_avg,
@@ -66,7 +67,6 @@ export const useSubmitDsr = () => {
             P_mFRRd_BSP: economicalParams.P_mFRRd_BSP,
             Sector: generalParams.concentratorName,
             produktai: getProductaiValues(technicalParams.service_type, false),
-            // hourly_power: technicalParams.,
         }
 
         mutate({

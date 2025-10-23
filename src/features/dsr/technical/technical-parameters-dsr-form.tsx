@@ -1,21 +1,25 @@
 import { Form, ServiceTypeSelect, FormInput } from "@/components/form"
 import {
-    defaultTechnicalParametersDsr,
+    getDefaultTechnicalParametersDsr,
     type TechnicalDsrParametersSchema,
-    technicalParametersDsrSchema,
+    getTechnicalParametersDsrSchema,
 } from "./technical-parameters-dsr-schema.ts"
 import { useLocation, useNavigate } from "@tanstack/react-router"
-import { Stack } from "@mui/material"
+import { Stack, Checkbox, FormControlLabel, Box, Typography } from "@mui/material"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import Divider from "@mui/material/Divider"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { HourlyTable } from "@/ui/tables/HourlyTable/hourlyTable"
 import { Title } from "@/ui/title"
 import FormLabel from "@mui/material/FormLabel"
+import { useState } from "react"
 
 export const TechnicalParametersDsrForm = () => {
     const navigate = useNavigate()
     const location = useLocation()
+    
+    const [useHourlyPower, setUseHourlyPower] = useState(true)
+    const [useMinMaxPower, setUseMinMaxPower] = useState(true)
 
     const handleSubmit = (data: TechnicalDsrParametersSchema) => {
         navigate({
@@ -34,8 +38,8 @@ export const TechnicalParametersDsrForm = () => {
     return (
         <Form
             onSubmit={handleSubmit}
-            validationSchema={technicalParametersDsrSchema}
-            defaultValues={location.state?.technicalParameters?.dsr || defaultTechnicalParametersDsr}
+            validationSchema={getTechnicalParametersDsrSchema(useHourlyPower, useMinMaxPower)}
+            defaultValues={location.state?.technicalParameters?.dsr || getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)}
         >
             <Stack spacing={2}>
                 <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
@@ -54,10 +58,63 @@ export const TechnicalParametersDsrForm = () => {
                 <Divider />
 
                 <div>
-                    <h6 style={{ margin: "0 0 16px 0", fontSize: "16px", fontWeight: 400 }}>
-                        Pasirenkami valandiniai galios profiliai
-                    </h6>
-                    <HourlyTable />
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 2, marginBottom: "16px" }}>
+                        <h6 style={{ margin: 0, fontSize: "16px", fontWeight: 400 }}>
+                            Pasirenkami valandiniai galios profiliai
+                        </h6>
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={useHourlyPower}
+                                    onChange={(e) => setUseHourlyPower(e.target.checked)}
+                                    sx={{ 
+                                        color: "#00EB8C",
+                                        '&.Mui-checked': { color: "#00EB8C" }
+                                    }}
+                                />
+                            }
+                            label="Use Hourly Power"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    checked={useMinMaxPower}
+                                    onChange={(e) => setUseMinMaxPower(e.target.checked)}
+                                    sx={{ 
+                                        color: "#00EB8C",
+                                        '&.Mui-checked': { color: "#00EB8C" }
+                                    }}
+                                />
+                            }
+                            label="Use Min/Max Power"
+                        />
+                    </Box>
+                    
+                    {useHourlyPower && (
+                        <Box sx={{ marginBottom: "24px" }}>
+                            <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
+                                Hourly Power
+                            </Typography>
+                            <HourlyTable namePrefix="hourly_power" />
+                        </Box>
+                    )}
+                    
+                    {useMinMaxPower && (
+                        <>
+                            <Box sx={{ marginBottom: "24px" }}>
+                                <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
+                                    Min Hourly Power
+                                </Typography>
+                                <HourlyTable namePrefix="min_hourly_power" />
+                            </Box>
+                            <Box sx={{ marginBottom: "24px" }}>
+                                <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
+                                    Max Hourly Power
+                                </Typography>
+                                <HourlyTable namePrefix="max_hourly_power" />
+                            </Box>
+                        </>
+                    )}
                 </div>
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
