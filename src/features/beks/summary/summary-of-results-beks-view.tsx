@@ -18,13 +18,13 @@ import { IntradayTable } from "@/features/beks/summary/tables/intraday-table"
 import { NpvAnalysisChartBeks } from "@/features/beks/summary/charts/npv-analysis-chart-beks"
 import { CostChartBeks } from "@/features/beks/summary/charts/cost-economic-evaluation-chart-beks"
 import { Title } from "@/ui/title"
-import { YearlySummaryChartBeks } from "@/features/beks/summary/charts/yearly-summary-chart-beks"
 import { UtilisationChartBeks } from "@/features/beks/summary/charts/utilisation-chart-beks"
 import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-beks"
 import { DefaultBeksSummaryTable } from "./tables/default-beks-summary-table"
 import { ExportToExcelBeks } from "./export-to-excel"
 import { ExportToPdfBeks } from "@/features/beks/summary/export-to-pdf.tsx"
 import { contactEmail } from "@/consts.ts"
+import { ProjectSummaryTable } from "@/features/beks/summary/tables/project-summary-table.tsx"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -46,8 +46,9 @@ export const SummaryOfResultsBeksView = () => {
                 <Box style={{ marginBottom: 16 }}>
                     <YearlySummaryTable />
                 </Box>
-                <YearlySummaryChartBeks />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: "760px" }} />
+                <Box style={{ marginBottom: 16 }}>
+                    <ProjectSummaryTable />
+                </Box>
                 <Box style={{ marginBottom: 16 }}>
                     <NpvAnalysisChartBeks />
                 </Box>
@@ -123,7 +124,7 @@ export const SummaryOfResultsBeksView = () => {
             <InfoBanner />
             <ExportToExcelBeks />
             <ExportToPdfBeks />
-            
+
             <Tabs
                 bordered
                 labels={["Apžvalga", "Rinkų duomenys", "Ekonominis vertinimas"]}

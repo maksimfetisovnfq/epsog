@@ -1,19 +1,10 @@
-import { useSummaryBeks } from "../use-summary-beks.ts"
 import { Table } from "@/ui/tables"
+import { useProjectSummaryTable } from "../hooks/use-project-summary-table.ts"
 
 export const ProjectSummaryTable = () => {
-    const data = useSummaryBeks()
+    const tableProps = useProjectSummaryTable()
 
-    if (!data) return
+    if (!tableProps) return null
 
-    return (
-        <Table
-            title="PROJECT (LIFETIME) SUMMARY"
-            dataSource={data.aggregated.summary.project_summary_table}
-            columns={[
-                { title: "Metric", dataIndex: "Metric" },
-                { title: "Value", dataIndex: "Value" },
-            ]}
-        />
-    )
+    return <Table  {...tableProps} />
 }
