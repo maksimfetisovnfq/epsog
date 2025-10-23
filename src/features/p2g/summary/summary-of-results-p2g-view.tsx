@@ -22,6 +22,7 @@ import { CostChartP2g } from "@/features/p2g/summary/charts/cost-economic-evalua
 import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table"
 import { HydrogenSalesTable } from "@/features/p2g/summary/tables/hydrogen-sales-table"
 import { DefaultP2gSummaryTable } from "@/features/p2g/summary/tables/default-p2g-summary-table"
+import { contactEmail } from "@/consts.ts"
 
 export const SummaryOfResultsP2gView = () => {
     const navigate = useNavigate()
@@ -29,7 +30,7 @@ export const SummaryOfResultsP2gView = () => {
     const handleBackward = () => {
         navigate({
             to: "/p2g/economic-parameters",
-            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters },
         })
     }
 
@@ -37,7 +38,7 @@ export const SummaryOfResultsP2gView = () => {
         <Fragment key={1}>
             <Stack spacing={1}>
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
-                <DefaultP2gSummaryTable/>
+                <DefaultP2gSummaryTable />
                 <YearlySummaryTable />
                 <YearlySummaryChartP2g />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -51,7 +52,7 @@ export const SummaryOfResultsP2gView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
-                <DefaultP2gSummaryTable/>
+                <DefaultP2gSummaryTable />
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -64,7 +65,7 @@ export const SummaryOfResultsP2gView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <DefaultP2gSummaryTable/>
+                <DefaultP2gSummaryTable />
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -75,7 +76,7 @@ export const SummaryOfResultsP2gView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <DefaultP2gSummaryTable/>
+                <DefaultP2gSummaryTable />
                 <DayAheadTable />
             </Stack>
         </Fragment>
@@ -84,7 +85,7 @@ export const SummaryOfResultsP2gView = () => {
     const FourthTab = (
         <Fragment key={4}>
             <Stack spacing={0}>
-                <DefaultP2gSummaryTable/>
+                <DefaultP2gSummaryTable />
                 <HydrogenSalesTable />
             </Stack>
         </Fragment>
@@ -95,7 +96,12 @@ export const SummaryOfResultsP2gView = () => {
             <Stack spacing={2}>
                 <Title style={{ fontSize: 24 }}>Rinkos duomenys</Title>
                 <Tabs
-                    labels={["Balansavimo pajėgumų rinka", "Balansavimo energijos rinka", "Elektros energijos prekyba", "FourthTab"]}
+                    labels={[
+                        "Balansavimo pajėgumų rinka",
+                        "Balansavimo energijos rinka",
+                        "Elektros energijos prekyba",
+                        "FourthTab",
+                    ]}
                     content={[balancingCapacityTab, BalancingEnergyTab, ElectricityTradeTab, FourthTab]}
                 />
             </Stack>
@@ -129,7 +135,12 @@ export const SummaryOfResultsP2gView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
+            <FormNavigation
+                handleBackward={handleBackward}
+                backButtonTitle="Koreguoti duomenys"
+                nextButtonTitle="Susisiekti"
+                nextButtonEmail={contactEmail}
+            />
         </>
     )
 }

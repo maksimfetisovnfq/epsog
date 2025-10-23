@@ -7,9 +7,10 @@ type FormNavigationProps = {
     handleBackward: () => void;
     backButtonTitle?: string;
     nextButtonTitle?: string;
+    nextButtonEmail?: string;
 }
 
-export const FormNavigation = ({handleBackward, backButtonTitle = "Atgal", nextButtonTitle = "Toliau"}: FormNavigationProps) => {
+export const FormNavigation = ({handleBackward, backButtonTitle = "Atgal", nextButtonTitle = "Toliau", nextButtonEmail}: FormNavigationProps) => {
     return (
         <Box sx={{ fontFamily: "Arial" }}>
             <Divider variant="fullWidth" sx={{marginTop: '64px'}}/>
@@ -23,14 +24,26 @@ export const FormNavigation = ({handleBackward, backButtonTitle = "Atgal", nextB
                 >
                     {backButtonTitle}
                 </Button>
-                <Button 
-                    variant="contained" 
-                    type="submit" 
-                    endIcon={<ArrowForwardIcon/>} 
-                    sx={{ whiteSpace: 'nowrap' }}
-                >
-                    {nextButtonTitle}
-                </Button>
+                {nextButtonEmail ? (
+                    <Button 
+                        variant="contained" 
+                        component="a"
+                        href={`mailto:${nextButtonEmail}`}
+                        endIcon={<ArrowForwardIcon/>} 
+                        sx={{ whiteSpace: 'nowrap' }}
+                    >
+                        {nextButtonTitle}
+                    </Button>
+                ) : (
+                    <Button 
+                        variant="contained" 
+                        type="submit" 
+                        endIcon={<ArrowForwardIcon/>} 
+                        sx={{ whiteSpace: 'nowrap' }}
+                    >
+                        {nextButtonTitle}
+                    </Button>
+                )}
                 
             </Box>
         </Box>

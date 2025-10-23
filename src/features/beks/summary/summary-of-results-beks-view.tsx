@@ -24,6 +24,7 @@ import { RevenueChartBeks } from "@/features/beks/summary/charts/revenue-chart-b
 import { DefaultBeksSummaryTable } from "./tables/default-beks-summary-table"
 import { ExportToExcelBeks } from "./export-to-excel"
 import { ExportToPdfBeks } from "@/features/beks/summary/export-to-pdf.tsx"
+import { contactEmail } from "@/consts.ts"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -133,6 +134,7 @@ export const SummaryOfResultsBeksView = () => {
                 handleBackward={handleBackward}
                 backButtonTitle="Koreguoti duomenis"
                 nextButtonTitle="Susisiekti"
+                nextButtonEmail={contactEmail}
             />
         </>
     )

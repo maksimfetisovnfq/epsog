@@ -23,6 +23,7 @@ import { IntradayTable } from "@/features/p2h/summary/tables/intraday-table"
 import { CostChartP2h } from "@/features/p2h/summary/charts/cost-economic-evaluation-chart-p2h"
 import { HitGenerationTable } from "@/features/p2h/summary/tables/heat-generation-table"
 import { DefaultP2hSummaryTable } from "@/features/p2h/summary/tables/default-p2h-summary-table"
+import { contactEmail } from "@/consts.ts"
 
 export const SummaryOfResultsP2hView = () => {
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export const SummaryOfResultsP2hView = () => {
     const handleBackward = () => {
         navigate({
             to: "/p2h/economic-parameters",
-            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters },
         })
     }
 
@@ -38,7 +39,7 @@ export const SummaryOfResultsP2hView = () => {
         <Fragment key={1}>
             <Stack spacing={1}>
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
-                <DefaultP2hSummaryTable/>
+                <DefaultP2hSummaryTable />
                 <YearlySummaryTable />
                 <YearlySummaryChartP2h />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -52,7 +53,7 @@ export const SummaryOfResultsP2hView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
-                <DefaultP2hSummaryTable/>
+                <DefaultP2hSummaryTable />
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -65,7 +66,7 @@ export const SummaryOfResultsP2hView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <DefaultP2hSummaryTable/>
+                <DefaultP2hSummaryTable />
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -76,11 +77,11 @@ export const SummaryOfResultsP2hView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <DefaultP2hSummaryTable/>
+                <DefaultP2hSummaryTable />
                 <ElectricityConsumptionTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
-                <HitGenerationTable/>
+                <HitGenerationTable />
             </Stack>
         </Fragment>
     )
@@ -124,7 +125,12 @@ export const SummaryOfResultsP2hView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
+            <FormNavigation
+                handleBackward={handleBackward}
+                backButtonTitle="Koreguoti duomenys"
+                nextButtonTitle="Susisiekti"
+                nextButtonEmail={contactEmail}
+            />
         </>
     )
 }

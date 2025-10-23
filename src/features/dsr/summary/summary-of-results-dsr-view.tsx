@@ -22,6 +22,7 @@ import { IntradayTable } from "./tables/intraday-table"
 import { RevenueChartDsr } from "@/features/dsr/summary/charts/revenue-chart-dsr.tsx"
 import { CostChartDsr } from "@/features/dsr/summary/charts/cost-economic-evaluation-chart-dsr.tsx"
 import { DefaultDsrSummaryTable } from "@/features/dsr/summary/tables/default-dsr-summary-table.tsx"
+import { contactEmail } from "@/consts.ts"
 
 export const SummaryOfResultsDsrView = () => {
     const navigate = useNavigate()
@@ -29,7 +30,7 @@ export const SummaryOfResultsDsrView = () => {
     const handleBackward = () => {
         navigate({
             to: "/dsr/economic-parameters",
-            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters},
+            state: { generalData: location.state.generalData, technicalParameters: location.state.technicalParameters },
         })
     }
 
@@ -37,7 +38,7 @@ export const SummaryOfResultsDsrView = () => {
         <Fragment key={1}>
             <Stack spacing={1}>
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
-                <DefaultDsrSummaryTable/>
+                <DefaultDsrSummaryTable />
                 <YearlySummaryTable />
                 <YearlySummaryChartDsr />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
@@ -51,7 +52,7 @@ export const SummaryOfResultsDsrView = () => {
     const balancingCapacityTab = (
         <Fragment key={1}>
             <Stack spacing={0}>
-                <DefaultDsrSummaryTable/>
+                <DefaultDsrSummaryTable />
                 <FcrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
@@ -64,7 +65,7 @@ export const SummaryOfResultsDsrView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <DefaultDsrSummaryTable/>
+                <DefaultDsrSummaryTable />
                 <AfrrBalancingCapacityTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
@@ -75,7 +76,7 @@ export const SummaryOfResultsDsrView = () => {
     const ElectricityTradeTab = (
         <Fragment key={3}>
             <Stack spacing={0}>
-                <DefaultDsrSummaryTable/>
+                <DefaultDsrSummaryTable />
                 <DayAheadTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
@@ -122,7 +123,12 @@ export const SummaryOfResultsDsrView = () => {
                 />
             </Stack>
 
-            <FormNavigation handleBackward={handleBackward} backButtonTitle="Koreguoti duomenys" nextButtonTitle="Susisiekti"/>
+            <FormNavigation
+                handleBackward={handleBackward}
+                backButtonTitle="Koreguoti duomenys"
+                nextButtonTitle="Susisiekti"
+                nextButtonEmail={contactEmail}
+            />
         </>
     )
 }

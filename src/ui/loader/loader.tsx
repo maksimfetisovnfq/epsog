@@ -30,12 +30,6 @@ export const Loader = ({ loadingTime = 120 }: LoaderProps) => {
         setProgress(calculatedProgress)
     }, [timeLeft, loadingTime])
 
-    const formatTime = (seconds: number) => {
-        const mins = Math.floor(seconds / 60)
-        const secs = seconds % 60
-        return `${mins}:${secs.toString().padStart(2, '0')}`
-    }
-
     return (
         <div style={{ fontWeight: 400, fontFamily: "Arial", width: "768px" }}>
             <GlobalStyles

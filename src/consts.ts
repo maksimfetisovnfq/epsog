@@ -1,0 +1,1 @@
+export const contactEmail = "market.services@litgrid.eu"
