@@ -6,13 +6,12 @@ import {
 import { useForm, FormProvider, Controller } from "react-hook-form"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
-import Checkbox from "@mui/material/Checkbox"
 import LineChart from "@/ui/charts/lineChart/line-chart"
 import { type ChartOptions } from "chart.js"
 import { Box } from "@mui/material"
 
 interface FormValues {
-    selectedColumns: string[]
+    selectedColumn: string
 }
 
 export const YearlySummary = () => {
@@ -20,22 +19,21 @@ export const YearlySummary = () => {
 
     const methods = useForm<FormValues>({
         defaultValues: {
-            selectedColumns: [],
+            selectedColumn: "cf",
         },
     })
     const { control } = methods
 
     if (!data) return null
 
-    const selectedColumns = methods.watch("selectedColumns")
+    const selectedColumn = methods.watch("selectedColumn")
 
     const columns = [
-        { value: "metai", label: "Metai" },
         { value: "ciklai", label: "Ciklai" },
-        { value: "capex", label: "CAPEX" },
-        { value: "opex", label: "OPEX" },
-        { value: "cf", label: "CF" },
-        { value: "npv", label: "NPV" },
+        { value: "capex", label: "CAPEX (tūkst. EUR)" },
+        { value: "opex", label: "OPEX (tūkst. EUR)" },
+        { value: "cf", label: "CF (tūkst. EUR)" },
+        { value: "npv", label: "NPV (tūkst. EUR)" },
     ]
 
     const transformedData: DetailedAnualResultsTableRow[] = data.aggregated.economic_results.yearly_table.map(
@@ -62,49 +60,41 @@ export const YearlySummary = () => {
         },
     }
 
-    const chartColumns = selectedColumns.length > 0 ? selectedColumns.filter((col) => col !== "metai") : ["cf", "npv"]
     const labels = transformedData.map((row) => row.metai)
-    const datasets = chartColumns.map((col) => ({
-        label: columns.find((c) => c.value === col)?.label || col,
-        data: transformedData.map((row) => Number(row[col as keyof DetailedAnualResultsTableRow]) || 0),
-    }))
+    const datasets = [
+        {
+            label: columns.find((c) => c.value === selectedColumn)?.label || selectedColumn,
+            data: transformedData.map((row) => Number(row[selectedColumn as keyof DetailedAnualResultsTableRow]) || 0),
+        },
+    ]
     const chartData = { labels, datasets }
 
     return (
         <FormProvider {...methods}>
             <Box sx={{ width: { sm: "768px" }, marginTop: "24px" }}>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelius</Box>
+                <Box sx={{ marginTop: "24px" }}>
+                    <DetailedAnualResultsTable data={transformedData} />
+                </Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "24px" }}>
+                    <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelį</Box>
                     <Controller
-                        name="selectedColumns"
+                        name="selectedColumn"
                         control={control}
                         render={({ field }) => (
                             <Select
                                 {...field}
-                                multiple
                                 sx={{ height: "40px", width: { sm: "230px" }, overflow: "hidden" }}
                                 displayEmpty
                                 inputProps={{ "aria-label": "Without label" }}
-                                renderValue={(selected) =>
-                                    selected.length === 0
-                                        ? "Pasirinkite stulpelius"
-                                        : selected
-                                              .map((val) => columns.find((col) => col.value === val)?.label)
-                                              .join(", ")
-                                }
                             >
                                 {columns.map((col) => (
                                     <MenuItem key={col.value} value={col.value}>
-                                        <Checkbox checked={field.value.indexOf(col.value) > -1} />
                                         {col.label}
                                     </MenuItem>
                                 ))}
                             </Select>
                         )}
                     />
-                </Box>
-                <Box sx={{ marginTop: "24px" }}>
-                    <DetailedAnualResultsTable data={transformedData} visibleColumns={selectedColumns} />
                 </Box>
                 <Box
                     sx={{
@@ -119,8 +109,8 @@ export const YearlySummary = () => {
                         <LineChart
                             data={chartData}
                             options={chartOptions}
-                            leftAxisLabel="NPV (tūkst. EUR)"
-                            bottomAxisLabel="Year"
+                            leftAxisLabel={columns.find((c) => c.value === selectedColumn)?.label || ""}
+                            bottomAxisLabel="Metai"
                         />
                     </Box>
                 </Box>
