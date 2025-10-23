@@ -12,6 +12,8 @@ import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { Title } from "@/ui/title"
 import { useWatch } from "react-hook-form"
 import { Stack } from "@mui/material"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { Accordion } from "@/ui/accordion"
 
 const TechnicalParametersFormContent = () => {
     const serviceType = useWatch({ name: "service_type" })
@@ -84,105 +86,123 @@ const TechnicalParametersFormContent = () => {
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos kaupiklio (talpyklos) parametrai</Title>
-            <FormInput name="d_HS" title="Diametras (m)" placeholder="10" type="number" tooltip="TODO" isRequired
-                       description="TODO" />
+            <Accordion
+                title="Išplėstiniai techniniai parametrai"
+                titleDescription={
+                    <InfoBanner
+                        title=""
+                        subtitle="TODO"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    />
+                }
+            >
+                <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos kaupiklio (talpyklos) parametrai</Title>
+                <FormInput
+                    name="d_HS"
+                    title="Diametras (m)"
+                    placeholder="10"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="H_HS"
-                title="Šilumos kaupiklio aukštis (m)"
-                placeholder="20"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="H_HS"
+                    title="Šilumos kaupiklio aukštis (m)"
+                    placeholder="20"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="lambda_HS"
-                title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C))"
-                placeholder="0.032"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="lambda_HS"
+                    title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C))"
+                    placeholder="0.032"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="dx_HS"
-                title="Izoliacinės medžiagos storis (m)"
-                placeholder="0.3"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="dx_HS"
+                    title="Izoliacinės medžiagos storis (m)"
+                    placeholder="0.3"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos katilo (boilerio) parametrai</Title>
+                <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos katilo (boilerio) parametrai</Title>
 
-            <FormInput
-                name="Q_max_BOILER"
-                title="Šilumos katilo maksimali šiluminė galia (MW)"
-                placeholder="4.5"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="Q_max_BOILER"
+                    title="Šilumos katilo maksimali šiluminė galia (MW)"
+                    placeholder="4.5"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="P_FUEL"
-                title="Deginamo kuro kaina (EUR/m³)"
-                placeholder="0.44"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="P_FUEL"
+                    title="Deginamo kuro kaina (EUR/m³)"
+                    placeholder="0.44"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="q_FUEL"
-                title="Deginamo kuro kaloringumas (Wh/m³)"
-                placeholder="9550"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="q_FUEL"
+                    title="Deginamo kuro kaloringumas (Wh/m³)"
+                    placeholder="9550"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="eta_BOILER"
-                title="Šilumos katilo naudingumo koeficientas (%)"
-                placeholder="98"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="eta_BOILER"
+                    title="Šilumos katilo naudingumo koeficientas (%)"
+                    placeholder="98"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
-            <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
-            <FormInput
-                name="T_max_HS"
-                title="Maksimali vandens temperatūra (°C)"
-                placeholder="-10"
-                type="number"
-                tooltip="TODO"
-                isRequired
-                description="TODO"
-            />
+                <FormInput
+                    name="T_max_HS"
+                    title="Maksimali vandens temperatūra (°C)"
+                    placeholder="-10"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
+            </Accordion>
         </>
     )
 }

@@ -7,6 +7,8 @@ import { useSubmitDsr } from "./use-submit-dsr"
 import { Stack } from "@mui/material"
 import { Title } from "@/ui/title"
 import Divider from "@mui/material/Divider"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { Accordion } from "@/ui/accordion"
 
 export const EconomicalParametersDsrForm = () => {
     const location = useLocation()
@@ -62,6 +64,17 @@ export const EconomicalParametersDsrForm = () => {
                     isRequired
                 />
                 <Divider />
+
+                <Accordion
+                    title="Išplėstiniai ekonominiai parametrai"
+                    titleDescription={
+                        <InfoBanner
+                            title=""
+                            subtitle="TODO"
+                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        />
+                    }
+                >
                 <FormInput
                     name="discount_rate"
                     title="Taikoma diskonto norma (%)"
@@ -73,6 +86,8 @@ export const EconomicalParametersDsrForm = () => {
                 <Divider />
 
                 <BspFields />
+                    
+                </Accordion>
             </Stack>
             <FormNavigation handleBackward={handleBackward} />
         </Form>

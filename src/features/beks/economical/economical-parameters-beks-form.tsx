@@ -6,6 +6,7 @@ import { economicalParametersDefaultValues, economicalParametersSchema } from ".
 import { useSubmitBeks } from "./use-submit-beks"
 import Divider from "@mui/material/Divider"
 import { Accordion } from "@/ui/accordion"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
 
 const FormContent = () => {
     return (
@@ -62,7 +63,16 @@ const FormContent = () => {
             />
             <Divider style={{ marginTop: "48px", marginBottom: "48px" }} />
 
-            <Accordion title="Išplėstiniai ekonominiai parametrai">
+            <Accordion
+                title="Išplėstiniai ekonominiai parametrai"
+                titleDescription={
+                    <InfoBanner
+                        title=""
+                        subtitle="TODO"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    />
+                }
+            >
                 <FormInput
                     type="number"
                     name="discount_rate"

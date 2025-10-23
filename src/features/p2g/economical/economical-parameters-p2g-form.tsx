@@ -6,6 +6,8 @@ import { defaultEconomicalParametersP2gSchema, economicalParametersP2gSchema } f
 import { useSubmitP2g } from "./use-submit-p2g"
 import { Title } from "@/ui/title"
 import Divider from "@mui/material/Divider"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { Accordion } from "@/ui/accordion"
 
 export const EconomicalParametersP2gForm = () => {
     const location = useLocation()
@@ -46,16 +48,28 @@ export const EconomicalParametersP2gForm = () => {
                 isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput
-                name="discount_rate"
-                title="discount_rate"
-                type="number"
-                description="TODO"
-                tooltip="TODO"
-                isRequired
-            />
 
-            <BspFields />
+            <Accordion
+                title="Išplėstiniai ekonominiai parametrai"
+                titleDescription={
+                    <InfoBanner
+                        title=""
+                        subtitle="TODO"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    />
+                }
+            >
+                <FormInput
+                    name="discount_rate"
+                    title="discount_rate"
+                    type="number"
+                    description="TODO"
+                    tooltip="TODO"
+                    isRequired
+                />
+
+                <BspFields />
+            </Accordion>
             <FormNavigation handleBackward={handleBackward} />
         </Form>
     )

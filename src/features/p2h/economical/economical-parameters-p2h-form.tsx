@@ -7,6 +7,7 @@ import { BspFields } from "@/components/bsp"
 import { Title } from "@/ui/title"
 import { Accordion } from "@/ui/accordion"
 import Divider from "@mui/material/Divider"
+import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
 
 export const EconomicalParametersP2hForm = () => {
     const navigate = useNavigate()
@@ -92,8 +93,17 @@ export const EconomicalParametersP2hForm = () => {
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormInput name="CAPEX_P" title="CAPEX_P" type="number" tooltip="TODO" isRequired description="TODO" />
-
-            <Accordion title="Išplėstiniai ekonominiai parametrai">
+            
+            <Accordion
+                title="Išplėstiniai ekonominiai parametrai"
+                titleDescription={
+                    <InfoBanner
+                        title=""
+                        subtitle="TODO"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    />
+                }
+            >
                 <BspFields />
             </Accordion>
 
