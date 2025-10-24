@@ -8,7 +8,6 @@ import { InfoBanner } from "@/components/infoBanner/InfoBanner"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import { useLocation, useNavigate } from "@tanstack/react-router"
 import { Title } from "@/ui/title"
-import Divider from "@mui/material/Divider"
 import { FcrBalancingCapacityTable } from "@/features/p2g/summary/tables/fsr-balancing-capacity-table"
 import { AfrrBalancingCapacityTable } from "./tables/afrr-balancing-capacity-table"
 import { MfrrBalancingCapacityTable } from "./tables/mfrr-balancing-capacity-table"
@@ -41,7 +40,6 @@ export const SummaryOfResultsP2gView = () => {
                 <DefaultP2gSummaryTable />
                 <YearlySummaryTable />
                 <YearlySummaryChartP2g />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <NpvAnalysisChartP2g />
                 <CostProductsChartP2g />
                 <UtilisationChartP2g />
@@ -51,12 +49,10 @@ export const SummaryOfResultsP2gView = () => {
 
     const balancingCapacityTab = (
         <Fragment key={1}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2gSummaryTable />
                 <FcrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -64,10 +60,9 @@ export const SummaryOfResultsP2gView = () => {
 
     const BalancingEnergyTab = (
         <Fragment key={2}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2gSummaryTable />
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -75,7 +70,7 @@ export const SummaryOfResultsP2gView = () => {
 
     const ElectricityTradeTab = (
         <Fragment key={3}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2gSummaryTable />
                 <DayAheadTable />
             </Stack>
@@ -84,7 +79,7 @@ export const SummaryOfResultsP2gView = () => {
 
     const FourthTab = (
         <Fragment key={4}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2gSummaryTable />
                 <HydrogenSalesTable />
             </Stack>
@@ -114,10 +109,8 @@ export const SummaryOfResultsP2gView = () => {
                 <Title style={{ fontSize: 24 }}>Rinkų produktų ekonominiai rezultatai</Title>
                 <RevenueTable />
                 <RevenueChartP2g />
-                <Divider style={{ marginBottom: 8, marginTop: 32, maxWidth: 768 }} />
                 <CostTable />
                 <CostChartP2g />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <YearlySummary />
             </Stack>
         </Fragment>

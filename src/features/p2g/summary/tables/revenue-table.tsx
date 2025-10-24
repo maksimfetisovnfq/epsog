@@ -1,23 +1,38 @@
 import { Table } from "@/ui/tables"
-import { Stack } from "@mui/material"
 import { useSummaryP2g } from "../use-summary-p2g"
 
-export const RevenueTable = () => {
+const useRevenueTable = () => {
     const data = useSummaryP2g()
 
-    if (!data) return
+    if (!data) return null
 
-    return (
-        <Stack spacing={2}>
-            <div>Pajamos už produktus</div>
-            <Table
-                dataSource={data.aggregated.economic_results.revenue_table}
-                columns={[
-                    { title: "Rinkos produktas", dataIndex: "Product", key: "Product" },
-                    { title: "Suma (tūkst. Eur)", dataIndex: "Value (tūkst. EUR)", key: "Value (tūkst. EUR)" },
-                ]}
-                boldHeaders={true}
-            />
-        </Stack>
-    )
+    const head = ["Rinkos produktas", "Suma (tūkst. Eur)"]
+    const body = data.aggregated.economic_results.revenue_table.map((row) => [
+        row.Product,
+        row["Value (tūkst. EUR)"],
+    ])
+
+    return {
+        columns: head.map((title, index) => ({
+            title,
+            dataIndex: `col${index}`,
+            key: `col${index}`,
+        })),
+        dataSource: body.map((row, rowIndex) => {
+            const rowData: { [key: string]: string | number } = { key: rowIndex.toString() }
+            row.forEach((cell, cellIndex) => {
+                rowData[`col${cellIndex}`] = cell
+            })
+            return rowData
+        }),
+        title: "Pajamos už produktus",
+    }
+}
+
+export const RevenueTable = () => {
+    const tableData = useRevenueTable()
+
+    if (!tableData) return null
+
+    return <Table {...tableData} boldHeaders={true} />
 }

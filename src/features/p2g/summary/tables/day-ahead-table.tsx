@@ -1,60 +1,46 @@
-import { CombinedTable } from "@/ui/tables/combinedTable"
+import { Table } from "@/ui/tables"
 import { useSummaryP2g } from "@/features/p2g/summary/use-summary-p2g.ts"
 
-export const DayAheadTable = () => {
+const useDayAheadTable = () => {
     const data = useSummaryP2g()
 
     if (!data) return null
 
-    const tables = [
-        {
-            dataSource: [
-                {
-                    key: "upward_volume",
-                    parameter: "VOLUME",
-                    value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.value}
-                    ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.unit}`,
-                },
-            ],
-        },
-        {
-            dataSource: [
-                {
-                    key: "upward_utilisation",
-                    parameter: "% OF TIME",
-                    value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.percentage_of_time.purchase.value} 
-                    ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.percentage_of_time.purchase.unit}`,
-                },
-            ],
-        },
-        {
-            dataSource: [
-                {
-                    key: "upward_revenue",
-                    parameter: "COST",
-                    value: `${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.value} 
-                    ${data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.unit}`,
-                },
-            ],
-        },
+    const head = ["", "Diena prieš (angl. Day-Ahead) rinka", "Matavimo vnt."]
+    const body = [
+        [
+            "Nupirktas energijos kiekis",
+            data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.value,
+            data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.volume_of_energy_exchange.purchase.unit,
+        ],
+        [
+            "Sąnaudos",
+            data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.value,
+            data.aggregated.markets.ELEKTROS_ENERGIJOS_PREKYBA.Day_Ahead.potential_cost_revenue.cost.unit,
+        ],
     ]
 
-    return (
-        <>
-            <div style={{ marginBottom: 16 }}>Diena prieš (angl. Day-Ahead) rinka</div>
-            {tables.map((table, index) => (
-                <CombinedTable
-                    key={index}
-                    dataSource={table.dataSource}
-                    source={
-                        index === 0
-                            ? "Energijos prekybos apimtys"
-                            : index === 1
-                              ? "Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)"
-                              : "Tikėtinos pajamos / sąnaudos"
-                    }
-                />
-            ))}
-        </>
-    )
+    return {
+        columns: head.map((title, index) => ({
+            title,
+            dataIndex: `col${index}`,
+            key: `col${index}`,
+        })),
+        dataSource: body.map((row, rowIndex) => {
+            const rowData: { [key: string]: string | number } = { key: rowIndex.toString() }
+            row.forEach((cell, cellIndex) => {
+                rowData[`col${cellIndex}`] = cell
+            })
+            return rowData
+        }),
+        title: "Elektros energijos suvartojimas",
+    }
+}
+
+export const DayAheadTable = () => {
+    const tableData = useDayAheadTable()
+
+    if (!tableData) return null
+
+    return <Table {...tableData} />
 }
