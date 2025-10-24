@@ -9,6 +9,7 @@ import { useIntradayTable } from "./hooks/use-intraday-table"
 import { useRevenueTable } from "./hooks/use-revenue-table"
 import { useCostTable } from "./hooks/use-cost-table"
 import { useProjectSummaryTable } from "./hooks/use-project-summary-table"
+import { useYearlyTable } from "./hooks/use-yearly-table.ts"
 
 export const ExportToPdfBeks = () => {
     const yearlySummary = useYearlySummaryTable()
@@ -20,6 +21,7 @@ export const ExportToPdfBeks = () => {
     const intraday = useIntradayTable()
     const revenue = useRevenueTable()
     const cost = useCostTable()
+    const yearly = useYearlyTable()
 
     const exportBeks = () => {
         const filename = "Beks"
@@ -34,6 +36,7 @@ export const ExportToPdfBeks = () => {
             intraday,
             revenue,
             cost,
+            yearly,
         ].filter(Boolean) as Array<StandardTable | CombinedTable>
 
         exportToPdf({ filename, tables })

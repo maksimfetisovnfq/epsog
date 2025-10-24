@@ -9,6 +9,7 @@ import { useIntradayTable } from "./hooks/use-intraday-table"
 import { useRevenueTable } from "./hooks/use-revenue-table"
 import { useCostTable } from "./hooks/use-cost-table"
 import { useProjectSummaryTable } from "./hooks/use-project-summary-table"
+import { useYearlyTable } from "./hooks/use-yearly-table"
 
 export const ExportToExcelBeks = () => {
     const yearlySummary = useYearlySummaryTable()
@@ -20,6 +21,7 @@ export const ExportToExcelBeks = () => {
     const intraday = useIntradayTable()
     const revenue = useRevenueTable()
     const cost = useCostTable()
+    const yearly = useYearlyTable()
 
     const exportBeks = () => {
         const filename = "Beks"
@@ -40,7 +42,7 @@ export const ExportToExcelBeks = () => {
             },
             { 
                 name: "Ekonominis vertinimas", 
-                tables: [revenue!, cost!].filter(Boolean) 
+                tables: [revenue!, cost!, yearly!].filter(Boolean) 
             },
         ]
 
