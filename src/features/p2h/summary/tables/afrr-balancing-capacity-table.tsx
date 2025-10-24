@@ -1,103 +1,51 @@
-import { CombinedTable } from "@/ui/tables/combinedTable"
+import { Table } from "@/ui/tables"
 import { useSummaryP2h } from "@/features/p2h/summary/use-summary-p2h.ts"
-import { Box } from "@mui/material"
+
+const useAfrrBalancingCapacityTable = () => {
+    const data = useSummaryP2h()
+
+    if (!data) return null
+
+    const head = ["", "aFRR", "Matavimo vnt."]
+    const body = [
+        [
+            "Nupirktas balansavimo pajėgumo kiekis",
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.value,
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.unit,
+        ],
+        [
+            "Pateiktų pasiūlymų kiekis",
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.upward.value,
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.upward.unit,
+        ],
+        [
+            "Pajamų srautas",
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.upward.value,
+            data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.upward.unit,
+        ],
+    ]
+
+    return {
+        columns: head.map((title, index) => ({
+            title,
+            dataIndex: `col${index}`,
+            key: `col${index}`,
+        })),
+        dataSource: body.map((row, rowIndex) => {
+            const rowData: { [key: string]: string | number } = { key: rowIndex.toString() }
+            row.forEach((cell, cellIndex) => {
+                rowData[`col${cellIndex}`] = cell
+            })
+            return rowData
+        }),
+        title: "aFRR balansavimo pajėgumų rinka",
+    }
+}
 
 export const AfrrBalancingCapacityTable = () => {
-    const data = useSummaryP2h();
+    const tableData = useAfrrBalancingCapacityTable()
 
-    if (!data) return null;
+    if (!tableData) return null
 
-    const tables = [
-        {
-            dataSource: [
-                {
-                    key: "upward_volume",
-                    parameter: "Aukštyn (angl. Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.unit}`,
-                },
-                {
-                    key: "downward_volume",
-                    parameter: "Žemyn (angl. Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.unit}`,
-                },
-            ],
-        },
-        {
-            dataSource: [
-                {
-                    key: "upward_utilisation",
-                    parameter: "Dalyvavimas paslaugoje (Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.utilisation.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.utilisation.upward.unit}`,
-                },
-                {
-                    key: "downward_utilisation",
-                    parameter: "Dalyvavimas paslaugoje (Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.utilisation.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.utilisation.downward.unit}`,
-                },
-            ],
-        },
-        {
-            dataSource: [
-                {
-                    
-                    key: "upward_revenue",
-                    parameter: "Potencialios pajamos/sąnaudos (Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.upward.unit}`,
-                },
-                {
-                    key: "downward_revenue",
-                    parameter: "Potencialios pajamos/sąnaudos (Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.potential_revenue.downward.unit}`,
-                },
-            ],
-        },
-        {
-            dataSource: [
-                {
-                    key: "upward_bids",
-                    parameter: "Priimtų kainos pasiūlymų dalis, proc. (Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.upward.unit}`,
-                },
-                {
-                    key: "downward_bids",
-                    parameter: "Priimtų kainos pasiūlymų dalis, proc. (Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.bids_selected.downward.unit}`,
-                },
-            ],
-        },
-    ];
-
-    return (
-        <>
-            <div style={{ fontSize: '18px', marginBottom: '16px' }}>
-                <div style={{ marginBottom: 4 }}>aFRR</div>
-                <Box sx={{ fontSize: '14px', color: '#6F8190', width: {sm: 768} }}>
-                    Automatinis dažnio atkūrimo rezervas (angl. Automatic frequency restoration reserve)
-                </Box>
-            </div>
-            {tables.map((table, index) => (
-                <CombinedTable
-                    key={index}
-                    dataSource={table.dataSource}
-                    source={
-                        index === 0
-                            ? "Užsakytų balansavimo pajėgumų kiekis"
-                            : index === 1
-                            ? "Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)"
-                            : index === 2
-                            ? "Tikėtinos pajamos"
-                            : "Užsakytų pasiūlymų kiekis (%)"
-                    }
-                />
-            ))}
-        </>
-    );
-};
+    return <Table {...tableData} />
+}

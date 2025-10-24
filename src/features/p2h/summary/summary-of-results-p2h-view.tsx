@@ -52,12 +52,10 @@ export const SummaryOfResultsP2hView = () => {
 
     const balancingCapacityTab = (
         <Fragment key={1}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2hSummaryTable />
                 <FcrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -65,10 +63,9 @@ export const SummaryOfResultsP2hView = () => {
 
     const BalancingEnergyTab = (
         <Fragment key={2}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2hSummaryTable />
                 <AfrrBalancingCapacityTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <MfrrBalancingCapacityTable />
             </Stack>
         </Fragment>
@@ -76,10 +73,9 @@ export const SummaryOfResultsP2hView = () => {
 
     const ElectricityTradeTab = (
         <Fragment key={3}>
-            <Stack spacing={0}>
+            <Stack spacing={3}>
                 <DefaultP2hSummaryTable />
                 <ElectricityConsumptionTable />
-                <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <IntradayTable />
                 <HitGenerationTable />
             </Stack>
