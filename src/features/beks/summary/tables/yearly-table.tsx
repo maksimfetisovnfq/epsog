@@ -1,8 +1,5 @@
-import { useSummaryBeks } from "../use-summary-beks.ts"
-import {
-    DetailedAnualResultsTable,
-    type DetailedAnualResultsTableRow,
-} from "@/ui/tables/DetailedAnualResultsTable/DetailedAnualResultsTable.tsx"
+import { Table } from "@/ui/tables"
+import { useYearlyTable } from "../hooks/use-yearly-table"
 import { useForm, FormProvider, Controller } from "react-hook-form"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
@@ -15,38 +12,26 @@ interface FormValues {
 }
 
 export const YearlySummary = () => {
-    const data = useSummaryBeks()
+    const tableData = useYearlyTable()
 
     const methods = useForm<FormValues>({
         defaultValues: {
-            selectedColumn: "cf",
+            selectedColumn: "CYCLES",
         },
     })
     const { control } = methods
 
-    if (!data) return null
+    if (!tableData) return null
 
     const selectedColumn = methods.watch("selectedColumn")
 
-    const columns = [
-        { value: "ciklai", label: "Ciklai" },
-        { value: "capex", label: "CAPEX (tūkst. EUR)" },
-        { value: "opex", label: "OPEX (tūkst. EUR)" },
-        { value: "cf", label: "CF (tūkst. EUR)" },
-        { value: "npv", label: "NPV (tūkst. EUR)" },
+    const chartColumns = [
+        { value: "CYCLES", label: "Ciklai" },
+        { value: "CAPEX (tūkst. EUR)", label: "CAPEX (tūkst. EUR)" },
+        { value: "OPEX (tūkst. EUR)", label: "OPEX (tūkst. EUR)" },
+        { value: "CF (tūkst. EUR)", label: "CF (tūkst. EUR)" },
+        { value: "NPV (tūkst. EUR)", label: "NPV (tūkst. EUR)" },
     ]
-
-    const transformedData: DetailedAnualResultsTableRow[] = data.aggregated.economic_results.yearly_table.map(
-        (item) => ({
-            metai: item.YEAR,
-            ciklai: item.CYCLES,
-            soh: item["SOH (%)"].toString(),
-            capex: item["CAPEX (tūkst. EUR)"].toString(),
-            opex: item["OPEX (tūkst. EUR)"].toString(),
-            cf: item["CF (tūkst. EUR)"].toString(),
-            npv: item["NPV (tūkst. EUR)"].toString(),
-        })
-    )
 
     const chartOptions: ChartOptions<"line"> = {
         responsive: true,
@@ -60,11 +45,12 @@ export const YearlySummary = () => {
         },
     }
 
-    const labels = transformedData.map((row) => row.metai)
+    const labels = tableData.dataSource.map((row) => row.YEAR)
     const datasets = [
         {
-            label: columns.find((c) => c.value === selectedColumn)?.label || selectedColumn,
-            data: transformedData.map((row) => Number(row[selectedColumn as keyof DetailedAnualResultsTableRow]) || 0),
+            label: chartColumns.find((c) => c.value === selectedColumn)?.label || selectedColumn,
+            // @ts-expect-error error
+            data: tableData.dataSource.map((row) => Number(row[selectedColumn]) || 0),
         },
     ]
     const chartData = { labels, datasets }
@@ -73,7 +59,11 @@ export const YearlySummary = () => {
         <FormProvider {...methods}>
             <Box sx={{ width: { sm: "768px" }, marginTop: "24px" }}>
                 <Box sx={{ marginTop: "24px" }}>
-                    <DetailedAnualResultsTable data={transformedData} />
+                    <Table
+                        dataSource={tableData.dataSource}
+                        columns={tableData.columns}
+                        title={tableData.title}
+                    />
                 </Box>
                 <Box sx={{ display: "flex", justifyContent: "space-between", marginTop: "24px" }}>
                     <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelį</Box>
@@ -87,7 +77,7 @@ export const YearlySummary = () => {
                                 displayEmpty
                                 inputProps={{ "aria-label": "Without label" }}
                             >
-                                {columns.map((col) => (
+                                {chartColumns.map((col) => (
                                     <MenuItem key={col.value} value={col.value}>
                                         {col.label}
                                     </MenuItem>
@@ -109,7 +99,7 @@ export const YearlySummary = () => {
                         <LineChart
                             data={chartData}
                             options={chartOptions}
-                            leftAxisLabel={columns.find((c) => c.value === selectedColumn)?.label || ""}
+                            leftAxisLabel={chartColumns.find((c) => c.value === selectedColumn)?.label || ""}
                             bottomAxisLabel="Metai"
                         />
                     </Box>

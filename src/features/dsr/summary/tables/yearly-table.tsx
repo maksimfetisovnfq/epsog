@@ -4,18 +4,16 @@ import MenuItem from "@mui/material/MenuItem"
 import Checkbox from "@mui/material/Checkbox"
 import LineChart from "@/ui/charts/lineChart/line-chart"
 import { type ChartOptions } from "chart.js"
-import {
-    DetailedAnualResultsTable,
-    type DetailedAnualResultsTableRow,
-} from "@/features/dsr/summary/tables/detailed-annual-results-table"
-import { useSummaryDsr } from "@/features/dsr/summary/use-summary-dsr"
+import { Table } from "@/ui/tables"
+import { useYearlyTable } from "../use-yearly-table"
+import { Box } from "@mui/material"
 
 interface FormValues {
     selectedColumns: string[]
 }
 
 export const YearlySummary = () => {
-    const data = useSummaryDsr()
+    const tableData = useYearlyTable()
 
     const methods = useForm<FormValues>({
         defaultValues: {
@@ -24,28 +22,17 @@ export const YearlySummary = () => {
     })
     const { control } = methods
 
-    if (!data) return null
+    if (!tableData) return null
 
     const selectedColumns = methods.watch("selectedColumns")
 
-    const columns = [
-        { value: "metai", label: "Metai" },
-        { value: "ciklai", label: "Ciklai" },
-        { value: "capex", label: "CAPEX" },
-        { value: "opex", label: "OPEX" },
-        { value: "cf", label: "CF" },
-        { value: "npv", label: "NPV" },
+    const chartColumns = [
+        { value: "YEAR", label: "Metai" },
+        { value: "CAPEX (tūkst. EUR)", label: "CAPEX" },
+        { value: "OPEX (tūkst. EUR)", label: "OPEX" },
+        { value: "CF (tūkst. EUR)", label: "CF" },
+        { value: "NPV (tūkst. EUR)", label: "NPV" },
     ]
-
-    const transformedData: DetailedAnualResultsTableRow[] = data.aggregated.economic_results.yearly_table.map(
-        (item) => ({
-            metai: item.YEAR,
-            capex: item["CAPEX (tūkst. EUR)"].toString(),
-            opex: item["OPEX (tūkst. EUR)"].toString(),
-            cf: item["CF (tūkst. EUR)"].toString(),
-            npv: item["NPV (tūkst. EUR)"].toString(),
-        })
-    )
 
     const chartOptions: ChartOptions<"line"> = {
         responsive: true,
@@ -59,65 +46,74 @@ export const YearlySummary = () => {
         },
     }
 
-    const chartColumns = selectedColumns.length > 0 ? selectedColumns.filter((col) => col !== "metai") : ["cf", "npv"]
-    const labels = transformedData.map((row) => row.metai)
-    const datasets = chartColumns.map((col) => ({
-        label: columns.find((c) => c.value === col)?.label || col,
-        data: transformedData.map((row) => Number(row[col as keyof DetailedAnualResultsTableRow]) || 0),
+    const chartColumnsToShow = selectedColumns.length > 0 ? selectedColumns.filter((col) => col !== "YEAR") : ["CF (tūkst. EUR)", "NPV (tūkst. EUR)"]
+    const labels = tableData.dataSource.map((row) => row.YEAR)
+    const datasets = chartColumnsToShow.map((col) => ({
+        label: chartColumns.find((c) => c.value === col)?.label || col,
+        // @ts-expect-error dynamic key access
+        data: tableData.dataSource.map((row) => Number(row[col]) || 0),
     }))
     const chartData = { labels, datasets }
 
+    // Filter visible columns for the table
+    const visibleColumns = selectedColumns.length > 0 
+        ? tableData.columns.filter(col => selectedColumns.includes(col.dataIndex || ""))
+        : tableData.columns
+
     return (
         <FormProvider {...methods}>
-            <div style={{ width: "768px", marginTop: "24px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                    <div style={{ fontSize: "18px" }}>Pasirinkite stulpelius</div>
-                    <div>
-                        <Controller
-                            name="selectedColumns"
-                            control={control}
-                            render={({ field }) => (
-                                <Select
-                                    {...field}
-                                    multiple
-                                    style={{ height: "40px", width: "230px" }}
-                                    displayEmpty
-                                    inputProps={{ "aria-label": "Without label" }}
-                                    renderValue={(selected) =>
-                                        selected.length === 0
-                                            ? "Pasirinkite stulpelius"
-                                            : selected
-                                                  .map((val) => columns.find((col) => col.value === val)?.label)
-                                                  .join(", ")
-                                    }
-                                >
-                                    {columns.map((col) => (
-                                        <MenuItem key={col.value} value={col.value}>
-                                            <Checkbox checked={field.value.indexOf(col.value) > -1} />
-                                            {col.label}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            )}
-                        />
-                    </div>
-                </div>
-                <div style={{ marginTop: "24px" }}>
-                    <DetailedAnualResultsTable data={transformedData} visibleColumns={selectedColumns} />
-                </div>
-                <div
-                    style={{
+            <Box sx={{ width: { sm: "768px" }, marginTop: "24px" }}>
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                    <Box sx={{ fontSize: "18px" }}>Pasirinkite stulpelius</Box>
+                    <Controller
+                        name="selectedColumns"
+                        control={control}
+                        render={({ field }) => (
+                            <Select
+                                {...field}
+                                multiple
+                                sx={{ height: "40px", width: { sm: "230px" } }}
+                                displayEmpty
+                                inputProps={{ "aria-label": "Without label" }}
+                                renderValue={(selected) =>
+                                    selected.length === 0
+                                        ? "Pasirinkite stulpelius"
+                                        : selected
+                                              .map((val) => chartColumns.find((col) => col.value === val)?.label)
+                                              .join(", ")
+                                }
+                            >
+                                {chartColumns.map((col) => (
+                                    <MenuItem key={col.value} value={col.value}>
+                                        <Checkbox checked={field.value.indexOf(col.value) > -1} />
+                                        {col.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        )}
+                    />
+                </Box>
+                <Box sx={{ marginTop: "24px" }}>
+                    <Table
+                        dataSource={tableData.dataSource}
+                        columns={visibleColumns}
+                        title={tableData.title}
+                    />
+                </Box>
+                <Box
+                    sx={{
                         marginTop: "24px",
                         border: "1px solid #CFD5DA",
-                        width: "768px",
-                        height: "382px",
+                        width: { sm: "768px" },
                         boxSizing: "border-box",
                         display: "flex",
                     }}
                 >
-                    <LineChart data={chartData} options={chartOptions}/>
-                </div>
-            </div>
+                    <Box sx={{ width: { sm: 768 } }}>
+                        <LineChart data={chartData} options={chartOptions}/>
+                    </Box>
+                </Box>
+            </Box>
         </FormProvider>
     )
 }
