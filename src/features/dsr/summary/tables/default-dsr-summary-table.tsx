@@ -3,8 +3,8 @@ import { Table } from "@/ui/tables/Table";
 
 const rowHeaders = [
     'Įrenginio galia ir talpa',
-    'Projekto investicijos CAPEX',
-    'Projekto sąnaudos OPEX',
+    "Projekto investicijos, CAPEX (tūkst. EUR)",
+    "Projekto veiklos sąnaudos, OPEX (tūkst. EUR)",
 ];
 
 export const DefaultDsrSummaryTable = () => {

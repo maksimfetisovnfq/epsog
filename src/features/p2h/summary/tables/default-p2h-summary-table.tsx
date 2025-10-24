@@ -5,8 +5,8 @@ const rowHeaders = [
     "Įrenginio galia ir talpa",
     "Reakcijos laikas įjungiant šilumos siurblį (reguliavimas žemyn)",
     "Reakcijos laikas išjungiant šilumos siurblį (reguliavimas aukštyn)",
-    "Projekto investicijos CAPEX",
-    "Projekto sąnaudos OPEX",
+    "Projekto investicijos, CAPEX (tūkst. EUR)",
+    "Projekto veiklos sąnaudos, OPEX (tūkst. EUR)",
 ]
 
 export const DefaultP2hSummaryTable = () => {
@@ -27,7 +27,7 @@ export const DefaultP2hSummaryTable = () => {
         technicalParams?.reaction_time_u
             ? { label: rowHeaders[2], value: `${technicalParams.reaction_time_u} min` }
             : null,
-        { label: rowHeaders[3], value: economicParams ? `${economicParams.CAPEX_P} Eur/MW` : "" },
+        { label: rowHeaders[3], value: economicParams ? `${economicParams.CAPEX_HP} Eur/MW` : "" },
         { label: rowHeaders[4], value: economicParams ? `${economicParams.OPEX_HP} Eur/MW/met` : "" },
     ].filter(Boolean)
 
