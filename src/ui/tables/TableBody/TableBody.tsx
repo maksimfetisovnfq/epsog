@@ -6,6 +6,13 @@ interface TableBodyProps {
     dataSource: Record<string, unknown>[]
 }
 
+const formatNumber = (value: number): string => {
+    return value.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })
+}
+
 export const TableBody = ({ columns, dataSource }: TableBodyProps) => (
     <MuiTableBody>
         {dataSource.map((row, rowIdx) => (
@@ -18,6 +25,11 @@ export const TableBody = ({ columns, dataSource }: TableBodyProps) => (
                         cellContent = row[column.render] as React.ReactNode
                     } else if (column.dataIndex) {
                         cellContent = row[column.dataIndex] as React.ReactNode
+                    }
+                    
+                    // Format numbers with thousand separators and 2 decimal places
+                    if (typeof cellContent === "number") {
+                        cellContent = formatNumber(cellContent)
                     }
                     const isLast = colIdx === columns.length - 1
                     return (
