@@ -8,9 +8,11 @@ import { useDayAheadTable } from "./hooks/use-day-ahead-table"
 import { useIntradayTable } from "./hooks/use-intraday-table"
 import { useRevenueTable } from "./hooks/use-revenue-table"
 import { useCostTable } from "./hooks/use-cost-table"
+import { useProjectSummaryTable } from "./hooks/use-project-summary-table"
 
 export const ExportToExcelBeks = () => {
     const yearlySummary = useYearlySummaryTable()
+    const projectSummary = useProjectSummaryTable()
     const fcrBalancingCapacity = useFcrBalancingCapacityTable()
     const afrrBalancingCapacity = useAfrrBalancingCapacityTable()
     const mfrrBalancingCapacity = useMfrrBalancingCapacityTable()
@@ -23,7 +25,7 @@ export const ExportToExcelBeks = () => {
         const filename = "Beks"
 
         const sheets = [
-            { name: "Apžvalga", tables: [yearlySummary!].filter(Boolean) },
+            { name: "Apžvalga", tables: [yearlySummary!, projectSummary!].filter(Boolean) },
             {
                 name: "Balansavimo pajėgumų rinka",
                 tables: [fcrBalancingCapacity!, mfrrBalancingCapacity!, afrrBalancingCapacity!].filter(Boolean),
