@@ -121,9 +121,14 @@ export const SummaryOfResultsBeksView = () => {
 
     return (
         <>
-            <InfoBanner />
-            <ExportToExcelBeks />
-            <ExportToPdfBeks />
+            <InfoBanner
+                actions={
+                    <>
+                        <ExportToExcelBeks />
+                        <ExportToPdfBeks />
+                    </>
+                }
+            />
 
             <Tabs
                 bordered

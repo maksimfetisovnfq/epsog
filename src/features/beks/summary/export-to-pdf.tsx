@@ -38,7 +38,7 @@ export const ExportToPdfBeks = () => {
 
     return (
         <Button variant="contained" type="button" onClick={exportBeks}>
-            Export to PDF
+            Eksportuoti kaip PDF
         </Button>
     )
 }

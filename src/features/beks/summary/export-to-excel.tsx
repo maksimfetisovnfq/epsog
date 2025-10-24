@@ -47,7 +47,7 @@ export const ExportToExcelBeks = () => {
 
     return (
         <Button variant="contained" type="button" onClick={exportBeks}>
-            Export
+            Eksportuoti kaip XLSX
         </Button>
     )
 }
