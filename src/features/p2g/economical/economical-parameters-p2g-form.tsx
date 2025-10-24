@@ -33,15 +33,36 @@ export const EconomicalParametersP2gForm = () => {
             defaultValues={location.state?.economicParameters?.p2g || defaultEconomicalParametersP2gSchema}
         >
             <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Ekonominiai parametrai</Title>
-            <FormInput name="CAPEX" title="CAPEX" type="number" description="TODO" tooltip="TODO" isRequired />
+            <FormInput
+                name="CAPEX"
+                title="Projekto investicijos: CAPEX (tūkst. eur per mw)"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="OPEX" title="OPEX" type="number" description="TODO" tooltip="TODO" isRequired />
+            <FormInput
+                name="OPEX"
+                title="Projekto investicijos: OPEX (tūkst mw per metus)"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-            <FormInput name="P_H2" title="P_H2" type="number" description="TODO" tooltip="TODO" isRequired />
+            <FormInput
+                name="P_H2"
+                title="Price of Hydrogen"
+                type="number"
+                description="TODO"
+                tooltip="TODO"
+                isRequired
+            />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
             <FormInput
                 name="number_of_years"
-                title="number_of_years"
+                title="Projekto metai"
                 type="number"
                 description="TODO"
                 tooltip="TODO"

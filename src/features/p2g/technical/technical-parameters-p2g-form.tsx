@@ -66,9 +66,8 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormInput
-                name="eta_H2"
-                title="Vandenilio kaina (EUR/kg)"
-                type="number"
+                name="electrolyzer_tech"
+                title="Elektrolizerio (elektra → vandenilis) naudingumo koeficientas (%)"
                 description="TODO"
                 tooltip="TODO"
                 isRequired
@@ -77,8 +76,9 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormInput
-                name="electrolyzer_tech"
-                title="Elektrolizerio (elektra → vandenilis) naudingumo koeficientas (%)"
+                name="eta_H2"
+                title="Vandenilio kaina (EUR/kg)"
+                type="number"
                 description="TODO"
                 tooltip="TODO"
                 isRequired

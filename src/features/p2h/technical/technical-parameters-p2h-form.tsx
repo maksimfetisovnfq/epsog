@@ -142,6 +142,18 @@ const TechnicalParametersFormContent = () => {
                     isRequired
                     description="TODO"
                 />
+                
+                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
+
+                <FormInput
+                    name="T_max_HS"
+                    title="Maksimali vandens temperatūra (°C)"
+                    placeholder="-10"
+                    type="number"
+                    tooltip="TODO"
+                    isRequired
+                    description="TODO"
+                />
 
                 <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos katilo (boilerio) parametrai</Title>
 
@@ -185,18 +197,6 @@ const TechnicalParametersFormContent = () => {
                     name="eta_BOILER"
                     title="Šilumos katilo naudingumo koeficientas (%)"
                     placeholder="98"
-                    type="number"
-                    tooltip="TODO"
-                    isRequired
-                    description="TODO"
-                />
-
-                <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
-
-                <FormInput
-                    name="T_max_HS"
-                    title="Maksimali vandens temperatūra (°C)"
-                    placeholder="-10"
                     type="number"
                     tooltip="TODO"
                     isRequired
