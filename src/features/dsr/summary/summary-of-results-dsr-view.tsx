@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "@tanstack/react-router"
 import { Title } from "@/ui/title"
 import Divider from "@mui/material/Divider"
 import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table.tsx"
-import { YearlySummaryChartDsr } from "@/features/dsr/summary/charts/yearly-summary-chart-dsr.tsx"
 import { NpvAnalysisChartDsr } from "@/features/dsr/summary/charts/npv-analysis-chart-dsr.tsx"
 import { CostProductsChartDsr } from "@/features/dsr/summary/charts/cost-products-chart-dsr.tsx"
 import { UtilisationChartDsr } from "@/features/dsr/summary/charts/utilisation-chart-dsr.tsx"
@@ -23,6 +22,7 @@ import { RevenueChartDsr } from "@/features/dsr/summary/charts/revenue-chart-dsr
 import { CostChartDsr } from "@/features/dsr/summary/charts/cost-economic-evaluation-chart-dsr.tsx"
 import { DefaultDsrSummaryTable } from "@/features/dsr/summary/tables/default-dsr-summary-table.tsx"
 import { contactEmail } from "@/consts.ts"
+import { ProjectSummaryTable } from "@/features/dsr/summary/tables/project-summary-table.tsx"
 
 export const SummaryOfResultsDsrView = () => {
     const navigate = useNavigate()
@@ -40,7 +40,7 @@ export const SummaryOfResultsDsrView = () => {
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
                 <DefaultDsrSummaryTable />
                 <YearlySummaryTable />
-                <YearlySummaryChartDsr />
+                <ProjectSummaryTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <NpvAnalysisChartDsr />
                 <CostProductsChartDsr />

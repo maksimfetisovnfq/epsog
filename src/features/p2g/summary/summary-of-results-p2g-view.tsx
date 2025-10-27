@@ -11,7 +11,6 @@ import { Title } from "@/ui/title"
 import { FcrBalancingCapacityTable } from "@/features/p2g/summary/tables/fsr-balancing-capacity-table"
 import { AfrrBalancingCapacityTable } from "./tables/afrr-balancing-capacity-table"
 import { MfrrBalancingCapacityTable } from "./tables/mfrr-balancing-capacity-table"
-import { YearlySummaryChartP2g } from "@/features/p2g/summary/charts/yearly-summary-chart-p2g"
 import { NpvAnalysisChartP2g } from "./charts/npv-analysis-chart-p2g"
 import { CostProductsChartP2g } from "./charts/cost-products-chart-p2g"
 import { UtilisationChartP2g } from "@/features/p2g/summary/charts/utilisation-chart-p2g"
@@ -22,6 +21,7 @@ import { YearlySummary } from "@/features/p2g/summary/tables/yearly-table"
 import { HydrogenSalesTable } from "@/features/p2g/summary/tables/hydrogen-sales-table"
 import { DefaultP2gSummaryTable } from "@/features/p2g/summary/tables/default-p2g-summary-table"
 import { contactEmail } from "@/consts.ts"
+import { ProjectSummaryTable } from "@/features/p2g/summary/tables/project-summary-table"
 
 export const SummaryOfResultsP2gView = () => {
     const navigate = useNavigate()
@@ -39,7 +39,7 @@ export const SummaryOfResultsP2gView = () => {
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
                 <DefaultP2gSummaryTable />
                 <YearlySummaryTable />
-                <YearlySummaryChartP2g />
+                <ProjectSummaryTable />
                 <NpvAnalysisChartP2g />
                 <CostProductsChartP2g />
                 <UtilisationChartP2g />

@@ -6,7 +6,6 @@ import { YearlySummary } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
 import { Fragment } from "react"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner"
-import { YearlySummaryChartP2h } from "@/features/p2h/summary/charts/yearly-summary-chart-p2h"
 import { NpvAnalysisChartP2h } from "./charts/npv-analysis-chart-p2h"
 import { CostProductsChartP2h } from "@/features/p2h/summary/charts/cost-products-chart-p2h"
 import { UtilisationChartP2h } from "./charts/utilisation-chart-p2h"
@@ -24,6 +23,7 @@ import { CostChartP2h } from "@/features/p2h/summary/charts/cost-economic-evalua
 import { HitGenerationTable } from "@/features/p2h/summary/tables/heat-generation-table"
 import { DefaultP2hSummaryTable } from "@/features/p2h/summary/tables/default-p2h-summary-table"
 import { contactEmail } from "@/consts.ts"
+import { ProjectSummaryTable } from "@/features/p2h/summary/tables/project-summary-table"
 
 export const SummaryOfResultsP2hView = () => {
     const navigate = useNavigate()
@@ -41,7 +41,7 @@ export const SummaryOfResultsP2hView = () => {
                 <Title style={{ fontSize: 24 }}>Santrauka</Title>
                 <DefaultP2hSummaryTable />
                 <YearlySummaryTable />
-                <YearlySummaryChartP2h />
+                <ProjectSummaryTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <NpvAnalysisChartP2h />
                 <CostProductsChartP2h />
