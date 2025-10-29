@@ -45,7 +45,7 @@ export const FormSlider = ({label, fieldName, fieldValue, tooltipContent, onChan
                 <HtmlTooltip title={
                     <Box sx={{
                         fontWeight: 400,
-                        width: {sm: "250px"},
+                        minWidth: {sm: "250px"},
                         fontSize: '14px',
                         color: '#000000',
                         backgroundColor: 'white',

@@ -23,7 +23,7 @@ const FormContent = () => {
                 name="q_max"
                 placeholder="1000 MW"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
-                title="Elektros energijos kaupiklio maksimali galia (MW)"
+                title="Elektros energijos kaupiklio maksimali galia (MW):"
                 isRequired
             />
 
@@ -34,7 +34,7 @@ const FormContent = () => {
                 name="q_total"
                 placeholder="2 MWh"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MWh (1 TWh)"
-                title="Elektros energijos kaupiklio talpa (MWh)"
+                title="Elektros energijos kaupiklio talpa (MWh):"
                 isRequired
             />
 

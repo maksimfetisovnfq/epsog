@@ -19,17 +19,21 @@ export const ReactionTimeSlider = ({ field, label }: ReactionTimeSliderProps) =>
         <FormSlider
             label={label}
             tooltipContent={
-                <>
-                    <ul style={{ paddingLeft: "20px", margin: "0 0 8px 0"}}>
-                        <li>FCR paslaugai maksimali galia turi būti pasiekta neilgiau negu 30 s</li>
-                        <li>aFRR – 5 min</li>
-                        <li>mFRR – 12,5 min</li>
+                <div>
+                    <div>
+                        Priklausomai nuo įrenginio reakcijos laiko, galima teikti atitinkamas balansavimo paslaugas
+                        (produktus). Maksimali galia turi būti pasiekiama:
+                    </div>
+                    <ul style={{ paddingLeft: "20px", margin: "0 0 8px 0" }}>
+                        <li>FCR: ≤ 30 s</li>
+                        <li>aFRR: ≤ 5 min</li>
+                        <li>mFRR: ≤ 12,5 min</li>
                     </ul>
                     <div>
                         Jeigu nurodomas didesnis laikas per kurį įrenginys pasiekia maksimalią galią negu paslaugos
                         reikalavimas, tuomet vertinama kad tos paslaugos įrenginys neteiks.
                     </div>
-                </>
+                </div>
             }
             fieldName={field}
             fieldValue={fieldValue}

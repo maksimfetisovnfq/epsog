@@ -26,7 +26,7 @@ const GeneralContext = () => {
         <>
             <div style={{ fontSize: "32px", fontWeight: 400 }}>Bendrieji duomenys</div>
             <div style={{ marginTop: "48px" }}>
-                <div style={{ height: "18px", marginBottom: "12px" }}>Pasirinkite savo atstovaujamą sektorių</div>
+                <div style={{ height: "18px", marginBottom: "12px" }}>Pasirinkite savo atstovaujamą sektorių:</div>
                 <Controller
                     name="sector"
                     control={control}
@@ -66,7 +66,7 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
             <FormLabel id="technology-group-label" style={{ color: "black", padding: 0 }}>
-                Pasirinkite vertinamą technologiją / įrenginį
+                Pasirinkite vertinamą technologiją / įrenginį:
             </FormLabel>
             <Controller
                 name="calculatorType"
