@@ -18,7 +18,6 @@ const FormContent = () => {
                 placeholder="Eur/MW"
                 description="Įvedami tik teigiami skaičiai"
                 title="Investicijos į kaupiklio galią, CAPEX (tūkst. EUR/MW)"
-                tooltip="TODO"
                 isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -28,7 +27,6 @@ const FormContent = () => {
                 placeholder="Eur/MWh"
                 description="Įvedami tik teigiami skaičiai"
                 title="Investicijos į kaupiklio talpą, CAPEX (tūkst. EUR/MWh)"
-                tooltip="TODO"
                 isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -38,7 +36,6 @@ const FormContent = () => {
                 placeholder="Eur/MW per metus"
                 description="Įvedami tik teigiami skaičiai"
                 title="Fiksuotos veiklos sąnaudos, OPEX (tūkst. EUR/MW per metus)"
-                tooltip="TODO"
                 isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -48,7 +45,6 @@ const FormContent = () => {
                 placeholder="Eur/MWh"
                 description="Įvedami tik teigiami skaičiai"
                 title="Kintamos veiklos sąnaudos, OPEX (tūkst. EUR/MWh)"
-                tooltip="TODO"
                 isRequired
             />
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -58,7 +54,6 @@ const FormContent = () => {
                 placeholder="10"
                 description="Skaičius nuo 1 iki 50"
                 title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"
-                tooltip="TODO"
                 isRequired
             />
             <Divider style={{ marginTop: "48px", marginBottom: "48px" }} />
@@ -68,8 +63,8 @@ const FormContent = () => {
                 titleDescription={
                     <InfoBanner
                         title=""
-                        subtitle="TODO"
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        subtitle="Norėdami tiksliau įvertinti potencialius pinigus srautus, įveskite papildomus ekonominius parametrus, tokius kaip"
+                        description="Taikoma diskonto norma, įprastai vertinama 5 proc.; Siūlomos kainos už produktus balansavimo pajėgumų ar balansavimo energijos rinkose. Įprastai, skaičiuoklė vertina, kad jūsų balansavimo pasiūlymai yra lygūs 0."
                     />
                 }
             >
@@ -78,8 +73,7 @@ const FormContent = () => {
                     name="discount_rate"
                     placeholder="5 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Taikoma diskonto norma (%)"
-                    tooltip="TODO"
+                    title="Taikoma diskonto norma (%):"
                     isRequired
                 />
                 <Divider style={{ marginTop: "32px", marginBottom: "32px" }} />
