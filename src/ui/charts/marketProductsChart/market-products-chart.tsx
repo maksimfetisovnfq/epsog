@@ -2,6 +2,7 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Toolt
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -76,19 +77,21 @@ export const MarketProductsChart = ({ labels, datasets }: MarketProductsChartPro
     }
 
     return (
-        <Box sx={{ width: {sm: 768}, maxWidth: "100%" }}>
-            <Box
-                sx={{
-                    position: "relative",
-                    width: {sm: 768},
-                    maxWidth: "100%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    overflow: "visible",
-                }}
-            >
-                <Bar data={data} options={options}/>
-            </Box>
+        <Box sx={{ width: { sm: 768 }, maxWidth: "100%" }}>
+            <ChartBgWrapper>
+                <Box
+                    sx={{
+                        position: "relative",
+                        width: { sm: 768 },
+                        maxWidth: "100%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        overflow: "visible",
+                    }}
+                >
+                    <Bar data={data} options={options} />
+                </Box>
+            </ChartBgWrapper>
         </Box>
     )
 }

@@ -2,6 +2,7 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Toolt
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -62,14 +63,14 @@ export const VerticalBarChart = ({ labels, datasets, showYAxis = true }: Vertica
             },
             y: {
                 beginAtZero: true,
-                grid: { 
-                    drawOnChartArea: true, 
-                    drawBorder: showYAxis 
+                grid: {
+                    drawOnChartArea: true,
+                    drawBorder: showYAxis,
                 },
                 ticks: { display: false },
                 border: {
-                    display: showYAxis
-                }
+                    display: showYAxis,
+                },
             },
         },
     }
@@ -86,42 +87,44 @@ export const VerticalBarChart = ({ labels, datasets, showYAxis = true }: Vertica
 
     return (
         <div>
-            <Box
-                sx={{
-                    position: "relative",
-                    maxWidth: { sm: 768 },
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                }}
-            >
-                <Bar data={barData} options={options} plugins={[ChartDataLabels]} />
+            <ChartBgWrapper>
                 <Box
                     sx={{
-                        display: "grid",
-                        gridTemplateColumns: `repeat(${filteredChartLabels.length}, 1fr)`,
+                        position: "relative",
                         maxWidth: { sm: 768 },
-                        left: 0,
-                        right: 0,
-                        bottom: -36,
-                        pointerEvents: "none",
+                        marginLeft: "auto",
+                        marginRight: "auto",
                     }}
                 >
-                    {filteredChartLabels.map((label, i) => (
-                        <div
-                            key={i}
-                            style={{
-                                fontSize: 12,
-                                textAlign: "center",
-                                wordBreak: "break-word",
-                                pointerEvents: "auto",
-                                color: "#3F576B",
-                            }}
-                        >
-                            {label}
-                        </div>
-                    ))}
+                    <Bar data={barData} options={options} plugins={[ChartDataLabels]} />
+                    <Box
+                        sx={{
+                            display: "grid",
+                            gridTemplateColumns: `repeat(${filteredChartLabels.length}, 1fr)`,
+                            maxWidth: { sm: 768 },
+                            left: 0,
+                            right: 0,
+                            bottom: -36,
+                            pointerEvents: "none",
+                        }}
+                    >
+                        {filteredChartLabels.map((label, i) => (
+                            <div
+                                key={i}
+                                style={{
+                                    fontSize: 12,
+                                    textAlign: "center",
+                                    wordBreak: "break-word",
+                                    pointerEvents: "auto",
+                                    color: "#3F576B",
+                                }}
+                            >
+                                {label}
+                            </div>
+                        ))}
+                    </Box>
                 </Box>
-            </Box>
+            </ChartBgWrapper>
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js"
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -64,11 +65,19 @@ export const StackedBarChart = ({ labels, datasets }: StackedBarChartProps) => {
     }
     return (
         <div style={{ width: 768, maxWidth: "100%" }}>
-            <div
-                style={{ position: "relative", width: 768, maxWidth: "100%", marginLeft: "auto", marginRight: "auto" }}
-            >
-                <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
-            </div>
+            <ChartBgWrapper>
+                <div
+                    style={{
+                        position: "relative",
+                        width: 768,
+                        maxWidth: "100%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                    }}
+                >
+                    <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
+                </div>
+            </ChartBgWrapper>
         </div>
     )
 }

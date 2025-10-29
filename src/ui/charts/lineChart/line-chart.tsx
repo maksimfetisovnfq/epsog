@@ -11,6 +11,7 @@ import {
     Tooltip,
 } from "chart.js"
 import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -82,15 +83,17 @@ const LineChart = ({ data, options, leftAxisLabel, bottomAxisLabel }: LineChartP
     }
     return (
         <Box sx={{ width: { sm: 768 }, maxWidth: "100%" }}>
-            <Box
-                sx={{
-                    position: "relative",
-                    width: { sm: 768 },
-                    overflow: "visible",
-                }}
-            >
-                <Line data={customData} options={customOptions} style={{ width: "100%", maxWidth: 768 }} />
-            </Box>
+            <ChartBgWrapper>
+                <Box
+                    sx={{
+                        position: "relative",
+                        width: { sm: 768 },
+                        overflow: "visible",
+                    }}
+                >
+                    <Line data={customData} options={customOptions} style={{ width: "100%", maxWidth: 768 }} />
+                </Box>
+            </ChartBgWrapper>
         </Box>
     )
 }

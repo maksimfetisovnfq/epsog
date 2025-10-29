@@ -2,6 +2,7 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Toolt
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -69,16 +70,18 @@ export const IncomeChart = ({ labels, datasets }: IncomeExpensesDataChart) => {
         },
     }
     return (
-        <Box sx={{ width: {sm: 768}, maxWidth: "100%", margin: "16px 0px" }}>
-            <Box
-                sx={{
-                    position: "relative",
-                    width: {sm: 768},
-                    overflow: "visible",
-                }}
-            >
-                <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
-            </Box>
+        <Box sx={{ width: { sm: 768 }, maxWidth: "100%", margin: "16px 0px" }}>
+            <ChartBgWrapper>
+                <Box
+                    sx={{
+                        position: "relative",
+                        width: { sm: 768 },
+                        overflow: "visible",
+                    }}
+                >
+                    <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
+                </Box>
+            </ChartBgWrapper>
         </Box>
     )
 }

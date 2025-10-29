@@ -2,6 +2,7 @@ import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Toolt
 import { Bar } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
@@ -44,7 +45,6 @@ export const IncomeChart = ({ labels, datasets }: IncomeChart) => {
                     font: {
                         size: 12,
                     },
-                    
                 },
                 grid: { display: false },
                 barPercentage: 0.9,
@@ -71,17 +71,19 @@ export const IncomeChart = ({ labels, datasets }: IncomeChart) => {
         },
     }
     return (
-        <Box sx={{ width: {sm: 768}}}>
-            <Box
-                sx={{
-                    position: "relative",
-                    width: {sm: 768},
-                    height: {sm: 353},
-                    overflow: "visible",
-                }}
-            >
-                <Bar data={data} options={options} />
-            </Box>
+        <Box sx={{ width: { sm: 768 } }}>
+            <ChartBgWrapper>
+                <Box
+                    sx={{
+                        position: "relative",
+                        width: { sm: 768 },
+                        height: { sm: 353 },
+                        overflow: "visible",
+                    }}
+                >
+                    <Bar data={data} options={options} />
+                </Box>
+            </ChartBgWrapper>
         </Box>
     )
 }

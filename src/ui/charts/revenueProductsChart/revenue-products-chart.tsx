@@ -1,40 +1,41 @@
-import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js";
-import { Bar } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
-import { Box } from "@mui/material";
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js"
+import { Bar } from "react-chartjs-2"
+import ChartDataLabels from "chartjs-plugin-datalabels"
+import { Box } from "@mui/material"
+import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels);
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
 
 export interface RevenueProductsChartProps {
-    labels: string[];
+    labels: string[]
     datasets: {
-        label: string;
-        data: number[];
-        backgroundColor?: string;
-    }[];
+        label: string
+        data: number[]
+        backgroundColor?: string
+    }[]
 }
 
 export const RevenueProductsChart = ({ labels, datasets }: RevenueProductsChartProps) => {
     const getBarColors = (labels: string[]) =>
         labels.map((label) => {
-            const upperLabel = label.toUpperCase();
-            if (upperLabel.includes("DA")) return "#0FCD73";
-            if (upperLabel.includes("CAP")) return "#0B9051";
-            if (upperLabel.includes("ID")) return "#06522E";
-            return "#032917";
-        });
+            const upperLabel = label.toUpperCase()
+            if (upperLabel.includes("DA")) return "#0FCD73"
+            if (upperLabel.includes("CAP")) return "#0B9051"
+            if (upperLabel.includes("ID")) return "#06522E"
+            return "#032917"
+        })
 
     const coloredDatasets = datasets.map((ds) => ({
         ...ds,
         backgroundColor: getBarColors(labels),
         borderSkipped: false,
         borderWidth: 0,
-    }));
+    }))
 
     const data = {
         labels: labels,
         datasets: coloredDatasets,
-    };
+    }
 
     const options = {
         responsive: true,
@@ -74,18 +75,22 @@ export const RevenueProductsChart = ({ labels, datasets }: RevenueProductsChartP
                 },
             },
         },
-    };
+    }
 
     return (
-        <Box sx={{ width: "100%", maxWidth: {sm: 768 } }}>
-            <Box
-                sx={{
-                    position: "relative",
-                    height: {xs: 180, sm: 400 },
-                }}
-            >
-                <Bar data={data} options={options} />
-            </Box>
+        <Box sx={{ width: "100%", maxWidth: { sm: 768 } }}>
+            <ChartBgWrapper>
+                <Box
+                    sx={{
+                        position: "relative",
+                        height: { xs: 180, sm: 400 },
+                    }}
+                >
+                    <Box sx={{ position: "relative", zIndex: 1, height: "100%" }}>
+                        <Bar data={data} options={options} />
+                    </Box>
+                </Box>
+            </ChartBgWrapper>
         </Box>
-    );
-};
+    )
+}
