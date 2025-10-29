@@ -114,7 +114,7 @@ export const SummaryOfResultsDsrView = () => {
     return (
         <>
             <Stack spacing={2}>
-                <InfoBanner />
+                <InfoBanner showBanner={false} />
 
                 <Tabs
                     bordered

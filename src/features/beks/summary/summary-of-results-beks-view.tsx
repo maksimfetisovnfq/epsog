@@ -122,6 +122,7 @@ export const SummaryOfResultsBeksView = () => {
     return (
         <>
             <InfoBanner
+                showBanner={false}
                 actions={
                     <>
                         <ExportToExcelBeks />
