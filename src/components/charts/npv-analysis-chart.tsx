@@ -7,7 +7,7 @@ type NpvAnalysisChartProps = {
         years: number[];
         npv: number[];
         dcfs: number[];
-        break_even_point: number;
+        break_even_point: number | null;
     }
 }
 

@@ -17,7 +17,7 @@ export const ChartBgWrapper = ({ children }: PropsWithChildren) => {
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundSize: "50%",
-                    opacity: 0.2,
+                    opacity: 0.1,
                     pointerEvents: "none",
                     zIndex: 0,
                 },
