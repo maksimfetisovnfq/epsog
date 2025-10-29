@@ -6,12 +6,13 @@ type NpvAnalysisChartProps = {
     data: {
         years: number[];
         npv: number[];
+        dcfs: number[]
     }
 }
 
 export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
     const dataSource = data.years.map((year, idx) => {
-        const value = data.npv[idx];
+        const value = data.dcfs[idx];
         return {
             key: String(idx),
             name: String(year),
@@ -43,6 +44,14 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                         {
                             label: 'Top',
                             data: dataSource.map(item => item.valueA ?? 0),
+                        },
+                    ]}
+                    lineDatasets={[
+                        {
+                            label: 'Cumulative NPV',
+                            data: data.npv,
+                            borderColor: '#4A90E2',
+                            backgroundColor: '#4A90E2',
                         },
                     ]}
                 />

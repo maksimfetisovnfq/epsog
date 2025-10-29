@@ -1,9 +1,9 @@
-import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip } from "chart.js"
-import { Bar } from "react-chartjs-2"
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Tooltip, LineElement, PointElement } from "chart.js"
+import { Chart } from "react-chartjs-2"
 import ChartDataLabels from "chartjs-plugin-datalabels"
 import { ChartBgWrapper } from "@/ui/charts/chart-bg-wrapper.tsx"
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels)
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartDataLabels, LineElement, PointElement)
 
 export interface StackedBarChartProps {
     labels: string[]
@@ -12,9 +12,16 @@ export interface StackedBarChartProps {
         data: number[]
         backgroundColor?: string
     }[]
+    lineDatasets?: {
+        label: string
+        data: number[]
+        borderColor?: string
+        backgroundColor?: string
+        labels?: string[]
+    }[]
 }
 
-export const StackedBarChart = ({ labels, datasets }: StackedBarChartProps) => {
+export const StackedBarChart = ({ labels, datasets, lineDatasets }: StackedBarChartProps) => {
     const getBarColors = (data: number[]) => data.map((v) => (v > 0 ? "#87E6B9" : "#FF7070"))
 
     const coloredDatasets = datasets.map((ds) => ({
@@ -22,11 +29,28 @@ export const StackedBarChart = ({ labels, datasets }: StackedBarChartProps) => {
         backgroundColor: getBarColors(ds.data),
         borderSkipped: false,
         borderWidth: 0,
+        type: 'bar' as const,
+        order: 1
     }))
+
+    const lineChartDatasets = lineDatasets ? lineDatasets.map((ds) => ({
+        ...ds,
+        type: 'line' as const,
+        borderColor: ds.borderColor || "#4A90E2",
+        backgroundColor: ds.backgroundColor || "#4A90E2",
+        pointBorderColor: ds.borderColor || "#4A90E2",
+        pointBackgroundColor: ds.backgroundColor || "#4A90E2",
+        pointRadius: 4,
+        pointBorderWidth: 2,
+        borderWidth: 2,
+        fill: false,
+        tension: 0.4,
+        order: 0,
+    })) : []
 
     const data = {
         labels: labels,
-        datasets: coloredDatasets,
+        datasets: [...coloredDatasets, ...lineChartDatasets],
     }
     const options = {
         responsive: true,
@@ -75,7 +99,7 @@ export const StackedBarChart = ({ labels, datasets }: StackedBarChartProps) => {
                         marginRight: "auto",
                     }}
                 >
-                    <Bar data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
+                    <Chart type="bar" data={data} options={options} style={{ width: "100%", maxWidth: 768 }} />
                 </div>
             </ChartBgWrapper>
         </div>
