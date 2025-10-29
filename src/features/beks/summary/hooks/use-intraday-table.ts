@@ -26,7 +26,7 @@ export const useIntradayTable = () => {
             ],
         },
         {
-            source: "Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)",
+            source: "Įrenginio dalyvavimas Dienos eigos (angl. Intraday) rinkoje (% nuo viso laiko)",
             dataSource: [
                 {
                     key: "upward_utilisation",
@@ -63,4 +63,3 @@ export const useIntradayTable = () => {
 
     return { title, tables }
 }
-

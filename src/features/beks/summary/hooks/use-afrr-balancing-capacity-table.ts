@@ -10,7 +10,7 @@ export const useAfrrBalancingCapacityTable = () => {
 
     const tables = [
         {
-            source: "Užsakytų balansavimo pajėgumų kiekis",
+            source: "Užsakytos balansavimo energijos kiekis",
             dataSource: [
                 {
                     key: "upward_volume",
@@ -27,7 +27,8 @@ export const useAfrrBalancingCapacityTable = () => {
             ],
         },
         {
-            source: "Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)",
+            source:
+                "Įrenginio dalyvavimas balansavimo energijos rinkoje (% nuo viso laiko)",
             dataSource: [
                 {
                     key: "upward_utilisation",

@@ -26,7 +26,8 @@ export const useDayAheadTable = () => {
             ],
         },
         {
-            source: "Įrenginio dalyvavimas energijos rinkoje (% nuo viso laiko)",
+            source:
+                "Įrenginio dalyvavimas Diena prieš (angl. Day-Ahead) rinkoje (% nuo viso laiko)",
             dataSource: [
                 {
                     key: "upward_utilisation",

@@ -67,7 +67,7 @@ export const RevenueProductsChart = ({ labels, datasets }: RevenueProductsChartP
                 grid: { display: true },
                 title: {
                     display: true,
-                    text: "Pajamos",
+                    text: "Pajamos (tūkst. EUR)",
                     font: {
                         size: 12,
                     },

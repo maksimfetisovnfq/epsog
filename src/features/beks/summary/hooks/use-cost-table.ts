@@ -5,11 +5,11 @@ export const useCostTable = () => {
 
     if (!data) return null
 
-    const title = "Pajamos / sąnaudos"
+    const title = "Produktų sąnaudos"
 
     const columns = [
-        { title: "Product", dataIndex: "Product" },
-        { title: "Value (tūkst. EUR)", dataIndex: "Value (tūkst. EUR)" },
+        { title: "Rinkos produktas", dataIndex: "Product" },
+        { title: "Suma (tūkst. EUR)", dataIndex: "Value (tūkst. EUR)" },
     ]
 
     const dataSource = data.aggregated.economic_results.cost_table

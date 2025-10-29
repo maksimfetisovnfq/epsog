@@ -5,11 +5,11 @@ export const useRevenueTable = () => {
 
     if (!data) return null
 
-    const title = "Pajamos už produktus"
+    const title = "Produktų pajamos"
 
     const columns = [
         { title: "Rinkos produktas", dataIndex: "Product" },
-        { title: "Suma (tūkst. Eur)", dataIndex: "Value (tūkst. EUR)" },
+        { title: "Suma (tūkst. EUR)", dataIndex: "Value (tūkst. EUR)" },
     ]
 
     const dataSource = data.aggregated.economic_results.revenue_table

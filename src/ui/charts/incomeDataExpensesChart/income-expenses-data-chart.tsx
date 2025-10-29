@@ -60,7 +60,7 @@ export const IncomeChart = ({ labels, datasets }: IncomeExpensesDataChart) => {
                 grid: { display: true },
                 title: {
                     display: true,
-                    text: "Pajamos (tūkst. Eur)",
+                    text: "Sąnaudos (tūkst. EUR)",
                     font: {
                         size: 12,
                     },
