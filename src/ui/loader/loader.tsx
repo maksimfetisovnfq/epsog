@@ -56,29 +56,52 @@ export const Loader = ({ loadingTime = 120 }: LoaderProps) => {
                     width: "768px",
                 }}
             >
-                <div style={{ marginTop: "20px", marginBottom: "20px", fontSize: "24px", marginLeft: "16px", width: "736px" }}>
+                <div
+                    style={{
+                        marginTop: "20px",
+                        marginBottom: "20px",
+                        fontSize: "24px",
+                        marginLeft: "16px",
+                        width: "736px",
+                    }}
+                >
                     <div style={{ marginBottom: "8px", color: "black" }}>Palaukite, vykdomas skaičiavimas...</div>
 
                     <div style={{ fontSize: "16px", width: "696px", marginBottom: "16px" }}>
-                        Energetikos ateitis – tai lankstumo, inovacijų ir duomenimis grįstų sprendimų sintezė.
+                        <div>Prašome kantrybės, skaičiavimai gali užtrukti iki 90-120 sekundžių.</div>
+                        <div>Skaičiavimai vykdomi šiais etapais:</div>
+                        <ol>
+                            <li>
+                                Surenkami paskutinių 12 mėn. 15 min periodiškumo balansavimo rinkų bei elektros
+                                energijos prekybos Dienos prieš rinkoje duomenys;
+                            </li>
+                            <li>Atliekama pasirinkto projekto laikotarpio, pvz. 10 metų, rinkų prognozė;</li>
+                            <li>Įvertinamos galimybės teikti balansavimo pajėgumus bei balansavimo energiją;</li>
+                            <li>Optimizuojamas įrenginio veikimas;</li>
+                            <li>Apskaičiuojami rezultatai.</li>
+                        </ol>
                     </div>
 
                     {timeLeft > 0 && (
                         <div style={{ width: "696px" }}>
-                            <div style={{
-                                width: "100%",
-                                height: "8px",
-                                backgroundColor: "#D9D9D9",
-                                borderRadius: "4px",
-                                overflow: "hidden"
-                            }}>
-                                <div style={{
-                                    width: `${progress}%`,
-                                    height: "100%",
-                                    backgroundColor: "#00EB8C",
-                                    transition: "width 1s linear",
-                                    borderRadius: "4px"
-                                }} />
+                            <div
+                                style={{
+                                    width: "100%",
+                                    height: "8px",
+                                    backgroundColor: "#D9D9D9",
+                                    borderRadius: "4px",
+                                    overflow: "hidden",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: `${progress}%`,
+                                        height: "100%",
+                                        backgroundColor: "#00EB8C",
+                                        transition: "width 1s linear",
+                                        borderRadius: "4px",
+                                    }}
+                                />
                             </div>
                         </div>
                     )}
