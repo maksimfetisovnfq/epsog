@@ -6,7 +6,8 @@ type NpvAnalysisChartProps = {
     data: {
         years: number[];
         npv: number[];
-        dcfs: number[]
+        dcfs: number[];
+        break_even_point: number;
     }
 }
 
@@ -19,6 +20,11 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
             valueA: value > 0 ? value : undefined,
             valueB: value <= 0 ? value : undefined,
         };
+    });
+    
+    // Create point colors array - red for break-even point, blue for others
+    const pointColors = data.npv.map((_, idx) => {
+        return idx === data.break_even_point ? '#FF7070' : '#4A90E2';
     });
     
     return (
@@ -52,6 +58,8 @@ export const NpvAnalysisChart = ({ data }: NpvAnalysisChartProps) => {
                             data: data.npv,
                             borderColor: '#4A90E2',
                             backgroundColor: '#4A90E2',
+                            pointBackgroundColor: pointColors,
+                            pointBorderColor: pointColors,
                         },
                     ]}
                 />

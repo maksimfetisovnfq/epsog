@@ -17,6 +17,8 @@ export interface StackedBarChartProps {
         data: number[]
         borderColor?: string
         backgroundColor?: string
+        pointBackgroundColor?: string | string[]
+        pointBorderColor?: string | string[]
         labels?: string[]
     }[]
 }
@@ -38,8 +40,8 @@ export const StackedBarChart = ({ labels, datasets, lineDatasets }: StackedBarCh
         type: 'line' as const,
         borderColor: ds.borderColor || "#4A90E2",
         backgroundColor: ds.backgroundColor || "#4A90E2",
-        pointBorderColor: ds.borderColor || "#4A90E2",
-        pointBackgroundColor: ds.backgroundColor || "#4A90E2",
+        pointBorderColor: ds.pointBorderColor || ds.borderColor || "#4A90E2",
+        pointBackgroundColor: ds.pointBackgroundColor || ds.backgroundColor || "#4A90E2",
         pointRadius: 4,
         pointBorderWidth: 2,
         borderWidth: 2,
