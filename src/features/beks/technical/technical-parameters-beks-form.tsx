@@ -75,8 +75,8 @@ const FormContent = () => {
                     name="RTE"
                     placeholder="88 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Pilno ciklo naudingumo koeficientas (%)"
-                    tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos"
+                    title="Pilno ciklo naudingumo koeficientas (%):"
+                    tooltip="Šis koeficientas parodo kiek per vieną ciklą (iškrovimą ir įkrovimą) į tinklą yra sugrąžinima elektros energijos."
                     isRequired
                 />
 
@@ -87,7 +87,7 @@ const FormContent = () => {
                     name="SOC_min"
                     placeholder="10 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis (%)"
+                    title="Elektros energijos kaupiklio minimalus įkrovimo lygis (%):"
                     tooltip="Mažiausia riba iki kurios galima iškrauti kaupiklį."
                     isRequired
                 />
@@ -99,7 +99,7 @@ const FormContent = () => {
                     name="SOC_max"
                     placeholder="95 %"
                     description="Skaičius nuo 0 iki 100"
-                    title="Elektros energijos kaupiklio maksimalus įkrovimo lygis"
+                    title="Elektros energijos kaupiklio maksimalus įkrovimo lygis:"
                     tooltip="Didžiausia riba iki kurios galima įkrauti kaupiklį."
                     isRequired
                 />
@@ -111,7 +111,7 @@ const FormContent = () => {
                     name="N_cycles_DA"
                     placeholder="4 kartai/d."
                     description="Sveikas skaičius nuo 0 iki 96 imtinai"
-                    title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš"
+                    title="Maksimalus energijos kaupiklio ciklų skaičius per dieną prekiaujant dieną prieš:"
                     tooltip="Kiek kartų per vieną parą leidžiama pilnai įkrauti/iškrauti kaupiklį."
                     isRequired
                 />
@@ -123,7 +123,7 @@ const FormContent = () => {
                     name="N_cycles_ID"
                     placeholder="16 kartai/d."
                     description="Sveikas skaičius nuo 0 iki 96 imtinai"
-                    title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos"
+                    title="Maksimalus energijos kaupiklio ciklų skaičius prekiaujant dienos eigos:"
                     tooltip="Dienos eigos rinka skirta išlaikyti kaupiklio talpą leistinose ribose teikiant balansavimo paslaugas."
                     isRequired
                 />
