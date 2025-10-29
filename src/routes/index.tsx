@@ -23,6 +23,13 @@ function RouteComponent() {
         setIsError(true)
     }
 
+    const handleCheck = (isChecked: boolean) => {
+        if (isChecked) {
+            setIsError(false)
+        }
+        setChecked(isChecked)
+    }
+
     return (
         <Box
             sx={{
@@ -61,7 +68,7 @@ function RouteComponent() {
             <div style={{ fontSize: "16px", marginBottom: "24px" }}>
                 <div style={{ marginBottom: "8px", fontWeight: 700 }}>Klausimai:</div>
                 <div>
-                    Jūsų patogumui dauguma klausimų jau užpildyti numatytomis vertėmis, kurias galite lengvai koreguoti
+                    Jūsų patogumui dauguma klausimų jau užpildyti numatytomis vertėmis, kurias galite lengvai koreguoti.
                 </div>
             </div>
 
@@ -81,22 +88,37 @@ function RouteComponent() {
                 </div>
             </div>
 
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "8px" }}>
-                <div>
-                    <CheckBox error={isError} checked={checked} onChange={(e) => setChecked(e.target.checked)} />
+            <div
+                style={{
+                    border: isError ? "2px solid red" : "2px solid transparent",
+                    padding: 10,
+                    margin: -10,
+                    borderRadius: 8,
+                }}
+            >
+                <div
+                    style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginBottom: "8px",
+                    }}
+                >
+                    <div>
+                        <CheckBox checked={checked} onChange={(e) => handleCheck(e.target.checked)} />
+                    </div>
+
+                    <Box sx={{ width: { sm: "768px" }, marginLeft: 6, fontSize: "16px" }}>
+                        Patvirtinu, kad su skaičiuoklės naudojimosi taisyklėmis susipažinau ir sutinku
+                    </Box>
                 </div>
 
-                <Box sx={{ width: { sm: "768px" }, marginLeft: 6, fontSize: "16px" }}>
-                    Patvirtinu, kad su skaičiuoklės naudojimosi taisyklėmis susipažinau ir sutinku
+                <Box sx={{ width: { sm: "736px" }, marginLeft: "32px", fontSize: "14px" }}>
+                    Tai nėra investicinis patarimas ar garantija dėl būsimų pajamų. Ši skaičiuoklė skirta padėti
+                    įvertinti lankstumo technologijų potencialą, remiantis pastarųjų 12 mėn. istoriniais rinkos
+                    duomenimis. Prieš priimant sprendimus dėl investicijų ar įgyvendinimo, rekomenduojama atlikti
+                    išsamią kaštų ir naudos analizę arba pasikonsultuoti su specialistais.
                 </Box>
             </div>
-
-            <Box sx={{ width: { sm: "736px" }, marginLeft: "32px", fontSize: "14px" }}>
-                Tai nėra investicinis patarimas ar garantija dėl būsimų pajamų. Ši skaičiuoklė skirta padėti įvertinti
-                lankstumo technologijų potencialą, remiantis pastarųjų 12 mėn. istoriniais rinkos duomenimis. Prieš
-                priimant sprendimus dėl investicijų ar įgyvendinimo, rekomenduojama atlikti išsamią kaštų ir naudos
-                analizę arba pasikonsultuoti su specialistais.
-            </Box>
 
             <Divider variant="fullWidth" sx={{ marginTop: "147px", width: { sm: "760px" } }} />
 
