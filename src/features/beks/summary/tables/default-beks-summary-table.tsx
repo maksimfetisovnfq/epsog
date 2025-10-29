@@ -15,7 +15,7 @@ export const DefaultBeksSummaryTable = () => {
     
     const columns = [
         { title: "Vertinama technologija", dataIndex: "label", key: "label" },
-        { title: "BEKS technologija", dataIndex: "value", key: "value" },
+        { title: "BEKS", dataIndex: "value", key: "value" },
     ]
 
     const dataSource = [

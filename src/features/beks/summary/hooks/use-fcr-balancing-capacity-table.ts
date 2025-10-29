@@ -8,23 +8,19 @@ export const useFcrBalancingCapacityTable = () => {
     const dataSource = [
         {
             Header: "Įsigytų pajėgumų apimtys",
-            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.volume_of_procured_reserves.value} 
-            ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.volume_of_procured_reserves.unit}`,
+            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.volume_of_procured_reserves.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.volume_of_procured_reserves.unit}`,
         },
         {
             Header: "Dalyvavimas paslaugoje",
-            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.utilisation.value} 
-            ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.utilisation.unit}`,
+            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.utilisation.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.utilisation.unit}`,
         },
         {
             Header: "Potencialios pajamos/sąnaudos",
-            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.potential_revenue.value} 
-            ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.potential_revenue.unit}`,
+            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.potential_revenue.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.potential_revenue.unit}`,
         },
         {
             Header: "Priimtų kainos pasiūlymų dalis, proc.",
-            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.value} 
-            ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.unit}`,
+            Value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.FCR.bids_selected.unit}`,
         },
     ]
 
