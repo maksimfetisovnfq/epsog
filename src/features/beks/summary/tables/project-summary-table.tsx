@@ -6,5 +6,5 @@ export const ProjectSummaryTable = () => {
 
     if (!tableProps) return null
 
-    return <Table {...tableProps} hideHead={true} />
+    return <Table {...tableProps} />
 }

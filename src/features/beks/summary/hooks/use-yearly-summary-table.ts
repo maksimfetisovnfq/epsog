@@ -25,5 +25,5 @@ export const useYearlySummaryTable = () => {
     
     const title = "Metiniai rezultatai"
     
-    return { dataSource, columns, title }
+    return { dataSource, columns, title, hideHead: true }
 }

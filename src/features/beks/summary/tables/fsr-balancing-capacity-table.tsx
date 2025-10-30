@@ -6,5 +6,5 @@ export const FcrBalancingCapacityTable = () => {
 
     if (!tableData) return null
 
-    return <Table {...tableData} hideHead={true} />
+    return <Table {...tableData} />
 }

@@ -32,5 +32,5 @@ export const useFcrBalancingCapacityTable = () => {
         { title: "Value", dataIndex: "Value" },
     ]
 
-    return { dataSource, title, description, columns }
+    return { dataSource, title, description, columns, hideHead: true }
 }
