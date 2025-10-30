@@ -19,6 +19,7 @@
     "@tanstack/react-router": "^1.130.12",
     "chart.js": "^4.5.0",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "jspdf-font": "^1.0.7",

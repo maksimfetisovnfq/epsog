@@ -2,6 +2,7 @@ import type { TableProps } from "@/ui/tables"
 import { jsPDF } from "jspdf"
 import autoTable from "jspdf-autotable"
 import type { RefObject } from "react"
+import html2canvas from "html2canvas"
 
 // Helper function to convert special characters to similar ASCII equivalents
 // This is a workaround for jsPDF's limited Unicode support in built-in fonts
@@ -44,7 +45,8 @@ type ExportToPdfProps = {
     refs: RefObject<HTMLDivElement | null>[]
 }
 
-export const exportToPdf = ({ filename, tables, refs }: ExportToPdfProps) => {
+
+export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) => {
     // Create a new PDF document with proper character encoding
     const doc = new jsPDF({
         orientation: "portrait",
@@ -209,6 +211,44 @@ export const exportToPdf = ({ filename, tables, refs }: ExportToPdfProps) => {
             startY += 5
         }
     })
+    console.log(refs)
+
+    // Process refs and add them as images to the PDF
+    for (const ref of refs) {
+        
+        if (ref.current) {
+            try {
+                // Convert the HTML element to canvas
+                const canvas = await html2canvas(ref.current, {
+                    scale: 2, // Higher quality
+                    useCORS: true, // Allow cross-origin images
+                    logging: false,
+                    backgroundColor: '#ffffff',
+                })
+                
+                // Convert canvas to image data
+                const imgData = canvas.toDataURL('image/png')
+                
+                // Calculate dimensions to fit the image on the page
+                const imgWidth = 182 // A4 width - margins (210mm - 28mm)
+                const imgHeight = (canvas.height * imgWidth) / canvas.width
+                
+                // Check if we need a new page
+                if (startY + imgHeight > 280) {
+                    doc.addPage()
+                    startY = 10
+                }
+                
+                // Add image to PDF
+                doc.addImage(imgData, 'PNG', 14, startY, imgWidth, imgHeight)
+                
+                // Update startY for next element
+                startY += imgHeight + 10
+            } catch (error) {
+                console.error('Error converting ref to image:', error)
+            }
+        }
+    }
 
     // Save the PDF
     doc.save(`${filename}.pdf`)
