@@ -1,6 +1,7 @@
 import type { TableProps } from "@/ui/tables"
 import { jsPDF } from "jspdf"
 import autoTable from "jspdf-autotable"
+import type { RefObject } from "react"
 
 // Helper function to convert special characters to similar ASCII equivalents
 // This is a workaround for jsPDF's limited Unicode support in built-in fonts
@@ -40,9 +41,10 @@ export type CombinedTable = {
 type ExportToPdfProps = {
     filename: string
     tables: (StandardTable | CombinedTable)[]
+    refs: RefObject<HTMLDivElement | null>[]
 }
 
-export const exportToPdf = ({ filename, tables }: ExportToPdfProps) => {
+export const exportToPdf = ({ filename, tables, refs }: ExportToPdfProps) => {
     // Create a new PDF document with proper character encoding
     const doc = new jsPDF({
         orientation: "portrait",

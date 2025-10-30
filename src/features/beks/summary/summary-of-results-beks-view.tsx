@@ -4,7 +4,7 @@ import { RevenueTable } from "./tables/revenue-table"
 import { CostTable } from "./tables/cost-table"
 import { YearlySummary } from "./tables/yearly-table"
 import { Tabs } from "@/components/tabs"
-import { Fragment } from "react"
+import { Fragment, useRef } from "react"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner"
 import { CostProductsChartBeks } from "@/features/beks/summary/charts/cost-products-chart-beks"
 import { FormNavigation } from "@/components/navigation/form-navigation"
@@ -36,6 +36,8 @@ export const SummaryOfResultsBeksView = () => {
         })
     }
 
+    const npvAnalysisChartRef = useRef<HTMLDivElement>(null)
+
     const summaryTab = (
         <Fragment key={1}>
             <Stack spacing={1}>
@@ -50,7 +52,7 @@ export const SummaryOfResultsBeksView = () => {
                     <ProjectSummaryTable />
                 </Box>
                 <Box style={{ marginBottom: 16 }}>
-                    <NpvAnalysisChartBeks />
+                    <NpvAnalysisChartBeks ref={npvAnalysisChartRef} />
                 </Box>
                 <Box style={{ marginBottom: 16 }}>
                     <CostProductsChartBeks />
@@ -126,7 +128,7 @@ export const SummaryOfResultsBeksView = () => {
                 actions={
                     <>
                         <ExportToExcelBeks />
-                        <ExportToPdfBeks />
+                        <ExportToPdfBeks refs={[npvAnalysisChartRef]} />
                     </>
                 }
             />

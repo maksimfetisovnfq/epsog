@@ -10,8 +10,13 @@ import { useRevenueTable } from "./hooks/use-revenue-table"
 import { useCostTable } from "./hooks/use-cost-table"
 import { useProjectSummaryTable } from "./hooks/use-project-summary-table"
 import { useYearlyTable } from "./hooks/use-yearly-table.ts"
+import type { RefObject } from "react"
 
-export const ExportToPdfBeks = () => {
+type Props = {
+    refs: RefObject<HTMLDivElement | null>[]
+}
+
+export const ExportToPdfBeks = ({refs}: Props) => {
     const yearlySummary = useYearlySummaryTable()
     const projectSummary = useProjectSummaryTable()
     const fcrBalancingCapacity = useFcrBalancingCapacityTable()
@@ -39,7 +44,7 @@ export const ExportToPdfBeks = () => {
             yearly,
         ].filter(Boolean) as Array<StandardTable | CombinedTable>
 
-        exportToPdf({ filename, tables })
+        exportToPdf({ filename, tables, refs })
     }
 
     return (
