@@ -62,6 +62,6 @@ export const useDayAheadTable = () => {
         },
     ]
 
-    return { title, tables }
+    return { title, tables, hideHead: true }
 }
 

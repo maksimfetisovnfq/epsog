@@ -28,11 +28,13 @@ export type StandardTable = {
     description?: string
     columns: TableProps["columns"]
     dataSource: TableProps["dataSource"]
+    hideHead?: boolean
 }
 
 export type CombinedTable = {
     title?: string
     description?: string
+    hideHead?: boolean
     tables: Array<{
         source?: string
         dataSource: Array<Record<string, unknown>>
@@ -125,7 +127,7 @@ export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) 
                 // Add table using autoTable with Unicode support
                 autoTable(doc, {
                     startY: startY,
-                    head: [[normalizeTextForPdf("Parameter"), normalizeTextForPdf("Value")]],
+                    head: table.hideHead ? undefined : [[normalizeTextForPdf("Parameter"), normalizeTextForPdf("Value")]],
                     body: tableData,
                     theme: "grid",
                     styles: {
@@ -178,7 +180,7 @@ export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) 
             // Add table using autoTable with Unicode support
             autoTable(doc, {
                 startY: startY,
-                head: [headers],
+                head: table.hideHead ? undefined : [headers],
                 body: tableData,
                 theme: "grid",
                 styles: {

@@ -75,6 +75,6 @@ export const useMfrrBalancingCapacityTable = () => {
         },
     ]
 
-    return { title, description, tables }
+    return { title, description, tables, hideHead: true }
 }
 

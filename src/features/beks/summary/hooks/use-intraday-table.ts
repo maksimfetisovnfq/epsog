@@ -61,5 +61,5 @@ export const useIntradayTable = () => {
         },
     ]
 
-    return { title, tables }
+    return { title, tables, hideHead: true }
 }
