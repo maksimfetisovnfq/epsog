@@ -1,5 +1,6 @@
 import { useLocation } from "@tanstack/react-router"
 import { Table } from "@/ui/tables/Table"
+import { getReactionTimeDisplay } from "../helpers/get-reaction-time-display"
 
 const rowHeaders = [
     "Įrenginio galia ir talpa",
@@ -20,7 +21,7 @@ export const DefaultBeksSummaryTable = () => {
 
     const dataSource = [
         { label: rowHeaders[0], value: technicalParams ? `${technicalParams.q_max} MW / ${technicalParams.q_total} MWh` : "" },
-        { label: rowHeaders[1], value: technicalParams ? `${technicalParams.reaction_time} min` : "" },
+        { label: rowHeaders[1], value: technicalParams ? getReactionTimeDisplay(technicalParams.reaction_time) : "" },
         { label: rowHeaders[2], value: economicParams ? `${economicParams.CAPEX_P} Eur/MW, ${economicParams.CAPEX_C} Eur/MWh` : "" },
         { label: rowHeaders[3], value: economicParams ? `${economicParams.OPEX_P} Eur/MW/met, ${economicParams.OPEX_C} Eur/MWh` : "" },
     ]
