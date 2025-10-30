@@ -63,8 +63,38 @@ export const exportToPdf = async ({ filename, content }: ExportToPdfProps) => {
         compress: true,
     })
 
-
     let startY = 10
+
+    // Add logo and report title at the top
+    try {
+        // Load logo image
+        const logoPath = '/EPSOG_logo_BLACK.png'
+        const logoImg = new Image()
+        logoImg.src = logoPath
+        
+        await new Promise((resolve, reject) => {
+            logoImg.onload = resolve
+            logoImg.onerror = reject
+        })
+        
+        // Add logo (scaled to fit nicely)
+        const logoWidth = 50 // mm
+        const logoHeight = (logoImg.height * logoWidth) / logoImg.width
+        doc.addImage(logoImg, 'PNG', 14, startY, logoWidth, logoHeight)
+        
+        startY += logoHeight + 10
+    } catch (error) {
+        console.error('Error loading logo:', error)
+        // Continue without logo if it fails to load
+    }
+
+    // Add report title
+    doc.setFontSize(20)
+    doc.setFont("helvetica", "bold")
+    doc.setTextColor(0, 0, 0)
+    const reportTitle = normalizeTextForPdf("Projekto rezultatu ataskaita")
+    doc.text(reportTitle, 14, startY)
+    startY += 15
 
     // Process each content item
     for (let i = 0; i < content.length; i++) {
