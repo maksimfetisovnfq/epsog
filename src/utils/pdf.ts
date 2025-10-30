@@ -41,14 +41,19 @@ export type CombinedTable = {
     }>
 }
 
+export type SectionTitle = {
+    sectionTitle: string
+}
+
+export type PdfContent = StandardTable | CombinedTable | SectionTitle | RefObject<HTMLDivElement | null>
+
 type ExportToPdfProps = {
     filename: string
-    tables: (StandardTable | CombinedTable)[]
-    refs: RefObject<HTMLDivElement | null>[]
+    content: PdfContent[]
 }
 
 
-export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) => {
+export const exportToPdf = async ({ filename, content }: ExportToPdfProps) => {
     // Create a new PDF document with proper character encoding
     const doc = new jsPDF({
         orientation: "portrait",
@@ -61,8 +66,115 @@ export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) 
 
     let startY = 10
 
-    // Process each table
-    tables.forEach((table, tableIndex) => {
+    // Process each content item
+    for (let i = 0; i < content.length; i++) {
+        const item = content[i]
+        
+        // Check if item is a section title
+        if ('sectionTitle' in item) {
+            // Add some space before section title (except for the first one)
+            if (startY > 10) {
+                startY += 10
+            }
+            
+            // Check if we need a new page
+            if (startY > 270) {
+                doc.addPage()
+                startY = 10
+            }
+            
+            doc.setFontSize(16)
+            doc.setFont("helvetica", "bold")
+            doc.setTextColor(0, 0, 0) // Black
+            
+            const titleText = normalizeTextForPdf(item.sectionTitle)
+            doc.text(titleText, 14, startY)
+            startY += 10
+            
+            continue
+        }
+        
+        // Check if item is a ref object
+        if ('current' in item) {
+            const ref = item as RefObject<HTMLDivElement | null>
+            
+            if (ref.current) {
+                try {
+                    // Store original display values for elements that need to be temporarily shown
+                    const elementsToRestore: Array<{ element: HTMLElement; originalDisplay: string }> = []
+                    
+                    // Temporarily show hidden parent elements
+                    let parent = ref.current.parentElement
+                    while (parent) {
+                        const computedStyle = window.getComputedStyle(parent)
+                        if (computedStyle.display === 'none') {
+                            elementsToRestore.push({
+                                element: parent,
+                                originalDisplay: parent.style.display || '',
+                            })
+                            parent.style.display = 'block'
+                        }
+                        parent = parent.parentElement
+                    }
+                    
+                    // Also check the ref element itself
+                    const refComputedStyle = window.getComputedStyle(ref.current)
+                    if (refComputedStyle.display === 'none') {
+                        elementsToRestore.push({
+                            element: ref.current,
+                            originalDisplay: ref.current.style.display || '',
+                        })
+                        ref.current.style.display = 'block'
+                    }
+                    
+                    // Wait for a brief moment to ensure the element is rendered
+                    await new Promise(resolve => setTimeout(resolve, 100))
+                    
+                    // Convert the HTML element to canvas
+                    const canvas = await html2canvas(ref.current, {
+                        scale: 2, // Higher quality
+                        useCORS: true, // Allow cross-origin images
+                        logging: false,
+                        backgroundColor: '#ffffff',
+                    })
+                    
+                    // Restore original display values
+                    elementsToRestore.forEach(({ element, originalDisplay }) => {
+                        if (originalDisplay) {
+                            element.style.display = originalDisplay
+                        } else {
+                            element.style.display = 'none'
+                        }
+                    })
+                    
+                    // Convert canvas to image data
+                    const imgData = canvas.toDataURL('image/png')
+                    
+                    // Calculate dimensions to fit the image on the page
+                    const imgWidth = 182 // A4 width - margins (210mm - 28mm)
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width
+                    
+                    // Check if we need a new page
+                    if (startY + imgHeight > 280) {
+                        doc.addPage()
+                        startY = 10
+                    }
+                    
+                    // Add image to PDF
+                    doc.addImage(imgData, 'PNG', 14, startY, imgWidth, imgHeight)
+                    
+                    // Update startY for next element
+                    startY += imgHeight + 10
+                } catch (error) {
+                    console.error('Error converting ref to image:', error)
+                }
+            }
+            
+            continue
+        }
+        
+        // Otherwise, it's a table
+        const table = item as StandardTable | CombinedTable
         // Add title if exists
         if (table.title) {
             const titleText = normalizeTextForPdf(
@@ -208,85 +320,9 @@ export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) 
             startY = doc.lastAutoTable.finalY + 8
         }
 
-        // Add spacing between tables
-        if (tableIndex < tables.length - 1) {
+        // Add spacing between items
+        if (i < content.length - 1) {
             startY += 5
-        }
-    })
-
-    // Process refs and add them as images to the PDF
-    for (const ref of refs) {
-        
-        if (ref.current) {
-            try {
-                // Store original display values for elements that need to be temporarily shown
-                const elementsToRestore: Array<{ element: HTMLElement; originalDisplay: string }> = []
-                
-                // Temporarily show hidden parent elements
-                let parent = ref.current.parentElement
-                while (parent) {
-                    const computedStyle = window.getComputedStyle(parent)
-                    if (computedStyle.display === 'none') {
-                        elementsToRestore.push({
-                            element: parent,
-                            originalDisplay: parent.style.display || '',
-                        })
-                        parent.style.display = 'block'
-                    }
-                    parent = parent.parentElement
-                }
-                
-                // Also check the ref element itself
-                const refComputedStyle = window.getComputedStyle(ref.current)
-                if (refComputedStyle.display === 'none') {
-                    elementsToRestore.push({
-                        element: ref.current,
-                        originalDisplay: ref.current.style.display || '',
-                    })
-                    ref.current.style.display = 'block'
-                }
-                
-                // Wait for a brief moment to ensure the element is rendered
-                await new Promise(resolve => setTimeout(resolve, 100))
-                
-                // Convert the HTML element to canvas
-                const canvas = await html2canvas(ref.current, {
-                    scale: 2, // Higher quality
-                    useCORS: true, // Allow cross-origin images
-                    logging: false,
-                    backgroundColor: '#ffffff',
-                })
-                
-                // Restore original display values
-                elementsToRestore.forEach(({ element, originalDisplay }) => {
-                    if (originalDisplay) {
-                        element.style.display = originalDisplay
-                    } else {
-                        element.style.display = 'none'
-                    }
-                })
-                
-                // Convert canvas to image data
-                const imgData = canvas.toDataURL('image/png')
-                
-                // Calculate dimensions to fit the image on the page
-                const imgWidth = 182 // A4 width - margins (210mm - 28mm)
-                const imgHeight = (canvas.height * imgWidth) / canvas.width
-                
-                // Check if we need a new page
-                if (startY + imgHeight > 280) {
-                    doc.addPage()
-                    startY = 10
-                }
-                
-                // Add image to PDF
-                doc.addImage(imgData, 'PNG', 14, startY, imgWidth, imgHeight)
-                
-                // Update startY for next element
-                startY += imgHeight + 10
-            } catch (error) {
-                console.error('Error converting ref to image:', error)
-            }
         }
     }
 
