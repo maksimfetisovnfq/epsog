@@ -37,6 +37,10 @@ export const SummaryOfResultsBeksView = () => {
     }
 
     const npvAnalysisChartRef = useRef<HTMLDivElement>(null)
+    const costProductsChartRef = useRef<HTMLDivElement>(null)
+    const utilisationChartRef = useRef<HTMLDivElement>(null)
+    const revenueChartRef = useRef<HTMLDivElement>(null)
+    const costChartRef = useRef<HTMLDivElement>(null)
 
     const summaryTab = (
         <Fragment key={1}>
@@ -55,9 +59,13 @@ export const SummaryOfResultsBeksView = () => {
                     <NpvAnalysisChartBeks ref={npvAnalysisChartRef} />
                 </Box>
                 <Box style={{ marginBottom: 16 }}>
-                    <CostProductsChartBeks />
+                    <div ref={costProductsChartRef}>
+                        <CostProductsChartBeks />
+                    </div>
                 </Box>
-                <UtilisationChartBeks />
+                <div ref={utilisationChartRef}>
+                    <UtilisationChartBeks />
+                </div>
             </Stack>
         </Fragment>
     )
@@ -111,10 +119,14 @@ export const SummaryOfResultsBeksView = () => {
             <Stack spacing={3}>
                 <Title style={{ fontSize: 24 }}>Rinkų produktų ekonominiai rezultatai</Title>
                 <RevenueTable />
-                <RevenueChartBeks />
+                <div ref={revenueChartRef}>
+                    <RevenueChartBeks />
+                </div>
                 <Divider style={{ marginBottom: 8, marginTop: 32, maxWidth: 768 }} />
                 <CostTable />
-                <CostChartBeks />
+                <div ref={costChartRef}>
+                    <CostChartBeks />
+                </div>
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
                 <YearlySummary />
             </Stack>
@@ -128,7 +140,7 @@ export const SummaryOfResultsBeksView = () => {
                 actions={
                     <>
                         <ExportToExcelBeks />
-                        <ExportToPdfBeks refs={[npvAnalysisChartRef]} />
+                        <ExportToPdfBeks refs={[npvAnalysisChartRef, costProductsChartRef, utilisationChartRef, revenueChartRef, costChartRef]} />
                     </>
                 }
             />

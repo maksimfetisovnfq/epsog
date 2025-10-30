@@ -44,12 +44,16 @@ export const Tabs = ({ labels, content, bordered = false }: Props) => {
                     },
                 }}
             >
-                {labels.map((label) => (
-                    <Tab key={label} label={label} />
-                ))}
-            </MuiTabs>
+            {labels.map((label) => (
+                <Tab key={label} label={label} />
+            ))}
+        </MuiTabs>
 
-            {content[tab] && <Stack spacing={6}>{content[tab]}</Stack>}
-        </Box>
+        {content.map((item, index) => (
+            <Stack key={index} spacing={6} style={{ display: tab === index ? 'flex' : 'none' }}>
+                {item}
+            </Stack>
+        ))}
+    </Box>
     )
 }

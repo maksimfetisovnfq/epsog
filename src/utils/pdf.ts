@@ -211,19 +211,57 @@ export const exportToPdf = async ({ filename, tables, refs }: ExportToPdfProps) 
             startY += 5
         }
     })
-    console.log(refs)
 
     // Process refs and add them as images to the PDF
     for (const ref of refs) {
         
         if (ref.current) {
             try {
+                // Store original display values for elements that need to be temporarily shown
+                const elementsToRestore: Array<{ element: HTMLElement; originalDisplay: string }> = []
+                
+                // Temporarily show hidden parent elements
+                let parent = ref.current.parentElement
+                while (parent) {
+                    const computedStyle = window.getComputedStyle(parent)
+                    if (computedStyle.display === 'none') {
+                        elementsToRestore.push({
+                            element: parent,
+                            originalDisplay: parent.style.display || '',
+                        })
+                        parent.style.display = 'block'
+                    }
+                    parent = parent.parentElement
+                }
+                
+                // Also check the ref element itself
+                const refComputedStyle = window.getComputedStyle(ref.current)
+                if (refComputedStyle.display === 'none') {
+                    elementsToRestore.push({
+                        element: ref.current,
+                        originalDisplay: ref.current.style.display || '',
+                    })
+                    ref.current.style.display = 'block'
+                }
+                
+                // Wait for a brief moment to ensure the element is rendered
+                await new Promise(resolve => setTimeout(resolve, 100))
+                
                 // Convert the HTML element to canvas
                 const canvas = await html2canvas(ref.current, {
                     scale: 2, // Higher quality
                     useCORS: true, // Allow cross-origin images
                     logging: false,
                     backgroundColor: '#ffffff',
+                })
+                
+                // Restore original display values
+                elementsToRestore.forEach(({ element, originalDisplay }) => {
+                    if (originalDisplay) {
+                        element.style.display = originalDisplay
+                    } else {
+                        element.style.display = 'none'
+                    }
                 })
                 
                 // Convert canvas to image data

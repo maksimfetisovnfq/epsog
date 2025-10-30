@@ -27,7 +27,6 @@ export const ExportToPdfBeks = ({refs}: Props) => {
     const revenue = useRevenueTable()
     const cost = useCostTable()
     const yearly = useYearlyTable()
-
     const exportBeks = () => {
         const filename = "Beks"
 
