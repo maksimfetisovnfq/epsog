@@ -58,7 +58,7 @@ export const StackedBarChart = ({ labels, datasets, lineDatasets }: StackedBarCh
         responsive: true,
         plugins: {
             legend: { display: false },
-            tooltip: { enabled: false },
+            tooltip: { enabled: true },
             datalabels: { display: false },
         },
         scales: {

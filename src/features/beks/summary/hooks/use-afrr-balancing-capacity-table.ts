@@ -15,14 +15,12 @@ export const useAfrrBalancingCapacityTable = () => {
                 {
                     key: "upward_volume",
                     parameter: "Aukštyn (angl. Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.upward.unit}`,
                 },
                 {
                     key: "downward_volume",
                     parameter: "Žemyn (angl. Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.aFRR.volume_of_procured_reserves.downward.unit}`,
                 },
             ],
         },

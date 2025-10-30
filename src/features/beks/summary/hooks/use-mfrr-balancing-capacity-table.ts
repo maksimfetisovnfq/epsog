@@ -15,14 +15,12 @@ export const useMfrrBalancingCapacityTable = () => {
                 {
                     key: "upward_volume",
                     parameter: "Aukštyn (angl. Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.unit}`,
                 },
                 {
                     key: "downward_volume",
                     parameter: "Žemyn (angl. Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.unit}`,
                 },
             ],
         },
@@ -32,14 +30,12 @@ export const useMfrrBalancingCapacityTable = () => {
                 {
                     key: "upward_utilisation",
                     parameter: "Dalyvavimas paslaugoje (Upward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.unit}`,
                 },
                 {
                     key: "downward_utilisation",
                     parameter: "Dalyvavimas paslaugoje (Downward)",
-                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.value} 
-                    ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.unit}`,
+                    value: `${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.value} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.unit}`,
                 },
             ],
         },
