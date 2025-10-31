@@ -1,7 +1,7 @@
 import { useSummaryBeks } from "../use-summary-beks"
 import { formatNumber } from "@/ui/tables/TableBody/TableBody.tsx"
 
-export const useMfrrBalancingCapacityTable = () => {
+export const useMfrrBalancingEnergyTable = () => {
     const data = useSummaryBeks()
 
     if (!data) return null
@@ -11,32 +11,32 @@ export const useMfrrBalancingCapacityTable = () => {
 
     const tables = [
         {
-            source: "Užsakytų balansavimo pajėgumų kiekis",
+            source: "Užsakytos balansavimo energijos kiekis",
             dataSource: [
                 {
                     key: "upward_volume",
                     parameter: "Aukštyn (angl. Upward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.upward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.volume_of_procured_energy.upward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.volume_of_procured_energy.upward.unit}`,
                 },
                 {
                     key: "downward_volume",
                     parameter: "Žemyn (angl. Downward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.volume_of_procured_reserves.downward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.volume_of_procured_energy.downward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.volume_of_procured_energy.downward.unit}`,
                 },
             ],
         },
         {
-            source: "Įrenginio dalyvavimas balansavimo pajėgumų rinkoje (% nuo viso laiko)",
+            source: "Įrenginio dalyvavimas balansavimo energijos rinkoje (% nuo viso laiko)",
             dataSource: [
                 {
                     key: "upward_utilisation",
                     parameter: "Dalyvavimas paslaugoje (Upward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.upward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.utilisation.upward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.utilisation.upward.unit}`,
                 },
                 {
                     key: "downward_utilisation",
                     parameter: "Dalyvavimas paslaugoje (Downward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.utilisation.downward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.utilisation.downward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.utilisation.downward.unit}`,
                 },
             ],
         },
@@ -46,12 +46,12 @@ export const useMfrrBalancingCapacityTable = () => {
                 {
                     key: "upward_revenue",
                     parameter: "Potencialios pajamos/sąnaudos (Upward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.potential_revenue.upward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.potential_revenue.upward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.potential_revenue.upward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.potential_revenue.upward.unit}`,
                 },
                 {
                     key: "downward_revenue",
                     parameter: "Potencialios pajamos/sąnaudos (Downward)",
-                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.potential_revenue.downward.value)} ${data.aggregated.markets.BALANSAVIMO_PAJEGUMU_RINKA.mFRR.potential_revenue.downward.unit}`,
+                    value: `${formatNumber(+data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.potential_revenue.downward.value)} ${data.aggregated.markets.BALANSAVIMO_ENERGIJOS_RINKA.mFRR.potential_revenue.downward.unit}`,
                 },
             ],
         },

@@ -10,6 +10,8 @@ import { useRevenueTable } from "./hooks/use-revenue-table"
 import { useCostTable } from "./hooks/use-cost-table"
 import { useProjectSummaryTable } from "./hooks/use-project-summary-table"
 import { useYearlyTable } from "./hooks/use-yearly-table"
+import { useMfrrBalancingEnergyTable } from "./hooks/use-mfrr-balancing-energy-table.ts"
+import { useAfrrBalancingEnergyTable } from "./hooks/use-afrr-balancing-energy-table.ts"
 
 export const ExportToExcelBeks = () => {
     const yearlySummary = useYearlySummaryTable()
@@ -17,6 +19,8 @@ export const ExportToExcelBeks = () => {
     const fcrBalancingCapacity = useFcrBalancingCapacityTable()
     const afrrBalancingCapacity = useAfrrBalancingCapacityTable()
     const mfrrBalancingCapacity = useMfrrBalancingCapacityTable()
+    const afrrBalancingEnergy = useAfrrBalancingEnergyTable()
+    const mfrrBalancingEnergy = useMfrrBalancingEnergyTable()
     const dayAhead = useDayAheadTable()
     const intraday = useIntradayTable()
     const revenue = useRevenueTable()
@@ -32,17 +36,17 @@ export const ExportToExcelBeks = () => {
                 name: "Balansavimo pajėgumų rinka",
                 tables: [fcrBalancingCapacity!, mfrrBalancingCapacity!, afrrBalancingCapacity!].filter(Boolean),
             },
-            { 
-                name: "Balansavimo energijos rinka", 
-                tables: [afrrBalancingCapacity!, mfrrBalancingCapacity!].filter(Boolean) 
+            {
+                name: "Balansavimo energijos rinka",
+                tables: [afrrBalancingEnergy!, mfrrBalancingEnergy!].filter(Boolean),
             },
-            { 
-                name: "Elektros energijos prekyba", 
-                tables: [dayAhead!, intraday!].filter(Boolean) 
+            {
+                name: "Elektros energijos prekyba",
+                tables: [dayAhead!, intraday!].filter(Boolean),
             },
-            { 
-                name: "Ekonominis vertinimas", 
-                tables: [revenue!, cost!, yearly!].filter(Boolean) 
+            {
+                name: "Ekonominis vertinimas",
+                tables: [revenue!, cost!, yearly!].filter(Boolean),
             },
         ]
 

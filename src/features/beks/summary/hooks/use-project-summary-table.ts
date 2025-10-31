@@ -1,4 +1,5 @@
 import { useSummaryBeks } from "@/features/beks/summary/use-summary-beks.ts"
+import { formatNumber } from "@/ui/tables/TableBody/TableBody.tsx"
 
 export const useProjectSummaryTable = () => {
     const data = useSummaryBeks()
@@ -9,15 +10,15 @@ export const useProjectSummaryTable = () => {
     const dataSource = [
         { 
             Header: "Potencialios pajamos (viso)",
-            Value: data.aggregated.summary.project_summary_table[0].Value
+            Value: `${formatNumber(+data.aggregated.summary.project_summary_table[0].Value)} tūkst. EUR`
         },
         {
             Header: "Potencialios pajamos (viso)",
-            Value: data.aggregated.summary.project_summary_table[1].Value
+            Value: `${formatNumber(+data.aggregated.summary.project_summary_table[1].Value)} tūkst. EUR`
         },
         {
             Header: "Potencialius pelnas/nuostolis (viso)",
-            Value: data.aggregated.summary.project_summary_table[2].Value
+            Value: `${formatNumber(+data.aggregated.summary.project_summary_table[2].Value)} tūkst. EUR`
         }
     ]
     const columns = [

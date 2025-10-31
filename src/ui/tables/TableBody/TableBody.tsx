@@ -6,7 +6,8 @@ interface TableBodyProps {
     dataSource: Record<string, unknown>[]
 }
 
-const formatNumber = (value: number): string => {
+// eslint-disable-next-line react-refresh/only-export-components
+export const formatNumber = (value: number): string => {
     return value.toLocaleString("en-US", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,

@@ -25,6 +25,8 @@ import { ExportToExcelBeks } from "./export-to-excel"
 import { ExportToPdfBeks } from "@/features/beks/summary/export-to-pdf.tsx"
 import { contactEmail } from "@/consts.ts"
 import { ProjectSummaryTable } from "@/features/beks/summary/tables/project-summary-table.tsx"
+import { AfrrBalancingEnergyTable } from "@/features/beks/summary/tables/afrr-balancing-energy-table.tsx"
+import { MfrrBalancingEnergyTable } from "@/features/beks/summary/tables/mfrr-balancing-energy-table.tsx"
 
 export const SummaryOfResultsBeksView = () => {
     const navigate = useNavigate()
@@ -85,9 +87,9 @@ export const SummaryOfResultsBeksView = () => {
     const BalancingEnergyTab = (
         <Fragment key={2}>
             <Stack spacing={0}>
-                <AfrrBalancingCapacityTable />
+                <AfrrBalancingEnergyTable />
                 <Divider style={{ marginBottom: 32, marginTop: 32, maxWidth: 768 }} />
-                <MfrrBalancingCapacityTable />
+                <MfrrBalancingEnergyTable />
             </Stack>
         </Fragment>
     )
