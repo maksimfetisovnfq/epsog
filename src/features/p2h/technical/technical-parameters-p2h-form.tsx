@@ -27,7 +27,6 @@ const TechnicalParametersFormContent = () => {
                 title="Šilumos siurblio maksimali elektrinė galia (MW)"
                 placeholder="2"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
-                tooltip="TODO"
                 isRequired
             />
 
@@ -37,8 +36,8 @@ const TechnicalParametersFormContent = () => {
                 name="Q_yearly"
                 title="Metinis šilumos energijos poreikis (MWh)"
                 placeholder="13000000.00"
-                description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
-                tooltip="TODO"
+                description="Įvedami tik teigiami skaičiai."
+                tooltip="Skaičiavimuose vertinamas tipinis šilumos vartojimo profilis, kuris pritaikomas pagal metinį šilumos energijos poreikį. "
                 isRequired
             />
 
@@ -49,9 +48,9 @@ const TechnicalParametersFormContent = () => {
                 title="Aplinkos temperatūra nuo kurios išjungiamas šilumos siurblys (°C)"
                 placeholder="-10"
                 type="number"
-                tooltip="TODO"
+                tooltip="Šilumos siurblio efektyvumas priklauso nuo lauko temperatūros. Pagal savo įrenginio savybes nustatykite, nuo kokios temperatūros šilumos siurblys tampa nebeefektyvus ir jo nebevertėtų naudoti."
                 isRequired
-                description="TODO"
+                description="Įvedami tik sveiki skaičiai."
             />
 
             <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
@@ -91,8 +90,8 @@ const TechnicalParametersFormContent = () => {
                 titleDescription={
                     <InfoBanner
                         title=""
-                        subtitle="TODO"
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        subtitle="Patikslinkite savo įrenginių technines charakteristikas, kad skaičiavimai būtų kuo tikslesni."
+                        description="Atkreipiame dėmesį, kad šios informacijos pateikimui geriausiai pasitelkti įrenginių technines specifikacijas. Jei kažkurių verčių nežinote, nurodykite rekomenduojamas vertes."
                     />
                 }
             >
@@ -142,7 +141,7 @@ const TechnicalParametersFormContent = () => {
                     isRequired
                     description="TODO"
                 />
-                
+
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
