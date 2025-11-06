@@ -15,7 +15,18 @@ import { useFormContext, useWatch, Controller } from "react-hook-form"
 import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { Tooltip } from "@/components/tooltip"
 
-const country = ["Kaunas", "Klaipėda", "Marijampolė", "Panevėžys", "Šiauliai", "Tauragė", "Telšiai", "Utena", "Vilnius"]
+const P2H_COUNTY_MAPPING = {
+    "Alytus": "alytus",
+    "Kaunas": "kaunas",
+    "Klaipėda": "klaipeda",
+    "Marijampolė": "marijampole",
+    "Panevėžys": "panevezys",
+    "Šiauliai": "siauliai",
+    "Tauragė": "taurage",
+    "Telšiai": "telsiai",
+    "Utena": "utena",
+    "Vilnius": "vilnius"
+}
 
 const GeneralContext = () => {
     const { control } = useFormContext()
@@ -162,9 +173,9 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                         control={control}
                         render={({ field }) => (
                             <Select {...field} style={{ height: "48px", width: "400px" }} displayEmpty>
-                                {country.map((c) => (
-                                    <MenuItem value={c} key={c}>
-                                        {c}
+                                {Object.entries(P2H_COUNTY_MAPPING).map(([name, value]) => (
+                                    <MenuItem value={value} key={value}>
+                                        {name}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -204,7 +215,7 @@ export const GeneralDataForm = () => {
             defaultValues={{
                 sector: navState?.sector || "",
                 provider: navState?.provider || "Litgrid",
-                country: navState?.country || "Kaunas",
+                country: navState?.country || "kaunas",
                 concentratorName: navState?.concentratorName || "",
                 calculatorType: navState?.calculatorType || CalculatorType.BEKS,
             }}
