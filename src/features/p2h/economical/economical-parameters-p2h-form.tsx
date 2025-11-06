@@ -44,7 +44,6 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="CAPEX_HP"
                 title="Investicijos į šilumos siurblį, CAPEX (tūkst. EUR/MW)"
                 type="number"
-                tooltip="TODO"
                 isRequired
                 description="TODO"
             />
@@ -59,7 +58,6 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="CAPEX_HS"
                 title="Investicijos į talpyklą CAPEX (tūkst. EUR/m³)"
                 type="number"
-                tooltip="TODO"
                 isRequired
                 description="TODO"
             />
@@ -70,7 +68,6 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="OPEX_HS"
                 title="Šilumos siurblio aptarnavimo ir priežiūros kaštai, OPEX (tūkst. Eur/MW per metus)"
                 type="number"
-                tooltip="TODO"
                 isRequired
                 description="TODO"
             />
@@ -81,7 +78,6 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 name="discount_rate"
                 title="Taikoma diskonto norma (%)"
                 type="number"
-                tooltip="TODO"
                 isRequired
                 description="TODO"
             />
@@ -90,9 +86,8 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
 
             <FormInput
                 name="number_of_years"
-                title="Projekto gyvavimo laikotarpis (metais)"
+                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"
                 type="number"
-                tooltip="TODO"
                 isRequired
                 description="TODO"
             />

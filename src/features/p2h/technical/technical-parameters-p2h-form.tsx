@@ -48,7 +48,7 @@ const TechnicalParametersFormContent = () => {
 
             <FormInput
                 name="Q_max_HP"
-                title="Šilumos siurblio maksimali elektrinė galia (MW)"
+                title="Šilumos siurblio maksimali elektrinė galia (MW):"
                 placeholder="2"
                 description="Įvedami tik teigiami skaičiai, maksimali reikšmė 1 000 000 MW (1 TW)"
                 isRequired
@@ -58,7 +58,7 @@ const TechnicalParametersFormContent = () => {
 
             <FormInput
                 name="Q_yearly"
-                title="Metinis šilumos energijos poreikis (MWh)"
+                title="Metinis šilumos energijos poreikis (MWh):"
                 placeholder="13000000.00"
                 description="Įvedami tik teigiami skaičiai."
                 tooltip="Skaičiavimuose vertinamas tipinis šilumos vartojimo profilis, kuris pritaikomas pagal metinį šilumos energijos poreikį. "
@@ -69,7 +69,7 @@ const TechnicalParametersFormContent = () => {
 
             <FormInput
                 name="T_HP"
-                title="Aplinkos temperatūra nuo kurios išjungiamas šilumos siurblys (°C)"
+                title="Aplinkos temperatūra nuo kurios išjungiamas šilumos siurblys (°C):"
                 placeholder="-10"
                 type="number"
                 tooltip="Šilumos siurblio efektyvumas priklauso nuo lauko temperatūros. Pagal savo įrenginio savybes nustatykite, nuo kokios temperatūros šilumos siurblys tampa nebeefektyvus ir jo nebevertėtų naudoti."
@@ -124,108 +124,102 @@ const TechnicalParametersFormContent = () => {
                 <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos kaupiklio (talpyklos) parametrai</Title>
                 <FormInput
                     name="d_HS"
-                    title="Diametras (m)"
+                    title="Diametras (m):"
                     placeholder="10"
                     type="number"
-                    tooltip="TODO"
+                    tooltip="Skaičiavimuose daroma prielaida, kad naudojama cilindro formos talpykla."
                     isRequired
-                    description="TODO"
+                    description="Įvedami tik teigiami sveiki skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="H_HS"
-                    title="Šilumos kaupiklio aukštis (m)"
+                    title="Šilumos kaupiklio aukštis (m):"
                     placeholder="20"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami tik teigiami sveiki skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="lambda_HS"
-                    title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C))"
+                    title="Izoliacinės medžiagos šiluminis laidumas (W/(m°C)):"
                     placeholder="0.032"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami teigiami tikslūs (po kablelio) skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="dx_HS"
-                    title="Izoliacinės medžiagos storis (m)"
+                    title="Izoliacinės medžiagos storis (m):"
                     placeholder="0.3"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami teigiami tikslūs (po kablelio) skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="T_max_HS"
-                    title="Maksimali vandens temperatūra (°C)"
+                    title="Maksimali vandens temperatūra (°C):"
                     placeholder="-10"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami tik teigiami sveiki skaičiai."
                 />
 
                 <Title sx={{ marginBottom: "16px", fontSize: "22px" }}>Šilumos katilo (boilerio) parametrai</Title>
 
                 <FormInput
                     name="Q_max_BOILER"
-                    title="Šilumos katilo maksimali šiluminė galia (MW)"
+                    title="Šilumos katilo maksimali šiluminė galia (MW):"
                     placeholder="4.5"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami teigiami tikslūs (po kablelio)   skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="P_FUEL"
-                    title="Deginamo kuro kaina (EUR/m³)"
+                    title="Deginamo kuro kaina (EUR/m³):"
                     placeholder="0.44"
                     type="number"
-                    tooltip="TODO"
+                    tooltip="Skaičiavimuose gali būti vertinamos skirtingos kuro rūšys, todėl svarbu nurodyti atitinkamo kuro kainą."
                     isRequired
-                    description="TODO"
+                    description="Įvedami teigiami tikslūs (po kablelio) skaičiai."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="q_FUEL"
-                    title="Deginamo kuro kaloringumas (Wh/m³)"
+                    title="Deginamo kuro kaloringumas (Wh/m³):"
                     placeholder="9550"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedami tik teigiami sveiki skaičiai."
+                    tooltip="Skaičiavimuose gali būti vertinamos skirtingos kuro rūšys, todėl svarbu nurodyti atitinkamo kuro kaloringumą (energijos kiekį, kuris išsiskiria sudeginant tam tikrą kiekį kuro)."
                 />
 
                 <Divider style={{ marginTop: "24px", marginBottom: "24px" }} />
 
                 <FormInput
                     name="eta_BOILER"
-                    title="Šilumos katilo naudingumo koeficientas (%)"
+                    title="Šilumos katilo naudingumo koeficientas (%):"
                     placeholder="98"
                     type="number"
-                    tooltip="TODO"
                     isRequired
-                    description="TODO"
+                    description="Įvedama procentinė vertė, nuo 0 iki 100."
                 />
             </Accordion>
         </>
