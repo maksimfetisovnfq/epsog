@@ -53,7 +53,7 @@ export const TechnicalParametersDsrForm = () => {
                     type="number"
                     description="TODO"
                     placeholder="TODO"
-                    tooltip="TODO"
+                    tooltip="Nurodykite kokia jūsų įrenginio vidutinė galia naudojama prie įprastinių veiklos sąlygų."
                     isRequired
                 />
                 <Divider />
@@ -63,7 +63,7 @@ export const TechnicalParametersDsrForm = () => {
                     type="number"
                     description="TODO"
                     placeholder="TODO"
-                    tooltip="TODO"
+                    tooltip="Nurodykite kokia jūsų įrenginio minimali galia. Taip įvertinsime potencialą sumažinti energijos vartojimą konkrečiu laikotarpiu."
                     isRequired
                 />
                 <Divider />
@@ -73,7 +73,7 @@ export const TechnicalParametersDsrForm = () => {
                     type="number"
                     description="TODO"
                     placeholder="TODO"
-                    tooltip="TODO"
+                    tooltip="Nurodykite kokia jūsų įrenginio maksimali galia. Taip įvertinsime potencialą padidinti energijos vartojimą konkrečiu laikotarpiu."
                     isRequired
                 />
                 <Divider />
@@ -83,7 +83,7 @@ export const TechnicalParametersDsrForm = () => {
                     type="number"
                     description="TODO"
                     placeholder="TODO"
-                    tooltip="TODO"
+                    tooltip="Jeigu planuote dalyvauti balansavimo rinkoje, jūsų įrenginio pajėgumas didinti ar mažinti energijos vartojimą bus panaudotas konkrečiam 15 min laikotarpiui. Nurodykite, po kiek laiko (matuojant valandos ketvirčiais) norite atstatyti savo įrenginio veikimą į įprastą būseną. Jeigu nežinote, tiesiog įrašykite 1, tai reikš, kad artimiausiu 15 min laikotarpiu įrenginio veikimas būtų gražintas į normalią būsena."
                     isRequired
                 />
 
@@ -105,7 +105,7 @@ export const TechnicalParametersDsrForm = () => {
                                     }}
                                 />
                             }
-                            label="Use Hourly Power"
+                            label="Naudoti valandinius vidutinės galios profilius"
                         />
                         <FormControlLabel
                             control={
@@ -118,7 +118,7 @@ export const TechnicalParametersDsrForm = () => {
                                     }}
                                 />
                             }
-                            label="Use Min/Max Power"
+                            label="Naudoti valandinius min/max galios profilius"
                         />
                     </Box>
 

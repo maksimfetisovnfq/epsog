@@ -17,22 +17,25 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
     const [accordionExpanded, setAccordionExpanded] = useState(false)
 
     // List of field names inside the accordion (discount_rate + BspFields)
-    const accordionFieldNames = useMemo(() => [
-        "discount_rate",
-        "P_FCR_CAP_BSP",
-        "P_aFRRu_CAP_BSP",
-        "P_aFRRd_CAP_BSP",
-        "P_mFRRu_CAP_BSP",
-        "P_mFRRd_CAP_BSP",
-        "P_aFRRu_BSP",
-        "P_aFRRd_BSP",
-        "P_mFRRu_BSP",
-        "P_mFRRd_BSP"
-    ], [])
+    const accordionFieldNames = useMemo(
+        () => [
+            "discount_rate",
+            "P_FCR_CAP_BSP",
+            "P_aFRRu_CAP_BSP",
+            "P_aFRRd_CAP_BSP",
+            "P_mFRRu_CAP_BSP",
+            "P_mFRRd_CAP_BSP",
+            "P_aFRRu_BSP",
+            "P_aFRRd_BSP",
+            "P_mFRRu_BSP",
+            "P_mFRRd_BSP",
+        ],
+        []
+    )
 
     // Check if any accordion fields have errors
     useEffect(() => {
-        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        const hasAccordionErrors = accordionFieldNames.some((fieldName) => errors[fieldName])
         if (hasAccordionErrors && !accordionExpanded) {
             setAccordionExpanded(true)
         }
@@ -40,37 +43,32 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
 
     return (
         <Stack spacing={2}>
-            <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>
-                Ekonominiai parametrai
-            </Title>
+            <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Ekonominiai parametrai</Title>
             <FormInput
                 name="CAPEX"
                 title="Investicijos, CAPEX (tūkst. EUR/MW)"
                 type="number"
-                description="TODO"
-                placeholder="TODO"
+                description="Įvedami teigiami tikslūs (po kablelio) skaičiai."
+                placeholder="15000"
                 isRequired
-                tooltip="TODO"
             />
             <Divider />
             <FormInput
                 name="OPEX"
                 title="Veiklos sąnaudos, OPEX (tūkst. EUR/MW per metus)"
                 type="number"
-                description="TODO"
-                placeholder="TODO"
+                description="Įvedami teigiami tikslūs (po kablelio) skaičiai."
+                placeholder="1000"
                 isRequired
-                tooltip="TODO"
             />
             <Divider />
             <FormInput
                 name="number_of_years"
-                title="Projekto gyvavimo laikotarpis (metais)"
+                title="Kokiam laikotarpiui (metais) norite skaičiuoti projekto atsipirkimą?"
                 type="number"
-                description="TODO"
-                placeholder="TODO"
+                description="Įvedami tik teigiami sveiki skaičiai."
+                placeholder="10"
                 isRequired
-                tooltip="TODO"
             />
             <Divider />
 
@@ -81,8 +79,8 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                 titleDescription={
                     <InfoBanner
                         title=""
-                        subtitle="TODO"
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                        subtitle="Norėdami tiksliau įvertinti potencialius pinigus srautus, įveskite papildomus ekonominius parametrus, tokius kaip:"
+                        description="Taikoma diskonto norma, įprastai vertinama 5 proc.; Siūlomos kainos už produktus balansavimo pajėgumų ar balansavimo energijos rinkose. Skaičiuoklėje įrašytos kainos lygios 0 reiškia, kad kainų ribojimai nebus taikomi ir visų jūsų pasiūlymai bus priimami maksimalia apimtimi."
                     />
                 }
             >
@@ -95,7 +93,7 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
                     tooltip="TODO"
                     isRequired
                 />
-                <Divider style={{marginBottom: "24px"}} />
+                <Divider style={{ marginBottom: "24px" }} />
 
                 <BspFields />
             </Accordion>
