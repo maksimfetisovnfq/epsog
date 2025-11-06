@@ -63,8 +63,8 @@ const FormContent = () => {
                 titleDescription={
                     <InfoBanner
                         title=""
-                        subtitle="Norėdami tiksliau įvertinti potencialius pinigus srautus, įveskite papildomus ekonominius parametrus, tokius kaip"
-                        description="Taikoma diskonto norma, įprastai vertinama 5 proc.; Siūlomos kainos už produktus balansavimo pajėgumų ar balansavimo energijos rinkose. Įprastai, skaičiuoklė vertina, kad jūsų balansavimo pasiūlymai yra lygūs 0."
+                        subtitle="Norėdami tiksliau įvertinti potencialius pinigus srautus, įveskite papildomus ekonominius parametrus, tokius kaip:"
+                        description="Taikoma diskonto norma, įprastai vertinama 5 proc.; Siūlomos kainos už produktus balansavimo pajėgumų ar balansavimo energijos rinkose. Skaičiuoklėje įrašytos kainos lygios 0 reiškia, kad kainų ribojimai nebus taikomi ir visų jūsų pasiūlymai bus priimami maksimalia apimtimi."
                     />
                 }
             >

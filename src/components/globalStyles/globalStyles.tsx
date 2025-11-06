@@ -3,6 +3,12 @@ import { GlobalStyles as MuiGlobalStyles } from '@mui/material';
 export const GlobalStyles = () => (
     <MuiGlobalStyles
         styles={{
+            'body, html': {
+                fontFamily: '"Nunito Sans", sans-serif !important',
+            },
+            '*': {
+                fontFamily: '"Nunito Sans", sans-serif !important',
+            },
             '.MuiContainer-root': {
                 padding: '0px !important',
             },
