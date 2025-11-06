@@ -3,6 +3,7 @@ import { useFormContext } from "react-hook-form"
 import { useState, useEffect } from "react"
 
 export interface HourlyTableProps {
+    minValue?: number
     maxValue?: number
     hours?: number
     sliderHeight?: number
@@ -10,7 +11,8 @@ export interface HourlyTableProps {
 }
 
 export const HourlyTable = ({ 
-    maxValue = 24, 
+    minValue = 0,
+    maxValue = 24,
     hours = 24, 
     sliderHeight = 200,
     namePrefix = "hourly_power"
@@ -80,7 +82,7 @@ export const HourlyTable = ({
                         orientation="vertical"
                         value={values[hour] || 0}
                         onChange={(_, value) => handleSliderChange(hour, value)}
-                        min={0}
+                        min={minValue}
                         max={maxValue}
                         step={0.1}
                         sx={{

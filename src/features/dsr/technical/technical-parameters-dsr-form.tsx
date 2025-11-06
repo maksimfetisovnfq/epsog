@@ -13,38 +13,23 @@ import { HourlyTable } from "@/ui/tables/HourlyTable/hourlyTable"
 import { Title } from "@/ui/title"
 import FormLabel from "@mui/material/FormLabel"
 import { useState } from "react"
+import { useFormContext } from "react-hook-form"
 
-export const TechnicalParametersDsrForm = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
+interface FormContentProps {
+    useHourlyPower: boolean
+    setUseHourlyPower: (value: boolean) => void
+    useMinMaxPower: boolean
+    setUseMinMaxPower: (value: boolean) => void
+    handleBackward: () => void
+}
 
-    const [useHourlyPower, setUseHourlyPower] = useState(true)
-    const [useMinMaxPower, setUseMinMaxPower] = useState(true)
-
-    const handleSubmit = (data: TechnicalDsrParametersSchema) => {
-        navigate({
-            to: "/dsr/economic-parameters",
-            state: {
-                generalData: location.state.generalData,
-                technicalParameters: { dsr: data },
-            },
-        })
-    }
-
-    const handleBackward = () => {
-        navigate({ to: "/general-data" })
-    }
+const FormContent = ({ useHourlyPower, setUseHourlyPower, useMinMaxPower, setUseMinMaxPower, handleBackward }: FormContentProps) => {
+    const { watch } = useFormContext()
+    const qMin = watch("Q_min")
+    const qMax = watch("Q_max")
 
     return (
-        <Form
-            onSubmit={handleSubmit}
-            // @ts-expect-error Zod schema inference
-            validationSchema={getTechnicalParametersDsrSchema(useHourlyPower, useMinMaxPower)}
-            defaultValues={
-                location.state?.technicalParameters?.dsr ||
-                getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)
-            }
-        >
+        <>
             <Stack spacing={2}>
                 <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
                 <FormInput
@@ -127,7 +112,7 @@ export const TechnicalParametersDsrForm = () => {
                             <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
                                 Hourly Power
                             </Typography>
-                            <HourlyTable namePrefix="hourly_power" />
+                            <HourlyTable namePrefix="hourly_power" minValue={qMin} maxValue={qMax} />
                         </Box>
                     )}
 
@@ -137,13 +122,13 @@ export const TechnicalParametersDsrForm = () => {
                                 <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
                                     Min Hourly Power
                                 </Typography>
-                                <HourlyTable namePrefix="min_hourly_power" />
+                                <HourlyTable namePrefix="min_hourly_power" minValue={qMin} maxValue={qMax} />
                             </Box>
                             <Box sx={{ marginBottom: "24px" }}>
                                 <Typography variant="subtitle2" sx={{ marginBottom: "8px", fontWeight: 500 }}>
                                     Max Hourly Power
                                 </Typography>
-                                <HourlyTable namePrefix="max_hourly_power" />
+                                <HourlyTable namePrefix="max_hourly_power" minValue={qMin} maxValue={qMax} />
                             </Box>
                         </>
                     )}
@@ -171,6 +156,48 @@ export const TechnicalParametersDsrForm = () => {
             </Stack>
 
             <FormNavigation handleBackward={handleBackward} />
+        </>
+    )
+}
+
+export const TechnicalParametersDsrForm = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    const [useHourlyPower, setUseHourlyPower] = useState(true)
+    const [useMinMaxPower, setUseMinMaxPower] = useState(true)
+
+    const handleSubmit = (data: TechnicalDsrParametersSchema) => {
+        navigate({
+            to: "/dsr/economic-parameters",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: { dsr: data },
+            },
+        })
+    }
+
+    const handleBackward = () => {
+        navigate({ to: "/general-data" })
+    }
+
+    return (
+        <Form
+            onSubmit={handleSubmit}
+            // @ts-expect-error Zod schema inference
+            validationSchema={getTechnicalParametersDsrSchema(useHourlyPower, useMinMaxPower)}
+            defaultValues={
+                location.state?.technicalParameters?.dsr ||
+                getDefaultTechnicalParametersDsr(useHourlyPower, useMinMaxPower)
+            }
+        >
+            <FormContent
+                useHourlyPower={useHourlyPower}
+                setUseHourlyPower={setUseHourlyPower}
+                useMinMaxPower={useMinMaxPower}
+                setUseMinMaxPower={setUseMinMaxPower}
+                handleBackward={handleBackward}
+            />
         </Form>
     )
 }
