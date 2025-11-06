@@ -8,16 +8,27 @@ type AccordionProps = PropsWithChildren<{
     title: string;
     titleDescription?: React.ReactNode | undefined;
     children?: React.ReactNode | undefined;
+    expanded?: boolean;
+    onExpandedChange?: (expanded: boolean) => void;
 }>;
 
-export const Accordion = ({ title, children, titleDescription }: AccordionProps) => {
-    const [expanded, setExpanded] = useState(false);
+export const Accordion = ({ title, children, titleDescription, expanded: controlledExpanded, onExpandedChange }: AccordionProps) => {
+    const [internalExpanded, setInternalExpanded] = useState(false);
+
+    const expanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded;
+    const handleChange = (isExpanded: boolean) => {
+        if (onExpandedChange) {
+            onExpandedChange(isExpanded);
+        } else {
+            setInternalExpanded(isExpanded);
+        }
+    };
 
     return (
         <MuiAccordion
             sx={{ boxShadow: "none", border: "none", width: { sm: "768px" } }}
             expanded={expanded}
-            onChange={(_, isExpanded) => setExpanded(isExpanded)}
+            onChange={(_, isExpanded) => handleChange(isExpanded)}
         >
             <AccordionSummary
                 aria-controls="panel2-content"

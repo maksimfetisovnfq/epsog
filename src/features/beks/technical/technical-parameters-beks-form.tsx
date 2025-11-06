@@ -12,8 +12,30 @@ import { FormNavigation } from "@/components/navigation/form-navigation.tsx"
 import { Title } from "@/ui/title/index.ts"
 import { Box } from "@mui/material"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { useFormState } from "react-hook-form"
+import { useEffect, useMemo, useState } from "react"
 
 const FormContent = () => {
+    const { errors } = useFormState()
+    const [accordionExpanded, setAccordionExpanded] = useState(false)
+
+    // List of field names inside the accordion
+    const accordionFieldNames = useMemo(() => [
+        "RTE",
+        "SOC_min",
+        "SOC_max",
+        "N_cycles_DA",
+        "N_cycles_ID"
+    ], [])
+
+    // Check if any accordion fields have errors
+    useEffect(() => {
+        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        if (hasAccordionErrors && !accordionExpanded) {
+            setAccordionExpanded(true)
+        }
+    }, [errors, accordionFieldNames, accordionExpanded])
+
     return (
         <>
             <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Techniniai parametrai</Title>
@@ -58,6 +80,8 @@ const FormContent = () => {
 
             <Accordion
                 title="Išplėstiniai techniniai parametrai"
+                expanded={accordionExpanded}
+                onExpandedChange={setAccordionExpanded}
                 titleDescription={
                     <InfoBanner
                         title=""

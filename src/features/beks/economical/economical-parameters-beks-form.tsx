@@ -7,8 +7,35 @@ import { useSubmitBeks } from "./use-submit-beks"
 import Divider from "@mui/material/Divider"
 import { Accordion } from "@/ui/accordion"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { useFormState } from "react-hook-form"
+import { useEffect, useMemo, useState } from "react"
 
 const FormContent = () => {
+    const { errors } = useFormState()
+    const [accordionExpanded, setAccordionExpanded] = useState(false)
+
+    // List of field names inside the accordion (discount_rate + BspFields)
+    const accordionFieldNames = useMemo(() => [
+        "discount_rate",
+        "P_FCR_CAP_BSP",
+        "P_aFRRu_CAP_BSP",
+        "P_aFRRd_CAP_BSP",
+        "P_mFRRu_CAP_BSP",
+        "P_mFRRd_CAP_BSP",
+        "P_aFRRu_BSP",
+        "P_aFRRd_BSP",
+        "P_mFRRu_BSP",
+        "P_mFRRd_BSP"
+    ], [])
+
+    // Check if any accordion fields have errors
+    useEffect(() => {
+        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        if (hasAccordionErrors && !accordionExpanded) {
+            setAccordionExpanded(true)
+        }
+    }, [errors, accordionFieldNames, accordionExpanded])
+
     return (
         <>
             <div style={{ fontSize: "32px", marginBottom: "48px" }}>Ekonominiai parametrai</div>
@@ -60,6 +87,8 @@ const FormContent = () => {
 
             <Accordion
                 title="Išplėstiniai ekonominiai parametrai"
+                expanded={accordionExpanded}
+                onExpandedChange={setAccordionExpanded}
                 titleDescription={
                     <InfoBanner
                         title=""

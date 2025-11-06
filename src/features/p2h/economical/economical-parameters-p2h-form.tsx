@@ -8,29 +8,36 @@ import { Title } from "@/ui/title"
 import { Accordion } from "@/ui/accordion"
 import Divider from "@mui/material/Divider"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
+import { useFormState } from "react-hook-form"
+import { useEffect, useMemo, useState } from "react"
 
-export const EconomicalParametersP2hForm = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    const { submit } = useSubmitP2h()
+const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
+    const { errors } = useFormState()
+    const [accordionExpanded, setAccordionExpanded] = useState(false)
 
-    const handleBackward = () => {
-        navigate({
-            to: "/p2h/technical-parameters",
-            state: {
-                generalData: location.state.generalData,
-                technicalParameters: location.state.technicalParameters,
-            },
-        })
-    }
+    // List of field names inside the accordion (BspFields)
+    const accordionFieldNames = useMemo(() => [
+        "P_FCR_CAP_BSP",
+        "P_aFRRu_CAP_BSP",
+        "P_aFRRd_CAP_BSP",
+        "P_mFRRu_CAP_BSP",
+        "P_mFRRd_CAP_BSP",
+        "P_aFRRu_BSP",
+        "P_aFRRd_BSP",
+        "P_mFRRu_BSP",
+        "P_mFRRd_BSP"
+    ], [])
+
+    // Check if any accordion fields have errors
+    useEffect(() => {
+        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        if (hasAccordionErrors && !accordionExpanded) {
+            setAccordionExpanded(true)
+        }
+    }, [errors, accordionFieldNames, accordionExpanded])
 
     return (
-        <Form
-            onSubmit={submit}
-            // @ts-expect-error Zod schema inference
-            validationSchema={economicalParametersP2hSchema}
-            defaultValues={location.state?.economicParameters?.p2h ?? defaultEconomicalP2hParameters}
-        >
+        <>
             <Title style={{ fontSize: "32px", marginBottom: "48px", fontWeight: 400 }}>Ekonominiai parametrai</Title>
 
             <FormInput
@@ -93,6 +100,8 @@ export const EconomicalParametersP2hForm = () => {
             
             <Accordion
                 title="Išplėstiniai ekonominiai parametrai"
+                expanded={accordionExpanded}
+                onExpandedChange={setAccordionExpanded}
                 titleDescription={
                     <InfoBanner
                         title=""
@@ -105,6 +114,33 @@ export const EconomicalParametersP2hForm = () => {
             </Accordion>
 
             <FormNavigation handleBackward={handleBackward} />
+        </>
+    )
+}
+
+export const EconomicalParametersP2hForm = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    const { submit } = useSubmitP2h()
+
+    const handleBackward = () => {
+        navigate({
+            to: "/p2h/technical-parameters",
+            state: {
+                generalData: location.state.generalData,
+                technicalParameters: location.state.technicalParameters,
+            },
+        })
+    }
+
+    return (
+        <Form
+            onSubmit={submit}
+            // @ts-expect-error Zod schema inference
+            validationSchema={economicalParametersP2hSchema}
+            defaultValues={location.state?.economicParameters?.p2h ?? defaultEconomicalP2hParameters}
+        >
+            <FormContent handleBackward={handleBackward} />
         </Form>
     )
 }

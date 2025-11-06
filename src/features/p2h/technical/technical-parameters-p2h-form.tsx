@@ -10,13 +10,37 @@ import { Form, FormInput, ServiceTypeSelect } from "@/components/form"
 import { FormNavigation } from "@/components/navigation/form-navigation"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { Title } from "@/ui/title"
-import { useWatch } from "react-hook-form"
+import { useFormState, useWatch } from "react-hook-form"
 import { Stack } from "@mui/material"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
 import { Accordion } from "@/ui/accordion"
+import { useEffect, useMemo, useState } from "react"
 
 const TechnicalParametersFormContent = () => {
     const serviceType = useWatch({ name: "service_type" })
+    const { errors } = useFormState()
+    const [accordionExpanded, setAccordionExpanded] = useState(false)
+
+    // List of field names inside the accordion
+    const accordionFieldNames = useMemo(() => [
+        "d_HS",
+        "H_HS",
+        "lambda_HS",
+        "dx_HS",
+        "T_max_HS",
+        "Q_max_BOILER",
+        "P_FUEL",
+        "q_FUEL",
+        "eta_BOILER"
+    ], [])
+
+    // Check if any accordion fields have errors
+    useEffect(() => {
+        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        if (hasAccordionErrors && !accordionExpanded) {
+            setAccordionExpanded(true)
+        }
+    }, [errors, accordionFieldNames, accordionExpanded])
 
     return (
         <>
@@ -87,6 +111,8 @@ const TechnicalParametersFormContent = () => {
 
             <Accordion
                 title="Išplėstiniai techniniai parametrai"
+                expanded={accordionExpanded}
+                onExpandedChange={setAccordionExpanded}
                 titleDescription={
                     <InfoBanner
                         title=""

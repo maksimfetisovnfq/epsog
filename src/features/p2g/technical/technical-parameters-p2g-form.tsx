@@ -10,13 +10,31 @@ import { FormNavigation } from "@/components/navigation/form-navigation"
 import Divider from "@mui/material/Divider"
 import { ReactionTimeSlider } from "@/components/reaction-time-slider"
 import { Title } from "@/ui/title"
-import { useWatch } from "react-hook-form"
+import { useFormState, useWatch } from "react-hook-form"
 import { InfoBanner } from "@/components/infoBanner/InfoBanner.tsx"
 import { Accordion } from "@/ui/accordion"
 import FormLabel from "@mui/material/FormLabel"
+import { useEffect, useMemo, useState } from "react"
 
 const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
     const serviceType = useWatch({ name: "service_type" })
+    const { errors } = useFormState()
+    const [accordionExpanded, setAccordionExpanded] = useState(false)
+
+    // List of field names inside the accordion
+    const accordionFieldNames = useMemo(() => [
+        "T0",
+        "p0",
+        "eta_C"
+    ], [])
+
+    // Check if any accordion fields have errors
+    useEffect(() => {
+        const hasAccordionErrors = accordionFieldNames.some(fieldName => errors[fieldName])
+        if (hasAccordionErrors && !accordionExpanded) {
+            setAccordionExpanded(true)
+        }
+    }, [errors, accordionFieldNames, accordionExpanded])
 
     return (
         <>
@@ -86,6 +104,8 @@ const FormContent = ({ handleBackward }: { handleBackward: () => void }) => {
 
             <Accordion
                 title="Išplėstiniai techniniai parametrai"
+                expanded={accordionExpanded}
+                onExpandedChange={setAccordionExpanded}
                 titleDescription={
                     <InfoBanner
                         title=""
